@@ -1,0 +1,10 @@
+<!-- Pegar en Supabase > Authentication > Email Templates > "Magic Link". Asunto: Tu código de acceso: {{ .Token }} -->
+<div style="background:#f5f4ef;padding:40px 16px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;color:#0a0a0a">
+  <div style="max-width:440px;margin:0 auto;background:#efede6;border:1px solid #e2dfd5;border-radius:24px;padding:36px">
+    <p style="margin:0 0 24px;font-size:18px;font-weight:600;letter-spacing:-0.03em">Trud <i style="font-family:Georgia,serif;font-weight:400;color:#16734b">Sales.</i></p>
+    <p style="margin:0 0 8px;font-size:15px;color:#6b6f6c">Tu código para entrar en Venta en Blanco:</p>
+    <p style="margin:0 0 24px;font-size:40px;font-weight:600;letter-spacing:0.25em;font-family:ui-monospace,Menlo,monospace">{{ .Token }}</p>
+    <p style="margin:0 0 24px;font-size:14px;color:#6b6f6c">Caduca en una hora. Si no lo has pedido tú, ignora este email.</p>
+    <a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=email" style="display:inline-block;background:#0a0a0a;color:#f5f4ef;text-decoration:none;border-radius:999px;padding:12px 20px;font-size:14px">O entra directamente</a>
+  </div>
+</div>

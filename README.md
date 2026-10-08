@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Plataforma Venta en Blanco
 
-## Getting Started
+Next.js 15 + Supabase + Vercel. Estética del brandbook de Trud Sales.
 
-First, run the development server:
+Incluye: acceso por código al email (sin contraseñas, solo alumnos dados de alta), bienvenida con perfil (3 objetivos, 3 puntos a mejorar, situación, horas), inicio con ruta de 6 meses y siguiente lección, cursos con módulos que se desbloquean por progreso o por días desde el alta, comunidad por canales (posts, comentarios, likes, fijar), directos con enlace y grabación, ranking mensual/histórico/por promoción con niveles, directorio de miembros, y panel de admin (alumnos en riesgo, altas, contenido, directos, asistencia, puntos manuales). Alta automática desde GHL por webhook.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Puesta en marcha (en este orden)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Supabase**: proyecto nuevo (no el del panel). SQL Editor → pegar y ejecutar `supabase/migrations/0001_init.sql`.
+2. **Email (obligatorio antes de abrir)**
+   - Authentication → SMTP: conectar Resend (o Postmark) con un remitente de trudsales.com. Sin esto Supabase solo manda unos pocos emails por hora y el día del lanzamiento nadie podrá entrar.
+   - Authentication → Rate Limits: subir el límite de emails a 300/h.
+   - Authentication → Email Templates → Magic Link: asunto `Tu código de acceso: {{ .Token }}` y cuerpo `supabase/email-codigo.html`.
+   - Authentication → URL Configuration: Site URL = el dominio final; añadir `https://DOMINIO/auth/callback` a Redirect URLs.
+   - Authentication → Providers → Email: desactivar "Allow new users to sign up".
+3. **Vercel**: importar el repo, variables de `.env.example` (las de Supabase en Settings → API). `WEBHOOK_SECRET`: cualquier cadena larga aleatoria.
+4. **Alumnos**: exportar contactos de la comunidad de GHL a CSV y ejecutar
+   `node --env-file=.env.local scripts/importar-alumnos.mjs alumnos.csv --admin=javiermarco@trudsales.com,EMAIL_AHMED`
+   Reconoce columnas email, nombre (o first_name/last_name), telefono, promocion y fecha_alta (DD/MM/AAAA). Se puede repetir sin duplicar.
+5. **Alta automática**: en GHL, workflow al cerrar venta → Webhook POST a `https://DOMINIO/api/webhooks/alta`, header `x-webhook-secret`, body `{"email":"{{contact.email}}","first_name":"{{contact.first_name}}","last_name":"{{contact.last_name}}","phone":"{{contact.phone}}"}`. El mismo workflow manda el WhatsApp/email de bienvenida con el enlace.
+6. **Vídeos**: subirlos a Bunny Stream (biblioteca privada, bloqueo por dominio) y pegar la URL de embed en cada lección desde Admin → Contenido. También acepta Vimeo, YouTube oculto, Loom o .mp4.
+7. **Dominio**: p. ej. `alumnos.trudsales.com` apuntando a Vercel.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Puntos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Resultado en el canal Resultados +50 · asistencia a directo +15 (la marca el equipo) · lección +10 · publicación +3 · comentario +1. Si se borra el post/comentario/asistencia, se retiran. El equipo puede sumar o restar puntos a mano (Admin → Alumnos → ⋯).
 
-## Learn More
+## Seguridad
 
-To learn more about Next.js, take a look at the following resources:
+Todo el control de acceso está en la base de datos (RLS), no solo en la interfaz: un alumno no puede leer datos privados de otros (email, teléfono, objetivos), ni ver el vídeo de un módulo bloqueado, ni marcar lecciones bloqueadas, ni darse puntos, ni cambiarse el rol. Alumno desactivado = sin acceso a nada.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Fase 2 (no incluido)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tracker de 3.000 €, tareas/entregables con corrección, quizzes y certificado, bolsa de trabajo con acceso de empresas, asistente IA y role-play, reserva de llamadas 1-1, Trustpilot automático, afiliados, notificaciones push, entradas del evento.
