@@ -10,7 +10,8 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
-  const [step, setStep] = useState<"email" | "code">("email");
+  const [step, setStep] = useState<"email" | "code" | "password">("email");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,6 +34,16 @@ export default function LoginPage() {
       return;
     }
     setStep("code");
+  }
+
+  async function signInPassword(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true); setError(null);
+    const { error } = await createClient().auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
+    setLoading(false);
+    if (error) { setError("Email o contraseña incorrectos."); return; }
+    router.replace("/");
+    router.refresh();
   }
 
   async function verify(e: React.FormEvent) {
@@ -63,15 +74,32 @@ export default function LoginPage() {
       <section className="flex flex-col justify-center px-6 py-12 sm:px-16">
         <div className="lg:hidden mb-12"><Logo /></div>
         <div className="max-w-sm w-full fade-in">
-          {step === "email" ? (
+          {step === "password" ? (
+            <form onSubmit={signInPassword} className="space-y-5">
+              <span className="badge badge-dot">Acceso con contraseña</span>
+              <h2 className="text-4xl font-semibold tracking-[-0.03em]">Entra a tu <span className="em">plataforma</span></h2>
+              <input className="input" type="email" required autoFocus autoComplete="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input className="input" type="password" required autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+              {error && <p className="text-sm text-red-700">{error}</p>}
+              <button className="btn btn-dark w-full justify-center" disabled={loading}>
+                {loading ? "Entrando…" : "Entrar"} <ArrowRight size={16} />
+              </button>
+              <button type="button" className="text-sm text-ink-muted underline" onClick={() => { setStep("email"); setError(null); }}>
+                Entrar con código por email
+              </button>
+            </form>
+          ) : step === "email" ? (
             <form onSubmit={sendCode} className="space-y-5">
               <span className="badge badge-dot">Acceso alumnos</span>
               <h2 className="text-4xl font-semibold tracking-[-0.03em]">Entra a tu <span className="em">plataforma</span></h2>
-              <p className="text-ink-muted">Te mandamos un código de 6 cifras a tu email. Sin contraseñas.</p>
+              <p className="text-ink-muted">Te mandamos un código de acceso a tu email. Sin contraseñas.</p>
               <input className="input" type="email" required autoFocus placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
               {error && <p className="text-sm text-red-700">{error}</p>}
               <button className="btn btn-dark w-full justify-center" disabled={loading}>
                 {loading ? "Enviando…" : "Enviarme el código"} <ArrowRight size={16} />
+              </button>
+              <button type="button" className="text-sm text-ink-muted underline" onClick={() => { setStep("password"); setError(null); }}>
+                Tengo contraseña
               </button>
             </form>
           ) : (
