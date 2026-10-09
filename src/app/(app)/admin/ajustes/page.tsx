@@ -19,7 +19,7 @@ export default async function AdminSettings() {
           <div className="flex items-center gap-4">
             <RosaAvatar url={st.rosa_avatar_url} size={56} />
             <div>
-              <p className="font-semibold">Rosa, la asistente</p>
+              <p className="font-semibold">Rosa, del equipo</p>
               <p className="text-sm text-ink-muted">Firma las novedades automáticas y manda los recordatorios cada mañana a las 9:00 (hora España): directos del día y alumnos que llevan 4 días sin entrar.</p>
             </div>
           </div>

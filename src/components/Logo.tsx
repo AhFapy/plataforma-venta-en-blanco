@@ -6,8 +6,11 @@ export function Logo({ dark = false, size = 20 }: { dark?: boolean; size?: numbe
       <span className="grid place-items-center rounded-[10px] bg-bg-dark" style={{ width: size * 1.6, height: size * 1.6 }}>
         <Image src="/isotipo.png" alt="" width={size * 1.1} height={size * 0.82} priority />
       </span>
-      <span className="font-semibold tracking-[-0.03em]" style={{ fontSize: size }}>
-        Trud <span className="em">Sales.</span>
+      <span className="flex flex-col leading-none">
+        <span className="font-semibold tracking-[-0.03em]" style={{ fontSize: size }}>
+          Venta en <span className="em">Blanco</span>
+        </span>
+        <span className="mt-1 text-ink-faint tracking-[-0.01em]" style={{ fontSize: Math.max(10, size * 0.6) }}>by Trud Sales</span>
       </span>
     </span>
   );

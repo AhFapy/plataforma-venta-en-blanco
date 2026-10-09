@@ -22,7 +22,7 @@ export function MissionCard({ m, big = false }: { m: M; big?: boolean }) {
 
   return (
     <article className={`feed-card overflow-hidden flex flex-col ${done ? "opacity-80" : ""}`}>
-      {big && m.image_url && <img src={m.image_url} alt="" className="w-full aspect-[16/9] object-cover" />}
+      {big && m.image_url && <img src={m.image_url} alt="" className="w-full aspect-[16/9] object-contain bg-[#f3f1ec]" />}
       <div className="p-5 flex flex-col gap-3 flex-1">
         <div className="flex items-start gap-3">
           {!(big && m.image_url) && (

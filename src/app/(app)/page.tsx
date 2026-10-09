@@ -260,7 +260,7 @@ function RosaAuthor({ at, rosa }: { at: string; rosa: { name: string; avatar: st
     <div className="flex items-center gap-3">
       <RosaAvatar url={rosa.avatar} size={40} />
       <div>
-        <p className="font-semibold leading-tight">{rosa.name} <span className="text-ink-faint font-normal">· Asistente</span></p>
+        <p className="font-semibold leading-tight">{rosa.name} <span className="text-ink-faint font-normal">· Equipo</span></p>
         <p className="text-xs text-ink-faint">{timeAgo(at)}</p>
       </div>
     </div>

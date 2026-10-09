@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-/** Avatar de Rosa, la asistente de la plataforma. Si no hay foto subida, monograma de marca. */
+/** Avatar de Rosa, del equipo de la plataforma. Si no hay foto subida, monograma de marca. */
 export function RosaAvatar({ url, size = 40 }: { url?: string | null; size?: number }) {
   return url ? (
     <img src={url} alt="Rosa" width={size} height={size} className="rounded-full object-cover shrink-0" style={{ width: size, height: size }} />
