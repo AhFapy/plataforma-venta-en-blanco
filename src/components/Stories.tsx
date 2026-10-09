@@ -3,7 +3,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, Megaphone, PlayCircle, Plus, Sparkles, Trophy, X } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trophy, X } from "lucide-react";
+import Image from "next/image";
+import { createComment, toggleLike } from "@/app/(app)/comunidad/actions";
 import { initials, timeAgo } from "@/lib/utils";
 
 export type StorySlide = {
@@ -14,6 +16,8 @@ export type StorySlide = {
   body?: string | null;
   link?: string | null;
   cta?: string;
+  postId?: string;   // historias de alumnos: permite responder (comentario) y dar like
+  liked?: boolean;
 };
 
 export type StoryGroup = {
@@ -127,20 +131,63 @@ export function Stories({ groups, me }: { groups: StoryGroup[]; me: { name: stri
   );
 }
 
+const BG = "radial-gradient(120% 80% at 20% 0%, #16734b 0%, #0c1f15 55%, #06120c 100%)";
+
+/** Texto de la historia. compact = versión pequeña para las previas laterales. */
+function SlideBody({ slide, compact = false }: { slide: StorySlide; compact?: boolean }) {
+  const Icon = KIND_ICON[slide.kind] ?? Sparkles;
+  return (
+    <div className={`absolute inset-0 flex flex-col justify-center ${compact ? "px-4" : "px-7 pt-24 pb-32"}`}>
+      <span className={`grid place-items-center rounded-2xl bg-accent text-ink ${compact ? "w-8 h-8 mb-3 rounded-xl" : "w-14 h-14 mb-6"}`}>
+        <Icon size={compact ? 16 : 26} strokeWidth={1.9} />
+      </span>
+      {slide.title && <p className={`font-semibold tracking-[-0.03em] ${compact ? "text-sm leading-tight line-clamp-3" : "text-[28px] leading-[1.12]"}`}>{slide.title}</p>}
+      {slide.body && (
+        <p className={`whitespace-pre-line break-words ${compact ? "mt-2 text-xs text-white/70 line-clamp-4" : slide.title ? "mt-4 text-white/75 text-[17px] line-clamp-[8]" : "text-[22px] leading-snug font-medium line-clamp-[12]"}`}>
+          {slide.body}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function SidePreview({ g, onClick, far = false }: { g: StoryGroup; onClick: () => void; far?: boolean }) {
+  const slide = g.slides[0];
+  return (
+    <button onClick={onClick} className={`relative shrink-0 h-[40vh] max-h-[380px] aspect-[9/16] rounded-[10px] overflow-hidden text-[#f5f4ef] group ${far ? "hidden min-[1680px]:block" : ""}`} style={{ background: BG }} aria-label={`Ver historias de ${g.name}`}>
+      <div className="absolute inset-0 opacity-30 blur-[3px] scale-105"><SlideBody slide={slide} compact /></div>
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+        <span className="rounded-full p-[3px]" style={{ background: "conic-gradient(from 200deg, #c5ff5b, #16734b, #0d4f33, #c5ff5b)" }}>
+          <span className="block rounded-full p-[2px] bg-[#1a1a1a]"><Bubble g={g} size={58} /></span>
+        </span>
+        <span className="text-[15px] font-semibold drop-shadow">{g.name}</span>
+        <span className="text-sm text-white/80 drop-shadow">{timeAgo(slide.at)}</span>
+      </div>
+    </button>
+  );
+}
+
 function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; start: { g: number; s: number }; onSeen: (id: string) => void; onClose: () => void }) {
   const [pos, setPos] = useState(start);
   const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [holding, setHolding] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [reply, setReply] = useState("");
+  const [sent, setSent] = useState<string | null>(null);
+  const [likes, setLikes] = useState<Record<string, boolean>>({});
   const posRef = useRef(start);
   const prog = useRef(0);
-  const pausedRef = useRef(false);
+  const stopped = useRef(false);
   const last = useRef(0);
 
   const group = groups[pos.g];
   const slide = group.slides[pos.s];
+  const liked = slide.postId ? likes[slide.postId] ?? !!slide.liked : false;
 
   const go = useCallback((p: { g: number; s: number }) => {
-    posRef.current = p; prog.current = 0; setProgress(0); setPos(p);
+    posRef.current = p; prog.current = 0; setProgress(0); setPos(p); setReply(""); setSent(null);
   }, []);
 
   const next = useCallback(() => {
@@ -158,7 +205,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   }, [groups, go]);
 
   useEffect(() => { onSeen(slide.id); }, [slide.id, onSeen]);
-  useEffect(() => { pausedRef.current = paused; }, [paused]);
+  useEffect(() => { stopped.current = paused || holding || typing; }, [paused, holding, typing]);
 
   // Avance automático
   useEffect(() => {
@@ -167,7 +214,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
     const tick = (t: number) => {
       const dt = t - last.current;
       last.current = t;
-      if (!pausedRef.current) {
+      if (!stopped.current) {
         prog.current += dt / DURATION;
         if (prog.current >= 1) next();
         else setProgress(prog.current);
@@ -181,9 +228,11 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   // Teclado y bloqueo de scroll
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
+      if ((e.target as HTMLElement)?.tagName === "INPUT") { if (e.key === "Escape") (e.target as HTMLElement).blur(); return; }
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
+      if (e.key === " ") { e.preventDefault(); setPaused((v) => !v); }
     };
     document.addEventListener("keydown", key);
     const overflow = document.body.style.overflow;
@@ -191,61 +240,133 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
     return () => { document.removeEventListener("keydown", key); document.body.style.overflow = overflow; };
   }, [next, prev, onClose]);
 
-  const Icon = KIND_ICON[slide.kind] ?? Sparkles;
+  async function sendReply(e: React.FormEvent) {
+    e.preventDefault();
+    if (!slide.postId || !reply.trim()) return;
+    const text = reply;
+    setReply("");
+    const r = await createComment(slide.postId, text);
+    setSent(r.error ? "No se ha podido enviar" : "Respuesta enviada");
+    (document.activeElement as HTMLElement)?.blur();
+  }
+
+  function like() {
+    if (!slide.postId) return;
+    const v = !liked;
+    setLikes((l) => ({ ...l, [slide.postId!]: v }));
+    toggleLike(slide.postId, v);
+  }
+
+  const before = groups.slice(Math.max(0, pos.g - 2), pos.g).map((g, i, arr) => ({ g, idx: pos.g - arr.length + i }));
+  const after = groups.slice(pos.g + 1, pos.g + 3).map((g, i) => ({ g, idx: pos.g + 1 + i }));
+  const canPrev = pos.g > 0 || pos.s > 0;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm grid place-items-center fade-in" role="dialog" aria-modal="true" aria-label={`Historias de ${group.name}`}>
-      <div className="on-dark relative w-full h-full sm:h-[min(88vh,780px)] sm:w-auto sm:aspect-[9/16] sm:rounded-[24px] overflow-hidden bg-[radial-gradient(120%_80%_at_20%_0%,#16734b_0%,#0c1f15_55%,#06120c_100%)] text-[#f5f4ef] select-none">
-        {/* Barras de progreso */}
-        <div className="absolute top-3 inset-x-3 z-20 flex gap-1">
-          {group.slides.map((s, i) => (
-            <span key={s.id} className="h-[3px] flex-1 rounded-full bg-white/25 overflow-hidden">
-              <span className="block h-full bg-white" style={{ width: `${i < pos.s ? 100 : i === pos.s ? progress * 100 : 0}%` }} />
-            </span>
-          ))}
+    <div className="on-dark fixed inset-0 z-[100] bg-[#1a1a1a] text-[#f5f4ef] fade-in" role="dialog" aria-modal="true" aria-label={`Historias de ${group.name}`}>
+      {/* Marca y cerrar (escritorio) */}
+      <div className="hidden lg:flex absolute top-5 left-6 items-center gap-2.5 z-30">
+        <span className="grid place-items-center w-8 h-8 rounded-[9px] bg-bg-dark"><Image src="/isotipo.png" alt="" width={20} height={15} /></span>
+        <span className="text-[20px] font-semibold tracking-[-0.03em]">Trud <span className="em">Sales.</span></span>
+      </div>
+      <button onClick={onClose} className="hidden lg:grid absolute top-4 right-5 z-30 place-items-center w-11 h-11 rounded-full hover:bg-white/10" aria-label="Cerrar">
+        <X size={30} strokeWidth={1.6} />
+      </button>
+
+      <div className="h-full flex items-center justify-center lg:gap-14">
+        {/* Previas anteriores */}
+        <div className="hidden lg:flex gap-14 items-center justify-end flex-1">
+          {before.map(({ g, idx }) => <SidePreview key={g.id} g={g} far={idx < pos.g - 1} onClick={() => go({ g: idx, s: 0 })} />)}
         </div>
 
-        {/* Cabecera */}
-        <div className="absolute top-7 inset-x-3 z-20 flex items-center gap-2.5">
-          <span className="rounded-full ring-2 ring-white/20"><Bubble g={group} size={34} /></span>
-          <span className="text-sm font-semibold">{group.name}</span>
-          <span className="text-sm text-white/60">{timeAgo(slide.at)}</span>
-          <button onClick={onClose} className="ml-auto grid place-items-center w-9 h-9 rounded-full hover:bg-white/10" aria-label="Cerrar">
-            <X size={22} />
+        <div className="relative flex items-center lg:gap-5">
+          <button onClick={prev} disabled={!canPrev} className="hidden lg:grid place-items-center w-8 h-8 rounded-full bg-white/80 text-[#1a1a1a] disabled:opacity-0 hover:bg-white" aria-label="Anterior">
+            <ChevronLeft size={18} strokeWidth={2.5} />
+          </button>
+
+          {/* Historia actual */}
+          <div className="relative w-screen h-[100dvh] lg:w-auto lg:h-[94vh] lg:max-h-[920px] lg:aspect-[9/16] lg:rounded-[10px] overflow-hidden select-none" style={{ background: BG }}>
+            <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/40 to-transparent z-10 pointer-events-none" />
+
+            {/* Barras */}
+            <div className="absolute top-3 inset-x-3 z-20 flex gap-1">
+              {group.slides.map((s, i) => (
+                <span key={s.id} className="h-[2px] flex-1 rounded-full bg-white/35 overflow-hidden">
+                  <span className="block h-full bg-white" style={{ width: `${i < pos.s ? 100 : i === pos.s ? progress * 100 : 0}%` }} />
+                </span>
+              ))}
+            </div>
+
+            {/* Cabecera */}
+            <div className="absolute top-6 inset-x-3 z-20 flex items-center gap-2.5">
+              <Bubble g={group} size={34} />
+              <span className="text-[15px] font-semibold">{group.name}</span>
+              <span className="text-[15px] text-white/70">{timeAgo(slide.at)}</span>
+              <div className="ml-auto flex items-center">
+                <button onClick={() => setPaused((v) => !v)} className="grid place-items-center w-9 h-9 rounded-full hover:bg-white/10" aria-label={paused ? "Reanudar" : "Pausar"}>
+                  {paused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
+                </button>
+                <button onClick={onClose} className="lg:hidden grid place-items-center w-9 h-9 rounded-full hover:bg-white/10" aria-label="Cerrar">
+                  <X size={24} />
+                </button>
+              </div>
+            </div>
+
+            {/* Zonas de toque */}
+            <div
+              className="absolute inset-x-0 top-0 bottom-24 z-10 grid grid-cols-[1fr_2fr]"
+              onPointerDown={() => setHolding(true)}
+              onPointerUp={() => setHolding(false)}
+              onPointerLeave={() => setHolding(false)}
+            >
+              <button aria-label="Anterior" onClick={prev} />
+              <button aria-label="Siguiente" onClick={next} />
+            </div>
+
+            <div className="pointer-events-none"><SlideBody slide={slide} /></div>
+
+            {/* Pie */}
+            <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-5 pt-10 bg-gradient-to-t from-black/45 to-transparent">
+              {slide.postId ? (
+                <div className="space-y-2">
+                  {slide.link && (
+                    <Link href={slide.link} onClick={onClose} className="inline-flex items-center gap-1 text-sm text-white/85 hover:text-white">
+                      {slide.cta ?? "Ver"} <ArrowRight size={14} />
+                    </Link>
+                  )}
+                  <form onSubmit={sendReply} className="flex items-center gap-3">
+                    <input
+                      value={reply}
+                      onChange={(e) => setReply(e.target.value)}
+                      onFocus={() => setTyping(true)}
+                      onBlur={() => setTyping(false)}
+                      placeholder={sent ?? `Responder a ${group.name}...`}
+                      className="flex-1 min-w-0 rounded-full border border-white/50 bg-transparent px-5 py-3 text-[15px] text-white placeholder:text-white/80 outline-none focus:border-white"
+                    />
+                    <button type="button" onClick={like} className="shrink-0" aria-label={liked ? "Quitar me gusta" : "Me gusta"} aria-pressed={liked}>
+                      <Heart size={26} strokeWidth={1.8} className={liked ? "text-accent" : ""} fill={liked ? "currentColor" : "none"} />
+                    </button>
+                    <button type="submit" disabled={!reply.trim()} className="shrink-0 disabled:opacity-60" aria-label="Enviar respuesta">
+                      <Send size={24} strokeWidth={1.8} />
+                    </button>
+                  </form>
+                </div>
+              ) : slide.link ? (
+                <Link href={slide.link} onClick={onClose} className="btn bg-accent text-ink w-full justify-center">
+                  {slide.cta ?? "Ver"} <ArrowRight size={16} />
+                </Link>
+              ) : null}
+            </div>
+          </div>
+
+          <button onClick={next} className="hidden lg:grid place-items-center w-8 h-8 rounded-full bg-white/80 text-[#1a1a1a] hover:bg-white" aria-label="Siguiente">
+            <ChevronRight size={18} strokeWidth={2.5} />
           </button>
         </div>
 
-        {/* Zonas de toque: izquierda atrás, derecha adelante; mantener pulsado pausa */}
-        <div
-          className="absolute inset-0 z-10 grid grid-cols-[1fr_2fr]"
-          onPointerDown={() => setPaused(true)}
-          onPointerUp={() => setPaused(false)}
-          onPointerLeave={() => setPaused(false)}
-        >
-          <button aria-label="Anterior" onClick={prev} />
-          <button aria-label="Siguiente" onClick={next} />
+        {/* Previas siguientes */}
+        <div className="hidden lg:flex gap-14 items-center justify-start flex-1">
+          {after.map(({ g, idx }) => <SidePreview key={g.id} g={g} far={idx > pos.g + 1} onClick={() => go({ g: idx, s: 0 })} />)}
         </div>
-
-        {/* Contenido */}
-        <div className="absolute inset-0 flex flex-col justify-center px-7 pt-20 pb-28 pointer-events-none">
-          <span className="grid place-items-center w-14 h-14 rounded-2xl bg-accent text-ink mb-6">
-            <Icon size={26} strokeWidth={1.9} />
-          </span>
-          {slide.title && <p className="text-[28px] leading-[1.12] font-semibold tracking-[-0.03em]">{slide.title}</p>}
-          {slide.body && (
-            <p className={`mt-4 whitespace-pre-line break-words ${slide.title ? "text-white/75 text-[17px] line-clamp-[8]" : "text-[22px] leading-snug font-medium line-clamp-[12]"}`}>
-              {slide.body}
-            </p>
-          )}
-        </div>
-
-        {slide.link && (
-          <div className="absolute bottom-6 inset-x-6 z-20">
-            <Link href={slide.link} onClick={onClose} className="btn bg-accent text-ink w-full justify-center">
-              {slide.cta ?? "Ver"} <ArrowRight size={16} />
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );

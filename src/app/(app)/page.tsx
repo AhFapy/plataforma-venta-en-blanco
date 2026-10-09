@@ -37,7 +37,7 @@ export default async function Home() {
     supabase.from("leaderboard").select("user_id,full_name,avatar_url,points_month").order("points_month", { ascending: false }).limit(5),
     supabase
       .from("posts")
-      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url),channel:channels!inner(staff_only_post)")
+      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url),channel:channels!inner(staff_only_post),post_likes(user_id)")
       .eq("channel.staff_only_post", false)
       .neq("author_id", profile.id)
       .gte("created_at", weekAgo)
@@ -53,12 +53,12 @@ export default async function Home() {
     { id: "directos", name: "Directos", brand: true, icon: "directos", slides: recent.filter((n) => n.kind === "directo").map((n) => slideOf(n, "Ver directos")) },
     { id: "avisos", name: "Avisos", brand: true, icon: "avisos", slides: recent.filter((n) => n.kind === "anuncio" || n.kind === "aviso").map((n) => slideOf(n, "Ver más")) },
   ].filter((g) => g.slides.length > 0) as StoryGroup[];
-  type SP = { id: string; body: string; created_at: string; author: { id: string; full_name: string | null; avatar_url: string | null } | null };
+  type SP = { id: string; body: string; created_at: string; post_likes: { user_id: string }[]; author: { id: string; full_name: string | null; avatar_url: string | null } | null };
   const byAuthor = new Map<string, StoryGroup>();
   for (const sp of ((storyPostsRaw ?? []) as unknown as SP[]).slice().reverse()) {
     if (!sp.author) continue;
     const g = byAuthor.get(sp.author.id) ?? { id: `u-${sp.author.id}`, name: firstName(sp.author.full_name) || "Miembro", avatar: sp.author.avatar_url, slides: [] };
-    g.slides.push({ id: `p-${sp.id}`, at: sp.created_at, kind: "post", body: sp.body, link: `/comunidad/post/${sp.id}`, cta: "Ver publicación" });
+    g.slides.push({ id: `p-${sp.id}`, at: sp.created_at, kind: "post", body: sp.body, link: `/comunidad/post/${sp.id}`, cta: "Ver publicación", postId: sp.id, liked: sp.post_likes.some((l) => l.user_id === profile.id) });
     byAuthor.set(sp.author.id, g);
   }
   const storyGroups = [...brandGroups, ...[...byAuthor.values()].slice(0, 20)];
