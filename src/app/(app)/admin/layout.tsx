@@ -12,8 +12,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   await requireStaff();
   return (
     <div className="fade-in">
-      <span className="badge badge-dot mb-4">Admin</span>
-      <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex flex-wrap gap-2 mb-8">
         {tabs.map((t) => (
           <Link key={t.href} href={t.href} className="rounded-full px-4 py-2 text-sm bg-bg-badge text-ink-muted hover:text-ink">{t.label}</Link>
         ))}

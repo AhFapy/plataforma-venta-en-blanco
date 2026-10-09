@@ -4,6 +4,8 @@ import { Logo } from "@/components/Logo";
 import { Avatar } from "@/components/Avatar";
 import { SideNav, BottomNav } from "@/components/Nav";
 import { SignOutButton } from "@/components/SignOutButton";
+import { NotificationBell } from "@/components/NotificationBell";
+import { getNotifications } from "@/lib/notifications";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { supabase, profile } = await requireMember();
@@ -14,12 +16,17 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   const staff = profile.role !== "alumno";
+  const notes = await getNotifications(supabase, 12);
+  const seenAt = profile.notifications_seen_at ?? new Date().toISOString();
 
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[260px_1fr]">
       <aside className="hidden lg:flex sticky top-0 h-dvh flex-col justify-between border-r border-line px-5 py-7">
         <div className="space-y-10">
-          <Link href="/" className="px-2 block"><Logo size={18} /></Link>
+          <div className="flex items-center justify-between pl-2">
+            <Link href="/"><Logo size={18} /></Link>
+            <NotificationBell items={notes} seenAt={seenAt} align="left" />
+          </div>
           <SideNav staff={staff} />
         </div>
         <div className="space-y-3">
@@ -36,8 +43,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
       <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between border-b border-line bg-bg/95 backdrop-blur px-4 py-3">
         <Link href="/"><Logo size={16} /></Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5">
           {staff && <Link href="/admin" className="badge">Admin</Link>}
+          <NotificationBell items={notes} seenAt={seenAt} />
           <Link href="/perfil"><Avatar name={profile.full_name} url={profile.avatar_url} size={32} /></Link>
         </div>
       </header>

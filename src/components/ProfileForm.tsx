@@ -34,7 +34,7 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
       className="space-y-10"
     >
       <section className="space-y-4">
-        <p className="label">01 · Sobre ti</p>
+        <p className="label">Sobre ti</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Nombre y apellidos"><input name="full_name" className="input" required defaultValue={profile.full_name ?? ""} /></Field>
           <Field label="Teléfono (WhatsApp)"><input name="phone" className="input" defaultValue={profile.phone ?? ""} placeholder="+34 …" /></Field>
@@ -45,7 +45,7 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
       </section>
 
       <section className="space-y-4">
-        <p className="label">02 · Tu punto de partida</p>
+        <p className="label">Tu punto de partida</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Situación actual">
             <select name="situation" className="input" defaultValue={profile.situation ?? ""} required>
@@ -63,7 +63,7 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
       </section>
 
       <section className="space-y-4">
-        <p className="label">03 · Tus 3 objetivos</p>
+        <p className="label">Tus 3 objetivos</p>
         <p className="text-sm text-ink-muted -mt-2">Los verás cada día al entrar.</p>
         {[0, 1, 2].map((i) => (
           <input key={i} name={`objective${i}`} className="input" required defaultValue={profile.objectives[i] ?? ""} placeholder={`Objetivo ${i + 1}`} />
@@ -71,7 +71,7 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
       </section>
 
       <section className="space-y-4">
-        <p className="label">04 · 3 puntos a mejorar</p>
+        <p className="label">3 puntos a mejorar</p>
         {[0, 1, 2].map((i) => (
           <input key={i} name={`improvement${i}`} className="input" required defaultValue={profile.improvements[i] ?? ""} placeholder={`Punto ${i + 1}`} />
         ))}

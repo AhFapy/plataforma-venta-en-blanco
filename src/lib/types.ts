@@ -18,6 +18,7 @@ export type Profile = {
   improvements: string[];
   onboarded_at: string | null;
   last_seen_at: string | null;
+  notifications_seen_at: string;
   created_at: string;
 };
 

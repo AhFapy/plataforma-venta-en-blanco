@@ -29,7 +29,7 @@ export default async function Member({ params }: { params: Promise<{ id: string 
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-[-0.03em]">{m.full_name}</h1>
           <div className="flex flex-wrap gap-2">
-            <span className="badge badge-dot">{lvl.name}</span>
+            <span className="badge">{lvl.name}</span>
             {m.cohort && <span className="badge">{m.cohort}</span>}
             {m.role !== "alumno" && <span className="badge !bg-brand !text-white">Equipo Trud</span>}
           </div>

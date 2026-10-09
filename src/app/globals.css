@@ -49,9 +49,11 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--brand); letter-spacing: 0; }
 .on-dark .em { color: var(--accent); }
 
-.label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-faint); }
+.label { font-size: 13px; font-weight: 600; color: var(--ink-muted); letter-spacing: -0.005em; }
 
-.card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.card { background: #fbfaf7; border: 1px solid var(--line); border-radius: 20px; }
+.feed-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+.scrollbar-none { scrollbar-width: none; } .scrollbar-none::-webkit-scrollbar { display: none; }
 
 .btn { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; padding: 12px 20px; font-size: 14px; font-weight: 500; transition: transform var(--t-fast), opacity var(--t-fast); cursor: pointer; }
 .btn:active { transform: scale(.98); }
@@ -60,8 +62,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .btn-brand { background: var(--brand); color: #fff; }
 .btn-ghost { background: var(--bg-badge); color: var(--ink); }
 
-.badge { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-badge); border-radius: 999px; padding: 4px 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); }
-.badge-dot::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: var(--brand); }
+.badge { display: inline-flex; align-items: center; gap: 5px; background: var(--bg-badge); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 500; color: var(--ink-muted); }
+.badge-dot::before { content: none; }
 
 .input { width: 100%; background: #fff8; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 11px 14px; font-size: 15px; outline: none; transition: border-color var(--t-fast); }
 .input:focus { border-color: var(--brand); }

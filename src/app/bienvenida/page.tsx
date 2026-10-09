@@ -14,8 +14,7 @@ export default async function Welcome() {
     <main className="mx-auto max-w-2xl px-5 py-10 sm:py-16">
       <Logo />
       <div className="mt-12 mb-10 fade-in">
-        <span className="badge badge-dot mb-4">Paso 1 de 1 · 3 minutos</span>
-        <h1 className="text-[40px] sm:text-[52px] leading-[1.03] font-semibold tracking-[-0.035em]">
+                <h1 className="text-[40px] sm:text-[52px] leading-[1.03] font-semibold tracking-[-0.035em]">
           Bienvenido{firstName(profile.full_name) ? `, ${firstName(profile.full_name)}` : ""}. <span className="em">Empezamos.</span>
         </h1>
         <p className="mt-4 text-ink-muted text-lg">Cuéntanos de dónde partes y a dónde vas. Con esto el equipo te sigue de cerca y tú no pierdes el foco.</p>

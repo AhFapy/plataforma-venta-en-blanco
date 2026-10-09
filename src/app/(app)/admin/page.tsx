@@ -2,6 +2,11 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { requireStaff } from "@/lib/auth";
 import { getStudents } from "./students";
+import { NoticeForm } from "./NoticeForm";
+import { DeleteButton } from "./ActionForm";
+import { deleteNotice } from "@/app/notification-actions";
+import { getNotifications } from "@/lib/notifications";
+import { timeAgo } from "@/lib/utils";
 
 export const metadata = { title: "Admin" };
 
@@ -13,6 +18,7 @@ export default async function AdminHome() {
   const onboarded = students.filter((s) => s.onboarded_at).length;
   const avg = students.length ? students.reduce((a, s) => a + (s.total ? s.done / s.total : 0), 0) / students.length : 0;
   const risk = students.filter((s) => s.risk);
+  const notes = await getNotifications(supabase, 8);
 
   return (
     <div className="space-y-8">
@@ -30,6 +36,23 @@ export default async function AdminHome() {
           </div>
         ))}
       </div>
+
+      <section className="card p-6">
+        <p className="label mb-1">Publicar un aviso</p>
+        <p className="text-sm text-ink-muted mb-4">Sale en las novedades de Inicio y en la campana de todos los alumnos. Las clases, cursos, directos y anuncios nuevos se avisan solos.</p>
+        <NoticeForm />
+        {notes.length > 0 && (
+          <ul className="mt-6 divide-y divide-line border-t border-line">
+            {notes.map((n) => (
+              <li key={n.id} className="flex items-center gap-3 py-2.5 text-sm">
+                <span className="flex-1 min-w-0 truncate">{n.title}</span>
+                <span className="text-ink-faint shrink-0">{timeAgo(n.created_at)}</span>
+                <DeleteButton onDelete={deleteNotice.bind(null, n.id)} label="Quitar" confirmText="¿Quitar esta novedad?" />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       <section>
         <div className="flex items-baseline justify-between mb-3">
