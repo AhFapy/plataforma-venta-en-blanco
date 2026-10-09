@@ -12,7 +12,7 @@ const file = process.argv[2];
 if (!file) { console.error("Falta el CSV"); process.exit(1); }
 const admins = (process.argv.find((a) => a.startsWith("--admin=")) ?? "").replace("--admin=", "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false } });
 
 function parseCSV(text) {
   const rows = []; let row = [], cur = "", q = false;
