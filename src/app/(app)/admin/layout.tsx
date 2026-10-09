@@ -6,6 +6,8 @@ const tabs = [
   { href: "/admin/alumnos", label: "Alumnos" },
   { href: "/admin/contenido", label: "Contenido" },
   { href: "/admin/eventos", label: "Directos" },
+  { href: "/admin/deberes", label: "Deberes" },
+  { href: "/admin/recursos", label: "Recursos" },
   { href: "/admin/misiones", label: "Misiones" },
   { href: "/admin/popups", label: "Pop-ups" },
   { href: "/admin/ajustes", label: "Ajustes" },

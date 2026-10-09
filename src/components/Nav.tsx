@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid } from "lucide-react";
+import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid, NotebookPen } from "lucide-react";
 
-const items = [
+const items: { href: string; label: string; short?: string; icon: typeof Home }[] = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/formacion", label: "Formación", icon: PlayCircle },
   { href: "/comunidad", label: "Comunidad", icon: MessagesSquare },
   { href: "/eventos", label: "Directos", icon: CalendarDays },
+  { href: "/hoja-en-blanco", label: "Hoja en Blanco", short: "Hoja", icon: NotebookPen },
   { href: "/ranking", label: "Ranking", icon: Trophy },
   { href: "/aplicaciones", label: "Aplicaciones", icon: LayoutGrid },
   { href: "/miembros", label: "Miembros", icon: Users },
@@ -43,11 +44,11 @@ export function BottomNav() {
   const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones");
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
-      <div className="grid grid-cols-5">
-        {mobile.map(({ href, label, icon: Icon }) => (
+      <div className="grid grid-cols-6">
+        {mobile.map(({ href, label, short, icon: Icon }) => (
           <Link key={href} href={href} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${active(path, href) ? "text-brand" : "text-ink-muted"}`}>
             <Icon size={21} strokeWidth={active(path, href) ? 2.2 : 1.7} />
-            {label}
+            {short ?? label}
           </Link>
         ))}
       </div>

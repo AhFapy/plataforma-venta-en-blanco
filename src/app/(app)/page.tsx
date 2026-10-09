@@ -11,12 +11,14 @@ import { Stories, type StoryGroup, type StorySlide } from "@/components/Stories"
 import { getSettings } from "@/lib/settings";
 import { RosaAvatar } from "@/components/RosaAvatar";
 import { GoalsCard } from "./GoalsCard";
+import { groupReactions } from "@/lib/reactions";
 
 type FeedPost = {
   id: string; body: string; created_at: string;
   author: { id: string; full_name: string | null; avatar_url: string | null; role: string } | null;
   channel: { name: string; slug: string; is_wins: boolean } | null;
   post_likes: { user_id: string }[];
+  post_reactions: { user_id: string; emoji: string }[];
   comments: { count: number }[];
 };
 
@@ -31,7 +33,7 @@ export default async function Home() {
     getNotifications(supabase, 20, profile.id),
     supabase
       .from("posts")
-      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),comments(count)")
+      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),post_reactions(user_id,emoji),comments(count)")
       .eq("channel.staff_only_post", false)
       .order("created_at", { ascending: false })
       .limit(10),
@@ -342,6 +344,13 @@ function PostCard({ p, me }: { p: FeedPost; me: string }) {
         <footer className="flex items-center gap-5 text-sm text-ink-muted pt-1">
           <span className={`flex items-center gap-1.5 ${liked ? "text-brand" : ""}`}><Heart size={16} fill={liked ? "currentColor" : "none"} /> {likes}</span>
           <span className="flex items-center gap-1.5"><MessageCircle size={16} /> {comments}</span>
+          {groupReactions(p.post_reactions ?? [], me).length > 0 && (
+            <span className="flex items-center gap-2">
+              {groupReactions(p.post_reactions ?? [], me).map((g) => (
+                <span key={g.emoji} className={`flex items-center gap-0.5 tabular-nums ${g.mine ? "text-brand" : ""}`}><span className="text-[15px]">{g.emoji}</span>{g.count}</span>
+              ))}
+            </span>
+          )}
         </footer>
       </article>
     </Link>

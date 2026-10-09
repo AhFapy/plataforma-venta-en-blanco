@@ -6,6 +6,7 @@ import { getCurriculum } from "@/lib/data";
 import { videoEmbed } from "@/lib/utils";
 import type { LessonMedia } from "@/lib/types";
 import { CompleteButton } from "./CompleteButton";
+import { HomeworkBox, type MySubmission } from "@/components/HomeworkBox";
 
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -35,7 +36,15 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   const moduleLessons = cur.lessons.filter((l) => l.module_id === lesson.module_id);
   // Registro de visualización (métricas del equipo)
   await supabase.from("lesson_views").upsert({ user_id: profile.id, lesson_id: lesson.id, viewed_at: new Date().toISOString() }, { onConflict: "user_id,lesson_id" });
-  const { data: media } = await supabase.from("lesson_media").select("*").eq("lesson_id", lesson.id).maybeSingle<LessonMedia>();
+  const [{ data: media }, { data: subRow }] = await Promise.all([
+    supabase.from("lesson_media").select("*").eq("lesson_id", lesson.id).maybeSingle<LessonMedia>(),
+    supabase.from("submissions").select("body,file_path,file_name,feedback,feedback_at,updated_at").eq("user_id", profile.id).eq("lesson_id", lesson.id).maybeSingle(),
+  ]);
+  let sub: MySubmission = null;
+  if (subRow) {
+    const signed = subRow.file_path ? (await supabase.storage.from("deberes").createSignedUrl(subRow.file_path, 3600)).data?.signedUrl ?? null : null;
+    sub = { body: subRow.body, file_name: subRow.file_name, file_url: signed, feedback: subRow.feedback, feedback_at: subRow.feedback_at, updated_at: subRow.updated_at };
+  }
   const resources = media?.resources ?? [];
   const done = cur.completed.has(lesson.id);
   const embed = videoEmbed(media?.video_url);
@@ -79,6 +88,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
             </ul>
           </section>
         )}
+
+        <HomeworkBox lessonId={lesson.id} userId={profile.id} sub={sub} />
 
         <div className="flex justify-between gap-3 pt-4 border-t border-line">
           {prev ? <Link href={`/formacion/leccion/${prev.id}`} className="btn btn-ghost"><ArrowLeft size={15} /> Anterior</Link> : <span />}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Heart, Pin, Send, Trash2 } from "lucide-react";
-import { createComment, createPost, deleteComment, deletePost, toggleLike, togglePin } from "./actions";
+import { Heart, Pin, Send, SmilePlus, Trash2 } from "lucide-react";
+import { REACTIONS, groupReactions, type Reaction } from "@/lib/reactions";
+import { createComment, createPost, deleteComment, deletePost, toggleLike, togglePin, toggleReaction } from "./actions";
 
 export function Composer({ channelId, placeholder, wins, trustpilotUrl = null }: { channelId: string; placeholder: string; wins: boolean; trustpilotUrl?: string | null }) {
   const [body, setBody] = useState("");
@@ -75,6 +76,56 @@ export function LikeButton({ postId, count, liked }: { postId: string; count: nu
     >
       <Heart size={16} fill={state.liked ? "currentColor" : "none"} /> {state.count}
     </button>
+  );
+}
+
+export function Reactions({ postId, rows, me }: { postId: string; rows: Reaction[]; me: string }) {
+  const [list, setList] = useState(rows);
+  const [open, setOpen] = useState(false);
+  const [, start] = useTransition();
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
+
+  function toggle(emoji: string) {
+    const on = !list.some((r) => r.emoji === emoji && r.user_id === me);
+    const prev = list;
+    setList(on ? [...list, { emoji, user_id: me }] : list.filter((r) => !(r.emoji === emoji && r.user_id === me)));
+    setOpen(false);
+    start(async () => { const r = await toggleReaction(postId, emoji, on); if (r.error) setList(prev); });
+  }
+
+  const groups = groupReactions(list, me);
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {groups.map((g) => (
+        <button key={g.emoji} onClick={() => toggle(g.emoji)} aria-pressed={g.mine}
+          className={`flex items-center gap-1 rounded-full border px-2 py-0.5 text-sm tabular-nums transition-colors ${g.mine ? "border-brand bg-accent-soft text-brand-deep" : "border-line text-ink-muted hover:border-ink-faint"}`}>
+          <span className="text-[15px] leading-none">{g.emoji}</span>{g.count}
+        </button>
+      ))}
+      <div ref={ref} className="relative">
+        <button onClick={() => setOpen(!open)} title="Reaccionar" aria-label="Reaccionar" aria-expanded={open}
+          className="grid place-items-center w-7 h-7 rounded-full text-ink-muted hover:text-ink hover:bg-bg-badge">
+          <SmilePlus size={16} />
+        </button>
+        {open && (
+          <div className="absolute bottom-full left-0 mb-2 z-20 flex gap-0.5 rounded-full border border-line bg-surface p-1 shadow-lg fade-in">
+            {REACTIONS.map((e) => {
+              const mine = list.some((r) => r.emoji === e && r.user_id === me);
+              return (
+                <button key={e} onClick={() => toggle(e)} aria-label={`Reaccionar con ${e}`}
+                  className={`w-9 h-9 rounded-full text-xl leading-none transition-transform hover:scale-125 ${mine ? "bg-accent-soft" : ""}`}>{e}</button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

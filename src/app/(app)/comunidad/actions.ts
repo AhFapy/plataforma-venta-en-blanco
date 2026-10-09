@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireMember } from "@/lib/auth";
+import { REACTIONS } from "@/lib/reactions";
 
 export async function createPost(channelId: string, body: string) {
   const { supabase, profile } = await requireMember();
@@ -19,6 +20,17 @@ export async function toggleLike(postId: string, like: boolean) {
   const { supabase, profile } = await requireMember();
   if (like) await supabase.from("post_likes").upsert({ post_id: postId, user_id: profile.id }, { ignoreDuplicates: true });
   else await supabase.from("post_likes").delete().eq("post_id", postId).eq("user_id", profile.id);
+  return { ok: true };
+}
+
+export async function toggleReaction(postId: string, emoji: string, on: boolean) {
+  const { supabase, profile } = await requireMember();
+  if (!(REACTIONS as readonly string[]).includes(emoji)) return { error: "Reacción no válida" };
+  const q = on
+    ? supabase.from("post_reactions").upsert({ post_id: postId, user_id: profile.id, emoji }, { ignoreDuplicates: true })
+    : supabase.from("post_reactions").delete().eq("post_id", postId).eq("user_id", profile.id).eq("emoji", emoji);
+  const { error } = await q;
+  if (error) return { error: "No se ha podido reaccionar" };
   return { ok: true };
 }
 
