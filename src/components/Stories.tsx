@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trophy, X } from "lucide-react";
 import Image from "next/image";
@@ -119,13 +120,14 @@ export function Stories({ groups, me }: { groups: StoryGroup[]; me: { name: stri
         </div>
       </div>
 
-      {open && (
+      {open && typeof document !== "undefined" && createPortal(
         <Viewer
           groups={ordered}
           start={open}
           onSeen={markSeen}
           onClose={() => setOpen(null)}
-        />
+        />,
+        document.body
       )}
     </>
   );
