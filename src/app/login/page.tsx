@@ -77,8 +77,8 @@ export default function LoginPage() {
           ) : (
             <form onSubmit={verify} className="space-y-5">
               <span className="badge badge-dot">Revisa tu email</span>
-              <h2 className="text-4xl font-semibold tracking-[-0.03em]">Escribe el <span className="em">código</span></h2>
-              <p className="text-ink-muted">Lo hemos enviado a <b className="text-ink">{email}</b>. Si no aparece, mira en spam o promociones.</p>
+              <h2 className="text-4xl font-semibold tracking-[-0.03em]">Revisa tu <span className="em">email</span></h2>
+              <p className="text-ink-muted">Lo hemos enviado a <b className="text-ink">{email}</b>. Escribe aquí el código o pulsa el enlace del email desde este mismo navegador. Si no aparece, mira en spam o promociones.</p>
               <input className="input text-center text-2xl tracking-[.5em] font-mono" inputMode="numeric" autoComplete="one-time-code" maxLength={8} required autoFocus value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} />
               {error && <p className="text-sm text-red-700">{error}</p>}
               <button className="btn btn-brand w-full justify-center" disabled={loading || code.length < 6}>
