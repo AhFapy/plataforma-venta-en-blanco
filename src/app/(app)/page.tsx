@@ -8,6 +8,7 @@ import { firstName, fmtDateTime, timeAgo } from "@/lib/utils";
 import { ProgressBar } from "@/components/Progress";
 import { Avatar } from "@/components/Avatar";
 import { NotificationIcon } from "@/components/NotificationIcon";
+import { Stories, type StoryGroup } from "@/components/Stories";
 
 type FeedPost = {
   id: string; body: string; created_at: string;
@@ -21,7 +22,8 @@ type FeedItem = { at: string } & ({ type: "note"; n: Notification } | { type: "p
 
 export default async function Home() {
   const { supabase, profile } = await requireMember();
-  const [cur, pts, notes, { data: postsRaw }, { data: nextEvent }, { data: top }] = await Promise.all([
+  const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
+  const [cur, pts, notes, { data: postsRaw }, { data: nextEvent }, { data: top }, { data: storyPostsRaw }] = await Promise.all([
     getCurriculum(supabase, profile),
     getMyPoints(supabase, profile.id),
     getNotifications(supabase, 20),
@@ -33,7 +35,33 @@ export default async function Home() {
       .limit(10),
     supabase.from("events").select("*").gte("starts_at", new Date(Date.now() - 2 * 3600_000).toISOString()).order("starts_at").limit(1).maybeSingle(),
     supabase.from("leaderboard").select("user_id,full_name,avatar_url,points_month").order("points_month", { ascending: false }).limit(5),
+    supabase
+      .from("posts")
+      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url),channel:channels!inner(staff_only_post)")
+      .eq("channel.staff_only_post", false)
+      .neq("author_id", profile.id)
+      .gte("created_at", weekAgo)
+      .order("created_at", { ascending: false })
+      .limit(40),
   ]);
+
+  // Historias: novedades de los últimos 7 días + publicaciones recientes de la comunidad
+  const recent = notes.filter((n) => n.created_at >= weekAgo).reverse(); // de más antigua a más nueva, como Instagram
+  const slideOf = (n: Notification, cta: string) => ({ id: `n-${n.id}`, at: n.created_at, kind: n.kind, title: n.title, body: n.body, link: n.link, cta });
+  const brandGroups: StoryGroup[] = [
+    { id: "clases", name: "Clases", brand: true, icon: "clases", slides: recent.filter((n) => n.kind === "leccion" || n.kind === "curso").map((n) => slideOf(n, n.kind === "curso" ? "Ver curso" : "Ver clase")) },
+    { id: "directos", name: "Directos", brand: true, icon: "directos", slides: recent.filter((n) => n.kind === "directo").map((n) => slideOf(n, "Ver directos")) },
+    { id: "avisos", name: "Avisos", brand: true, icon: "avisos", slides: recent.filter((n) => n.kind === "anuncio" || n.kind === "aviso").map((n) => slideOf(n, "Ver más")) },
+  ].filter((g) => g.slides.length > 0) as StoryGroup[];
+  type SP = { id: string; body: string; created_at: string; author: { id: string; full_name: string | null; avatar_url: string | null } | null };
+  const byAuthor = new Map<string, StoryGroup>();
+  for (const sp of ((storyPostsRaw ?? []) as unknown as SP[]).slice().reverse()) {
+    if (!sp.author) continue;
+    const g = byAuthor.get(sp.author.id) ?? { id: `u-${sp.author.id}`, name: firstName(sp.author.full_name) || "Miembro", avatar: sp.author.avatar_url, slides: [] };
+    g.slides.push({ id: `p-${sp.id}`, at: sp.created_at, kind: "post", body: sp.body, link: `/comunidad/post/${sp.id}`, cta: "Ver publicación" });
+    byAuthor.set(sp.author.id, g);
+  }
+  const storyGroups = [...brandGroups, ...[...byAuthor.values()].slice(0, 20)];
 
   const posts = (postsRaw ?? []) as unknown as FeedPost[];
   const feed: FeedItem[] = [
@@ -51,7 +79,9 @@ export default async function Home() {
     <div className="fade-in grid xl:grid-cols-[minmax(0,1fr)_320px] gap-8 max-w-[1080px]">
       {/* ── Feed ── */}
       <div className="space-y-4 min-w-0">
-        <h1 className="text-[28px] sm:text-[34px] leading-tight font-semibold tracking-[-0.035em]">
+        <Stories groups={storyGroups} me={{ name: profile.full_name, avatar: profile.avatar_url }} />
+
+        <h1 className="text-[28px] sm:text-[34px] leading-tight font-semibold tracking-[-0.035em] pt-2">
           Hola, {firstName(profile.full_name)}. <span className="em">A por ello.</span>
         </h1>
 
