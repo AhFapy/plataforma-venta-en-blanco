@@ -6,6 +6,10 @@ import { SideNav, BottomNav } from "@/components/Nav";
 import { SignOutButton } from "@/components/SignOutButton";
 import { NotificationBell } from "@/components/NotificationBell";
 import { getNotifications } from "@/lib/notifications";
+import { ThemePicker } from "@/components/ThemePicker";
+import { getSettings } from "@/lib/settings";
+import { PopupGate } from "@/components/PopupGate";
+import { getActivePopup } from "@/lib/popups";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { supabase, profile } = await requireMember();
@@ -16,7 +20,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   const staff = profile.role !== "alumno";
-  const notes = await getNotifications(supabase, 12);
+  const [notes, settings, popup] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id)]);
   const seenAt = profile.notifications_seen_at ?? new Date().toISOString();
 
   return (
@@ -25,19 +29,22 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="space-y-10">
           <div className="flex items-center justify-between pl-2">
             <Link href="/"><Logo size={18} /></Link>
-            <NotificationBell items={notes} seenAt={seenAt} align="left" />
+            <NotificationBell items={notes} seenAt={seenAt} align="left" rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           </div>
           <SideNav staff={staff} />
         </div>
         <div className="space-y-3">
-          <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-bg-alt">
+          <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-surface">
             <Avatar name={profile.full_name} url={profile.avatar_url} />
             <div className="min-w-0">
               <p className="text-sm font-medium truncate">{profile.full_name || profile.email}</p>
               <p className="text-xs text-ink-faint">Ver perfil</p>
             </div>
           </Link>
-          <SignOutButton className="flex items-center gap-2 px-3 text-sm text-ink-muted hover:text-ink" />
+          <div className="flex items-center justify-between px-2">
+            <SignOutButton className="flex items-center gap-2 text-sm text-ink-muted hover:text-ink" />
+            <ThemePicker compact />
+          </div>
         </div>
       </aside>
 
@@ -45,13 +52,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <Link href="/"><Logo size={16} /></Link>
         <div className="flex items-center gap-1.5">
           {staff && <Link href="/admin" className="badge">Admin</Link>}
-          <NotificationBell items={notes} seenAt={seenAt} />
+          <NotificationBell items={notes} seenAt={seenAt} rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           <Link href="/perfil"><Avatar name={profile.full_name} url={profile.avatar_url} size={32} /></Link>
         </div>
       </header>
 
       <main className="px-4 pt-6 pb-28 sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full">{children}</main>
       <BottomNav />
+      {popup && <PopupGate popup={popup} />}
     </div>
   );
 }

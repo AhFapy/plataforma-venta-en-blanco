@@ -6,6 +6,9 @@ const tabs = [
   { href: "/admin/alumnos", label: "Alumnos" },
   { href: "/admin/contenido", label: "Contenido" },
   { href: "/admin/eventos", label: "Directos" },
+  { href: "/admin/misiones", label: "Misiones" },
+  { href: "/admin/popups", label: "Pop-ups" },
+  { href: "/admin/ajustes", label: "Ajustes" },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -10,6 +10,7 @@ export function NoticeForm() {
         <Field label="Título"><input name="title" className="input" required maxLength={140} placeholder="Ej: Esta semana sesión especial de objeciones" /></Field>
         <Field label="Enlace (opcional)" hint="Una ruta de la plataforma (/eventos) o una URL completa"><input name="link" className="input" placeholder="/eventos" /></Field>
         <div className="sm:col-span-2"><Field label="Texto (opcional)"><textarea name="body" className="input min-h-20" maxLength={1000} /></Field></div>
+        <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="as_rosa" defaultChecked /> Publicar como Rosa (si no, sale con tu nombre)</label>
       </div>
     </ActionForm>
   );

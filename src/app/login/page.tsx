@@ -62,11 +62,12 @@ export default function LoginPage() {
       <section className="on-dark hidden lg:flex flex-col justify-between bg-bg-dark p-12 text-[#f5f4ef]">
         <Logo dark />
         <div>
-          <p className="text-[#a4a8a4] mb-4 font-medium">Venta en Blanco</p>
-          <h1 className="text-6xl font-semibold tracking-[-0.03em] leading-[1.02]">
-            Vendedores que <span className="em">venden más.</span>
+          <h1 className="text-7xl font-semibold tracking-[-0.04em] leading-[0.98]">
+            Venta en <span className="em">Blanco.</span>
           </h1>
-          <p className="mt-6 max-w-md text-[#a4a8a4] text-lg">Aprende el método, genera ingresos reales y entra en proyectos serios dentro del ecosistema Trud.</p>
+          <p className="mt-7 max-w-md text-[#a4a8a4] text-lg leading-relaxed">
+            La formación de Trud Sales para aprender a vender con el método de la antiventa y generar tus primeros ingresos como comercial. Seis meses de método, sesiones en directo y acceso a proyectos reales dentro del ecosistema Trud.
+          </p>
         </div>
         <span />
       </section>

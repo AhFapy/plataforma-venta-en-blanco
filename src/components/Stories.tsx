@@ -4,21 +4,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trophy, X } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trash2, Trophy, Volume2, VolumeX, X } from "lucide-react";
 import Image from "next/image";
 import { createComment, toggleLike } from "@/app/(app)/comunidad/actions";
 import { initials, timeAgo } from "@/lib/utils";
+import { StoryComposer } from "./StoryComposer";
+import { deleteStory } from "@/app/story-actions";
+import { useRouter } from "next/navigation";
 
 export type StorySlide = {
   id: string;
   at: string;
-  kind: "leccion" | "curso" | "directo" | "anuncio" | "aviso" | "post";
+  kind: "leccion" | "curso" | "directo" | "anuncio" | "aviso" | "post" | "story";
   title?: string | null;
   body?: string | null;
   link?: string | null;
   cta?: string;
   postId?: string;   // historias de alumnos: permite responder (comentario) y dar like
   liked?: boolean;
+  media?: { url: string; type: "image" | "video" }; // historias subidas por alumnos
+  storyId?: string;
+  mine?: boolean;
 };
 
 export type StoryGroup = {
@@ -41,7 +47,7 @@ function writeSeen(s: Set<string>) {
 }
 
 const ICONS = { clases: PlayCircle, directos: CalendarDays, avisos: Megaphone, resultado: Trophy };
-const KIND_ICON = { leccion: PlayCircle, curso: BookOpen, directo: CalendarDays, anuncio: Megaphone, aviso: Sparkles, post: Trophy };
+const KIND_ICON = { leccion: PlayCircle, curso: BookOpen, directo: CalendarDays, anuncio: Megaphone, aviso: Sparkles, post: Trophy, story: Sparkles };
 
 function Bubble({ g, size = 64 }: { g: StoryGroup; size?: number }) {
   if (g.brand) {
@@ -61,9 +67,10 @@ function Bubble({ g, size = 64 }: { g: StoryGroup; size?: number }) {
   );
 }
 
-export function Stories({ groups, me }: { groups: StoryGroup[]; me: { name: string | null; avatar: string | null } }) {
+export function Stories({ groups, mine, me }: { groups: StoryGroup[]; mine: StoryGroup | null; me: { id: string; name: string | null; avatar: string | null } }) {
   const [seen, setSeen] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<{ g: number; s: number } | null>(null);
+  const [composer, setComposer] = useState(false);
 
   useEffect(() => { setSeen(readSeen()); }, []);
 
@@ -78,36 +85,47 @@ export function Stories({ groups, me }: { groups: StoryGroup[]; me: { name: stri
     });
   }, []);
 
+  // La propia historia va primero en el visor, como en Instagram
+  const all = mine ? [mine, ...ordered] : ordered;
+  const offset = mine ? 1 : 0;
   const openGroup = (gi: number) => {
-    const g = ordered[gi];
+    const g = all[gi];
     const first = g.slides.findIndex((s) => !seen.has(s.id));
     setOpen({ g: gi, s: first === -1 ? 0 : first });
   };
+  const mineSeen = mine ? groupSeen(mine) : true;
 
   return (
     <>
       <div className="-mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-none">
         <div className="flex gap-4 w-max pb-1">
-          <Link href="/comunidad/resultados" className="flex flex-col items-center gap-1.5 w-[72px]">
-            <span className="relative p-[3px]">
-              <span className="block rounded-full p-[2px]">
-                {me.avatar ? (
-                  <img src={me.avatar} alt="" className="w-[62px] h-[62px] rounded-full object-cover" />
-                ) : (
-                  <span className="grid place-items-center w-[62px] h-[62px] rounded-full bg-bg-badge text-ink-muted font-semibold">{initials(me.name)}</span>
-                )}
-              </span>
-              <span className="absolute bottom-0.5 right-0.5 grid place-items-center w-6 h-6 rounded-full bg-brand text-white ring-[3px] ring-bg">
+          <div className="flex flex-col items-center gap-1.5 w-[72px]">
+            <span className="relative">
+              <button
+                onClick={() => (mine ? openGroup(0) : setComposer(true))}
+                className="block rounded-full p-[3px]"
+                style={{ background: mine ? (mineSeen ? "var(--line)" : "conic-gradient(from 200deg, #c5ff5b, #16734b, #0d4f33, #c5ff5b)") : "transparent" }}
+                aria-label={mine ? "Ver tu historia" : "Subir una historia"}
+              >
+                <span className="block rounded-full p-[2px] bg-bg">
+                  {me.avatar ? (
+                    <img src={me.avatar} alt="" className="w-[62px] h-[62px] rounded-full object-cover" />
+                  ) : (
+                    <span className="grid place-items-center w-[62px] h-[62px] rounded-full bg-bg-badge text-ink-muted font-semibold">{initials(me.name)}</span>
+                  )}
+                </span>
+              </button>
+              <button onClick={() => setComposer(true)} className="absolute bottom-0.5 right-0.5 grid place-items-center w-6 h-6 rounded-full bg-brand text-white ring-[3px] ring-bg" aria-label="Añadir a tu historia">
                 <Plus size={14} strokeWidth={2.5} />
-              </span>
+              </button>
             </span>
-            <span className="text-xs text-ink-muted truncate w-full text-center">Tu resultado</span>
-          </Link>
+            <span className="text-xs text-ink-muted truncate w-full text-center">Tu historia</span>
+          </div>
 
           {ordered.map((g, i) => {
             const done = groupSeen(g);
             return (
-              <button key={g.id} onClick={() => openGroup(i)} className="flex flex-col items-center gap-1.5 w-[72px]">
+              <button key={g.id} onClick={() => openGroup(i + offset)} className="flex flex-col items-center gap-1.5 w-[72px]">
                 <span className="rounded-full p-[3px]" style={{ background: done ? "var(--line)" : "conic-gradient(from 200deg, #c5ff5b, #16734b, #0d4f33, #c5ff5b)" }}>
                   <span className="block rounded-full p-[2px] bg-bg">
                     <Bubble g={g} size={62} />
@@ -122,13 +140,14 @@ export function Stories({ groups, me }: { groups: StoryGroup[]; me: { name: stri
 
       {open && typeof document !== "undefined" && createPortal(
         <Viewer
-          groups={ordered}
+          groups={all}
           start={open}
           onSeen={markSeen}
           onClose={() => setOpen(null)}
         />,
         document.body
       )}
+      {composer && <StoryComposer userId={me.id} onClose={() => setComposer(false)} />}
     </>
   );
 }
@@ -140,7 +159,7 @@ function SlideBody({ slide, compact = false }: { slide: StorySlide; compact?: bo
   const Icon = KIND_ICON[slide.kind] ?? Sparkles;
   return (
     <div className={`absolute inset-0 flex flex-col justify-center ${compact ? "px-4" : "px-7 pt-24 pb-32"}`}>
-      <span className={`grid place-items-center rounded-2xl bg-accent text-ink ${compact ? "w-8 h-8 mb-3 rounded-xl" : "w-14 h-14 mb-6"}`}>
+      <span className={`grid place-items-center rounded-2xl bg-accent text-on-accent ${compact ? "w-8 h-8 mb-3 rounded-xl" : "w-14 h-14 mb-6"}`}>
         <Icon size={compact ? 16 : 26} strokeWidth={1.9} />
       </span>
       {slide.title && <p className={`font-semibold tracking-[-0.03em] ${compact ? "text-sm leading-tight line-clamp-3" : "text-[28px] leading-[1.12]"}`}>{slide.title}</p>}
@@ -157,7 +176,13 @@ function SidePreview({ g, onClick, far = false }: { g: StoryGroup; onClick: () =
   const slide = g.slides[0];
   return (
     <button onClick={onClick} className={`relative shrink-0 h-[40vh] max-h-[380px] aspect-[9/16] rounded-[10px] overflow-hidden text-[#f5f4ef] group ${far ? "hidden min-[1680px]:block" : ""}`} style={{ background: BG }} aria-label={`Ver historias de ${g.name}`}>
-      <div className="absolute inset-0 opacity-30 blur-[3px] scale-105"><SlideBody slide={slide} compact /></div>
+      {slide.media?.type === "image" ? (
+        <img src={slide.media.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      ) : slide.media?.type === "video" ? (
+        <video src={slide.media.url} muted playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" />
+      ) : (
+        <div className="absolute inset-0 opacity-30 blur-[3px] scale-105"><SlideBody slide={slide} compact /></div>
+      )}
       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors" />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
         <span className="rounded-full p-[3px]" style={{ background: "conic-gradient(from 200deg, #c5ff5b, #16734b, #0d4f33, #c5ff5b)" }}>
@@ -180,6 +205,9 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   const [sent, setSent] = useState<string | null>(null);
   const [likes, setLikes] = useState<Record<string, boolean>>({});
   const posRef = useRef(start);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(false);
+  const router = useRouter();
   const prog = useRef(0);
   const stopped = useRef(false);
   const last = useRef(0);
@@ -187,6 +215,9 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   const group = groups[pos.g];
   const slide = group.slides[pos.s];
   const liked = slide.postId ? likes[slide.postId] ?? !!slide.liked : false;
+  const isVideo = slide.media?.type === "video";
+  const isVideoRef = useRef(isVideo);
+  isVideoRef.current = isVideo;
 
   const go = useCallback((p: { g: number; s: number }) => {
     posRef.current = p; prog.current = 0; setProgress(0); setPos(p); setReply(""); setSent(null);
@@ -207,7 +238,18 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   }, [groups, go]);
 
   useEffect(() => { onSeen(slide.id); }, [slide.id, onSeen]);
-  useEffect(() => { stopped.current = paused || holding || typing; }, [paused, holding, typing]);
+  useEffect(() => {
+    stopped.current = paused || holding || typing;
+    const v = videoRef.current;
+    if (v) { if (stopped.current) v.pause(); else v.play().catch(() => { v.muted = true; setMuted(true); v.play().catch(() => {}); }); }
+  }, [paused, holding, typing, slide.id]);
+
+  async function removeStory() {
+    if (!slide.storyId || !confirm("¿Eliminar esta historia?")) return;
+    await deleteStory(slide.storyId);
+    onClose();
+    router.refresh();
+  }
 
   // Avance automático
   useEffect(() => {
@@ -216,7 +258,8 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
     const tick = (t: number) => {
       const dt = t - last.current;
       last.current = t;
-      if (!stopped.current) {
+      // Los vídeos llevan su propio ritmo (timeupdate)
+      if (!stopped.current && !isVideoRef.current) {
         prog.current += dt / DURATION;
         if (prog.current >= 1) next();
         else setProgress(prog.current);
@@ -304,6 +347,11 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
               <span className="text-[15px] font-semibold">{group.name}</span>
               <span className="text-[15px] text-white/70">{timeAgo(slide.at)}</span>
               <div className="ml-auto flex items-center">
+                {isVideo && (
+                  <button onClick={() => setMuted((m) => !m)} className="grid place-items-center w-9 h-9 rounded-full hover:bg-white/10 text-sm font-medium" aria-label={muted ? "Activar sonido" : "Silenciar"}>
+                    {muted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  </button>
+                )}
                 <button onClick={() => setPaused((v) => !v)} className="grid place-items-center w-9 h-9 rounded-full hover:bg-white/10" aria-label={paused ? "Reanudar" : "Pausar"}>
                   {paused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
                 </button>
@@ -324,7 +372,31 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
               <button aria-label="Siguiente" onClick={next} />
             </div>
 
-            <div className="pointer-events-none"><SlideBody slide={slide} /></div>
+            {slide.media?.type === "image" && (
+              <img key={slide.id} src={slide.media.url} alt="" className="absolute inset-0 w-full h-full object-contain bg-black" />
+            )}
+            {isVideo && (
+              <video
+                key={slide.id}
+                ref={videoRef}
+                src={slide.media!.url}
+                autoPlay
+                playsInline
+                muted={muted}
+                className="absolute inset-0 w-full h-full object-contain bg-black"
+                onTimeUpdate={(e) => { const v = e.currentTarget; if (v.duration) setProgress(v.currentTime / v.duration); }}
+                onEnded={next}
+              />
+            )}
+            {slide.media ? (
+              slide.body && (
+                <div className="absolute inset-x-0 bottom-28 z-[5] px-6 pointer-events-none">
+                  <p className="mx-auto w-fit max-w-full rounded-xl bg-black/55 px-4 py-2.5 text-center text-[17px] font-medium leading-snug whitespace-pre-line break-words">{slide.body}</p>
+                </div>
+              )
+            ) : (
+              <div className="pointer-events-none"><SlideBody slide={slide} /></div>
+            )}
 
             {/* Pie */}
             <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-5 pt-10 bg-gradient-to-t from-black/45 to-transparent">
@@ -352,8 +424,10 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
                     </button>
                   </form>
                 </div>
+              ) : slide.mine ? (
+                <button onClick={removeStory} className="flex items-center gap-2 text-sm text-white/85 hover:text-white"><Trash2 size={16} /> Eliminar historia</button>
               ) : slide.link ? (
-                <Link href={slide.link} onClick={onClose} className="btn bg-accent text-ink w-full justify-center">
+                <Link href={slide.link} onClick={onClose} className="btn bg-accent text-on-accent w-full justify-center">
                   {slide.cta ?? "Ver"} <ArrowRight size={16} />
                 </Link>
               ) : null}

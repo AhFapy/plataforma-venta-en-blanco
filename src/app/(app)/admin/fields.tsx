@@ -59,7 +59,7 @@ export function LessonFields({ moduleId, l, media, nextPos }: { moduleId: string
   );
 }
 
-function toLocalMadrid(iso?: string | null) {
+export function toLocalMadrid(iso?: string | null) {
   if (!iso) return "";
   const parts = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
   return parts.replace(" ", "T");

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, CalendarDays, Heart, MessageCircle, Play, Trophy, Video } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { getCurriculum, getMyPoints, level } from "@/lib/data";
@@ -8,7 +7,10 @@ import { firstName, fmtDateTime, timeAgo } from "@/lib/utils";
 import { ProgressBar } from "@/components/Progress";
 import { Avatar } from "@/components/Avatar";
 import { NotificationIcon } from "@/components/NotificationIcon";
-import { Stories, type StoryGroup } from "@/components/Stories";
+import { Stories, type StoryGroup, type StorySlide } from "@/components/Stories";
+import { getSettings } from "@/lib/settings";
+import { RosaAvatar } from "@/components/RosaAvatar";
+import { GoalsCard } from "./GoalsCard";
 
 type FeedPost = {
   id: string; body: string; created_at: string;
@@ -23,10 +25,10 @@ type FeedItem = { at: string } & ({ type: "note"; n: Notification } | { type: "p
 export default async function Home() {
   const { supabase, profile } = await requireMember();
   const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
-  const [cur, pts, notes, { data: postsRaw }, { data: nextEvent }, { data: top }, { data: storyPostsRaw }] = await Promise.all([
+  const [cur, pts, notes, { data: postsRaw }, { data: nextEvent }, { data: top }, { data: storyPostsRaw }, { data: userStoriesRaw }, settings, { data: lastEvent }] = await Promise.all([
     getCurriculum(supabase, profile),
     getMyPoints(supabase, profile.id),
-    getNotifications(supabase, 20),
+    getNotifications(supabase, 20, profile.id),
     supabase
       .from("posts")
       .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),comments(count)")
@@ -43,6 +45,14 @@ export default async function Home() {
       .gte("created_at", weekAgo)
       .order("created_at", { ascending: false })
       .limit(40),
+    supabase
+      .from("stories")
+      .select("id,media_path,media_type,caption,created_at,author:profiles!stories_author_id_fkey(id,full_name,avatar_url)")
+      .gt("expires_at", new Date().toISOString())
+      .order("created_at")
+      .limit(200),
+    getSettings(supabase),
+    supabase.from("events").select("id,title,starts_at,recording_url").lt("starts_at", new Date().toISOString()).not("recording_url", "is", null).order("starts_at", { ascending: false }).limit(1).maybeSingle(),
   ]);
 
   // Historias: novedades de los últimos 7 días + publicaciones recientes de la comunidad
@@ -61,7 +71,28 @@ export default async function Home() {
     g.slides.push({ id: `p-${sp.id}`, at: sp.created_at, kind: "post", body: sp.body, link: `/comunidad/post/${sp.id}`, cta: "Ver publicación", postId: sp.id, liked: sp.post_likes.some((l) => l.user_id === profile.id) });
     byAuthor.set(sp.author.id, g);
   }
-  const storyGroups = [...brandGroups, ...[...byAuthor.values()].slice(0, 20)];
+  // Historias subidas (foto/vídeo, 24 h): van primero dentro del círculo de cada persona
+  type US = { id: string; media_path: string; media_type: "image" | "video"; caption: string | null; created_at: string; author: { id: string; full_name: string | null; avatar_url: string | null } | null };
+  let mine: StoryGroup | null = null;
+  const storySlides = new Map<string, StorySlide[]>();
+  for (const st of (userStoriesRaw ?? []) as unknown as US[]) {
+    if (!st.author) continue;
+    // La URL se calcula desde la ruta del archivo (nunca se usa una URL guardada por el alumno)
+    const url = supabase.storage.from("stories").getPublicUrl(st.media_path).data.publicUrl;
+    const slide: StorySlide = { id: `s-${st.id}`, at: st.created_at, kind: "story", body: st.caption, media: { url, type: st.media_type }, storyId: st.id, mine: st.author.id === profile.id };
+    if (st.author.id === profile.id) {
+      mine = mine ?? { id: "mine", name: "Tu historia", avatar: profile.avatar_url, slides: [] };
+      mine.slides.push(slide);
+      continue;
+    }
+    storySlides.set(st.author.id, [...(storySlides.get(st.author.id) ?? []), slide]);
+    if (!byAuthor.has(st.author.id)) byAuthor.set(st.author.id, { id: `u-${st.author.id}`, name: firstName(st.author.full_name) || "Miembro", avatar: st.author.avatar_url, slides: [] });
+  }
+  for (const [uid, g] of byAuthor) g.slides = [...(storySlides.get(uid) ?? []), ...g.slides];
+  // Personas con historia subida primero
+  const people = [...byAuthor.entries()].sort((a, b) => Number(storySlides.has(b[0])) - Number(storySlides.has(a[0]))).map(([, g]) => g);
+  const storyGroups = [...brandGroups, ...people.slice(0, 30)];
+  const rosa = { name: settings.rosa_name, avatar: settings.rosa_avatar_url };
 
   const posts = (postsRaw ?? []) as unknown as FeedPost[];
   const feed: FeedItem[] = [
@@ -79,7 +110,7 @@ export default async function Home() {
     <div className="fade-in grid xl:grid-cols-[minmax(0,1fr)_320px] gap-8 max-w-[1080px]">
       {/* ── Feed ── */}
       <div className="space-y-4 min-w-0">
-        <Stories groups={storyGroups} me={{ name: profile.full_name, avatar: profile.avatar_url }} />
+        <Stories groups={storyGroups} mine={mine} me={{ id: profile.id, name: profile.full_name, avatar: profile.avatar_url }} />
 
         <h1 className="text-[28px] sm:text-[34px] leading-tight font-semibold tracking-[-0.035em] pt-2">
           Hola, {firstName(profile.full_name)}. <span className="em">A por ello.</span>
@@ -104,7 +135,7 @@ export default async function Home() {
 
         {feed.map((item) =>
           item.type === "note" ? (
-            <NoteCard key={`n-${item.n.id}`} n={item.n} isNew={new Date(item.n.created_at).getTime() > seen} />
+            <NoteCard key={`n-${item.n.id}`} n={item.n} isNew={new Date(item.n.created_at).getTime() > seen} rosa={rosa} />
           ) : (
             <PostCard key={`p-${item.p.id}`} p={item.p} me={profile.id} />
           )
@@ -113,7 +144,7 @@ export default async function Home() {
 
       {/* ── Columna lateral ── */}
       <aside className="space-y-4 xl:sticky xl:top-10 h-fit">
-        <section className="feed-card p-5">
+        <Link href="/ranking?t=puntos" className="block feed-card p-5 hover:border-brand transition-colors">
           <div className="flex items-center gap-3">
             <Avatar name={profile.full_name} url={profile.avatar_url} size={52} />
             <div className="min-w-0">
@@ -130,9 +161,19 @@ export default async function Home() {
             <Stat n={`${done}`} l="clases" />
             <Stat n={`${pts.month}`} l="pts mes" />
           </div>
-        </section>
+          <p className="mt-4 text-sm font-medium text-brand flex items-center gap-1">Ver mis puntos y rangos <ArrowRight size={14} /></p>
+        </Link>
 
         <div className="hidden xl:block"><NextLessonCard cur={cur} done={done} total={total} /></div>
+
+        {!nextEvent && lastEvent && (
+          <a href={`/eventos/grabacion/${lastEvent.id}`} className="block feed-card p-5 space-y-2 hover:border-brand transition-colors">
+            <p className="label flex items-center gap-2"><Play size={14} className="text-brand" /> Última sesión</p>
+            <p className="font-semibold leading-snug">{lastEvent.title}</p>
+            <p className="text-sm text-ink-muted capitalize">{fmtDateTime(lastEvent.starts_at)}</p>
+            <p className="text-sm font-medium text-brand flex items-center gap-1">Ver grabación <ArrowRight size={14} /></p>
+          </a>
+        )}
 
         {nextEvent && (
           <section className="feed-card p-5 space-y-3">
@@ -149,20 +190,7 @@ export default async function Home() {
           </section>
         )}
 
-        <section className="feed-card p-5">
-          <div className="flex items-center justify-between mb-3">
-            <p className="label">Tus objetivos</p>
-            <Link href="/perfil" className="text-xs text-ink-faint hover:text-ink">Editar</Link>
-          </div>
-          <ol className="space-y-2.5">
-            {profile.objectives.map((o, i) => (
-              <li key={i} className="flex gap-3 text-[15px] leading-snug">
-                <span className="text-brand font-semibold">{i + 1}</span>
-                <span>{o}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
+        <GoalsCard objectives={profile.objectives} improvements={profile.improvements} objectivesProgress={profile.objectives_progress ?? [0, 0, 0]} improvementsProgress={profile.improvements_progress ?? [0, 0, 0]} />
 
         <section className="feed-card p-5">
           <div className="flex items-center justify-between mb-3">
@@ -214,7 +242,7 @@ function NextLessonCard({ cur, done, total }: { cur: Awaited<ReturnType<typeof g
             <ProgressBar value={total ? done / total : 0} dark />
             <p className="text-xs text-[#a4a8a4]">{done} de {total} clases</p>
           </div>
-          <Link href={`/formacion/leccion/${cur.next.id}`} className="btn bg-accent text-ink !py-2.5 w-full justify-center">
+          <Link href={`/formacion/leccion/${cur.next.id}`} className="btn bg-accent text-on-accent !py-2.5 w-full justify-center">
             <Play size={15} fill="currentColor" /> {done === 0 ? "Empezar" : "Continuar"}
           </Link>
         </>
@@ -225,21 +253,19 @@ function NextLessonCard({ cur, done, total }: { cur: Awaited<ReturnType<typeof g
   );
 }
 
-function TrudAuthor({ at }: { at: string }) {
+function RosaAuthor({ at, rosa }: { at: string; rosa: { name: string; avatar: string | null } }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="grid place-items-center w-10 h-10 rounded-full bg-bg-dark shrink-0">
-        <Image src="/isotipo.png" alt="" width={24} height={18} />
-      </span>
+      <RosaAvatar url={rosa.avatar} size={40} />
       <div>
-        <p className="font-semibold leading-tight">Trud Sales</p>
+        <p className="font-semibold leading-tight">{rosa.name} <span className="text-ink-faint font-normal">· Asistente</span></p>
         <p className="text-xs text-ink-faint">{timeAgo(at)}</p>
       </div>
     </div>
   );
 }
 
-function NoteCard({ n, isNew }: { n: Notification; isNew: boolean }) {
+function NoteCard({ n, isNew, rosa }: { n: Notification; isNew: boolean; rosa: { name: string; avatar: string | null } }) {
   const isMedia = n.kind === "leccion" || n.kind === "curso";
   const fromPerson = (n.kind === "anuncio" || n.kind === "aviso") && n.author;
   const body = (
@@ -254,14 +280,14 @@ function NoteCard({ n, isNew }: { n: Notification; isNew: boolean }) {
             </div>
           </div>
         ) : (
-          <TrudAuthor at={n.created_at} />
+          <RosaAuthor at={n.created_at} rosa={rosa} />
         )}
         {isNew && <span className="badge !bg-accent-soft !text-brand-deep">Nuevo</span>}
       </header>
 
       {isMedia ? (
         <div className="on-dark rounded-[16px] bg-bg-dark p-5 sm:p-6 flex items-center gap-4 text-[#f5f4ef]">
-          <span className="grid place-items-center w-12 h-12 rounded-full bg-accent text-ink shrink-0">
+          <span className="grid place-items-center w-12 h-12 rounded-full bg-accent text-on-accent shrink-0">
             <Play size={20} fill="currentColor" />
           </span>
           <div className="min-w-0">
@@ -279,7 +305,7 @@ function NoteCard({ n, isNew }: { n: Notification; isNew: boolean }) {
         </div>
       ) : (
         <div className="space-y-1">
-          {n.kind === "aviso" && <p className="font-semibold text-[17px] leading-snug">{n.title}</p>}
+          {(n.kind === "aviso" || n.kind === "recordatorio") && <p className="font-semibold text-[17px] leading-snug">{n.title}</p>}
           {n.body && <p className="text-[15px] leading-relaxed whitespace-pre-line line-clamp-6">{n.body}</p>}
         </div>
       )}

@@ -33,6 +33,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   const next = sameCourse[pos + 1];
   const nextOpen = next && cur.states.get(next.module_id)?.unlocked;
   const moduleLessons = cur.lessons.filter((l) => l.module_id === lesson.module_id);
+  // Registro de visualización (métricas del equipo)
+  await supabase.from("lesson_views").upsert({ user_id: profile.id, lesson_id: lesson.id, viewed_at: new Date().toISOString() }, { onConflict: "user_id,lesson_id" });
   const { data: media } = await supabase.from("lesson_media").select("*").eq("lesson_id", lesson.id).maybeSingle<LessonMedia>();
   const resources = media?.resources ?? [];
   const done = cur.completed.has(lesson.id);

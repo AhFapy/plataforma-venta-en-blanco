@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield } from "lucide-react";
+import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid } from "lucide-react";
 
 const items = [
   { href: "/", label: "Inicio", icon: Home },
@@ -10,6 +10,7 @@ const items = [
   { href: "/comunidad", label: "Comunidad", icon: MessagesSquare },
   { href: "/eventos", label: "Directos", icon: CalendarDays },
   { href: "/ranking", label: "Ranking", icon: Trophy },
+  { href: "/aplicaciones", label: "Aplicaciones", icon: LayoutGrid },
   { href: "/miembros", label: "Miembros", icon: Users },
 ];
 
@@ -39,7 +40,7 @@ export function SideNav({ staff }: { staff: boolean }) {
 
 export function BottomNav() {
   const path = usePathname();
-  const mobile = items.filter((i) => i.href !== "/miembros");
+  const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones");
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
       <div className="grid grid-cols-5">

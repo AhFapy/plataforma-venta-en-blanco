@@ -16,6 +16,8 @@ export type Profile = {
   weekly_hours: number | null;
   objectives: string[];
   improvements: string[];
+  objectives_progress?: number[];
+  improvements_progress?: number[];
   onboarded_at: string | null;
   last_seen_at: string | null;
   notifications_seen_at: string;

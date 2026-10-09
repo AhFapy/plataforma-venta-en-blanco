@@ -15,7 +15,8 @@ export async function createNotice(f: FormData): Promise<{ ok?: boolean; error?:
   const body = String(f.get("body") ?? "").trim().slice(0, 1000) || null;
   const link = String(f.get("link") ?? "").trim().slice(0, 300) || null;
   if (!title) return { error: "Falta el título" };
-  const { error } = await supabase.from("notifications").insert({ kind: "aviso", title, body, link, created_by: profile.id });
+  const asRosa = f.get("as_rosa") === "on";
+  const { error } = await supabase.from("notifications").insert({ kind: "aviso", title, body, link, created_by: asRosa ? null : profile.id });
   if (error) return { error: error.message };
   revalidatePath("/", "layout");
   return { ok: true, msg: "Aviso publicado" };

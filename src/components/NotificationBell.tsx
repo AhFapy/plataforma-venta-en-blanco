@@ -6,10 +6,11 @@ import { Bell } from "lucide-react";
 import { markNotificationsSeen } from "@/app/notification-actions";
 import { timeAgo } from "@/lib/utils";
 import { NotificationIcon } from "./NotificationIcon";
+import { RosaAvatar } from "./RosaAvatar";
 
-type Item = { id: string; kind: "leccion" | "curso" | "directo" | "anuncio" | "aviso"; title: string; body: string | null; link: string | null; created_at: string };
+type Item = { id: string; kind: "leccion" | "curso" | "directo" | "anuncio" | "aviso" | "recordatorio"; title: string; body: string | null; link: string | null; created_at: string; author?: { full_name: string | null } | null };
 
-export function NotificationBell({ items, seenAt, align = "right" }: { items: Item[]; seenAt: string; align?: "left" | "right" }) {
+export function NotificationBell({ items, seenAt, align = "right", rosa }: { items: Item[]; seenAt: string; align?: "left" | "right"; rosa: { name: string; avatar: string | null } }) {
   const [open, setOpen] = useState(false);
   const [cleared, setCleared] = useState(false);
   const [, start] = useTransition();
@@ -57,7 +58,7 @@ export function NotificationBell({ items, seenAt, align = "right" }: { items: It
               const isNew = new Date(n.created_at).getTime() > seen;
               const inner = (
                 <div className={`flex gap-3 px-4 py-3 hover:bg-bg ${isNew ? "bg-brand-soft/40" : ""}`}>
-                  <NotificationIcon kind={n.kind} />
+                  {n.kind === "recordatorio" || (n.kind === "aviso" && !n.author) ? <RosaAvatar url={rosa.avatar} size={36} /> : <NotificationIcon kind={n.kind} />}
                   <div className="min-w-0 flex-1">
                     <p className="text-sm leading-snug"><span className="font-medium">{n.title}</span></p>
                     {n.body && <p className="text-sm text-ink-muted line-clamp-2">{n.body}</p>}

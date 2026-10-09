@@ -1,4 +1,4 @@
-import { CalendarDays, Megaphone, PlayCircle, Sparkles, BookOpen } from "lucide-react";
+import { BellRing, CalendarDays, Megaphone, PlayCircle, Sparkles, BookOpen } from "lucide-react";
 
 const map = {
   leccion: { icon: PlayCircle, bg: "bg-brand-soft", fg: "text-brand-deep" },
@@ -6,6 +6,7 @@ const map = {
   directo: { icon: CalendarDays, bg: "bg-accent-soft", fg: "text-brand-deep" },
   anuncio: { icon: Megaphone, bg: "bg-bg-dark", fg: "text-accent" },
   aviso: { icon: Sparkles, bg: "bg-bg-dark", fg: "text-accent" },
+  recordatorio: { icon: BellRing, bg: "bg-accent-soft", fg: "text-brand-deep" },
 } as const;
 
 export function NotificationIcon({ kind, size = 36 }: { kind: keyof typeof map; size?: number }) {

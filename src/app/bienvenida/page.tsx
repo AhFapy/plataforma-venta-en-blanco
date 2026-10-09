@@ -3,6 +3,7 @@ import { requireMember } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { ProfileForm } from "@/components/ProfileForm";
 import { firstName } from "@/lib/utils";
+import { AvatarUpload } from "@/app/(app)/perfil/AvatarUpload";
 
 export const metadata = { title: "Bienvenida" };
 
@@ -19,6 +20,10 @@ export default async function Welcome() {
         </h1>
         <p className="mt-4 text-ink-muted text-lg">Cuéntanos de dónde partes y a dónde vas. Con esto el equipo te sigue de cerca y tú no pierdes el foco.</p>
       </div>
+      <section className="space-y-4 mb-10">
+        <p className="label">Tu foto de perfil</p>
+        <AvatarUpload name={profile.full_name} url={profile.avatar_url} required />
+      </section>
       <ProfileForm profile={profile} submitLabel="Entrar a la plataforma" />
     </main>
   );

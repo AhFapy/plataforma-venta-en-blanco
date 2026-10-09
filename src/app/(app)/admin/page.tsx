@@ -7,32 +7,30 @@ import { DeleteButton } from "./ActionForm";
 import { deleteNotice } from "@/app/notification-actions";
 import { getNotifications } from "@/lib/notifications";
 import { timeAgo } from "@/lib/utils";
+import { getServiceMetrics } from "./metrics";
+import { getSettings } from "@/lib/settings";
 
 export const metadata = { title: "Admin" };
 
 export default async function AdminHome() {
   const { supabase } = await requireStaff();
   const students = (await getStudents(supabase)).filter((s) => s.role === "alumno" && s.active);
-  const week = Date.now() - 7 * 86_400_000;
-  const active7 = students.filter((s) => s.last_seen_at && new Date(s.last_seen_at).getTime() > week).length;
-  const onboarded = students.filter((s) => s.onboarded_at).length;
-  const avg = students.length ? students.reduce((a, s) => a + (s.total ? s.done / s.total : 0), 0) / students.length : 0;
   const risk = students.filter((s) => s.risk);
-  const notes = await getNotifications(supabase, 8);
+  const settings = await getSettings(supabase);
+  const [notes, metrics] = await Promise.all([getNotifications(supabase, 8), getServiceMetrics(supabase, students, settings.mentoria_points)]);
 
   return (
     <div className="space-y-8">
       <h1 className="text-[34px] sm:text-[46px] leading-[1.05] font-semibold tracking-[-0.035em]">Cómo van <span className="em">los alumnos.</span></h1>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        {[
-          ["Alumnos activos", students.length],
-          ["Entraron últimos 7 días", `${active7} · ${students.length ? Math.round((active7 / students.length) * 100) : 0}%`],
-          ["Perfil completado", `${onboarded}/${students.length}`],
-          ["Progreso medio", `${Math.round(avg * 100)}%`],
-        ].map(([k, v]) => (
-          <div key={k} className="card p-5">
-            <p className="label mb-2">{k}</p>
-            <p className="text-2xl font-semibold tracking-[-0.02em]">{v}</p>
+        {metrics.map((m) => (
+          <div key={m.label} className="card p-5">
+            <p className="label mb-2 leading-snug">{m.label}</p>
+            <p className="text-2xl font-semibold tracking-[-0.02em] tabular-nums">
+              {m.value}
+              {m.of > 0 && <span className="text-base text-ink-faint font-normal"> / {m.of} · {Math.round((m.value / m.of) * 100)}%</span>}
+            </p>
+            <p className="text-xs text-ink-faint mt-1">{m.hint}</p>
           </div>
         ))}
       </div>

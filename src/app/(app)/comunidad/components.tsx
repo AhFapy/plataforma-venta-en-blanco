@@ -1,15 +1,17 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { Heart, Pin, Send, Trash2 } from "lucide-react";
 import { createComment, createPost, deleteComment, deletePost, toggleLike, togglePin } from "./actions";
 
-export function Composer({ channelId, placeholder, wins }: { channelId: string; placeholder: string; wins: boolean }) {
+export function Composer({ channelId, placeholder, wins, trustpilotUrl = null }: { channelId: string; placeholder: string; wins: boolean; trustpilotUrl?: string | null }) {
   const [body, setBody] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const [flash, setFlash] = useState<string | null>(null);
+  const [celebrate, setCelebrate] = useState(false);
   const router = useRouter();
 
   return (
@@ -22,6 +24,7 @@ export function Composer({ channelId, placeholder, wins }: { channelId: string; 
           if (res.error) { setError(res.error); return; }
           setBody(""); setError(null);
           setFlash(wins ? "+50 pts · Resultado publicado" : "+3 pts");
+          if (wins && trustpilotUrl) setCelebrate(true);
           setTimeout(() => setFlash(null), 1800);
           router.refresh();
         });
@@ -31,11 +34,29 @@ export function Composer({ channelId, placeholder, wins }: { channelId: string; 
       <div className="flex items-center justify-between">
         <span className="text-sm text-red-700">{error}</span>
         <div className="flex items-center gap-3">
-          {flash && <span className="rounded-full bg-accent px-3 py-1 text-sm font-semibold fade-in">{flash}</span>}
+          {flash && <span className="rounded-full bg-accent text-on-accent px-3 py-1 text-sm font-semibold fade-in">{flash}</span>}
           <button className="btn btn-dark !py-2" disabled={pending || !body.trim()}><Send size={15} /> Publicar</button>
         </div>
       </div>
+      {celebrate && trustpilotUrl && <TrustpilotModal url={trustpilotUrl} onClose={() => setCelebrate(false)} />}
     </form>
+  );
+}
+
+function TrustpilotModal({ url, onClose }: { url: string; onClose: () => void }) {
+  return createPortal(
+    <div className="fixed inset-0 z-[90] grid place-items-center bg-black/55 backdrop-blur-sm p-4 fade-in" role="dialog" aria-modal="true" aria-label="Valora Trud Sales">
+      <div className="w-full max-w-md feed-card p-7 text-center space-y-4">
+        <p className="text-5xl" aria-hidden>🏆</p>
+        <h2 className="text-2xl font-semibold tracking-[-0.03em]">Enhorabuena por tu <span className="em">resultado.</span></h2>
+        <p className="text-ink-muted">Si la formación te está ayudando, cuéntalo en Trustpilot. Le sirve a la próxima persona que esté dudando, como dudaste tú.</p>
+        <div className="flex flex-col gap-2 pt-2">
+          <a href={url} target="_blank" rel="noreferrer" onClick={onClose} className="btn btn-brand justify-center">Dejar mi opinión en Trustpilot</a>
+          <button type="button" onClick={onClose} className="btn btn-ghost justify-center">Ahora no</button>
+        </div>
+      </div>
+    </div>,
+    document.body
   );
 }
 

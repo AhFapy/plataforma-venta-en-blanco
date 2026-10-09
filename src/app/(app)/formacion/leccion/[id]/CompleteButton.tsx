@@ -30,7 +30,7 @@ export function CompleteButton({ lessonId, done, nextHref }: { lessonId: string;
         <Check size={16} /> {done ? "Completada" : pending ? "Guardando…" : "Marcar como completada"}
       </button>
       {burst && (
-        <span className="pointer-events-none absolute -top-8 right-2 rounded-full bg-accent px-3 py-1 text-sm font-semibold text-ink fade-in">+10 pts</span>
+        <span className="pointer-events-none absolute -top-8 right-2 rounded-full bg-accent px-3 py-1 text-sm font-semibold text-on-accent fade-in">+10 pts</span>
       )}
     </div>
   );

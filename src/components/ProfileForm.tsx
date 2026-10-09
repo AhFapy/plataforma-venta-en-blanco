@@ -19,6 +19,9 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
   const [saved, setSaved] = useState(false);
   const [pending, start] = useTransition();
   const router = useRouter();
+  const initSit = profile.situation ?? "";
+  const otherInit = initSit.startsWith("Otra: ") ? initSit.slice(6) : "";
+  const [situation, setSituation] = useState(initSit.startsWith("Otra") ? "Otra" : initSit);
 
   return (
     <form
@@ -48,10 +51,13 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
         <p className="label">Tu punto de partida</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Situación actual">
-            <select name="situation" className="input" defaultValue={profile.situation ?? ""} required>
+            <select name="situation" className="input" value={situation} onChange={(e) => setSituation(e.target.value)} required>
               <option value="" disabled>Elige una</option>
               {SITUATIONS.map((s) => <option key={s}>{s}</option>)}
             </select>
+            {situation === "Otra" && (
+              <input name="situation_other" className="input mt-2 fade-in" required autoFocus defaultValue={otherInit} placeholder="¿Cuál es tu situación?" maxLength={80} />
+            )}
           </Field>
           <Field label="Horas a la semana que puedes dedicar">
             <input name="weekly_hours" type="number" min={1} max={80} className="input" defaultValue={profile.weekly_hours ?? ""} required />
