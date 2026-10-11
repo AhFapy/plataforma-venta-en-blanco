@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { shownAuthor, type LegacyAuthor, type Media } from "./comunidad/posts";
 import { ArrowRight, CalendarDays, Heart, MessageCircle, Play, Trophy, Video } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { getCurriculum, getMyPoints, level } from "@/lib/data";
@@ -20,6 +21,9 @@ type FeedPost = {
   post_likes: { user_id: string }[];
   post_reactions: { user_id: string; emoji: string }[];
   comments: { count: number }[];
+  legacy_author: LegacyAuthor | null;
+  media: Media[] | null;
+  legacy_likes: number | null;
 };
 
 type FeedItem = { at: string } & ({ type: "note"; n: Notification } | { type: "post"; p: FeedPost });
@@ -33,7 +37,7 @@ export default async function Home() {
     getNotifications(supabase, 20, profile.id),
     supabase
       .from("posts")
-      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),post_reactions(user_id,emoji),comments(count)")
+      .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),post_reactions(user_id,emoji),comments(count),legacy_author,media,legacy_likes")
       .eq("channel.staff_only_post", false)
       .order("created_at", { ascending: false })
       .limit(10),
@@ -323,24 +327,27 @@ function NoteCard({ n, isNew, rosa }: { n: Notification; isNew: boolean; rosa: {
 }
 
 function PostCard({ p, me }: { p: FeedPost; me: string }) {
-  const likes = p.post_likes.length;
+  const likes = p.post_likes.length + (p.legacy_likes ?? 0);
+  const au = shownAuthor(p.author, p.legacy_author);
+  const firstImg = p.media?.find((m) => m.type.startsWith("image/"));
   const liked = p.post_likes.some((l) => l.user_id === me);
   const comments = p.comments?.[0]?.count ?? 0;
   return (
     <Link href={`/comunidad/post/${p.id}`} className="block">
       <article className="feed-card p-5 space-y-3 hover:border-brand transition-colors">
         <header className="flex items-center gap-3">
-          <Avatar name={p.author?.full_name} url={p.author?.avatar_url} size={40} />
+          <Avatar name={au.name} url={au.avatar} size={40} />
           <div className="min-w-0">
             <p className="font-semibold leading-tight truncate">
-              {p.author?.full_name || "Miembro"}
-              {p.author && p.author.role !== "alumno" && <span className="text-ink-faint font-normal"> · Equipo</span>}
+              {au.name}
+              {au.staff && <span className="text-ink-faint font-normal"> · Equipo</span>}
             </p>
             <p className="text-xs text-ink-faint">{p.channel?.name} · {timeAgo(p.created_at)}</p>
           </div>
           {p.channel?.is_wins && <span className="ml-auto badge !bg-accent-soft !text-brand-deep"><Trophy size={12} /> Resultado</span>}
         </header>
         <p className="text-[15px] leading-relaxed whitespace-pre-line line-clamp-6 break-words">{p.body}</p>
+        {firstImg && <img src={firstImg.url} alt="" loading="lazy" className="w-full max-h-[360px] object-cover rounded-[14px] bg-bg-badge" />}
         <footer className="flex items-center gap-5 text-sm text-ink-muted pt-1">
           <span className={`flex items-center gap-1.5 ${liked ? "text-brand" : ""}`}><Heart size={16} fill={liked ? "currentColor" : "none"} /> {likes}</span>
           <span className="flex items-center gap-1.5"><MessageCircle size={16} /> {comments}</span>
