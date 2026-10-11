@@ -92,7 +92,7 @@
   --radius-xl: 32px;
 }
 
-html, body { background: var(--bg); color: var(--ink); }
+html, body { background: var(--bg); color: var(--ink); overflow-x: clip; }
 body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 /* Énfasis serif: siempre verde de marca */

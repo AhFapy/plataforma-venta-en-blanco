@@ -109,7 +109,7 @@ export default async function Home() {
   const ranked = (top ?? []).filter((r) => r.points_month > 0);
 
   return (
-    <div className="fade-in grid xl:grid-cols-[minmax(0,1fr)_320px] gap-8 max-w-[1080px]">
+    <div className="fade-in grid grid-cols-[minmax(0,1fr)] xl:grid-cols-[minmax(0,1fr)_320px] gap-8 max-w-[1080px]">
       {/* ── Feed ── */}
       <div className="space-y-4 min-w-0">
         <Stories groups={storyGroups} mine={mine} me={{ id: profile.id, name: profile.full_name, avatar: profile.avatar_url }} />
@@ -145,7 +145,7 @@ export default async function Home() {
       </div>
 
       {/* ── Columna lateral ── */}
-      <aside className="space-y-4 xl:sticky xl:top-10 h-fit">
+      <aside className="space-y-4 min-w-0 xl:sticky xl:top-10 h-fit">
         <Link href="/ranking?t=puntos" className="block feed-card p-5 hover:border-brand transition-colors">
           <div className="flex items-center gap-3">
             <Avatar name={profile.full_name} url={profile.avatar_url} size={52} />

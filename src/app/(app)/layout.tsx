@@ -57,7 +57,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </header>
 
-      <main className="px-4 pt-6 pb-28 sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full">{children}</main>
+      <main className="px-4 pt-6 pb-28 sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full min-w-0">{children}</main>
       <BottomNav />
       {popup && <PopupGate popup={popup} />}
     </div>
