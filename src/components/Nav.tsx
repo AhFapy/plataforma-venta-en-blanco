@@ -43,7 +43,7 @@ export function BottomNav() {
   const path = usePathname();
   const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones");
   return (
-    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
+    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[max(env(safe-area-inset-bottom),6px)]">
       <div className="grid grid-cols-6">
         {mobile.map(({ href, label, short, icon: Icon }) => (
           <Link key={href} href={href} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${active(path, href) ? "text-brand" : "text-ink-muted"}`}>

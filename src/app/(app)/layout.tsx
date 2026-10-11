@@ -48,7 +48,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </aside>
 
-      <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between border-b border-line bg-bg/95 backdrop-blur px-4 py-3">
+      <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between border-b border-line bg-bg/95 backdrop-blur px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
         <Link href="/"><Logo size={16} /></Link>
         <div className="flex items-center gap-1.5">
           {staff && <Link href="/admin" className="badge">Admin</Link>}
@@ -57,7 +57,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </header>
 
-      <main className="px-4 pt-6 pb-28 sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full min-w-0">{children}</main>
+      <main className="px-4 pt-6 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full min-w-0">{children}</main>
       <BottomNav />
       {popup && <PopupGate popup={popup} />}
     </div>
