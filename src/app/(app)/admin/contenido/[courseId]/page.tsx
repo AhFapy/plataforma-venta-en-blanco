@@ -6,6 +6,7 @@ import type { Course, Lesson, LessonMedia, Module } from "@/lib/types";
 import { deleteRow, saveCourse, saveLesson, saveModule } from "../../actions";
 import { ActionForm, DeleteButton } from "../../ActionForm";
 import { CourseFields, LessonFields, ModuleFields } from "../../fields";
+import { QuizEditor, type QuizQ } from "../../QuizEditor";
 
 export default async function AdminCourse({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params;
@@ -20,6 +21,10 @@ export default async function AdminCourse({ params }: { params: Promise<{ course
   const ls = (lessons ?? []) as Lesson[];
   const { data: mediaRows } = await supabase.from("lesson_media").select("*").in("lesson_id", ls.map((l) => l.id));
   const media = new Map(((mediaRows ?? []) as LessonMedia[]).map((m) => [m.lesson_id, m]));
+  const quizzes = new Map(await Promise.all(modules.map(async (m) => {
+    const { data } = await supabase.rpc("quiz_admin_list", { p_module: m.id });
+    return [m.id, (data ?? []) as QuizQ[]] as const;
+  })));
 
   return (
     <div className="space-y-8">
@@ -69,6 +74,8 @@ export default async function AdminCourse({ params }: { params: Promise<{ course
                 </li>
               ))}
             </ul>
+
+            <QuizEditor moduleId={m.id} questions={quizzes.get(m.id) ?? []} />
 
             <details className="rounded-[14px] bg-bg p-4">
               <summary className="cursor-pointer text-sm font-medium">+ Añadir lección</summary>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Download, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Download, Lock, ListChecks } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { getCurriculum } from "@/lib/data";
 import { videoEmbed } from "@/lib/utils";
@@ -34,6 +34,10 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   const next = sameCourse[pos + 1];
   const nextOpen = next && cur.states.get(next.module_id)?.unlocked;
   const moduleLessons = cur.lessons.filter((l) => l.module_id === lesson.module_id);
+  const { count: quizN } = await supabase.from("quiz_questions").select("id", { count: "exact", head: true }).eq("module_id", lesson.module_id);
+  const hasQuiz = (quizN ?? 0) > 0;
+  const moduleDone = st.total > 0 && st.done === st.total;
+  const isLastOfModule = moduleLessons.at(-1)?.id === lesson.id;
   // Registro de visualización (métricas del equipo)
   await supabase.from("lesson_views").upsert({ user_id: profile.id, lesson_id: lesson.id, viewed_at: new Date().toISOString() }, { onConflict: "user_id,lesson_id" });
   const [{ data: media }, { data: subRow }] = await Promise.all([
@@ -91,6 +95,19 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
         <HomeworkBox lessonId={lesson.id} userId={profile.id} sub={sub} />
 
+        {hasQuiz && (isLastOfModule || moduleDone) && (
+          <section className="rounded-[24px] bg-[#0c1f15] text-[#f5f4ef] on-dark p-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-[#a4a8a4]">Fin del módulo</p>
+              <p className="text-xl font-semibold tracking-[-0.02em]">Quiz: {lesson.module.title}</p>
+              <p className="text-sm text-[#a4a8a4] mt-1">{moduleDone ? `${quizN} preguntas · +20 pts al aprobar` : "Se abre al terminar todas las clases del módulo"}</p>
+            </div>
+            {moduleDone
+              ? <Link href={`/formacion/quiz/${lesson.module_id}`} className="btn bg-accent text-on-accent">Hacer el quiz <ArrowRight size={15} /></Link>
+              : <span className="btn bg-white/10 text-white/70"><Lock size={14} /> {st.done}/{st.total} clases</span>}
+          </section>
+        )}
+
         <div className="flex justify-between gap-3 pt-4 border-t border-line">
           {prev ? <Link href={`/formacion/leccion/${prev.id}`} className="btn btn-ghost"><ArrowLeft size={15} /> Anterior</Link> : <span />}
           {next && (nextOpen
@@ -110,6 +127,13 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
               </Link>
             </li>
           ))}
+          {hasQuiz && (
+            <li>
+              <Link href={`/formacion/quiz/${lesson.module_id}`} className="flex items-center gap-2.5 rounded-[14px] px-3 py-2 text-sm hover:bg-bg-badge font-medium">
+                <ListChecks size={15} className={moduleDone ? "text-brand" : "text-ink-faint"} /> Quiz del módulo
+              </Link>
+            </li>
+          )}
         </ul>
       </aside>
     </div>

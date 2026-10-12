@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CheckCircle2, Circle, Lock, ArrowLeft } from "lucide-react";
+import { CheckCircle2, Circle, Lock, ArrowLeft, ListChecks } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { getCurriculum } from "@/lib/data";
 import { ProgressBar } from "@/components/Progress";
@@ -13,6 +13,14 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
   const course = cur.courses.find((c) => c.id === courseId);
   if (!course) notFound();
   const mods = cur.modules.filter((m) => m.course_id === course.id);
+  const modIds = mods.map((m) => m.id);
+  const [{ data: qrows }, { data: arows }] = modIds.length ? await Promise.all([
+    supabase.from("quiz_questions").select("module_id").in("module_id", modIds),
+    supabase.from("quiz_attempts").select("module_id,best,total,passed").eq("user_id", profile.id).in("module_id", modIds),
+  ]) : [{ data: [] }, { data: [] }];
+  const quizCount = new Map<string, number>();
+  for (const r of (qrows ?? []) as { module_id: string }[]) quizCount.set(r.module_id, (quizCount.get(r.module_id) ?? 0) + 1);
+  const attempts = new Map(((arows ?? []) as { module_id: string; best: number; total: number; passed: boolean }[]).map((a) => [a.module_id, a]));
 
   return (
     <div className="fade-in space-y-8">
@@ -62,6 +70,23 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                   );
                 })}
                 {ls.length === 0 && <li className="py-3 text-sm text-ink-faint">Sin lecciones todavía.</li>}
+                {(quizCount.get(m.id) ?? 0) > 0 && (() => {
+                  const a = attempts.get(m.id);
+                  const ready = st.unlocked && st.total > 0 && st.done === st.total;
+                  const inner = (
+                    <>
+                      {a?.passed ? <CheckCircle2 size={18} className="text-brand" /> : <ListChecks size={18} className={ready ? "text-brand" : "text-ink-faint"} />}
+                      <span className="flex-1 font-medium">Quiz del módulo</span>
+                      {a ? <span className="text-xs text-ink-faint tabular-nums">{a.best}/{a.total}</span> : !ready && <span className="text-xs text-ink-faint">Al terminar las clases</span>}
+                      {ready && !a && <span className="badge !bg-accent-soft !text-brand-deep">Pendiente</span>}
+                    </>
+                  );
+                  return (
+                    <li>
+                      {ready || a ? <Link href={`/formacion/quiz/${m.id}`} className="flex items-center gap-3 py-3 hover:text-brand">{inner}</Link> : <div className="flex items-center gap-3 py-3 text-ink-muted">{inner}</div>}
+                    </li>
+                  );
+                })()}
               </ul>
             </section>
           );
