@@ -4,12 +4,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trash2, Trophy, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ChevronLeft, ChevronRight, Eye, Heart, Megaphone, Pause, Play, PlayCircle, Plus, Send, Sparkles, Trash2, Trophy, Volume2, VolumeX, X } from "lucide-react";
 import Image from "next/image";
 import { createComment, toggleLike } from "@/app/(app)/comunidad/actions";
 import { initials, timeAgo } from "@/lib/utils";
 import { StoryComposer } from "./StoryComposer";
 import { deleteStory } from "@/app/story-actions";
+import { getStoryActivity, markStoryViewed, sendDm, toggleStoryLike, type StoryViewer } from "@/app/social-actions";
 import { useRouter } from "next/navigation";
 
 export type StorySlide = {
@@ -25,6 +26,7 @@ export type StorySlide = {
   media?: { url: string; type: "image" | "video" }; // historias subidas por alumnos
   storyId?: string;
   mine?: boolean;
+  authorId?: string; // historias subidas: para responder por privado
 };
 
 export type StoryGroup = {
@@ -204,6 +206,8 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   const [reply, setReply] = useState("");
   const [sent, setSent] = useState<string | null>(null);
   const [likes, setLikes] = useState<Record<string, boolean>>({});
+  const [activity, setActivity] = useState<StoryViewer[] | null>(null);
+  const [showViewers, setShowViewers] = useState(false);
   const posRef = useRef(start);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(false);
@@ -214,13 +218,15 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
 
   const group = groups[pos.g];
   const slide = group.slides[pos.s];
-  const liked = slide.postId ? likes[slide.postId] ?? !!slide.liked : false;
+  const likeKey = slide.postId ?? slide.storyId;
+  const liked = likeKey ? likes[likeKey] ?? !!slide.liked : false;
+  const isStory = !!slide.storyId;
   const isVideo = slide.media?.type === "video";
   const isVideoRef = useRef(isVideo);
   isVideoRef.current = isVideo;
 
   const go = useCallback((p: { g: number; s: number }) => {
-    posRef.current = p; prog.current = 0; setProgress(0); setPos(p); setReply(""); setSent(null);
+    posRef.current = p; prog.current = 0; setProgress(0); setPos(p); setReply(""); setSent(null); setShowViewers(false); setActivity(null);
   }, []);
 
   const next = useCallback(() => {
@@ -238,11 +244,17 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   }, [groups, go]);
 
   useEffect(() => { onSeen(slide.id); }, [slide.id, onSeen]);
+  // Historias subidas: registrar la vista (las de otros) o cargar quién la ha visto (las mías)
   useEffect(() => {
-    stopped.current = paused || holding || typing;
+    if (!slide.storyId) return;
+    if (slide.mine) { let live = true; getStoryActivity(slide.storyId).then((a) => { if (live) setActivity(a); }); return () => { live = false; }; }
+    markStoryViewed(slide.storyId);
+  }, [slide.storyId, slide.mine]);
+  useEffect(() => {
+    stopped.current = paused || holding || typing || showViewers;
     const v = videoRef.current;
     if (v) { if (stopped.current) v.pause(); else v.play().catch(() => { v.muted = true; setMuted(true); v.play().catch(() => {}); }); }
-  }, [paused, holding, typing, slide.id]);
+  }, [paused, holding, typing, showViewers, slide.id]);
 
   async function removeStory() {
     if (!slide.storyId || !confirm("¿Eliminar esta historia?")) return;
@@ -289,19 +301,25 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
 
   async function sendReply(e: React.FormEvent) {
     e.preventDefault();
-    if (!slide.postId || !reply.trim()) return;
+    if (!reply.trim()) return;
     const text = reply;
     setReply("");
-    const r = await createComment(slide.postId, text);
-    setSent(r.error ? "No se ha podido enviar" : "Respuesta enviada");
+    if (slide.storyId && slide.authorId) {
+      const r = await sendDm(slide.authorId, text, slide.storyId);
+      setSent(r.error ? "No se ha podido enviar" : "Enviado por privado");
+    } else if (slide.postId) {
+      const r = await createComment(slide.postId, text);
+      setSent(r.error ? "No se ha podido enviar" : "Respuesta enviada");
+    }
     (document.activeElement as HTMLElement)?.blur();
   }
 
   function like() {
-    if (!slide.postId) return;
+    if (!likeKey) return;
     const v = !liked;
-    setLikes((l) => ({ ...l, [slide.postId!]: v }));
-    toggleLike(slide.postId, v);
+    setLikes((l) => ({ ...l, [likeKey]: v }));
+    if (slide.storyId) toggleStoryLike(slide.storyId, v);
+    else if (slide.postId) toggleLike(slide.postId, v);
   }
 
   const before = groups.slice(Math.max(0, pos.g - 2), pos.g).map((g, i, arr) => ({ g, idx: pos.g - arr.length + i }));
@@ -402,7 +420,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
 
             {/* Pie */}
             <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-[calc(env(safe-area-inset-bottom)+20px)] pt-10 bg-gradient-to-t from-black/45 to-transparent">
-              {slide.postId ? (
+              {slide.postId || (isStory && !slide.mine && slide.authorId) ? (
                 <div className="space-y-2">
                   {slide.link && (
                     <Link href={slide.link} onClick={onClose} className="inline-flex items-center gap-1 text-sm text-white/85 hover:text-white">
@@ -415,7 +433,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
                       onChange={(e) => setReply(e.target.value)}
                       onFocus={() => setTyping(true)}
                       onBlur={() => setTyping(false)}
-                      placeholder={sent ?? `Responder a ${group.name}...`}
+                      placeholder={sent ?? (isStory ? `Enviar mensaje a ${group.name}…` : `Responder a ${group.name}...`)}
                       className="flex-1 min-w-0 rounded-full border border-white/50 bg-transparent px-5 py-3 text-[15px] text-white placeholder:text-white/80 outline-none focus:border-white"
                     />
                     <button type="button" onClick={like} className="shrink-0" aria-label={liked ? "Quitar me gusta" : "Me gusta"} aria-pressed={liked}>
@@ -427,7 +445,13 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
                   </form>
                 </div>
               ) : slide.mine ? (
-                <button onClick={removeStory} className="flex items-center gap-2 text-sm text-white/85 hover:text-white"><Trash2 size={16} /> Eliminar historia</button>
+                <div className="flex items-center justify-between gap-3">
+                  <button onClick={() => setShowViewers(true)} className="flex items-center gap-2 text-sm font-medium text-white hover:text-white/85">
+                    <Eye size={18} /> {activity === null ? "Visto por…" : `Visto por ${activity.length}`}
+                    {activity && activity.some((a) => a.liked) && <span className="flex items-center gap-1 text-accent"><Heart size={15} fill="currentColor" /> {activity.filter((a) => a.liked).length}</span>}
+                  </button>
+                  <button onClick={removeStory} className="flex items-center gap-2 text-sm text-white/70 hover:text-white"><Trash2 size={16} /> Eliminar</button>
+                </div>
               ) : slide.link ? (
                 <Link href={slide.link} onClick={onClose} className="btn bg-accent text-on-accent w-full justify-center">
                   {slide.cta ?? "Ver"} <ArrowRight size={16} />
@@ -435,6 +459,28 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
               ) : null}
             </div>
           </div>
+
+          {showViewers && activity && (
+            <div className="absolute inset-0 z-[60] flex flex-col justify-end bg-black/50" onClick={() => setShowViewers(false)}>
+              <div className="max-h-[70%] overflow-y-auto rounded-t-[20px] bg-[#1f1f1f] p-5 pb-[calc(env(safe-area-inset-bottom)+20px)] lg:absolute lg:inset-x-0 lg:bottom-0" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="font-semibold">Visto por {activity.length}</p>
+                  <button onClick={() => setShowViewers(false)} aria-label="Cerrar" className="grid place-items-center w-8 h-8 rounded-full hover:bg-white/10"><X size={18} /></button>
+                </div>
+                {activity.length === 0 && <p className="text-sm text-white/60 py-4">Todavía no la ha visto nadie.</p>}
+                <ul className="space-y-3">
+                  {activity.map((v) => (
+                    <li key={v.id} className="flex items-center gap-3">
+                      {v.avatar ? <img src={v.avatar} alt="" className="w-10 h-10 rounded-full object-cover" /> : <span className="grid place-items-center w-10 h-10 rounded-full bg-white/10 text-sm font-semibold">{initials(v.name)}</span>}
+                      <span className="flex-1 min-w-0 truncate">{v.name}</span>
+                      {v.liked && <Heart size={18} className="text-accent shrink-0" fill="currentColor" />}
+                      <Link href={`/mensajes/${v.id}`} onClick={onClose} className="shrink-0 text-sm text-white/70 hover:text-white">Mensaje</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
 
           <button onClick={next} className="hidden lg:grid place-items-center w-8 h-8 rounded-full bg-white/80 text-[#1a1a1a] hover:bg-white" aria-label="Siguiente">
             <ChevronRight size={18} strokeWidth={2.5} />

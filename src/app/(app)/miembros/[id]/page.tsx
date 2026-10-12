@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ArrowLeft, MessageCircle, Send } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { Avatar } from "@/components/Avatar";
 import { getMyPoints, level } from "@/lib/data";
@@ -34,6 +34,7 @@ export default async function Member({ params }: { params: Promise<{ id: string 
             {m.role !== "alumno" && <span className="badge !bg-brand !text-white">Equipo Trud</span>}
           </div>
           {m.bio && <p className="text-ink-muted max-w-xl">{m.bio}</p>}
+          {m.id !== me.id && <Link href={`/mensajes/${m.id}`} className="btn btn-dark !py-2 mt-2 w-fit"><Send size={15} /> Enviar mensaje</Link>}
         </div>
       </section>
 

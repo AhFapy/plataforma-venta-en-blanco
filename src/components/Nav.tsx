@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid, NotebookPen } from "lucide-react";
+import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid, NotebookPen, Send } from "lucide-react";
 
 const items: { href: string; label: string; short?: string; icon: typeof Home }[] = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/formacion", label: "Formación", icon: PlayCircle },
   { href: "/comunidad", label: "Comunidad", icon: MessagesSquare },
+  { href: "/mensajes", label: "Mensajes", icon: Send },
   { href: "/eventos", label: "Directos", icon: CalendarDays },
   { href: "/hoja-en-blanco", label: "Hoja en Blanco", short: "Hoja", icon: NotebookPen },
   { href: "/ranking", label: "Ranking", icon: Trophy },
@@ -19,7 +20,7 @@ function active(path: string, href: string) {
   return href === "/" ? path === "/" : path.startsWith(href);
 }
 
-export function SideNav({ staff }: { staff: boolean }) {
+export function SideNav({ staff, unread = 0 }: { staff: boolean; unread?: number }) {
   const path = usePathname();
   const all = staff ? [...items, { href: "/admin", label: "Admin", icon: Shield }] : items;
   return (
@@ -33,6 +34,7 @@ export function SideNav({ staff }: { staff: boolean }) {
           }`}
         >
           <Icon size={18} strokeWidth={1.8} /> {label}
+          {href === "/mensajes" && unread > 0 && <span className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center">{unread}</span>}
         </Link>
       ))}
     </nav>
@@ -41,7 +43,7 @@ export function SideNav({ staff }: { staff: boolean }) {
 
 export function BottomNav() {
   const path = usePathname();
-  const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones");
+  const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones" && i.href !== "/mensajes");
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[max(env(safe-area-inset-bottom),6px)]">
       <div className="grid grid-cols-6">

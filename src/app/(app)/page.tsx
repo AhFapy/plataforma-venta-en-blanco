@@ -81,11 +81,14 @@ export default async function Home() {
   type US = { id: string; media_path: string; media_type: "image" | "video"; caption: string | null; created_at: string; author: { id: string; full_name: string | null; avatar_url: string | null } | null };
   let mine: StoryGroup | null = null;
   const storySlides = new Map<string, StorySlide[]>();
+  const storyIds = ((userStoriesRaw ?? []) as { id: string }[]).map((x) => x.id);
+  const { data: myStoryLikes } = storyIds.length ? await supabase.from("story_likes").select("story_id").eq("user_id", profile.id).in("story_id", storyIds) : { data: [] };
+  const likedStories = new Set((myStoryLikes ?? []).map((l) => l.story_id as string));
   for (const st of (userStoriesRaw ?? []) as unknown as US[]) {
     if (!st.author) continue;
     // La URL se calcula desde la ruta del archivo (nunca se usa una URL guardada por el alumno)
     const url = supabase.storage.from("stories").getPublicUrl(st.media_path).data.publicUrl;
-    const slide: StorySlide = { id: `s-${st.id}`, at: st.created_at, kind: "story", body: st.caption, media: { url, type: st.media_type }, storyId: st.id, mine: st.author.id === profile.id };
+    const slide: StorySlide = { id: `s-${st.id}`, at: st.created_at, kind: "story", body: st.caption, media: { url, type: st.media_type }, storyId: st.id, mine: st.author.id === profile.id, authorId: st.author.id, liked: likedStories.has(st.id) };
     if (st.author.id === profile.id) {
       mine = mine ?? { id: "mine", name: "Tu historia", avatar: profile.avatar_url, slides: [] };
       mine.slides.push(slide);

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Send } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Avatar } from "@/components/Avatar";
@@ -20,7 +21,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   const staff = profile.role !== "alumno";
-  const [notes, settings, popup] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id)]);
+  const [notes, settings, popup, { data: unreadDm }] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id), supabase.rpc("unread_dm_count")]);
+  const unread = Number(unreadDm ?? 0);
   const seenAt = profile.notifications_seen_at ?? new Date().toISOString();
 
   return (
@@ -31,7 +33,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/"><Logo size={18} /></Link>
             <NotificationBell items={notes} seenAt={seenAt} align="left" rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           </div>
-          <SideNav staff={staff} />
+          <SideNav staff={staff} unread={unread} />
         </div>
         <div className="space-y-3">
           <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-surface">
@@ -52,6 +54,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <Link href="/"><Logo size={16} /></Link>
         <div className="flex items-center gap-1.5">
           {staff && <Link href="/admin" className="badge">Admin</Link>}
+          <Link href="/mensajes" aria-label={`Mensajes${unread ? `, ${unread} sin leer` : ""}`} className="relative grid place-items-center w-10 h-10 rounded-full hover:bg-bg-badge">
+            <Send size={20} strokeWidth={1.8} />
+            {unread > 0 && <span className="absolute top-1 right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center leading-none">{unread}</span>}
+          </Link>
           <NotificationBell items={notes} seenAt={seenAt} rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           <Link href="/perfil"><Avatar name={profile.full_name} url={profile.avatar_url} size={32} /></Link>
         </div>
