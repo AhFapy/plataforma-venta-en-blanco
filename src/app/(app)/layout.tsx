@@ -25,7 +25,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[260px_1fr]">
-      <aside className="hidden lg:flex sticky top-0 h-dvh flex-col justify-between border-r border-line px-5 py-7">
+      <aside className="hidden lg:flex sticky top-0 z-40 h-dvh flex-col justify-between border-r border-line px-5 py-7">
         <div className="space-y-10">
           <div className="flex items-center justify-between pl-2">
             <Link href="/"><Logo size={18} /></Link>
