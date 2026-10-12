@@ -46,6 +46,7 @@ export default async function ChannelPage({ params, searchParams }: { params: Pr
       {canPost && (
         <Composer
           channelId={channel.id}
+          userId={profile.id}
           wins={channel.is_wins}
           trustpilotUrl={channel.is_wins ? settings?.trustpilot_url ?? null : null}
           placeholder={channel.is_wins ? "¿Qué has conseguido? Cliente, cierre, ingresos… con números." : channel.slug === "presentate" ? "Quién eres, de dónde vienes y qué quieres conseguir" : "Escribe algo para la comunidad"}

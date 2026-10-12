@@ -3,27 +3,70 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Heart, Pin, Send, SmilePlus, Trash2 } from "lucide-react";
+import { Camera, Heart, Paperclip, Pin, Send, SmilePlus, Trash2, X } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import type { Media } from "./posts";
 import { REACTIONS, groupReactions, type Reaction } from "@/lib/reactions";
 import { createComment, createPost, deleteComment, deletePost, toggleLike, togglePin, toggleReaction } from "./actions";
 
-export function Composer({ channelId, placeholder, wins, trustpilotUrl = null }: { channelId: string; placeholder: string; wins: boolean; trustpilotUrl?: string | null }) {
+const MAX_FILE = 25 * 1024 * 1024;
+const MAX_FILES = 6;
+type Pending = { file: File; preview: string | null };
+
+export function Composer({ channelId, placeholder, wins, trustpilotUrl = null, userId }: { channelId: string; placeholder: string; wins: boolean; trustpilotUrl?: string | null; userId: string }) {
   const [body, setBody] = useState("");
+  const [files, setFiles] = useState<Pending[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
   const [pending, start] = useTransition();
   const [flash, setFlash] = useState<string | null>(null);
   const [celebrate, setCelebrate] = useState(false);
+  const attach = useRef<HTMLInputElement>(null);
+  const camera = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  useEffect(() => () => files.forEach((f) => f.preview && URL.revokeObjectURL(f.preview)), [files]);
+
+  function add(list: FileList | null) {
+    if (!list) return;
+    const next = [...files];
+    for (const f of Array.from(list)) {
+      if (next.length >= MAX_FILES) { setError(`Máximo ${MAX_FILES} archivos por publicación.`); break; }
+      if (f.size > MAX_FILE) { setError(`"${f.name}" pesa más de 25 MB.`); continue; }
+      next.push({ file: f, preview: f.type.startsWith("image/") || f.type.startsWith("video/") ? URL.createObjectURL(f) : null });
+    }
+    setFiles(next);
+  }
+
+  async function upload(): Promise<Media[] | null> {
+    const sb = createClient();
+    const out: Media[] = [];
+    for (const { file } of files) {
+      const ext = (file.name.split(".").pop() || "bin").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 8) || "bin";
+      const path = `${userId}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const { error: e } = await sb.storage.from("posts").upload(path, file, { contentType: file.type || undefined });
+      if (e) { setError(`No se ha podido subir "${file.name}".`); return null; }
+      out.push({ url: sb.storage.from("posts").getPublicUrl(path).data.publicUrl, type: file.type || "application/octet-stream", name: file.name });
+    }
+    return out;
+  }
+
+  const canSend = !!body.trim() || files.length > 0;
 
   return (
     <form
       className="card p-4 space-y-3"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        if (!canSend) return;
+        setBusy(true); setError(null);
+        const media = files.length ? await upload() : [];
+        if (!media) { setBusy(false); return; }
         start(async () => {
-          const res = await createPost(channelId, body);
+          const res = await createPost(channelId, body, media);
+          setBusy(false);
           if (res.error) { setError(res.error); return; }
-          setBody(""); setError(null);
+          setBody(""); setFiles([]);
           setFlash(wins ? "+50 pts · Resultado publicado" : "+3 pts");
           if (wins && trustpilotUrl) setCelebrate(true);
           setTimeout(() => setFlash(null), 1800);
@@ -32,11 +75,34 @@ export function Composer({ channelId, placeholder, wins, trustpilotUrl = null }:
       }}
     >
       <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder={placeholder} className="w-full bg-transparent outline-none resize-none min-h-20 text-[15px]" />
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-red-700">{error}</span>
+      <input ref={attach} type="file" multiple hidden onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+      <input ref={camera} type="file" accept="image/*" capture="environment" hidden onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+      {files.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {files.map((f, i) => (
+            <div key={i} className="relative">
+              {f.preview && f.file.type.startsWith("image/") ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={f.preview} alt="" className="w-20 h-20 rounded-[12px] object-cover bg-bg-badge" />
+              ) : f.preview ? (
+                <video src={f.preview} muted playsInline className="w-20 h-20 rounded-[12px] object-cover bg-black" />
+              ) : (
+                <span className="flex items-center gap-1.5 h-20 max-w-[180px] rounded-[12px] bg-bg-badge px-3 text-sm"><Paperclip size={14} className="shrink-0" /><span className="truncate">{f.file.name}</span></span>
+              )}
+              <button type="button" onClick={() => setFiles(files.filter((_, j) => j !== i))} aria-label="Quitar" className="absolute -top-2 -right-2 grid place-items-center w-6 h-6 rounded-full bg-ink text-bg"><X size={13} /></button>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1">
+          <button type="button" onClick={() => camera.current?.click()} className="grid place-items-center w-9 h-9 rounded-full text-ink-muted hover:bg-bg-badge hover:text-ink" aria-label="Hacer foto" title="Hacer foto"><Camera size={18} /></button>
+          <button type="button" onClick={() => attach.current?.click()} className="grid place-items-center w-9 h-9 rounded-full text-ink-muted hover:bg-bg-badge hover:text-ink" aria-label="Adjuntar archivo" title="Adjuntar foto, vídeo o archivo"><Paperclip size={18} /></button>
+          <span className="text-sm text-red-700 pl-1">{error}</span>
+        </div>
         <div className="flex items-center gap-3">
           {flash && <span className="rounded-full bg-accent text-on-accent px-3 py-1 text-sm font-semibold fade-in">{flash}</span>}
-          <button className="btn btn-dark !py-2" disabled={pending || !body.trim()}><Send size={15} /> Publicar</button>
+          <button className="btn btn-dark !py-2" disabled={busy || pending || !canSend}><Send size={15} /> {busy ? "Subiendo…" : "Publicar"}</button>
         </div>
       </div>
       {celebrate && trustpilotUrl && <TrustpilotModal url={trustpilotUrl} onClose={() => setCelebrate(false)} />}

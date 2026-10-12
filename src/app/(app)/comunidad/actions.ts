@@ -4,12 +4,19 @@ import { revalidatePath } from "next/cache";
 import { requireMember } from "@/lib/auth";
 import { REACTIONS } from "@/lib/reactions";
 
-export async function createPost(channelId: string, body: string) {
+type Media = { url: string; type: string; name?: string | null };
+
+export async function createPost(channelId: string, body: string, media: Media[] = []) {
   const { supabase, profile } = await requireMember();
   const text = body.trim();
-  if (!text) return { error: "Escribe algo" };
+  // Solo archivos subidos por esta persona a nuestro almacenamiento
+  const prefix = `${(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").replace(/\/+$/, "")}/storage/v1/object/public/posts/${profile.id}/`;
+  const files = (Array.isArray(media) ? media : []).slice(0, 6)
+    .filter((m) => typeof m?.url === "string" && m.url.startsWith(prefix))
+    .map((m) => ({ url: m.url, type: String(m.type || "").slice(0, 100), name: m.name ? String(m.name).slice(0, 200) : null }));
+  if (!text && !files.length) return { error: "Escribe algo o adjunta un archivo" };
   if (text.length > 8000) return { error: "Demasiado largo" };
-  const { error } = await supabase.from("posts").insert({ channel_id: channelId, author_id: profile.id, body: text });
+  const { error } = await supabase.from("posts").insert({ channel_id: channelId, author_id: profile.id, body: text, media: files });
   if (error) return { error: "No puedes publicar en este canal" };
   revalidatePath("/comunidad", "layout");
   revalidatePath("/", "layout");
