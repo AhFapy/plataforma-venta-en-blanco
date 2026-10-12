@@ -104,15 +104,15 @@ export default async function Home() {
   const rosa = { name: settings.rosa_name, avatar: settings.rosa_avatar_url };
 
   const posts = (postsRaw ?? []) as unknown as FeedPost[];
-  // Bienvenida de Rosa: fija arriba del todo, fuera del feed
+  // Bienvenida de Rosa: post fijado arriba del todo (se abre, se reacciona y se comenta)
   const { data: welcomeRow } = await supabase
-    .from("notifications")
-    .select("id,kind,title,body,link,count,created_at,author:profiles!notifications_created_by_fkey(full_name,avatar_url)")
-    .eq("ref", "rosa:bienvenida").is("user_id", null).maybeSingle();
-  const welcome = welcomeRow as unknown as Notification | null;
+    .from("posts")
+    .select("id,body,created_at,author:profiles!posts_author_id_fkey(id,full_name,avatar_url,role),channel:channels!inner(name,slug,is_wins,staff_only_post),post_likes(user_id),post_reactions(user_id,emoji),comments(count),legacy_author,media,legacy_likes")
+    .eq("ghl_id", "rosa:bienvenida").maybeSingle();
+  const welcome = welcomeRow as unknown as FeedPost | null;
   const feed: FeedItem[] = [
-    ...notes.filter((n) => n.id !== welcome?.id).map((n) => ({ type: "note" as const, n, at: n.created_at })),
-    ...posts.map((p) => ({ type: "post" as const, p, at: p.created_at })),
+    ...notes.map((n) => ({ type: "note" as const, n, at: n.created_at })),
+    ...posts.filter((p) => p.id !== welcome?.id).map((p) => ({ type: "post" as const, p, at: p.created_at })),
   ].sort((a, b) => b.at.localeCompare(a.at)).slice(0, 25);
 
   const seen = new Date(profile.notifications_seen_at ?? 0).getTime();
@@ -131,7 +131,7 @@ export default async function Home() {
           Hola, {firstName(profile.full_name)}. <span className="em">A por ello.</span>
         </h1>
 
-        {welcome && <NoteCard n={welcome} isNew={new Date(welcome.created_at).getTime() > seen} rosa={rosa} />}
+        {welcome && <PostCard p={welcome} me={profile.id} />}
 
         {/* Seguir donde lo dejaste (móvil y tablet; en escritorio va en la columna) */}
         <div className="xl:hidden"><NextLessonCard cur={cur} done={done} total={total} /></div>
