@@ -43,7 +43,7 @@ export function LessonFields({ moduleId, l, media, nextPos }: { moduleId: string
       <Field label="Orden"><input name="position" type="number" className="input" defaultValue={l?.position ?? nextPos ?? 0} /></Field>
       <Field label="Duración (min)"><input name="duration_min" type="number" min={0} className="input" defaultValue={l?.duration_min ?? ""} /></Field>
       <div className="sm:col-span-4">
-        <Field label="Vídeo" hint="URL de Bunny Stream, Vimeo, YouTube (oculto), Loom o un .mp4 directo.">
+        <Field label="Vídeo" hint="Enlace de Google Drive (compartido con «cualquiera con el enlace»), YouTube (oculto), Vimeo, Loom, Bunny o un .mp4 directo.">
           <input name="video_url" className="input" defaultValue={media?.video_url ?? ""} placeholder="https://iframe.mediadelivery.net/embed/…" />
         </Field>
       </div>

@@ -38,6 +38,9 @@ export function videoEmbed(url?: string | null): { kind: "iframe" | "file"; src:
     return { kind: "iframe", src: `https://player.vimeo.com/video/${m[1]}${m[2] ? `?h=${m[2]}` : ""}` };
   if ((m = u.match(/loom\.com\/(?:share|embed)\/(\w+)/)))
     return { kind: "iframe", src: `https://www.loom.com/embed/${m[1]}` };
+  // Google Drive (compartido "cualquiera con el enlace"): reproductor de Drive
+  if ((m = u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/)))
+    return { kind: "iframe", src: `https://drive.google.com/file/d/${m[1]}/preview` };
   // Bunny Stream: pegar la URL de embed (iframe.mediadelivery.net/embed/LIB/ID) o de play
   if ((m = u.match(/(?:iframe|player)\.mediadelivery\.net\/(?:embed|play)\/(\d+)\/([\w-]+)/)))
     return { kind: "iframe", src: `https://iframe.mediadelivery.net/embed/${m[1]}/${m[2]}?autoplay=false&preload=true` };
