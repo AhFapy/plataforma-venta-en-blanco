@@ -281,8 +281,10 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
     };
     document.addEventListener("keydown", key);
     const overflow = document.body.style.overflow;
+    const htmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", key); document.body.style.overflow = overflow; };
+    document.documentElement.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", key); document.body.style.overflow = overflow; document.documentElement.style.overflow = htmlOverflow; };
   }, [next, prev, onClose]);
 
   async function sendReply(e: React.FormEvent) {
@@ -307,7 +309,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
   const canPrev = pos.g > 0 || pos.s > 0;
 
   return (
-    <div className="on-dark fixed inset-0 z-[100] bg-[#1a1a1a] text-[#f5f4ef] fade-in" role="dialog" aria-modal="true" aria-label={`Historias de ${group.name}`}>
+    <div className="on-dark fixed inset-0 z-[100] overflow-hidden overscroll-none bg-[#1a1a1a] text-[#f5f4ef] fade-in" role="dialog" aria-modal="true" aria-label={`Historias de ${group.name}`}>
       {/* Marca y cerrar (escritorio) */}
       <div className="hidden lg:flex absolute top-5 left-6 items-center gap-2.5 z-30">
         <span className="grid place-items-center w-8 h-8 rounded-[9px] bg-bg-dark"><Image src="/isotipo.png" alt="" width={20} height={15} /></span>
@@ -323,17 +325,17 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
           {before.map(({ g, idx }) => <SidePreview key={g.id} g={g} far={idx < pos.g - 1} onClick={() => go({ g: idx, s: 0 })} />)}
         </div>
 
-        <div className="relative flex items-center lg:gap-5">
+        <div className="lg:relative flex items-center lg:gap-5">
           <button onClick={prev} disabled={!canPrev} className="hidden lg:grid place-items-center w-8 h-8 rounded-full bg-white/80 text-[#1a1a1a] disabled:opacity-0 hover:bg-white" aria-label="Anterior">
             <ChevronLeft size={18} strokeWidth={2.5} />
           </button>
 
           {/* Historia actual */}
-          <div className="relative w-screen h-[100dvh] lg:w-auto lg:h-[94vh] lg:max-h-[920px] lg:aspect-[9/16] lg:rounded-[10px] overflow-hidden select-none" style={{ background: BG }}>
-            <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/40 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-0 lg:relative lg:inset-auto lg:w-auto lg:h-[94vh] lg:max-h-[920px] lg:aspect-[9/16] lg:rounded-[10px] overflow-hidden select-none" style={{ background: BG }}>
+            <div className="absolute top-0 inset-x-0 h-[calc(7rem+env(safe-area-inset-top))] bg-gradient-to-b from-black/40 to-transparent z-10 pointer-events-none" />
 
             {/* Barras */}
-            <div className="absolute top-3 inset-x-3 z-20 flex gap-1">
+            <div className="absolute top-[calc(env(safe-area-inset-top)+12px)] inset-x-3 z-20 flex gap-1">
               {group.slides.map((s, i) => (
                 <span key={s.id} className="h-[2px] flex-1 rounded-full bg-white/35 overflow-hidden">
                   <span className="block h-full bg-white" style={{ width: `${i < pos.s ? 100 : i === pos.s ? progress * 100 : 0}%` }} />
@@ -342,11 +344,11 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
             </div>
 
             {/* Cabecera */}
-            <div className="absolute top-6 inset-x-3 z-20 flex items-center gap-2.5">
+            <div className="absolute top-[calc(env(safe-area-inset-top)+22px)] inset-x-3 z-20 flex items-center gap-2.5 min-w-0">
               <Bubble g={group} size={34} />
-              <span className="text-[15px] font-semibold">{group.name}</span>
-              <span className="text-[15px] text-white/70">{timeAgo(slide.at)}</span>
-              <div className="ml-auto flex items-center">
+              <span className="text-[15px] font-semibold truncate min-w-0">{group.name}</span>
+              <span className="text-[15px] text-white/70 shrink-0">{timeAgo(slide.at)}</span>
+              <div className="ml-auto flex items-center shrink-0">
                 {isVideo && (
                   <button onClick={() => setMuted((m) => !m)} className="grid place-items-center w-9 h-9 rounded-full hover:bg-white/10 text-sm font-medium" aria-label={muted ? "Activar sonido" : "Silenciar"}>
                     {muted ? <VolumeX size={20} /> : <Volume2 size={20} />}
@@ -399,7 +401,7 @@ function Viewer({ groups, start, onSeen, onClose }: { groups: StoryGroup[]; star
             )}
 
             {/* Pie */}
-            <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-5 pt-10 bg-gradient-to-t from-black/45 to-transparent">
+            <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-[calc(env(safe-area-inset-bottom)+20px)] pt-10 bg-gradient-to-t from-black/45 to-transparent">
               {slide.postId ? (
                 <div className="space-y-2">
                   {slide.link && (

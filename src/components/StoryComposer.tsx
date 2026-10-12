@@ -63,9 +63,10 @@ export function StoryComposer({ userId, onClose }: { userId: string; onClose: ()
   }
   useEffect(() => () => { if (preview) URL.revokeObjectURL(preview); }, [preview]);
   useEffect(() => {
-    const o = document.body.style.overflow;
+    const o = document.body.style.overflow, h = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = o; };
+    document.documentElement.style.overflow = "hidden";
+    return () => { document.body.style.overflow = o; document.documentElement.style.overflow = h; };
   }, []);
 
   function pick(f: File | undefined) {
@@ -93,11 +94,11 @@ export function StoryComposer({ userId, onClose }: { userId: string; onClose: ()
   }
 
   return createPortal(
-    <div className="on-dark fixed inset-0 z-[100] bg-[#111] text-[#f5f4ef] grid place-items-center fade-in" role="dialog" aria-modal="true" aria-label="Nueva historia">
+    <div className="on-dark fixed inset-0 z-[100] overflow-hidden overscroll-none bg-[#111] text-[#f5f4ef] sm:grid sm:place-items-center fade-in" role="dialog" aria-modal="true" aria-label="Nueva historia">
       <input ref={input} type="file" accept={TYPES.join(",")} hidden onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ""; }} />
       <input ref={capture} type="file" accept="image/*" capture="environment" hidden onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ""; }} />
-      <div className="relative w-screen h-[100dvh] sm:w-auto sm:h-[90vh] sm:aspect-[9/16] sm:rounded-[12px] overflow-hidden bg-black flex flex-col">
-        <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between p-3 bg-gradient-to-b from-black/50 to-transparent">
+      <div className="absolute inset-0 sm:relative sm:inset-auto sm:w-auto sm:h-[90vh] sm:aspect-[9/16] sm:rounded-[12px] overflow-hidden bg-black flex flex-col">
+        <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between p-3 pt-[calc(env(safe-area-inset-top)+12px)] bg-gradient-to-b from-black/50 to-transparent">
           <span className="font-semibold pl-1">Nueva historia</span>
           <button onClick={() => { stopCamera(); onClose(); }} className="grid place-items-center w-10 h-10 rounded-full hover:bg-white/10" aria-label="Cerrar"><X size={24} /></button>
         </div>
@@ -129,7 +130,7 @@ export function StoryComposer({ userId, onClose }: { userId: string; onClose: ()
         </div>
 
         {camera && (
-          <div className="absolute bottom-0 inset-x-0 p-6 flex items-center justify-center gap-10 bg-gradient-to-t from-black/60 to-transparent">
+          <div className="absolute bottom-0 inset-x-0 p-6 pb-[calc(env(safe-area-inset-bottom)+24px)] flex items-center justify-center gap-10 bg-gradient-to-t from-black/60 to-transparent">
             <button onClick={() => { stopCamera(); setCamera(false); }} className="text-sm text-white/80 hover:text-white w-16">Cancelar</button>
             <button onClick={shoot} aria-label="Hacer foto" className="w-[72px] h-[72px] rounded-full border-4 border-white bg-white/30 active:bg-white" />
             <button onClick={() => openCamera(facing === "user" ? "environment" : "user")} aria-label="Cambiar cámara" className="grid place-items-center w-16 h-12 text-white/80 hover:text-white"><RefreshCw size={24} /></button>
@@ -137,7 +138,7 @@ export function StoryComposer({ userId, onClose }: { userId: string; onClose: ()
         )}
 
         {preview && (
-          <div className="absolute bottom-0 inset-x-0 p-4 space-y-3 bg-gradient-to-t from-black/70 to-transparent">
+          <div className="absolute bottom-0 inset-x-0 p-4 pb-[calc(env(safe-area-inset-bottom)+16px)] space-y-3 bg-gradient-to-t from-black/70 to-transparent">
             <input
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
