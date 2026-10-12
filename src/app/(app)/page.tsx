@@ -101,8 +101,14 @@ export default async function Home() {
   const rosa = { name: settings.rosa_name, avatar: settings.rosa_avatar_url };
 
   const posts = (postsRaw ?? []) as unknown as FeedPost[];
+  // Bienvenida de Rosa: fija arriba del todo, fuera del feed
+  const { data: welcomeRow } = await supabase
+    .from("notifications")
+    .select("id,kind,title,body,link,count,created_at,author:profiles!notifications_created_by_fkey(full_name,avatar_url)")
+    .eq("ref", "rosa:bienvenida").is("user_id", null).maybeSingle();
+  const welcome = welcomeRow as unknown as Notification | null;
   const feed: FeedItem[] = [
-    ...notes.map((n) => ({ type: "note" as const, n, at: n.created_at })),
+    ...notes.filter((n) => n.id !== welcome?.id).map((n) => ({ type: "note" as const, n, at: n.created_at })),
     ...posts.map((p) => ({ type: "post" as const, p, at: p.created_at })),
   ].sort((a, b) => b.at.localeCompare(a.at)).slice(0, 25);
 
@@ -121,6 +127,8 @@ export default async function Home() {
         <h1 className="text-[28px] sm:text-[34px] leading-tight font-semibold tracking-[-0.035em] pt-2">
           Hola, {firstName(profile.full_name)}. <span className="em">A por ello.</span>
         </h1>
+
+        {welcome && <NoteCard n={welcome} isNew={new Date(welcome.created_at).getTime() > seen} rosa={rosa} />}
 
         {/* Seguir donde lo dejaste (móvil y tablet; en escritorio va en la columna) */}
         <div className="xl:hidden"><NextLessonCard cur={cur} done={done} total={total} /></div>
