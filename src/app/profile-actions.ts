@@ -22,7 +22,16 @@ export async function saveProfile(form: FormData) {
     return { error: "Completa tu nombre, tus 3 objetivos y tus 3 puntos a mejorar." };
   }
   if (!profile.avatar_url) return { error: "Sube tu foto de perfil para continuar." };
+  const phone = clean(form.get("phone"), 40);
+  const bio = clean(form.get("bio"), 600);
+  const goal = clean(form.get("goal"), 600);
+  const hoursIn = Number(form.get("weekly_hours"));
+  if (!phone || phone.replace(/\D/g, "").length < 6) return { error: "Pon tu teléfono (WhatsApp)." };
+  if (!bio) return { error: "Preséntate en dos líneas." };
+  if (!goal) return { error: "Cuéntanos qué quieres conseguir en estos 6 meses." };
+  if (!Number.isFinite(hoursIn) || hoursIn <= 0) return { error: "Indica cuántas horas a la semana puedes dedicar." };
   let situation = clean(form.get("situation"), 60);
+  if (!situation) return { error: "Elige tu situación actual." };
   if (situation === "Otra") {
     const other = clean(form.get("situation_other"), 80);
     if (!other) return { error: "Cuéntanos cuál es tu situación." };

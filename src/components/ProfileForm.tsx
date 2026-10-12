@@ -40,10 +40,10 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
         <p className="label">Sobre ti</p>
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Nombre y apellidos"><input name="full_name" className="input" required defaultValue={profile.full_name ?? ""} /></Field>
-          <Field label="Teléfono (WhatsApp)"><input name="phone" className="input" defaultValue={profile.phone ?? ""} placeholder="+34 …" /></Field>
+          <Field label="Teléfono (WhatsApp)"><input name="phone" type="tel" className="input" required minLength={6} defaultValue={profile.phone ?? ""} placeholder="+34 …" /></Field>
         </div>
         <Field label="Preséntate en dos líneas">
-          <textarea name="bio" className="input min-h-24" maxLength={600} defaultValue={profile.bio ?? ""} placeholder="A qué te dedicas, de dónde eres, por qué estás aquí" />
+          <textarea name="bio" className="input min-h-24" required maxLength={600} defaultValue={profile.bio ?? ""} placeholder="A qué te dedicas, de dónde eres, por qué estás aquí" />
         </Field>
       </section>
 
