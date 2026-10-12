@@ -9,7 +9,9 @@ import { timeAgo } from "@/lib/utils";
 
 export type ThreadMsg = { id: string; sender_id: string; body: string; created_at: string; read_at: string | null; story_media_url: string | null; story_media_type: string | null };
 
-export function Thread({ me, to, conversationId, messages, canSend }: { me: string; to: string; conversationId: string | null; messages: ThreadMsg[]; canSend: boolean }) {
+type SendFn = (to: string, body: string) => Promise<{ error?: string; ok?: boolean }>;
+
+export function Thread({ me, to, conversationId, messages, canSend, onSend, onRead }: { me: string; to: string; conversationId: string | null; messages: ThreadMsg[]; canSend: boolean; onSend?: SendFn; onRead?: (id: string) => Promise<void> }) {
   const [text, setText] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [optimistic, setOptimistic] = useState<ThreadMsg[]>([]);
@@ -22,7 +24,7 @@ export function Thread({ me, to, conversationId, messages, canSend }: { me: stri
 
   // Marcar como leído y refrescar cada pocos segundos mientras la conversación está abierta
   const unread = messages.some((m) => m.sender_id !== me && !m.read_at);
-  useEffect(() => { if (conversationId && unread) markConversationRead(conversationId).then(() => router.refresh()); }, [conversationId, unread, router]);
+  useEffect(() => { if (conversationId && unread) (onRead ?? markConversationRead)(conversationId).then(() => router.refresh()); }, [conversationId, unread, router, onRead]);
   useEffect(() => {
     const t = setInterval(() => { if (document.visibilityState === "visible") router.refresh(); }, 5000);
     return () => clearInterval(t);
@@ -36,7 +38,7 @@ export function Thread({ me, to, conversationId, messages, canSend }: { me: stri
     setText(""); setError(null);
     setOptimistic((o) => [...o, { id: `tmp-${Date.now()}`, sender_id: me, body, created_at: new Date().toISOString(), read_at: null, story_media_url: null, story_media_type: null }]);
     start(async () => {
-      const r = await sendDm(to, body);
+      const r = await (onSend ?? sendDm)(to, body);
       if (r.error) { setError(r.error); setText(body); setOptimistic([]); return; }
       router.refresh();
     });
