@@ -2,3 +2,5 @@
 -- Ver la definición aplicada en Supabase: public.report_snapshot(p_days int)
 -- Devuelve: totals, period (actividad del periodo), team_todo (deberes sin corregir, mensajes a Rosa sin contestar)
 -- y students (una fila por alumno activo: clases totales y del periodo, módulo actual, deberes, actividad en comunidad, puntos).
+-- public.rosa_report_dm(p_body text): envía el informe como mensaje privado de Rosa a todos los admins activos.
+-- Los mensajes a Rosa sin contestar del informe solo cuentan los de alumnos.
