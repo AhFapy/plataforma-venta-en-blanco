@@ -3,6 +3,8 @@ import { Search } from "lucide-react";
 import { requireMember } from "@/lib/auth";
 import { PageHeader } from "@/components/PageHeader";
 import { Avatar } from "@/components/Avatar";
+import { RosaAvatar } from "@/components/RosaAvatar";
+import { getSettings } from "@/lib/settings";
 
 export const metadata = { title: "Miembros" };
 
@@ -11,7 +13,8 @@ export default async function Members({ searchParams }: { searchParams: Promise<
   const { supabase } = await requireMember();
   let query = supabase.from("profiles").select("id,full_name,avatar_url,role,cohort,bio").eq("active", true).not("onboarded_at", "is", null).order("full_name").limit(300);
   if (q) query = query.ilike("full_name", `%${q.replace(/[%_]/g, "")}%`);
-  const { data } = await query;
+  const [{ data }, settings] = await Promise.all([query, getSettings(supabase)]);
+  const showRosa = !q || settings.rosa_name.toLowerCase().includes(q.trim().toLowerCase());
 
   return (
     <div className="fade-in">
@@ -22,6 +25,18 @@ export default async function Members({ searchParams }: { searchParams: Promise<
         </form>
       </PageHeader>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {showRosa && (
+          <div className="card p-5 flex gap-4">
+            <RosaAvatar url={settings.rosa_avatar_url} size={48} />
+            <div className="min-w-0">
+              <p className="font-medium truncate flex items-center gap-2">
+                {settings.rosa_name}
+                <span className="badge !py-0.5 !text-[10px] !bg-brand !text-white">Equipo</span>
+              </p>
+              <p className="text-sm text-ink-muted line-clamp-2 mt-1">Te acompaño en la formación: recordatorios, directos y correcciones de tus deberes.</p>
+            </div>
+          </div>
+        )}
         {(data ?? []).map((m) => (
           <Link key={m.id} href={`/miembros/${m.id}`} className="card p-5 flex gap-4 hover:border-brand transition-colors">
             <Avatar name={m.full_name} url={m.avatar_url} size={48} />
