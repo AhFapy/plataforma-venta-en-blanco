@@ -1,10 +1,81 @@
-<!-- Pegar en Supabase > Authentication > Email Templates > "Magic Link". Asunto: Tu código de acceso: {{ .Token }} -->
-<div style="background:#f5f4ef;padding:40px 16px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;color:#0a0a0a">
-  <div style="max-width:440px;margin:0 auto;background:#efede6;border:1px solid #e2dfd5;border-radius:24px;padding:36px">
-    <p style="margin:0 0 24px;font-size:18px;font-weight:600;letter-spacing:-0.03em">Trud <i style="font-family:Georgia,serif;font-weight:400;color:#16734b">Sales.</i></p>
-    <p style="margin:0 0 8px;font-size:15px;color:#6b6f6c">Tu código para entrar en Venta en Blanco:</p>
-    <p style="margin:0 0 24px;font-size:40px;font-weight:600;letter-spacing:0.25em;font-family:ui-monospace,Menlo,monospace">{{ .Token }}</p>
-    <p style="margin:0 0 24px;font-size:14px;color:#6b6f6c">Caduca en una hora. Si no lo has pedido tú, ignora este email.</p>
-    <a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=email" style="display:inline-block;background:#0a0a0a;color:#f5f4ef;text-decoration:none;border-radius:999px;padding:12px 20px;font-size:14px">O entra directamente</a>
-  </div>
-</div>
+<!doctype html>
+<!--
+  Supabase > Authentication > Emails > Templates > "Magic link or OTP"
+  Asunto: {{ .Token }} es tu código para entrar en Venta en Blanco
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
+<title>Tu código de acceso</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f4ef;-webkit-text-size-adjust:100%;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#f5f4ef;">Tu código es {{ .Token }}. Caduca en una hora.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f4ef;">
+  <tr>
+    <td align="center" style="padding:40px 16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;">
+
+        <!-- Cabecera -->
+        <tr>
+          <td style="background:#0c1f15;border-radius:24px 24px 0 0;padding:28px 32px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="vertical-align:middle;padding-right:12px;">
+                  <img src="https://plataforma-venta-en-blanco-trud-sales.vercel.app/isotipo.png" width="40" height="30" alt="" style="display:block;border:0;">
+                </td>
+                <td style="vertical-align:middle;font-family:'Inter Tight',Helvetica,Arial,sans-serif;">
+                  <div style="font-size:20px;line-height:22px;font-weight:600;letter-spacing:-0.03em;color:#f5f4ef;">Venta en <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;letter-spacing:0;color:#c5ff5b;">Blanco</span></div>
+                  <div style="font-size:12px;line-height:16px;color:#8fa596;">by Trud Sales</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Cuerpo -->
+        <tr>
+          <td style="background:#ffffff;border:1px solid #e2dfd5;border-top:0;border-radius:0 0 24px 24px;padding:36px 32px 32px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;color:#0a0a0a;">
+            <h1 style="margin:0 0 10px;font-size:28px;line-height:32px;font-weight:600;letter-spacing:-0.035em;">Tu código de <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;letter-spacing:0;color:#16734b;">acceso.</span></h1>
+            <p style="margin:0 0 28px;font-size:15px;line-height:22px;color:#6b6f6c;">Escríbelo en la plataforma para entrar. Sin contraseñas.</p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" style="background:#f5f4ef;border:1px solid #e2dfd5;border-radius:18px;padding:22px 12px;">
+                  <div style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:38px;line-height:44px;font-weight:600;letter-spacing:0.3em;color:#0a0a0a;padding-left:0.3em;">{{ .Token }}</div>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:16px 0 28px;font-size:13px;line-height:20px;color:#a4a8a4;text-align:center;">Caduca en una hora.</p>
+
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td align="center" style="border-radius:999px;background:#c5ff5b;">
+                  <a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=email" style="display:inline-block;padding:14px 28px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;font-size:15px;font-weight:600;color:#0a0a0a;text-decoration:none;border-radius:999px;">O entra con un clic &rarr;</a>
+                </td>
+              </tr>
+            </table>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:32px;">
+              <tr><td style="border-top:1px solid #e2dfd5;font-size:0;line-height:0;">&nbsp;</td></tr>
+            </table>
+            <p style="margin:20px 0 0;font-size:13px;line-height:20px;color:#6b6f6c;">Si no has pedido este código, ignora este email: nadie puede entrar sin él.</p>
+          </td>
+        </tr>
+
+        <!-- Pie -->
+        <tr>
+          <td align="center" style="padding:24px 16px 0;font-family:'Inter Tight',Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#a4a8a4;">
+            Trud <span style="font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#16734b;">Sales.</span> &middot; Formación Venta en Blanco
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
