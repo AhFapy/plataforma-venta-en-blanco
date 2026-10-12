@@ -1,0 +1,4 @@
+-- Datos del informe diario/semanal para Javi y Ahmed (lo lee la tarea programada vía SQL).
+-- Ver la definición aplicada en Supabase: public.report_snapshot(p_days int)
+-- Devuelve: totals, period (actividad del periodo), team_todo (deberes sin corregir, mensajes a Rosa sin contestar)
+-- y students (una fila por alumno activo: clases totales y del periodo, módulo actual, deberes, actividad en comunidad, puntos).
