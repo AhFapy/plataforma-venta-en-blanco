@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { requireStaff } from "@/lib/auth";
 import { fmtDate, timeAgo } from "@/lib/utils";
 import { getStudents } from "../students";
@@ -56,7 +57,7 @@ export default async function AdminStudents({ searchParams }: { searchParams: Pr
             {rows.map((r) => (
               <tr key={r.id} className={r.active ? "" : "opacity-50"}>
                 <td className="px-4 py-3">
-                  <p className="font-medium">{r.full_name || "—"} {r.role !== "alumno" && <span className="badge !py-0 !text-[10px] ml-1">{r.role}</span>}</p>
+                  <Link href={`/admin/alumnos/${r.id}`} className="font-medium hover:text-brand">{r.full_name || "—"}</Link> <p className="inline">{r.role !== "alumno" && <span className="badge !py-0 !text-[10px] ml-1">{r.role}</span>}</p>
                   <p className="text-xs text-ink-faint">{r.email}</p>
                   {r.risk && <p className="text-xs text-red-700 mt-0.5">{r.risk}</p>}
                 </td>
