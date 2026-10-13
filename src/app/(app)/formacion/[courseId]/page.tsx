@@ -5,6 +5,7 @@ import { requireMember } from "@/lib/auth";
 import { getCurriculum } from "@/lib/data";
 import { ProgressBar } from "@/components/Progress";
 import { isNew } from "@/lib/utils";
+import { SearchFilter } from "@/components/SearchFilter";
 
 export default async function CoursePage({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params;
@@ -30,12 +31,12 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
         {course.description && <p className="mt-3 text-ink-muted text-lg max-w-2xl">{course.description}</p>}
       </div>
 
-      <div className="space-y-4">
+      <SearchFilter placeholder="Buscar una clase…">
         {mods.map((m, mi) => {
           const st = cur.states.get(m.id)!;
           const ls = cur.lessons.filter((l) => l.module_id === m.id);
           return (
-            <section key={m.id} className={`card p-6 ${st.unlocked ? "" : "opacity-70"}`}>
+            <section key={m.id} data-search-group={m.title} className={`card p-6 ${st.unlocked ? "" : "opacity-70"}`}>
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <div className="flex items-center gap-4">
                   <span className="text-brand font-semibold text-2xl tabular-nums">{String(mi + 1).padStart(2, "0")}</span>
@@ -47,7 +48,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                 {!st.unlocked && <span className="badge"><Lock size={12} /> {st.reason}</span>}
                 {st.unlocked && st.total > 0 && st.done === st.total && <span className="badge !bg-brand !text-white">Completado</span>}
               </div>
-              {st.unlocked && <ProgressBar value={st.total ? st.done / st.total : 0} />}
+              {st.unlocked && <div data-search-hide><ProgressBar value={st.total ? st.done / st.total : 0} /></div>}
               <ul className="mt-4 divide-y divide-line">
                 {ls.map((l) => {
                   const done = cur.completed.has(l.id);
@@ -60,7 +61,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                     </>
                   );
                   return (
-                    <li key={l.id}>
+                    <li key={l.id} data-search={l.title}>
                       {st.unlocked ? (
                         <Link href={`/formacion/leccion/${l.id}`} className="flex items-center gap-3 py-3 hover:text-brand">{inner}</Link>
                       ) : (
@@ -69,7 +70,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                     </li>
                   );
                 })}
-                {ls.length === 0 && <li className="py-3 text-sm text-ink-faint">Sin lecciones todavía.</li>}
+                {ls.length === 0 && <li data-search-hide className="py-3 text-sm text-ink-faint">Sin lecciones todavía.</li>}
                 {(quizCount.get(m.id) ?? 0) > 0 && (() => {
                   const a = attempts.get(m.id);
                   const ready = st.unlocked && st.total > 0 && st.done === st.total;
@@ -82,7 +83,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
                     </>
                   );
                   return (
-                    <li>
+                    <li data-search-hide>
                       {ready || a ? <Link href={`/formacion/quiz/${m.id}`} className="flex items-center gap-3 py-3 hover:text-brand">{inner}</Link> : <div className="flex items-center gap-3 py-3 text-ink-muted">{inner}</div>}
                     </li>
                   );
@@ -91,7 +92,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
             </section>
           );
         })}
-      </div>
+      </SearchFilter>
     </div>
   );
 }
