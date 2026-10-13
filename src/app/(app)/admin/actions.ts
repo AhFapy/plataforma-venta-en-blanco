@@ -157,3 +157,14 @@ function madridToUtc(local: string) {
   const utc = new Date(asUtc.toLocaleString("en-US", { timeZone: "UTC" }));
   return new Date(asUtc.getTime() - (madrid.getTime() - utc.getTime())).toISOString();
 }
+
+export async function setStudentPassword(id: string, password: string): Promise<R> {
+  await requireAdmin();
+  const pw = String(password ?? "");
+  if (pw.length < 8) return { error: "Mínimo 8 caracteres" };
+  if (pw.length > 72) return { error: "Máximo 72 caracteres" };
+  const admin = createAdminClient();
+  const { error } = await admin.auth.admin.updateUserById(id, { password: pw });
+  if (error) return { error: error.message };
+  return { ok: true, msg: "Contraseña cambiada. Puede entrar con «Tengo contraseña»." };
+}

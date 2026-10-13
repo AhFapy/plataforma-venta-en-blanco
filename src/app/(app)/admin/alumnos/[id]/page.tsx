@@ -5,12 +5,13 @@ import { requireStaff } from "@/lib/auth";
 import { Avatar } from "@/components/Avatar";
 import { getMyPoints, level } from "@/lib/data";
 import { fmtDate, timeAgo } from "@/lib/utils";
+import { PasswordForm } from "./PasswordForm";
 
 export const metadata = { title: "Ficha de alumno" };
 
 export default async function StudentDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { supabase } = await requireStaff();
+  const { supabase, profile: me } = await requireStaff();
   const [{ data: p }, { data: priv }] = await Promise.all([
     supabase.from("profiles").select("id,full_name,avatar_url,role,active,cohort,bio,enrolled_at,last_seen_at,onboarded_at").eq("id", id).maybeSingle(),
     supabase.from("profile_private").select("email,phone,situation,goal,weekly_hours,objectives,improvements").eq("id", id).maybeSingle(),
@@ -58,6 +59,8 @@ export default async function StudentDetail({ params }: { params: Promise<{ id: 
           <Link href={`/mensajes/${p.id}`} className="btn btn-ghost !py-2"><Send size={15} /> Mensaje</Link>
         </div>
       </section>
+
+      {me.role === "admin" && <PasswordForm id={p.id} />}
 
       <section className="card p-6 space-y-5">
         <div className="flex items-center justify-between">
