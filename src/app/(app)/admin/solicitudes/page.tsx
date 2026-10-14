@@ -20,11 +20,11 @@ export default async function Requests() {
     <div className="space-y-8 max-w-3xl">
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold tracking-[-0.03em]">Solicitudes de acceso</h1>
-        <p className="text-sm text-ink-muted">Los alumnos las envían desde <span className="font-mono text-xs break-all">{link}</span>. Al aceptar se le da de alta y ya puede entrar con su email.</p>
+        <p className="text-sm text-ink-muted">Quien rellena <span className="font-mono text-xs break-all">{link}</span> entra al momento. Aquí solo quedan pendientes los que tenían el acceso desactivado.</p>
       </div>
 
       <section className="card divide-y divide-line">
-        {pending.length === 0 && <p className="p-6 text-sm text-ink-muted">No hay solicitudes pendientes.</p>}
+        {pending.length === 0 && <p className="p-6 text-sm text-ink-muted">Nada pendiente.</p>}
         {pending.map((r) => (
           <div key={r.id} className="p-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
             <div className="min-w-0">
@@ -39,7 +39,7 @@ export default async function Requests() {
 
       {decided.length > 0 && (
         <section className="space-y-3">
-          <p className="label">Resueltas</p>
+          <p className="label">Últimas altas y decisiones</p>
           <div className="card divide-y divide-line">
             {decided.map((r) => (
               <div key={r.id} className="p-4 flex items-center justify-between gap-3 text-sm">

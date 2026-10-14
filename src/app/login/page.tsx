@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -14,6 +14,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const e = new URLSearchParams(location.search).get("email");
+    if (e) setEmail(e);
+  }, []);
 
   async function sendCode(e: React.FormEvent) {
     e.preventDefault();
@@ -28,7 +32,7 @@ export default function LoginPage() {
     if (error) {
       setError(
         /signups not allowed|not found|invalid/i.test(error.message)
-          ? "Este email no tiene acceso todavía. Usa el mismo con el que te inscribiste o solicita el acceso abajo."
+          ? "Este email no tiene acceso todavía. Usa el mismo con el que te inscribiste o pulsa «¿Primera vez? Accede aquí»."
           : "No hemos podido enviar el código. Prueba en un minuto."
       );
       return;
@@ -101,7 +105,7 @@ export default function LoginPage() {
                 <button type="button" className="text-sm text-ink-muted underline" onClick={() => { setStep("password"); setError(null); }}>
                   Tengo contraseña
                 </button>
-                <a href="/solicitar-acceso" className="text-sm text-ink-muted underline">Solicitar acceso</a>
+                <a href="/solicitar-acceso" className="text-sm text-ink-muted underline">¿Primera vez? Accede aquí</a>
               </div>
             </form>
           ) : (

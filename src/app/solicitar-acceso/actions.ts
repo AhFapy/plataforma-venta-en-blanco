@@ -1,8 +1,9 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { enrollStudent } from "@/lib/enroll";
 
-type R = { ok?: boolean; already?: boolean; error?: string };
+type R = { ok?: boolean; already?: boolean; pending?: boolean; error?: string };
 
 export async function requestAccess(f: FormData): Promise<R> {
   const full_name = String(f.get("full_name") ?? "").trim().slice(0, 120);
@@ -14,31 +15,38 @@ export async function requestAccess(f: FormData): Promise<R> {
   if (phone.replace(/\D/g, "").length < 6) return { error: "Escribe tu teléfono (WhatsApp)." };
 
   const admin = createAdminClient();
+  const { count: recent } = await admin.from("access_requests").select("id", { count: "exact", head: true })
+    .gte("created_at", new Date(Date.now() - 3600_000).toISOString());
+  const notify = (recent ?? 0) <= 15; // freno por si alguien abusa del formulario
 
-  // ¿Ya tiene acceso?
+  // ¿Ya existe?
   const { data: pp } = await admin.from("profile_private").select("id").eq("email", email).maybeSingle();
   if (pp) {
     const { data: p } = await admin.from("profiles").select("active").eq("id", pp.id).maybeSingle();
     if (p?.active) return { already: true };
+    // Desactivado a propósito: no se reactiva solo, queda pendiente para el equipo
+    const { data: pend } = await admin.from("access_requests").select("id").ilike("email", email).eq("status", "pendiente").maybeSingle();
+    if (!pend) {
+      await admin.from("access_requests").insert({ email, full_name, phone });
+      if (notify) await admin.rpc("rosa_report_dm", {
+        p_body: `🔔 ${full_name} (${email}) pide volver a entrar, pero su acceso estaba desactivado.\nAcéptalo o recházalo en Admin → Solicitudes.`,
+      });
+    }
+    return { pending: true };
   }
 
-  // ¿Ya hay una pendiente? Se actualizan los datos y listo.
-  const { data: pending } = await admin.from("access_requests").select("id").ilike("email", email).eq("status", "pendiente").maybeSingle();
-  if (pending) {
-    await admin.from("access_requests").update({ full_name, phone }).eq("id", pending.id);
-    return { ok: true };
+  // Alta directa
+  let profileId: string;
+  try {
+    const r = await enrollStudent({ email, full_name, phone, cohort: new Date().toISOString().slice(0, 7) });
+    profileId = r.id;
+  } catch {
+    return { error: "No hemos podido darte de alta. Prueba en un minuto." };
   }
+  await admin.from("access_requests").insert({ email, full_name, phone, status: "aceptada", decided_at: new Date().toISOString(), profile_id: profileId });
 
-  const { error } = await admin.from("access_requests").insert({ email, full_name, phone });
-  if (error) return { error: "No hemos podido enviar la solicitud. Prueba en un minuto." };
-
-  // Aviso al equipo desde el perfil de Rosa (con freno por si alguien abusa del formulario)
-  const { count } = await admin.from("access_requests").select("id", { count: "exact", head: true })
-    .eq("status", "pendiente").gte("created_at", new Date(Date.now() - 3600_000).toISOString());
-  if ((count ?? 0) <= 15) {
-    await admin.rpc("rosa_report_dm", {
-      p_body: `🔔 Nueva solicitud de acceso\n${full_name} · ${email} · ${phone}\n\nAcéptala en Admin → Solicitudes.`,
-    });
-  }
+  if (notify) await admin.rpc("rosa_report_dm", {
+    p_body: `🆕 Nuevo alumno dado de alta desde la bienvenida\n${full_name} · ${email} · ${phone}\n\nSi no es alumno, desactívalo en Admin → Alumnos.`,
+  });
   return { ok: true };
 }
