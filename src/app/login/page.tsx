@@ -28,7 +28,7 @@ export default function LoginPage() {
     if (error) {
       setError(
         /signups not allowed|not found|invalid/i.test(error.message)
-          ? "Este email no está dado de alta. Usa el mismo con el que te inscribiste o escribe a soporte."
+          ? "Este email no tiene acceso todavía. Usa el mismo con el que te inscribiste o solicita el acceso abajo."
           : "No hemos podido enviar el código. Prueba en un minuto."
       );
       return;
@@ -97,9 +97,12 @@ export default function LoginPage() {
               <button className="btn btn-dark w-full justify-center" disabled={loading}>
                 {loading ? "Enviando…" : "Enviarme el código"} <ArrowRight size={16} />
               </button>
-              <button type="button" className="text-sm text-ink-muted underline" onClick={() => { setStep("password"); setError(null); }}>
-                Tengo contraseña
-              </button>
+              <div className="flex items-center justify-between gap-4">
+                <button type="button" className="text-sm text-ink-muted underline" onClick={() => { setStep("password"); setError(null); }}>
+                  Tengo contraseña
+                </button>
+                <a href="/solicitar-acceso" className="text-sm text-ink-muted underline">Solicitar acceso</a>
+              </div>
             </form>
           ) : (
             <form onSubmit={verify} className="space-y-5">
