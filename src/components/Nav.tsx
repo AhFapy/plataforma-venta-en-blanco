@@ -20,7 +20,7 @@ function active(path: string, href: string) {
   return href === "/" ? path === "/" : path.startsWith(href);
 }
 
-export function SideNav({ staff, unread = 0 }: { staff: boolean; unread?: number }) {
+export function SideNav({ staff, unread = 0, community = 0 }: { staff: boolean; unread?: number; community?: number }) {
   const path = usePathname();
   const all = staff ? [...items, { href: "/admin", label: "Admin", icon: Shield }] : items;
   return (
@@ -35,21 +35,25 @@ export function SideNav({ staff, unread = 0 }: { staff: boolean; unread?: number
         >
           <Icon size={18} strokeWidth={1.8} /> {label}
           {href === "/mensajes" && unread > 0 && <span className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center">{unread}</span>}
+          {href === "/comunidad" && community > 0 && <span className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center" title={`${community} publicaciones nuevas`}>{community > 99 ? "99+" : community}</span>}
         </Link>
       ))}
     </nav>
   );
 }
 
-export function BottomNav() {
+export function BottomNav({ community = 0 }: { community?: number }) {
   const path = usePathname();
   const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones" && i.href !== "/mensajes");
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[max(env(safe-area-inset-bottom),6px)]">
       <div className="grid grid-cols-6">
         {mobile.map(({ href, label, short, icon: Icon }) => (
-          <Link key={href} href={href} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] ${active(path, href) ? "text-brand" : "text-ink-muted"}`}>
-            <Icon size={21} strokeWidth={active(path, href) ? 2.2 : 1.7} />
+          <Link key={href} href={href} className={`relative flex flex-col items-center gap-1 py-2.5 text-[11px] ${active(path, href) ? "text-brand" : "text-ink-muted"}`}>
+            <span className="relative">
+              <Icon size={21} strokeWidth={active(path, href) ? 2.2 : 1.7} />
+              {href === "/comunidad" && community > 0 && <span className="absolute -top-1.5 -right-3 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[10px] font-semibold grid place-items-center leading-none">{community > 99 ? "99+" : community}</span>}
+            </span>
             {short ?? label}
           </Link>
         ))}

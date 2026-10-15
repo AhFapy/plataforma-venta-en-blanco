@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export function ChannelTabs({ channels }: { channels: { slug: string; name: string; emoji: string | null }[] }) {
+export function ChannelTabs({ channels }: { channels: { slug: string; name: string; emoji: string | null; unread?: number }[] }) {
   const path = usePathname();
   const current = path.split("/")[2] ?? channels[0]?.slug;
   return (
@@ -13,9 +13,12 @@ export function ChannelTabs({ channels }: { channels: { slug: string; name: stri
           <Link
             key={c.slug}
             href={`/comunidad/${c.slug}`}
-            className={`rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors ${current === c.slug ? "bg-ink text-bg" : "bg-bg-badge text-ink-muted hover:text-ink"}`}
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors ${current === c.slug ? "bg-ink text-bg" : "bg-bg-badge text-ink-muted hover:text-ink"}`}
           >
             {c.emoji} {c.name}
+            {current !== c.slug && (c.unread ?? 0) > 0 && (
+              <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center leading-none" title={`${c.unread} nuevas`}>{(c.unread ?? 0) > 99 ? "99+" : c.unread}</span>
+            )}
           </Link>
         ))}
       </div>

@@ -72,3 +72,8 @@ export async function togglePin(postId: string, pinned: boolean) {
   revalidatePath("/comunidad", "layout");
   return { ok: true };
 }
+
+export async function markChannelRead(channelId: string) {
+  const { supabase } = await requireMember();
+  await supabase.rpc("mark_channel_read", { p_channel: channelId });
+}

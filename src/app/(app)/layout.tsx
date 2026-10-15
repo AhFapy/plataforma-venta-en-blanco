@@ -22,6 +22,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   const staff = profile.role !== "alumno";
   const [notes, settings, popup, { data: unreadDm }] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id), supabase.rpc("unread_dm_count")]);
+  const { data: unreadPosts } = await supabase.rpc("unread_posts_by_channel");
+  const community = ((unreadPosts ?? []) as { n: number }[]).reduce((a, r) => a + Number(r.n || 0), 0);
   const unread = Number(unreadDm ?? 0);
   const seenAt = profile.notifications_seen_at ?? new Date().toISOString();
 
@@ -33,7 +35,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/"><Logo size={18} /></Link>
             <NotificationBell items={notes} seenAt={seenAt} align="left" rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           </div>
-          <SideNav staff={staff} unread={unread} />
+          <SideNav staff={staff} unread={unread} community={community} />
         </div>
         <div className="space-y-3">
           <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-surface">
@@ -64,7 +66,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       </header>
 
       <main className="px-4 pt-6 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-8 lg:px-12 lg:py-10 max-w-6xl w-full min-w-0">{children}</main>
-      <BottomNav />
+      <BottomNav community={community} />
       {popup && <PopupGate popup={popup} />}
     </div>
   );

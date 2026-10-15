@@ -7,6 +7,7 @@ import { PostCard, POST_SELECT, type PostRow } from "../posts";
 import { getSettings } from "@/lib/settings";
 import { getMyPoints } from "@/lib/data";
 import { ProgressBar } from "@/components/Progress";
+import { MarkRead } from "../MarkRead";
 
 export default async function ChannelPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ n?: string }> }) {
   const { slug } = await params;
@@ -15,6 +16,9 @@ export default async function ChannelPage({ params, searchParams }: { params: Pr
   const { supabase, profile } = await requireMember();
   const { data: channel } = await supabase.from("channels").select("*").eq("slug", slug).maybeSingle<Channel>();
   if (!channel) notFound();
+
+  const { data: unread } = await supabase.rpc("unread_posts_by_channel");
+  const hadUnread = ((unread ?? []) as { channel_id: string; n: number }[]).some((r) => r.channel_id === channel.id && Number(r.n) > 0);
 
   const { data } = await supabase
     .from("posts")
@@ -32,6 +36,7 @@ export default async function ChannelPage({ params, searchParams }: { params: Pr
 
   return (
     <div className="max-w-3xl space-y-4">
+      <MarkRead channelId={channel.id} hadUnread={hadUnread} />
       {channel.description && <p className="text-ink-muted">{channel.description}</p>}
       {channel.is_wins && settings && pts && (
         <Link href="/ranking?t=puntos" className="on-dark block rounded-[20px] bg-bg-dark p-5 text-[#f5f4ef] space-y-3 hover:opacity-95">
