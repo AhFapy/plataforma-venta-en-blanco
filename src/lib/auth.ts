@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server";
-import type { Profile } from "./types";
+import { isCsmRole, isStaffRole, type Profile } from "./types";
 
 /** Usuario + perfil actual. Redirige a login, a "sin acceso" o al onboarding según el caso. */
 export const requireMember = cache(async (opts?: { allowNotOnboarded?: boolean }) => {
@@ -23,7 +23,13 @@ export const requireMember = cache(async (opts?: { allowNotOnboarded?: boolean }
 
 export async function requireStaff() {
   const ctx = await requireMember();
-  if (ctx.profile.role === "alumno") redirect("/");
+  if (!isStaffRole(ctx.profile.role)) redirect("/");
+  return ctx;
+}
+
+export async function requireCsm() {
+  const ctx = await requireMember();
+  if (!isCsmRole(ctx.profile.role)) redirect("/");
   return ctx;
 }
 

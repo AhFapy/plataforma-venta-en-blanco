@@ -1,3 +1,4 @@
+import { isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Lock } from "lucide-react";
@@ -21,7 +22,7 @@ export default async function QuizPage({ params }: { params: Promise<{ moduleId:
   const questions = (qs ?? []) as { id: string; question: string; options: string[] }[];
   if (!questions.length) notFound();
   const st = cur.states.get(mod.id);
-  const staff = profile.role !== "alumno";
+  const staff = isStaffRole(profile.role);
   const ready = staff || (!!st?.unlocked && st.total > 0 && st.done === st.total);
   const back = `/formacion/${course.id}`;
 

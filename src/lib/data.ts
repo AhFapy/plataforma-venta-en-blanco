@@ -1,4 +1,5 @@
 import "server-only";
+import { isStaffRole } from "@/lib/types";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Course, Lesson, Module, Profile } from "./types";
 import { moduleStates, type ModuleState } from "./utils";
@@ -10,7 +11,7 @@ export async function getCurriculum(supabase: SupabaseClient, profile: Profile) 
     supabase.from("lessons").select("id,module_id,title,description,duration_min,position,published,updated_at").order("position"),
     supabase.from("lesson_progress").select("lesson_id").eq("user_id", profile.id),
   ]);
-  const staff = profile.role !== "alumno";
+  const staff = isStaffRole(profile.role);
   const visibleCourses = (courses ?? []).filter((c: Course) => c.published || staff) as Course[];
   const courseIds = new Set(visibleCourses.map((c) => c.id));
   const mods = ((modules ?? []) as Module[]).filter((m) => courseIds.has(m.course_id));

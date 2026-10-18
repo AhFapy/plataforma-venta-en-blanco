@@ -32,9 +32,10 @@ export function MemberControls({ id, active, role, cohort, isAdmin }: { id: stri
               }}>Cambiar promoción</button>
               <div className="flex items-center gap-2">
                 <span>Rol</span>
-                <select defaultValue={role} disabled={pending} className="input !py-1" onChange={(e) => run(() => updateMember(id, { role: e.target.value as "alumno" | "mentor" | "admin" }))}>
+                <select defaultValue={role} disabled={pending} className="input !py-1" onChange={(e) => run(() => updateMember(id, { role: e.target.value as "alumno" | "mentor" | "admin" | "csm" }))}>
                   <option value="alumno">Alumno</option>
                   <option value="mentor">Mentor</option>
+                  <option value="csm">CSM (seguimiento)</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>

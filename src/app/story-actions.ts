@@ -1,4 +1,5 @@
 "use server";
+import { isStaffRole } from "@/lib/types";
 
 import { revalidatePath } from "next/cache";
 import { requireMember } from "@/lib/auth";
@@ -29,7 +30,7 @@ export async function deleteStory(id: string) {
   const { error, count } = await supabase.from("stories").delete({ count: "exact" }).eq("id", id);
   if (error || !count) return { error: "No puedes borrar esta historia" };
   if (st.author_id === profile.id) await supabase.storage.from("stories").remove([st.media_path]);
-  else if (profile.role !== "alumno") await createAdminClient().storage.from("stories").remove([st.media_path]);
+  else if (isStaffRole(profile.role)) await createAdminClient().storage.from("stories").remove([st.media_path]);
   revalidatePath("/");
   return { ok: true };
 }

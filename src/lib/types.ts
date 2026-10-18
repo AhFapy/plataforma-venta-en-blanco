@@ -1,4 +1,9 @@
-export type Role = "alumno" | "mentor" | "admin";
+export type Role = "alumno" | "mentor" | "admin" | "csm";
+
+/** Equipo con acceso al panel de admin (contenido, alumnos…). La CSM no entra aquí. */
+export const isStaffRole = (r?: string | null) => r === "admin" || r === "mentor";
+/** Seguimiento de alumnos: CSM y admins. */
+export const isCsmRole = (r?: string | null) => r === "csm" || r === "admin";
 
 export type Profile = {
   id: string;

@@ -1,3 +1,4 @@
+import { isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MessageCircle, Send } from "lucide-react";
@@ -19,7 +20,7 @@ export default async function Member({ params }: { params: Promise<{ id: string 
     supabase.from("profile_private").select("phone").eq("id", m.id).maybeSingle(),
   ]);
   const lvl = level(pts.total);
-  const staffViewer = me.role !== "alumno";
+  const staffViewer = isStaffRole(me.role) || me.role === "csm";
 
   return (
     <div className="fade-in max-w-3xl space-y-6">

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireMember } from "@/lib/auth";
+import { isStaffRole } from "@/lib/types";
 import { REACTIONS } from "@/lib/reactions";
 
 type Media = { url: string; type: string; name?: string | null };
@@ -67,7 +68,7 @@ export async function deleteComment(commentId: string, postId: string) {
 
 export async function togglePin(postId: string, pinned: boolean) {
   const { supabase, profile } = await requireMember();
-  if (profile.role === "alumno") return { error: "Sin permiso" };
+  if (!isStaffRole(profile.role)) return { error: "Sin permiso" };
   await supabase.from("posts").update({ pinned }).eq("id", postId);
   revalidatePath("/comunidad", "layout");
   return { ok: true };

@@ -1,3 +1,4 @@
+import { isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireMember } from "@/lib/auth";
@@ -17,7 +18,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   ]);
   if (!post) notFound();
   const p = post as unknown as PostRow & { channel: { slug: string; name: string } };
-  const staff = profile.role !== "alumno";
+  const staff = isStaffRole(profile.role);
 
   return (
     <div className="max-w-3xl space-y-4">

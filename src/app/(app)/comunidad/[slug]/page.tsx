@@ -1,3 +1,4 @@
+import { isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireMember } from "@/lib/auth";
@@ -30,7 +31,7 @@ export default async function ChannelPage({ params, searchParams }: { params: Pr
   const rows = (data ?? []) as unknown as PostRow[];
   const more = rows.length > limit;
   const posts = rows.slice(0, limit);
-  const staff = profile.role !== "alumno";
+  const staff = isStaffRole(profile.role);
   const canPost = staff || !channel.staff_only_post;
   const [settings, pts] = channel.is_wins ? await Promise.all([getSettings(supabase), getMyPoints(supabase, profile.id)]) : [null, null];
 

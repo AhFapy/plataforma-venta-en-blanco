@@ -1,3 +1,4 @@
+import { isCsmRole, isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { Send } from "lucide-react";
 import { requireMember } from "@/lib/auth";
@@ -20,7 +21,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     await supabase.from("profiles").update({ last_seen_at: new Date().toISOString() }).eq("id", profile.id);
   }
 
-  const staff = profile.role !== "alumno";
+  const staff = isStaffRole(profile.role);
+  const csm = isCsmRole(profile.role);
   const [notes, settings, popup, { data: unreadDm }] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id), supabase.rpc("unread_dm_count")]);
   const { data: unreadPosts } = await supabase.rpc("unread_posts_by_channel");
   const community = ((unreadPosts ?? []) as { n: number }[]).reduce((a, r) => a + Number(r.n || 0), 0);
@@ -35,7 +37,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/"><Logo size={18} /></Link>
             <NotificationBell items={notes} seenAt={seenAt} align="left" rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           </div>
-          <SideNav staff={staff} unread={unread} community={community} />
+          <SideNav staff={staff} csm={csm} unread={unread} community={community} />
         </div>
         <div className="space-y-3">
           <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-surface">
@@ -55,6 +57,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between border-b border-line bg-bg/95 backdrop-blur px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
         <Link href="/"><Logo size={16} /></Link>
         <div className="flex items-center gap-1.5">
+          {csm && <Link href="/seguimiento" className="badge">Seguimiento</Link>}
           {staff && <Link href="/admin" className="badge">Admin</Link>}
           <Link href="/mensajes" aria-label={`Mensajes${unread ? `, ${unread} sin leer` : ""}`} className="relative grid place-items-center w-10 h-10 rounded-full hover:bg-bg-badge">
             <Send size={20} strokeWidth={1.8} />

@@ -32,7 +32,7 @@ export async function inviteStudents(f: FormData): Promise<R> {
   return { ok: errors.length === 0, msg: `${created} dados de alta, ${reactivated} ya existían${errors.length ? ` · Errores: ${errors.join(" | ")}` : ""}` };
 }
 
-export async function updateMember(id: string, patch: { active?: boolean; role?: "alumno" | "mentor" | "admin"; cohort?: string | null }): Promise<R> {
+export async function updateMember(id: string, patch: { active?: boolean; role?: "alumno" | "mentor" | "admin" | "csm"; cohort?: string | null }): Promise<R> {
   const { profile } = await requireAdmin();
   if (id === profile.id && (patch.active === false || (patch.role && patch.role !== "admin"))) return { error: "No puedes quitarte tu propio acceso" };
   const admin = createAdminClient();
