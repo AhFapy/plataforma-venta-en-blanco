@@ -69,13 +69,20 @@ export function PostCard({ p, me, staff, full = false }: { p: PostRow; me: strin
   return (
     <article className="card p-5 sm:p-6 space-y-4">
       <header className="flex items-start justify-between gap-3">
-        {au.id ? <Link href={`/miembros/${au.id}`} className="flex items-center gap-3">{head}</Link> : <div className="flex items-center gap-3">{head}</div>}
+        {au.id ? <Link href={`/miembros/${au.id}`} className="flex items-center gap-3 min-w-0">{head}</Link> : <div className="flex items-center gap-3">{head}</div>}
         <div className="flex items-center gap-3">
           {p.pinned && <Pin size={15} className="text-brand" />}
           <PostAdmin postId={p.id} canDelete={staff || p.author_id === me} canPin={staff} pinned={p.pinned} redirectTo={full ? "/comunidad" : undefined} />
         </div>
       </header>
-      <p className={`whitespace-pre-line text-[15px] leading-relaxed break-words ${full ? "" : "line-clamp-[12]"}`}>{p.body}</p>
+      {full ? (
+        <p className="whitespace-pre-line text-[15px] leading-relaxed break-words">{p.body}</p>
+      ) : (
+        <Link href={`/comunidad/post/${p.id}`} className="block group" aria-label="Abrir publicación">
+          <p className="whitespace-pre-line text-[15px] leading-relaxed break-words line-clamp-[12]">{p.body}</p>
+          {(p.body.length > 600 || p.body.split("\n").length > 12) && <span className="mt-1 inline-block text-sm font-medium text-brand group-hover:underline">Ver más</span>}
+        </Link>
+      )}
       <MediaGrid media={p.media} />
       <footer className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
         <LikeButton postId={p.id} count={p.post_likes.length + (p.legacy_likes ?? 0)} liked={p.post_likes.some((l) => l.user_id === me)} />
