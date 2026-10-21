@@ -9,16 +9,18 @@ import { StartFollowup } from "./StartFollowup";
 
 export const metadata = { title: "Seguimiento" };
 
-type SP = { mes?: string; riesgo?: string; estado?: string };
+type SP = { mes?: string; riesgo?: string; estado?: string; onb?: string };
 
 export default async function FollowupHome({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const { supabase } = await requireCsm();
-  const [{ data }, { data: allStudents }] = await Promise.all([
+  const [{ data }, { data: allStudents }, { data: extra }] = await Promise.all([
     supabase.rpc("followup_overview"),
     supabase.from("profiles").select("id,full_name").eq("role", "alumno").eq("active", true).order("full_name"),
+    supabase.from("followups").select("user_id,onboarding_done,objective_met,goals_3m"),
   ]);
   const rows = (data ?? []) as Overview[];
+  const ex = new Map((extra ?? []).map((e) => [e.user_id as string, e as { onboarding_done: boolean; objective_met: boolean; goals_3m: string | null }]));
   const tracked = new Set(rows.map((r) => r.user_id));
   const notTracked = (allStudents ?? []).filter((s) => !tracked.has(s.id)).map((s) => ({ id: s.id as string, name: (s.full_name as string) || "—" }));
 
@@ -30,7 +32,8 @@ export default async function FollowupHome({ searchParams }: { searchParams: Pro
   const list = rows.filter((r) =>
     (estado === "todos" || r.status === estado) &&
     (!sp.mes || r.month === Number(sp.mes)) &&
-    (sp.riesgo !== "si" || r.at_risk));
+    (sp.riesgo !== "si" || r.at_risk) &&
+    (sp.onb !== "pendiente" || !ex.get(r.user_id)?.onboarding_done));
 
   const q = (patch: Partial<SP>) => {
     const p = new URLSearchParams(Object.entries({ ...sp, ...patch }).filter(([, v]) => v) as [string, string][]);
@@ -77,6 +80,7 @@ export default async function FollowupHome({ searchParams }: { searchParams: Pro
           {[1, 2, 3, 4, 5, 6].map((m) => <Link key={m} href={q({ mes: String(m) })} className={chip(sp.mes === String(m))}>Mes {m}</Link>)}
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          <Link href={q({ onb: sp.onb === "pendiente" ? undefined : "pendiente" })} className={chip(sp.onb === "pendiente")}>Onboarding pendiente</Link>
           <Link href={q({ riesgo: sp.riesgo === "si" ? undefined : "si" })} className={chip(sp.riesgo === "si")}><AlertTriangle size={13} className="inline -mt-0.5" /> En riesgo</Link>
           {(["activo", "finalizado", "todos"] as const).map((e) => <Link key={e} href={q({ estado: e === "activo" ? undefined : e })} className={chip(estado === e)}>{e === "activo" ? "Activos" : e === "finalizado" ? "Finalizados" : "Todos"}</Link>)}
           <span className="ml-auto text-sm text-ink-muted">{list.length} alumnos</span>
@@ -93,10 +97,13 @@ export default async function FollowupHome({ searchParams }: { searchParams: Pro
                   <span className="badge !py-0.5">Mes {r.month}</span>
                   {r.at_risk && <span className="badge !py-0.5 !bg-red-50 !text-red-800" title={r.at_risk_manual !== null ? "marcado a mano" : r.risk_reason ?? ""}><AlertTriangle size={11} /> En riesgo</span>}
                   {r.status === "finalizado" && <span className="badge !py-0.5">Finalizado</span>}
+                  {!ex.get(r.user_id)?.onboarding_done && <span className="badge !py-0.5 !bg-amber-50 !text-amber-800">Onboarding pendiente</span>}
+                  {ex.get(r.user_id)?.objective_met && <span className="badge !py-0.5 !bg-brand !text-white">Objetivo cumplido</span>}
                 </div>
                 <p className="text-xs text-ink-muted mt-1">
                   {r.progress_pct}% curso · {r.sessions} sesiones · {r.applications} aplicaciones · {r.active_projects} proyectos · {r.last_seen_at ? `entró ${timeAgo(r.last_seen_at)}` : "nunca ha entrado"}
                 </p>
+                {ex.get(r.user_id)?.goals_3m && <p className="text-xs text-ink-muted mt-0.5 truncate">🎯 {ex.get(r.user_id)!.goals_3m}</p>}
                 {r.at_risk && <p className="text-xs text-red-700 mt-0.5">{r.at_risk_manual !== null ? "Marcado a mano" : r.risk_reason}</p>}
               </div>
             </Link>

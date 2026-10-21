@@ -28,6 +28,10 @@ export async function saveFollowup(userId: string, f: FormData): Promise<R> {
     testimonial: s(f, "testimonial") === "hecho" ? "hecho" : "pendiente",
     offboarding: ["pendiente", "agendado", "hecho"].includes(s(f, "offboarding")) ? s(f, "offboarding") : "pendiente",
     status: s(f, "status") === "finalizado" ? "finalizado" : "activo",
+    onboarding_done: s(f, "onboarding_done") === "si",
+    notes: s(f, "notes") || null,
+    objective_due: s(f, "objective_due") || null,
+    objective_met: s(f, "objective_met") === "si",
   };
   const { error } = await supabase.from("followups").update(patch).eq("user_id", userId);
   if (error) return { error: error.message };
@@ -64,5 +68,25 @@ export async function moderateTestimonial(id: string, action: "publicar" | "devo
   if (error) return { error: error.message };
   revalidatePath("/seguimiento", "layout");
   revalidatePath("/testimonios");
+  return { ok: true };
+}
+
+export async function createCsmEvent(f: FormData): Promise<R> {
+  const { supabase } = await requireCsm();
+  const title = s(f, "title");
+  if (!title) return { error: "Ponle nombre al evento" };
+  const { error } = await supabase.from("csm_events").insert({ title, event_date: s(f, "event_date") || null });
+  if (error) return { error: error.message };
+  revalidatePath("/seguimiento", "layout");
+  return { ok: true };
+}
+
+export async function toggleCsmAttendance(eventId: string, userId: string, attended: boolean): Promise<R> {
+  const { supabase } = await requireCsm();
+  const { error } = attended
+    ? await supabase.from("csm_event_attendance").upsert({ event_id: eventId, user_id: userId })
+    : await supabase.from("csm_event_attendance").delete().eq("event_id", eventId).eq("user_id", userId);
+  if (error) return { error: error.message };
+  revalidatePath("/seguimiento", "layout");
   return { ok: true };
 }

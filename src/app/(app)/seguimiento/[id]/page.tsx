@@ -7,6 +7,7 @@ import { fmtDateTime, timeAgo } from "@/lib/utils";
 import { dueCheckins, eur, fmtDay, STAGE_LABEL, STAGES, type Overview } from "@/lib/followup";
 import { FollowupForm } from "./FollowupForm";
 import { CheckinForm } from "./CheckinForm";
+import { InPersonEvents } from "./InPersonEvents";
 
 export const metadata = { title: "Ficha de seguimiento" };
 
@@ -15,6 +16,7 @@ const FIELD: Record<string, string> = {
   active_projects: "Proyectos activos", projects_notes: "Proyectos", revenue: "Facturación", interviews: "Entrevistas",
   job_applications: "Aplicaciones", sessions_manual: "Sesiones (a mano)", at_risk_manual: "En riesgo (a mano)", guarantee: "Garantía",
   testimonial: "Testimonio", offboarding: "Offboarding", status: "Estado",
+  onboarding_done: "Onboarding con Javi", notes: "Notas", objective_due: "Fecha objetivo", objective_met: "Objetivo cumplido", objective_met_at: "Fecha cumplido",
 };
 const show = (v: unknown) => v === null || v === undefined || v === "" ? "—" : v === true ? "sí" : v === false ? "no" : String(v);
 
@@ -30,6 +32,12 @@ export default async function FollowupDetail({ params }: { params: Promise<{ id:
     supabase.from("testimonials").select("status,kind,updated_at").eq("user_id", id).maybeSingle(),
     supabase.from("event_attendance").select("event_id", { count: "exact", head: true }).eq("user_id", id),
   ]);
+  const [{ data: evs }, { data: evAtt }] = await Promise.all([
+    supabase.from("csm_events").select("id,title,event_date").order("event_date", { ascending: true, nullsFirst: false }),
+    supabase.from("csm_event_attendance").select("event_id").eq("user_id", id),
+  ]);
+  const went = new Set((evAtt ?? []).map((a) => a.event_id as string));
+  const inPerson = (evs ?? []).map((e) => ({ id: e.id as string, title: e.title as string, event_date: e.event_date as string | null, attended: went.has(e.id as string) }));
   if (!f) notFound();
   const o = ((ov ?? []) as Overview[]).find((r) => r.user_id === id)!;
   const pending = dueCheckins(o);
@@ -51,6 +59,8 @@ export default async function FollowupDetail({ params }: { params: Promise<{ id:
             <span className="badge">Entrada {fmtDay(o.start_date)}</span>
             {o.at_risk && <span className="badge !bg-red-50 !text-red-800"><AlertTriangle size={12} /> En riesgo · {o.at_risk_manual !== null ? "marcado a mano" : o.risk_reason}</span>}
             {o.status === "finalizado" && <span className="badge">Finalizado</span>}
+            <span className={`badge ${f.onboarding_done ? "" : "!bg-amber-50 !text-amber-800"}`}>Onboarding Javi: {f.onboarding_done ? "hecho" : "pendiente"}</span>
+            {f.objective_met && <span className="badge !bg-brand !text-white">Objetivo cumplido</span>}
           </div>
         </div>
         <div className="flex sm:flex-col gap-2">
@@ -102,6 +112,8 @@ export default async function FollowupDetail({ params }: { params: Promise<{ id:
           {!checkins?.length && <li className="py-3 text-sm text-ink-faint">Aún no hay check-ins.</li>}
         </ul>
       </section>
+
+      <InPersonEvents userId={id} events={inPerson} />
 
       <FollowupForm userId={id} f={f} sessionsRecorded={attended ?? 0} autoRisk={o.at_risk_auto ? o.risk_reason : null} />
 
