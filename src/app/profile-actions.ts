@@ -21,6 +21,9 @@ export async function saveProfile(form: FormData) {
   if (!full_name || objectives.length < 3 || improvements.length < 3) {
     return { error: "Completa tu nombre, tus 3 objetivos y tus 3 puntos a mejorar." };
   }
+  if (!objectives.some((o) => /\d/.test(o))) {
+    return { error: "Al menos uno de tus 3 objetivos tiene que llevar un número (por ejemplo: «Facturar 1.500 € al mes» o «Cerrar 3 clientes»)." };
+  }
   if (!profile.avatar_url) return { error: "Sube tu foto de perfil para continuar." };
   const phone = clean(form.get("phone"), 40);
   const bio = clean(form.get("bio"), 600);

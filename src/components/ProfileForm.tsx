@@ -28,6 +28,11 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
       action={(fd) =>
         start(async () => {
           setError(null); setSaved(false);
+          const objs = [0, 1, 2].map((i) => String(fd.get(`objective${i}`) ?? ""));
+          if (!objs.some((o) => /\d/.test(o))) {
+            setError("Al menos uno de tus 3 objetivos tiene que llevar un número (por ejemplo: «Facturar 1.500 € al mes» o «Cerrar 3 clientes»).");
+            return;
+          }
           const res = await saveProfile(fd);
           if (res.error) { setError(res.error); return; }
           if (res.first) { router.replace("/"); router.refresh(); return; }
@@ -70,9 +75,10 @@ export function ProfileForm({ profile, submitLabel }: { profile: Profile; submit
 
       <section className="space-y-4">
         <p className="label">Tus 3 objetivos</p>
-        <p className="text-sm text-ink-muted -mt-2">Los verás cada día al entrar.</p>
+        <p className="text-sm text-ink-muted -mt-2">Los verás cada día al entrar. <b className="text-ink">Al menos uno tiene que llevar un número</b> para poder medirlo: facturación, clientes, llamadas…</p>
         {[0, 1, 2].map((i) => (
-          <input key={i} name={`objective${i}`} className="input" required defaultValue={profile.objectives[i] ?? ""} placeholder={`Objetivo ${i + 1}`} />
+          <input key={i} name={`objective${i}`} className="input" required defaultValue={profile.objectives[i] ?? ""}
+            placeholder={["Ej.: Facturar 1.500 € al mes", "Ej.: Cerrar mis 3 primeros clientes", `Objetivo ${i + 1}`][i]} />
         ))}
       </section>
 
