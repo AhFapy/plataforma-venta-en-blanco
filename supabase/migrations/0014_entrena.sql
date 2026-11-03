@@ -611,7 +611,7 @@ language plpgsql security definer set search_path = public as $$
 declare e jsonb; mod uuid; n_q int := 0; n_i int := 0; n_o int := 0; n_s int := 0; n_b int := 0; pub boolean;
   skipped jsonb := '[]'::jsonb;
 begin
-  if not exists (select 1 from profiles where id = auth.uid() and role = 'admin' and active) then raise exception 'solo admin'; end if;
+  if coalesce(auth.role(), '') <> 'service_role' and not exists (select 1 from profiles where id = auth.uid() and role = 'admin' and active) then raise exception 'solo admin'; end if;
   pub := exists (select 1 from app_settings where key = 'entrena_abierto' and value = '1');
 
   for e in select * from jsonb_array_elements(p->'badges') loop
@@ -679,3 +679,5 @@ begin
     execute format('grant execute on function public.%s to authenticated', f);
   end loop;
 end $$;
+
+grant execute on function public.entrena_load(jsonb) to service_role;
