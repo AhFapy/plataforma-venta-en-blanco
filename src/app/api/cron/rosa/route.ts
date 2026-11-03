@@ -19,6 +19,10 @@ export async function GET(req: Request) {
   const hhmm = (iso: string) => new Intl.DateTimeFormat("es-ES", { timeZone: tz, hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
   let created = 0;
 
+  // Liga de Entrena: insignias y aviso al podio de la semana pasada (no repite si ya está hecho)
+  const { data: settled } = await db.rpc("league_settle");
+  created += Number(settled ?? 0);
+
   // 1) Directos de hoy
   const from = new Date(Date.now() - 2 * 3600_000).toISOString();
   const to = new Date(Date.now() + 26 * 3600_000).toISOString();

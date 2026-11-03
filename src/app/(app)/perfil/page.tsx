@@ -1,3 +1,4 @@
+import { BadgesRow } from "@/components/BadgesRow";
 import { requireMember } from "@/lib/auth";
 import { PageHeader } from "@/components/PageHeader";
 import { ProfileForm } from "@/components/ProfileForm";
@@ -17,6 +18,7 @@ export default async function MyProfile() {
         <p className="label">Color de la plataforma</p>
         <ThemePicker />
       </section>
+      <div className="mb-10"><BadgesRow userId={profile.id} /></div>
       <ProfileForm profile={profile} submitLabel="Guardar cambios" />
     </div>
   );

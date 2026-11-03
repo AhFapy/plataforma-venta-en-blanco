@@ -16,6 +16,8 @@ type Row = { user_id: string; full_name: string | null; avatar_url: string | nul
 const RULES = [
   ["Publicar un resultado en Resultados", "+50"],
   ["Completar una misión (redes, apps…)", "+10 a +30"],
+  ["Aprobar el quiz de un módulo (una vez)", "+20"],
+  ["Conseguir una insignia (una vez)", "+5 a +20"],
   ["Asistir a un directo", "+15"],
   ["Completar una clase", "+10"],
   ["Publicar en la comunidad", "+3"],

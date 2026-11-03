@@ -1,0 +1,17 @@
+[
+{"slug":"primer-reto","name":"Primer reto","description":"Has completado tu primer reto diario.","icon":"flame","points":5},
+{"slug":"racha-7","name":"Una semana entera","description":"7 días seguidos haciendo el reto.","icon":"flame","points":10},
+{"slug":"racha-30","name":"Disciplina de closer","description":"30 días seguidos haciendo el reto.","icon":"flame","points":20},
+{"slug":"racha-100","name":"Cien días","description":"100 días seguidos. Esto ya es identidad.","icon":"crown","points":20},
+{"slug":"quiz-primero","name":"Primer quiz","description":"Has aprobado tu primer quiz de módulo.","icon":"graduation","points":5},
+{"slug":"vb-dominada","name":"Venta en Blanco dominada","description":"Todos los quizzes de Venta en Blanco aprobados.","icon":"crown","points":20},
+{"slug":"manos-rapidas","name":"Manos rápidas","description":"Una racha de 8 aciertos seguidos en el Ping Pong.","icon":"zap","points":5},
+{"slug":"ping-pong-limpio","name":"Partida limpia","description":"Ping Pong completo sin perder una vida.","icon":"shield","points":10},
+{"slug":"lector","name":"Lector de personas","description":"Lee al lead completo sin perder una vida.","icon":"eye","points":10},
+{"slug":"arquitecto","name":"Arquitecto de llamadas","description":"Todos los niveles de Ordena la llamada resueltos.","icon":"list","points":10},
+{"slug":"primer-cierre","name":"Primer sí","description":"Has cerrado o agendado en el simulador.","icon":"phone","points":5},
+{"slug":"ley-de-mama","name":"Ley de Mamá","description":"Has rechazado una venta que no debía hacerse.","icon":"heart","points":10},
+{"slug":"simulador-completo","name":"Todas las llamadas","description":"Has superado todos los escenarios del simulador.","icon":"crown","points":10},
+{"slug":"podio","name":"Podio semanal","description":"Top 3 de la liga de una semana.","icon":"medal","points":5},
+{"slug":"campeon","name":"Campeón de la liga","description":"Has ganado la liga de una semana.","icon":"trophy","points":5}
+]

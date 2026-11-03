@@ -121,3 +121,15 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .fade-in { animation: fade var(--t-med) both; }
 /* Solo opacidad: un transform rompería los elementos fixed (modales) que haya dentro */
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Entrena: microinteracciones */
+.pop-in { animation: pop var(--t-med) both; }
+@keyframes pop { from { opacity: 0; scale: .96; } 60% { opacity: 1; scale: 1.015; } to { scale: 1; } }
+.shake { animation: shake 360ms cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes shake { 10%, 90% { translate: -1px; } 20%, 80% { translate: 2px; } 30%, 50%, 70% { translate: -4px; } 40%, 60% { translate: 4px; } }
+.confetti span { position: absolute; top: -12px; border-radius: 2px; animation-name: confetti; animation-timing-function: cubic-bezier(.2,.6,.4,1); animation-fill-mode: both; }
+@keyframes confetti { to { transform: translate3d(var(--drift), 105vh, 0) rotate(540deg); opacity: .7; } }
+@media (prefers-reduced-motion: reduce) {
+  .pop-in, .shake { animation: none; }
+  .confetti { display: none; }
+}
