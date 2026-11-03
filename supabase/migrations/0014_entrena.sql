@@ -314,7 +314,7 @@ begin
       from quiz_questions q
       join modules m on m.id = q.module_id
       join courses c on c.id = m.course_id
-      where q.published and (
+      where (q.published or is_staff()) and (
         q.module_id in (select module_id from started)
         or (c.title = 'Venta en Blanco' and m.position <= 3)   -- sin progreso todavía: los primeros módulos
       )
