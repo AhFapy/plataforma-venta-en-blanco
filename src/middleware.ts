@@ -2,7 +2,7 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/env";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC = ["/login", "/solicitar-acceso", "/auth", "/api/webhooks", "/api/cron"];
+const PUBLIC = ["/login", "/solicitar-acceso", "/auth", "/api/webhooks", "/api/cron", "/api/onboarding"];
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
