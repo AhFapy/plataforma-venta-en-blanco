@@ -234,12 +234,12 @@
 {
 "q": "¿Cuál es el orden real de una decisión de compra?",
 "o": [
+"Emoción, seguridad y lógica",
 "Seguridad, emoción y lógica",
 "Lógica, emoción y seguridad",
-"Emoción, lógica y seguridad",
 "Seguridad, lógica y emoción"
 ],
-"e": "Reptiliano, límbico y neocórtex. Si empiezas por el precio, pierdes la venta."
+"e": "Límbico, reptiliano y neocórtex: primero conectas, luego das seguridad y la lógica lo justifica. Si empiezas por el precio, pierdes la venta."
 },
 {
 "q": "¿Cómo se vende a un perfil dominante?",
