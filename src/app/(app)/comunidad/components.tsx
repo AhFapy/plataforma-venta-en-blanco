@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Camera, Heart, Paperclip, Pin, Send, SmilePlus, Trash2, X } from "lucide-react";
+import { Camera, Heart, Paperclip, Pin, Send, SmilePlus, Trash2, Users, X } from "lucide-react";
+import Link from "next/link";
+import { Avatar } from "@/components/Avatar";
 import { createClient } from "@/lib/supabase/client";
 import type { Media } from "./posts";
 import { REACTIONS, groupReactions, type Reaction } from "@/lib/reactions";
-import { createComment, createPost, deleteComment, deletePost, toggleLike, togglePin, toggleReaction } from "./actions";
+import { createComment, createPost, deleteComment, deletePost, getPostEngagement, toggleLike, togglePin, toggleReaction } from "./actions";
 
 const MAX_FILE = 25 * 1024 * 1024;
 const MAX_FILES = 6;
@@ -192,6 +194,74 @@ export function Reactions({ postId, rows, me }: { postId: string; rows: Reaction
         )}
       </div>
     </div>
+  );
+}
+
+type Engaged = { id: string; name: string; avatar: string | null; liked: boolean; emojis: string[] };
+
+export function PostEngagement({ postId }: { postId: string }) {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState<{ people: Engaged[]; legacyLikes: number } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    let alive = true;
+    setData(null); setError(null);
+    getPostEngagement(postId).then((r) => {
+      if (!alive) return;
+      if ("error" in r) setError(r.error ?? "No se ha podido cargar la lista");
+      else setData({ people: r.people, legacyLikes: r.legacyLikes });
+    }).catch(() => { if (alive) setError("No se ha podido cargar la lista"); });
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => { alive = false; document.removeEventListener("keydown", onKey); };
+  }, [open, postId]);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)} className="flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink">
+        <Users size={16} /> Ver quién
+      </button>
+      {open && createPortal(
+        <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4" onClick={() => setOpen(false)}>
+          <div role="dialog" aria-modal="true" aria-label="Likes y reacciones" onClick={(e) => e.stopPropagation()}
+            className="w-full sm:max-w-md max-h-[75vh] flex flex-col rounded-t-2xl sm:rounded-2xl border border-line bg-surface fade-in">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-line">
+              <h2 className="font-semibold">Likes y reacciones</h2>
+              <button onClick={() => setOpen(false)} aria-label="Cerrar" className="grid place-items-center w-8 h-8 rounded-full hover:bg-bg-badge"><X size={18} /></button>
+            </div>
+            <div className="overflow-y-auto px-5 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+              {error && <p className="py-6 text-center text-sm text-ink-muted">{error}</p>}
+              {!error && !data && <p className="py-6 text-center text-sm text-ink-muted">Cargando…</p>}
+              {data && data.people.length === 0 && data.legacyLikes === 0 && <p className="py-6 text-center text-sm text-ink-muted">Todavía nadie ha reaccionado.</p>}
+              {data && data.people.length > 0 && (
+                <ul className="space-y-1">
+                  {data.people.map((u) => (
+                    <li key={u.id}>
+                      <Link href={`/miembros/${u.id}`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-lg py-2 hover:bg-bg-badge">
+                        <Avatar name={u.name} url={u.avatar} size={36} />
+                        <span className="min-w-0 flex-1 truncate text-sm font-medium">{u.name}</span>
+                        <span className="flex shrink-0 items-center gap-1 pr-1 text-[15px] leading-none">
+                          {u.liked && <Heart size={15} className="text-brand" fill="currentColor" aria-label="Le ha dado like" />}
+                          {u.emojis.map((e) => <span key={e}>{e}</span>)}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {data && data.legacyLikes > 0 && (
+                <p className="pt-3 text-xs text-ink-faint">
+                  {data.legacyLikes === 1 ? "1 like" : `${data.legacyLikes} likes`} de la comunidad anterior, sin nombre guardado.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>,
+        document.body,
+      )}
+    </>
   );
 }
 

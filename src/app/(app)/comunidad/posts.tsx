@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MessageCircle, Paperclip, Pin } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { timeAgo } from "@/lib/utils";
-import { LikeButton, PostAdmin, Reactions } from "./components";
+import { LikeButton, PostAdmin, PostEngagement, Reactions } from "./components";
 
 export type PostRow = {
   id: string; body: string; pinned: boolean; created_at: string; author_id: string;
@@ -92,6 +92,7 @@ export function PostCard({ p, me, staff, full = false }: { p: PostRow; me: strin
             <MessageCircle size={16} /> {comments} {comments === 1 ? "comentario" : "comentarios"}
           </Link>
         )}
+        {(p.post_likes.length + (p.post_reactions?.length ?? 0) + (p.legacy_likes ?? 0)) > 0 && <PostEngagement postId={p.id} />}
       </footer>
     </article>
   );
