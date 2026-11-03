@@ -1,3 +1,4 @@
+import { BadgesRow } from "@/components/BadgesRow";
 import { isStaffRole } from "@/lib/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -51,6 +52,8 @@ export default async function Member({ params }: { params: Promise<{ id: string 
           </div>
         ))}
       </div>
+
+      <BadgesRow userId={m.id} />
 
       {staffViewer && priv?.phone && (
         <a href={`https://wa.me/${priv.phone.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="btn btn-brand"><MessageCircle size={16} /> WhatsApp</a>

@@ -12,6 +12,7 @@ import { Stories, type StoryGroup, type StorySlide } from "@/components/Stories"
 import { getSettings } from "@/lib/settings";
 import { RosaAvatar } from "@/components/RosaAvatar";
 import { GoalsCard } from "./GoalsCard";
+import { EntrenaCard } from "./EntrenaCard";
 import { groupReactions } from "@/lib/reactions";
 
 type FeedPost = {
@@ -134,6 +135,7 @@ export default async function Home() {
         {welcome && <PostCard p={welcome} me={profile.id} />}
 
         {/* Seguir donde lo dejaste (móvil y tablet; en escritorio va en la columna) */}
+        <div className="xl:hidden"><EntrenaCard supabase={supabase} userId={profile.id} /></div>
         <div className="xl:hidden"><NextLessonCard cur={cur} done={done} total={total} /></div>
 
         <Link href="/comunidad/resultados" className="feed-card flex items-center gap-3 p-3 pl-4 hover:border-brand transition-colors">
@@ -161,6 +163,7 @@ export default async function Home() {
 
       {/* ── Columna lateral ── */}
       <aside className="space-y-4 min-w-0 xl:sticky xl:top-10 h-fit">
+        <div className="hidden xl:block"><EntrenaCard supabase={supabase} userId={profile.id} /></div>
         <Link href="/ranking?t=puntos" className="block feed-card p-5 hover:border-brand transition-colors">
           <div className="flex items-center gap-3">
             <Avatar name={profile.full_name} url={profile.avatar_url} size={52} />

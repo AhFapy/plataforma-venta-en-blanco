@@ -1,0 +1,1109 @@
+[
+{
+"course": "Venta en Blanco",
+"module": 1,
+"module_title": "Introducción",
+"questions": [
+{
+"q": "¿Cómo se reparte el trabajo en esta formación?",
+"o": [
+"Tú pones el trabajo y Javi pone el camino",
+"Javi pone el método y los resultados llegan solos",
+"La academia busca los clientes y tú los atiendes"
+],
+"e": "«Tú pones el trabajo. Yo pongo el camino.» La formación es práctica más acción."
+},
+{
+"q": "¿En qué paso del roadmap subes a tickets de 6.000 a 30.000 €?",
+"o": [
+"Paso 7, Escala",
+"Paso 5, Primeros trabajos",
+"Paso 2, Técnica",
+"Paso 4, Práctica real"
+],
+"e": "Antes de escalar vienen la práctica real, los primeros trabajos y el posicionamiento."
+},
+{
+"q": "Según el roadmap, ¿cómo empiezas en tus primeros trabajos?",
+"o": [
+"Como setter o closer de tickets pequeños",
+"Directamente en proyectos de 10.000 €",
+"Montando tu propia oferta desde el día uno",
+"Liderando un equipo comercial"
+],
+"e": "El paso 5 es empezar en tickets pequeños y subir tus casos de éxito."
+},
+{
+"q": "¿Qué marca la diferencia respecto al miedo?",
+"o": [
+"Actuar igual, aunque estés temblando",
+"Esperar a sentirte preparado",
+"Eliminarlo antes de la primera llamada",
+"Evitar las llamadas difíciles al principio"
+],
+"e": "Todos tenemos miedo. La diferencia está en quién actúa igual a pesar de él."
+},
+{
+"q": "¿Qué se espera de ti como alumno?",
+"o": [
+"Ser coherente con tu palabra y aplicar cada ejercicio",
+"Ver todos los vídeos antes de hacer ningún ejercicio",
+"Tener experiencia previa en ventas",
+"Conseguir un cliente durante la primera semana"
+],
+"e": "Consciencia de tu punto de partida, coherencia, ejercicios y participación, no quedarte mirando."
+},
+{
+"q": "¿Qué tienes que definir antes de pasar al siguiente módulo?",
+"o": [
+"De dónde partes, tu mayor miedo y tu objetivo mínimo",
+"Tu nicho, tu tarifa y tu primer cliente",
+"Tu marca personal y tu calendario de contenido"
+],
+"e": "Punto de partida, mayor miedo y objetivo mínimo, y después el primer ejercicio."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 2,
+"module_title": "Mentalidad",
+"questions": [
+{
+"q": "¿De dónde viene el miedo a vender, según el módulo?",
+"o": [
+"De pensar que vendes por ti y no para ayudar",
+"De no conocer bien el producto",
+"De no tener suficiente experiencia",
+"De que los clientes no tienen dinero"
+],
+"e": "Cuando entiendes que vendes para ayudar, el miedo desaparece."
+},
+{
+"q": "¿Cómo se rompen las creencias limitantes?",
+"o": [
+"Con acción repetida",
+"Con pensamiento positivo",
+"Con más formación antes de empezar",
+"Con motivación diaria"
+],
+"e": "Las creencias no se rompen pensando. Se reemplazan con acción repetida."
+},
+{
+"q": "La mayoría espera pruebas antes de moverse. ¿Cuándo llega la prueba en realidad?",
+"o": [
+"Después de moverte",
+"Cuando terminas la formación",
+"Antes de la primera venta",
+"Cuando alguien te valida"
+],
+"e": "Primero te mueves y luego llega la prueba."
+},
+{
+"q": "«Lo que dices importa, pero importa más…»",
+"o": [
+"Desde dónde lo dices",
+"A quién se lo dices",
+"Cuántas veces lo repites",
+"Lo bien que lo tienes memorizado"
+],
+"e": "Cada llamada refleja tu estado interno: si estás en calma transmites calma."
+},
+{
+"q": "¿Por qué debes validarte?",
+"o": [
+"Por lo que siembras, no por lo que recoges",
+"Por las ventas que cierras cada mes",
+"Por lo que opinan tus compañeros",
+"Por las comisiones que cobras"
+],
+"e": "Valídate por tus acciones, no por tus resultados. Los resultados llegan como consecuencia."
+},
+{
+"q": "¿Qué es lo que de verdad bloquea a muchos vendedores?",
+"o": [
+"El miedo a perder su identidad actual",
+"La falta de un buen guion para cada llamada",
+"El precio del producto",
+"La competencia que hay hoy en el sector"
+],
+"e": "Lo que bloquea no es el fracaso, sino el miedo a perder la identidad actual."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 3,
+"module_title": "Reprogramación Mental",
+"questions": [
+{
+"q": "¿Cuáles son las 3 razones reales por las que vendemos?",
+"o": [
+"Propósito, impacto y conexión",
+"Dinero, estatus y libertad",
+"Necesidad, presión y objetivos",
+"Técnica, volumen y comisión"
+],
+"e": "Vendemos por propósito, impacto y conexión. No por necesidad ni presión."
+},
+{
+"q": "¿Desde dónde trabaja el vendedor tradicional?",
+"o": [
+"Desde el miedo",
+"Desde el propósito",
+"Desde la escucha",
+"Desde el desapego"
+],
+"e": "Miedo a no cerrar, a no llegar a fin de mes y a no ser suficiente. Y el cliente lo nota."
+},
+{
+"q": "¿Qué es vender para el nuevo vendedor?",
+"o": [
+"Amar con estructura, escuchar y observar con profundidad",
+"Hablar bonito y rebatir cada objeción",
+"Insistir con educación hasta conseguir el sí",
+"Presentar el producto con la mayor claridad posible"
+],
+"e": "Vender es amar con estructura. Y el dinero llega como consecuencia, no como objetivo."
+},
+{
+"q": "¿Qué vende en realidad un setter?",
+"o": [
+"Atención",
+"Productos",
+"Precio",
+"Formación"
+],
+"e": "El setter no vende productos, vende atención: crea interés y filtra."
+},
+{
+"q": "¿Qué hace el triager?",
+"o": [
+"Llama al lead antes de su llamada para confirmar asistencia y cualificación",
+"Cierra las ventas que el closer no ha podido cerrar en su llamada",
+"Publica el contenido que atrae a los leads",
+"Cobra y gestiona los pagos de los clientes una vez que entran"
+],
+"e": "Confirma que el lead asistirá y que está cualificado antes de llegar al closer."
+},
+{
+"q": "¿Cómo persuade un closer?",
+"o": [
+"Para ayudar, desde la empatía",
+"Para cerrar, a cualquier precio",
+"Con presión, de forma elegante",
+"Con un guion exacto y memorizado"
+],
+"e": "El closer no persuade para cerrar, persuade para ayudar."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 4,
+"module_title": "Neuroventas + Psicología",
+"questions": [
+{
+"q": "¿Qué significa «el mapa no es el territorio»?",
+"o": [
+"Cada persona vive su propia versión de la realidad",
+"El guion no siempre coincide con la llamada",
+"Hay que estudiar el mercado antes de vender",
+"Cada nicho funciona de forma distinta"
+],
+"e": "Tu trabajo no es imponer tu visión, sino entender la del cliente."
+},
+{
+"q": "Un cliente dice «me transmite buena energía». ¿Qué canal domina?",
+"o": [
+"Kinestésico",
+"Visual",
+"Auditivo"
+],
+"e": "Sentir, transmitir, energía: canal kinestésico."
+},
+{
+"q": "¿Cuál es el nivel de escucha más importante?",
+"o": [
+"Expansiva: palabras, energía, pausas y emociones",
+"Enfocada: atención total a sus palabras",
+"Interna: pensar bien lo que vas a decir"
+],
+"e": "En la escucha expansiva no necesitas convencer, entiendes lo que necesita."
+},
+{
+"q": "¿Cuál es el orden real de una decisión de compra?",
+"o": [
+"Seguridad, emoción y lógica",
+"Lógica, emoción y seguridad",
+"Emoción, lógica y seguridad",
+"Seguridad, lógica y emoción"
+],
+"e": "Reptiliano, límbico y neocórtex. Si empiezas por el precio, pierdes la venta."
+},
+{
+"q": "¿Cómo se vende a un perfil dominante?",
+"o": [
+"Firme, directo, breve y dejando claro que él decide",
+"Con muchos datos, comparativas y garantías",
+"Con historias largas y tono muy cálido",
+"Con pasos pequeños y mucho acompañamiento"
+],
+"e": "Respeta la competencia y la claridad. Habla de resultados."
+},
+{
+"q": "¿Qué enseña la metáfora del barco que espera un mar perfecto?",
+"o": [
+"El momento ideal nunca llega",
+"Hay que preparar bien cada oferta",
+"El cliente debe marcar el ritmo",
+"Conviene esperar a tener más experiencia"
+],
+"e": "Se avanza cuando actúas, no cuando esperas."
+},
+{
+"q": "¿Qué enseña el ejemplo del cuchillo?",
+"o": [
+"No vendes el producto, vendes el resultado",
+"Hay que cortar las llamadas largas",
+"Un buen vendedor no necesita herramientas",
+"El precio se defiende con firmeza"
+],
+"e": "Nadie compra el cuchillo, compra lo que le permite hacer."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 5,
+"module_title": "Microgestos, Pausas y Lectura Emocional",
+"questions": [
+{
+"q": "¿Qué señal indica que el cliente está en confianza?",
+"o": [
+"Copia tu postura y relaja el cuerpo",
+"Acelera la voz y habla más rápido",
+"Cruza los brazos mientras te escucha",
+"Te pide el precio al principio"
+],
+"e": "También inclina la cabeza hacia ti, sincroniza la respiración y baja el tono."
+},
+{
+"q": "¿Qué provoca hablar rápido?",
+"o": [
+"Activa las defensas del cliente",
+"Transmite más autoridad",
+"Mantiene su atención por más tiempo",
+"Da sensación de profesionalidad"
+],
+"e": "Las pausas relajan su sistema nervioso. Habla como quien ya tiene la venta cerrada."
+},
+{
+"q": "¿Qué haces antes de cuestionar a un cliente?",
+"o": [
+"Validar lo que ha dicho",
+"Corregir lo que ha entendido mal",
+"Recordarle tu experiencia",
+"Hacer un resumen de la oferta"
+],
+"e": "Primero validas, luego profundizas: «Tiene sentido lo que dices. Déjame preguntarte algo…»"
+},
+{
+"q": "El lead llega muy acelerado. ¿Qué haces?",
+"o": [
+"Dejar que se vacíe y luego bajar tu energía",
+"Frenarlo para retomar el guion",
+"Igualar su ritmo durante toda la llamada",
+"Pedirle que se tranquilice"
+],
+"e": "No lo frenes de golpe. Déjalo vaciarse, baja tu energía y él te sigue."
+},
+{
+"q": "¿Cuándo se abre el subconsciente del cliente?",
+"o": [
+"Cuando no percibe presión",
+"Cuando ve muchos casos de éxito",
+"Cuando le das una oferta limitada",
+"Cuando recibe toda la información"
+],
+"e": "«Si encaja, genial. Si no, no pasa nada.» La seguridad abre la puerta."
+},
+{
+"q": "El cliente es muy dominante e intenso. ¿Cómo adaptas tu energía?",
+"o": [
+"Subes un momento a su nivel y lo llevas poco a poco a tu calma",
+"Te quedas muy tranquilo desde el primer segundo, sin moverte de ahí",
+"Elevas el tono hasta imponerte",
+"Le cedes el control para que se sienta cómodo en la llamada"
+],
+"e": "Adapta tu energía sin perder la tuya."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 6,
+"module_title": "Cómo Persuadir Sin Hablar",
+"questions": [
+{
+"q": "¿Qué pasa cuando haces silencio?",
+"o": [
+"El cliente siente la necesidad de llenar el espacio y se sincera",
+"El cliente pierde interés y empieza a pensar en otra cosa",
+"Se rompe la conexión que habías creado",
+"Pareces inseguro y el cliente nota que no tienes respuesta"
+],
+"e": "Cuando habla más revela su problema real y baja sus defensas."
+},
+{
+"q": "¿Qué rompe un buen silencio?",
+"o": [
+"El patrón del vendedor pesado",
+"La autoridad que traías al empezar",
+"El marco de la llamada",
+"El interés que tenía el lead en ti"
+],
+"e": "El cliente espera que intentes convencerlo. El silencio le demuestra que no persigues."
+},
+{
+"q": "¿Con qué autoridad entras a la llamada gracias al proceso previo?",
+"o": [
+"Un 10 por defecto, que solo puedes bajar",
+"Un 0, y hay que ganársela en la llamada",
+"Un 5, que sube al presentar la oferta",
+"Depende del precio del producto"
+],
+"e": "Contenido, pre-llamada y marca te la dan. Cualquier movimiento inseguro puede bajar ese 10."
+},
+{
+"q": "En una llamada de ventas, ¿qué papel tienes?",
+"o": [
+"Eres el puente, no el protagonista",
+"Eres el experto que da la lección",
+"Eres quien debe impresionar al cliente",
+"Eres el representante de la marca"
+],
+"e": "No presionas, acompañas. No empujas, guías."
+},
+{
+"q": "Tu identidad atrae a un tipo de cliente y repele a otro. ¿Eso es…?",
+"o": [
+"Bueno: deja que tus valores elijan tu nicho",
+"Un problema que hay que corregir",
+"Algo a evitar para vender a todo el mundo",
+"Solo importante si haces contenido"
+],
+"e": "Cuanto más auténtico seas, más fuerte es la conexión."
+},
+{
+"q": "¿Cuándo decide la gente si te escucha o no?",
+"o": [
+"Antes de que digas una palabra",
+"Al presentar la oferta",
+"Cuando escucha el precio",
+"Al final de la conexión inicial"
+],
+"e": "Tu presencia persuade antes que tus palabras."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 7,
+"module_title": "Comunicación en Llamada de Ventas",
+"questions": [
+{
+"q": "Si suenas necesitado, ¿qué pasa?",
+"o": [
+"El cliente manda",
+"El cliente empatiza contigo",
+"Consigues un mejor precio",
+"Generas más urgencia"
+],
+"e": "Si suenas seguro, marcas tú el ritmo."
+},
+{
+"q": "En la exploración, ¿quién habla el 80 % del tiempo?",
+"o": [
+"El cliente",
+"El closer",
+"Ambos por igual"
+],
+"e": "Preguntas abiertas, re-preguntas, escucha activa y validación."
+},
+{
+"q": "¿Cómo debe sonar la presentación del valor?",
+"o": [
+"Como un diagnóstico",
+"Como un pitch bien ensayado",
+"Como una lista de características",
+"Como una promoción con fecha límite"
+],
+"e": "«Lo que necesitas no es X, es Y. Y esto se consigue así…»"
+},
+{
+"q": "¿Qué haces justo después de decir el precio?",
+"o": [
+"Callarte por completo",
+"Explicar todo lo que incluye",
+"Ofrecer varias formas de pago",
+"Recordar la garantía"
+],
+"e": "Hablar después de decir el precio destruye tu autoridad."
+},
+{
+"q": "¿Cómo debe ser tu comunicación ante una objeción?",
+"o": [
+"Cálida, curiosa y directa",
+"Firme, rápida y bien argumentada",
+"Defensiva, pero siempre educada",
+"Neutra, para no entrar en el tema"
+],
+"e": "«Entiendo. ¿A qué te refieres exactamente con eso?»"
+},
+{
+"q": "¿Qué sucede cuando justificas?",
+"o": [
+"Pierdes poder",
+"Generas confianza",
+"Aumentas el valor percibido",
+"Evitas objeciones"
+],
+"e": "Tu autoridad: no justificas, no explicas de más, no pides permiso, no persigues."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 8,
+"module_title": "Estructura de Ventas",
+"questions": [
+{
+"q": "¿Por qué falla imponer autoridad desde el segundo 0?",
+"o": [
+"Porque la autoridad forzada genera rechazo",
+"Porque el cliente aún no conoce el producto",
+"Porque es mejor reservarla para el cierre",
+"Porque no se puede tener autoridad por llamada"
+],
+"e": "La conexión abre la puerta. Nadie compra a alguien con quien no se siente cómodo."
+},
+{
+"q": "¿Cuáles son los 5 pilares que debe sentir alguien para comprar?",
+"o": [
+"Escasez, autoridad, pertenencia, transformación y seguridad",
+"Precio, urgencia, oferta, garantía y escasez",
+"Conexión, marco, preguntas, solución y cierre",
+"Dolor, deseo, lógica, emoción y confianza"
+],
+"e": "Si falta uno, el cierre se complica."
+},
+{
+"q": "¿Por qué no se da el precio en el marco?",
+"o": [
+"Porque sin contexto cualquier precio es caro",
+"Porque está prohibido por el manual",
+"Porque hay que guardarlo para el seguimiento",
+"Porque el setter ya lo ha comunicado"
+],
+"e": "Primero valor, después inversión."
+},
+{
+"q": "¿Qué consigues en la fase de preguntas?",
+"o": [
+"Descubrir qué quiere, qué le duele y qué necesita",
+"Demostrar lo mucho que sabes del sector",
+"Cubrir el formulario con todos los datos",
+"Rebatir sus creencias antes de presentar"
+],
+"e": "Es un diagnóstico, no un interrogatorio. La brecha entre dónde está y dónde quiere estar."
+},
+{
+"q": "¿Cuál es la secuencia de la montaña rusa?",
+"o": [
+"Identificas dónde está, subes o bajas, estabilizas y le haces ver por qué está aquí",
+"Presentas la oferta, subes la urgencia, das el precio y cierras la venta",
+"Bajas sus expectativas, cuentas tu historia y le pides una decisión hoy"
+],
+"e": "Se da cuenta de su realidad porque lo llevas a que él la diga."
+},
+{
+"q": "¿Qué vendes en la solución?",
+"o": [
+"Resultado, no producto, e inversión, no gasto",
+"Características, pagos y módulos completos",
+"La marca del experto y sus credenciales",
+"Descuentos y bonus por decidir hoy"
+],
+"e": "Si has escuchado bien, la oferta es: «Lo que necesitas es esto. Y se hace así.»"
+},
+{
+"q": "¿Qué es el cierre?",
+"o": [
+"Guiar la decisión que él ya quiere tomar",
+"El momento de presionar con la urgencia",
+"Rebatir hasta conseguir el sí",
+"La técnica más importante de la llamada"
+],
+"e": "Es una consecuencia natural de todo lo anterior."
+},
+{
+"q": "¿Qué define a la antiventa?",
+"o": [
+"No empujar, ni forzar, ni perseguir",
+"Decirle al lead que no compre nunca",
+"Vender sin hablar del precio",
+"Evitar los leads complicados"
+],
+"e": "El cliente se siente dueño de su decisión, y una decisión propia se paga con gusto."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 9,
+"module_title": "Objeciones",
+"questions": [
+{
+"q": "¿Qué es una objeción?",
+"o": [
+"Información que te guía hacia lo que necesita",
+"Un rechazo a la oferta que hay que rebatir",
+"El final natural de una mala llamada",
+"Una frase que se tumba con otra frase"
+],
+"e": "Las objeciones solo son información. Si sabes interpretarla, te guía."
+},
+{
+"q": "¿Cuál es el orden correcto ante una objeción?",
+"o": [
+"Saber si es real, entender de dónde sale y gestionarla",
+"Rebatirla, reforzar el valor y volver a cerrar",
+"Validarla, bajar el precio y pedir la decisión"
+],
+"e": "Si te saltas los dos primeros pasos, solo apagas fuegos."
+},
+{
+"q": "Detrás de «no tengo tiempo» casi siempre hay…",
+"o": [
+"Prioridades mal colocadas",
+"Falta real de horas",
+"Desconfianza en ti",
+"Un problema de precio"
+],
+"e": "Además de no haber profundizado bien en la fase inicial."
+},
+{
+"q": "¿Qué porcentaje de las veces la objeción de dinero no es de dinero?",
+"o": [
+"El 90 %",
+"El 50 %",
+"El 25 %",
+"El 10 %"
+],
+"e": "Es falta de claridad, de prioridad, miedo a equivocarse o poca confianza en sí mismo."
+},
+{
+"q": "«Cuando dices que no tienes dinero, ¿te refieres a que no puedes o a que no sabes si vale la pena?» ¿Para qué sirve?",
+"o": [
+"Para distinguir si es emocional o económico",
+"Para hacerle sentir incómodo con su respuesta",
+"Para ganar tiempo y preparar el descuento",
+"Para pasar directamente al pago fraccionado"
+],
+"e": "Si es emocional, trabajas confianza. Si es económico, trabajas prioridades."
+},
+{
+"q": "«Me lo pienso» y «lo hablo con mi pareja» suelen esconder falta de…",
+"o": [
+"Confianza",
+"Tiempo",
+"Dinero",
+"Información sobre el precio"
+],
+"e": "La objeción de confianza nunca aparece como «no confío en ti»."
+},
+{
+"q": "¿En qué tres sitios puede faltar la confianza?",
+"o": [
+"En ti, en el proceso y en sí mismo",
+"En el precio, en la marca y en el sector",
+"En el setter, en el closer y en el experto"
+],
+"e": "La más profunda es la tercera: el cliente duda de su propia capacidad."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 10,
+"module_title": "Trucos de Experto",
+"questions": [
+{
+"q": "¿Para qué sirve la ley del espejo?",
+"o": [
+"Para que el cliente se escuche y sienta su propio dolor",
+"Para copiar la postura corporal del cliente",
+"Para ganar tiempo mientras piensas la respuesta",
+"Para demostrar que has tomado buenas notas"
+],
+"e": "Cuando usas el espejo no tienes que convencerla: ella sola se convence."
+},
+{
+"q": "¿Cuándo aplicas la regla de oro del silencio?",
+"o": [
+"Al decir el precio, tras una pregunta clave y cuando duda",
+"Solo al final de la llamada, antes de cerrar",
+"Mientras el cliente te está contando su situación",
+"Cuando no sabes qué responder a una objeción"
+],
+"e": "Cuando te callas, el cliente se ve obligado a pensar. Y ahí pasan las cosas."
+},
+{
+"q": "¿Para qué sirve una ruptura de patrón?",
+"o": [
+"Para resetear la emoción del lead cuando está muy tenso",
+"Para cambiar de tema cuando no te interesa",
+"Para demostrar autoridad frente a un dominante",
+"Para alargar la llamada con el lead"
+],
+"e": "Un vaso que se cae, un estornudo o ajustar el micro desbloquean cuerpo y mente."
+},
+{
+"q": "¿Qué giro de consciencia enseña «El Problema»?",
+"o": [
+"El problema es que no haces nada con él",
+"El problema siempre es externo al cliente",
+"El problema se resuelve con la oferta",
+"El problema lo debe resolver el closer"
+],
+"e": "No es que te pase algo. Es qué haces cuando te pasa."
+},
+{
+"q": "¿Qué dos preguntas hace el truco de «¿Qué quieres?»",
+"o": [
+"¿Qué quieres? ¿Y qué NO quieres?",
+"¿Qué quieres? ¿Y cuánto puedes pagar?",
+"¿Qué quieres? ¿Y para cuándo lo necesitas?"
+],
+"e": "La mayoría nunca se lo ha planteado, y al decirlo tú ya sabes cómo venderles."
+},
+{
+"q": "El lead se va por las ramas. ¿Qué haces?",
+"o": [
+"Retomas con amabilidad para no liaros, y le preguntas si le parece",
+"Le cortas en seco y vuelves directamente a tu guion de siempre",
+"Dejas que siga hasta que se quede sin tema",
+"Saltas a presentar la oferta para ahorrar tiempo a los dos"
+],
+"e": "«Podríamos estar hablando todo el día, pero si te parece retomamos lo de antes.»"
+},
+{
+"q": "¿Con qué perfiles sirve especialmente la estrategia rusa?",
+"o": [
+"Con dominantes o fríos",
+"Con inseguros",
+"Con emocionales",
+"Con recién llegados al sector"
+],
+"e": "Control emocional, cambios de tono, pausas y confrontación suave para romper su rigidez."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 11,
+"module_title": "Leyes No Escritas",
+"questions": [
+{
+"q": "¿Qué dice el «cambio de chip» del precio?",
+"o": [
+"Nunca cambies tono ni vocabulario al decirlo",
+"Sube la energía para defender el valor",
+"Usa un tono más formal en ese momento",
+"Explica antes por qué cuesta lo que cuesta"
+],
+"e": "El cliente lo nota en 0,2 segundos. «La inversión inicial es de 3.000 €.» Simple, firme, limpio."
+},
+{
+"q": "¿Qué dice la Ley de Mamá?",
+"o": [
+"No vendas a nadie lo que no venderías a tu madre",
+"Habla al cliente con el cariño de una madre",
+"Cierra siempre con la pareja o familia delante",
+"Pide referidos a tus familiares primero"
+],
+"e": "Tu reputación vale más que una comisión."
+},
+{
+"q": "El cliente no encaja y sabes que no le va a funcionar. ¿Qué haces?",
+"o": [
+"No lo cierras",
+"Lo cierras con un pago reducido",
+"Lo cierras y avisas al equipo de soporte",
+"Se lo pasas a un compañero"
+],
+"e": "«Te digo la verdad aunque pierda dinero hoy.»"
+},
+{
+"q": "¿En cuánto tiempo se gana o se pierde una venta?",
+"o": [
+"En los primeros 30 segundos",
+"En los últimos 5 minutos",
+"En el momento del precio",
+"En el seguimiento posterior"
+],
+"e": "Ahí el cliente decide si confía, se relaja y escucha, o se pone a la defensiva."
+},
+{
+"q": "¿Qué hace falta en esos primeros 30 segundos?",
+"o": [
+"Caer bien y sonar real",
+"Un discurso potente",
+"Dejar claro tu historial de ventas",
+"Hablar ya de la oferta"
+],
+"e": "No hace falta un discurso épico."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 12,
+"module_title": "Entrenamientos de Closer",
+"questions": [
+{
+"q": "¿Tener muletillas es malo?",
+"o": [
+"No, el problema es cuando se repiten en momentos importantes",
+"Sí, hay que eliminarlas todas para sonar profesional",
+"Solo si la llamada es de un ticket muy alto",
+"No, nunca restan autoridad"
+],
+"e": "Muchas veces muestran naturalidad. Pero repetitivas en lo importante te restan certeza."
+},
+{
+"q": "¿Con qué sustituyes una muletilla?",
+"o": [
+"Por una pausa",
+"Por otra palabra más profesional",
+"Por una pregunta de control",
+"Por una risa natural"
+],
+"e": "El silencio ordena tu cabeza más que cualquier muletilla."
+},
+{
+"q": "¿Cuál es la progresión perfecta de roleplays?",
+"o": [
+"Setting, triaje y closing",
+"Closing, setting y triaje",
+"Objeciones, closing y setting",
+"Triaje, closing y setting"
+],
+"e": "Primero iniciar y filtrar, luego diagnosticar, y por último silencio, autoridad y precio."
+},
+{
+"q": "¿Qué necesita un roleplay para que sirva?",
+"o": [
+"Contexto real, producto definido y situaciones reales",
+"Un guion cerrado, dos observadores y una rúbrica",
+"Una grabación profesional y una rúbrica",
+"Un cliente muy duro que no acabe comprando nunca"
+],
+"e": "Un roleplay sin contexto es perder el tiempo."
+},
+{
+"q": "¿Qué entrenas en el Ping Pong de Objeciones?",
+"o": [
+"La velocidad mental sin perder naturalidad",
+"Frases memorizadas para cada objeción",
+"A ganar el debate a tu compañero",
+"A hablar más rápido en las llamadas"
+],
+"e": "El objetivo no es ganar, sino pensar bajo presión sin perder naturalidad."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 13,
+"module_title": "Consigue tu Primer Cliente",
+"questions": [
+{
+"q": "¿Cuántas interacciones nuevas al día como mínimo?",
+"o": [
+"10-15",
+"2-3",
+"50-100",
+"Una, pero muy buena"
+],
+"e": "Responder historias, comentar, mandar audios y abrir conversaciones."
+},
+{
+"q": "¿Dónde te haces bueno, según el módulo?",
+"o": [
+"En el campo, no en tu cabeza",
+"En los roleplays, antes de salir",
+"Viendo cada clase dos veces",
+"Cuando acabas toda la formación"
+],
+"e": "El error típico es esperar a «estar listo»."
+},
+{
+"q": "Si estás empezando, ¿qué modo eliges para conectar con el mercado?",
+"o": [
+"Acción masiva",
+"Marca cerrada",
+"Solo contenido, sin escribir a nadie",
+"Solo anuncios de pago"
+],
+"e": "Primero resultados, luego posicionamiento."
+},
+{
+"q": "¿Para qué sirve mandar una propuesta en vídeo?",
+"o": [
+"Para que vean tu energía, tu cara y que vas en serio",
+"Para vender ahí mismo tu servicio completo",
+"Para explicar con detalle todas tus tarifas",
+"Para evitar tener una llamada después"
+],
+"e": "No es para vender ahí mismo, es para que piensen «este tío va en serio»."
+},
+{
+"q": "¿Qué debe hacer el mensaje que acompaña al vídeo?",
+"o": [
+"Abrir conversación, no cerrarla",
+"Cerrar la colaboración con un precio",
+"Contar toda tu trayectoria",
+"Enviar el contrato"
+],
+"e": "Quién eres, por qué le escribes a él y qué has visto en su proyecto."
+},
+{
+"q": "Te contestan pero no cierras. ¿Qué revisas?",
+"o": [
+"Tu llamada y tu seguimiento",
+"A quién escribes",
+"El copy de tu primer mensaje",
+"El diseño de tu perfil"
+],
+"e": "Si no contestan, revisa a quién escribes y el copy. Cada silencio es un dato."
+}
+]
+},
+{
+"course": "Venta en Blanco",
+"module": 14,
+"module_title": "Posicionamiento",
+"questions": [
+{
+"q": "¿Cuál es el objetivo de tus redes?",
+"o": [
+"Que los clientes vengan a ti",
+"Conseguir el máximo de seguidores",
+"Publicar a diario sin descanso",
+"Enseñar solo tus resultados"
+],
+"e": "Ir de «perseguir» a que el mercado te pida trabajar contigo."
+},
+{
+"q": "¿Cuál es la estructura de bio que funciona?",
+"o": [
+"Frase disruptiva, resultados y CTA",
+"Nombre, ciudad y estudios",
+"Frase motivadora, hobbies y web",
+"Empresa, cargo y fecha de inicio"
+],
+"e": "Frase disruptiva + «+X facturado como setter/closer» + «contáctame aquí abajo»."
+},
+{
+"q": "¿Qué debería darte más miedo, según el módulo?",
+"o": [
+"Convertirte en uno más",
+"Polarizar",
+"Perder seguidores",
+"Que alguien no te entienda"
+],
+"e": "No tengas miedo de polarizar. La gente conecta con lo que eres."
+},
+{
+"q": "Cuando empiezas, ¿qué proyecto te conviene?",
+"o": [
+"Con volumen, para hacer muchas llamadas",
+"Con la comisión más alta posible",
+"De ticket alto, de 6.000 € en adelante",
+"De un experto con mucha audiencia"
+],
+"e": "Primero aprende a vender transformaciones de 500 €. La experiencia se gana trabajando."
+},
+{
+"q": "¿Qué preguntas al final al entrar en un proyecto?",
+"o": [
+"La comisión",
+"Cómo trabajaron comerciales anteriores",
+"Cómo es el producto",
+"Cómo es el volumen"
+],
+"e": "Cuando alguien habla de comisiones en el primer mensaje, mala señal. Y firma siempre contrato."
+},
+{
+"q": "¿Qué demuestra una buena propuesta?",
+"o": [
+"Que entiendes su negocio mejor que el resto",
+"Que tienes una imagen muy cuidada y un buen diseño",
+"Que has hecho muchas ventas",
+"Que cobras bastante menos que los demás comerciales"
+],
+"e": "No es un PDF bonito: contexto, investigación y algo simple y accionable."
+}
+]
+},
+{
+"course": "Sistemas + IA aplicadas a las ventas",
+"module": 2,
+"module_title": "KPIs y CRMs",
+"questions": [
+{
+"q": "¿Qué KPI es el que el 90 % subestima?",
+"o": [
+"Show-up rate",
+"Close rate",
+"Ticket medio",
+"Presentación a cierre"
+],
+"e": "Un solo KPI mal optimizado puede costarte miles al mes."
+},
+{
+"q": "¿Cuál es tu trabajo con los KPIs?",
+"o": [
+"Encontrar el cuello de botella y romperlo",
+"Mejorar todos a la vez, cada semana",
+"Informar de ellos a tu jefe comercial",
+"Compararlos con los de tus compañeros"
+],
+"e": "Controlas los números, controlas el proceso, controlas tus ingresos."
+},
+{
+"q": "¿Qué cuatro cosas haces cada día en tu checklist?",
+"o": [
+"Pipelines, agenda, seguimientos y KPIs",
+"Contenido, prospección, llamadas y cierres",
+"Formación, roleplay, llamadas y análisis"
+],
+"e": "La mayoría pierde ventas por desorden, no por falta de habilidad."
+},
+{
+"q": "¿Cuántos KPIs eliges como foco en tu diagnóstico semanal?",
+"o": [
+"Uno solo",
+"Dos o tres",
+"Todos los que tengas",
+"Ninguno, mandan las sensaciones"
+],
+"e": "Nada de intentar mejorar todo a la vez."
+}
+]
+},
+{
+"course": "Sistemas + IA aplicadas a las ventas",
+"module": 3,
+"module_title": "Métricas",
+"questions": [
+{
+"q": "¿Qué pregunta te cambia la carrera?",
+"o": [
+"¿Qué dato me dice qué tengo que mejorar mañana?",
+"¿Cuánto he vendido este mes?",
+"¿Cómo me he sentido en la llamada?",
+"¿Quién de mi equipo está vendiendo más que yo este mes?"
+],
+"e": "Quien mejora con datos va mucho más rápido que quien vende a sensaciones."
+},
+{
+"q": "Presentas pero no cierras. ¿Qué te dicen tus ratios?",
+"o": [
+"Mala transición o pitch",
+"Prospección floja",
+"Mala cualificación",
+"Falta de contenido"
+],
+"e": "Pocas oportunidades: prospección. Mucho movimiento y pocos resultados: cualificación."
+},
+{
+"q": "Mucho movimiento y pocos resultados. ¿Dónde está el problema?",
+"o": [
+"En la cualificación",
+"En la transición",
+"En el precio",
+"En el silencio"
+],
+"e": "Los ratios no mienten: te dicen dónde poner el foco mañana mismo."
+},
+{
+"q": "¿Cuánto tiempo al día lleva rellenar tu Excel de métricas?",
+"o": [
+"5 minutos",
+"Media hora",
+"Una hora",
+"Se hace solo una vez por semana"
+],
+"e": "Te da una claridad brutal a cambio de muy poco tiempo."
+}
+]
+},
+{
+"course": "Sistemas + IA aplicadas a las ventas",
+"module": 6,
+"module_title": "Sistemas que te harán generar más",
+"questions": [
+{
+"q": "¿Grabar tus llamadas es opcional?",
+"o": [
+"No, es obligatorio",
+"Sí, solo en las importantes",
+"Sí, solo si lo pide el proyecto",
+"Solo durante el primer mes"
+],
+"e": "Un cierre de 5 cifras puede depender de revisar 30 segundos de tu propia llamada."
+},
+{
+"q": "¿Cuál es el proceso pre-llamada?",
+"o": [
+"Revisión rápida, mensaje de valor al lead y secuencia de emails",
+"Estudiar el nicho, preparar un pitch y bajar el precio",
+"Llamar al lead dos veces y enviar el contrato"
+],
+"e": "Entrar preparado te da autoridad inmediata."
+},
+{
+"q": "¿Cuánto dura la revisión rápida antes de la llamada?",
+"o": [
+"20-30 segundos",
+"10 minutos",
+"1 hora",
+"No hace falta"
+],
+"e": "Formulario, notas e información del setter."
+},
+{
+"q": "¿Qué preguntas respondes cada noche en tu sistema de mejora?",
+"o": [
+"Qué hice bien, qué fallé y qué corrijo mañana",
+"Cuánto vendí, a quién y a qué precio",
+"Qué publiqué, a quién escribí y quién respondió"
+],
+"e": "Sencillo y efectivo."
+},
+{
+"q": "¿Qué le pides a la IA al pasarle un fragmento de tu llamada?",
+"o": [
+"Que señale dónde pierdes autoridad o claridad",
+"Que te escriba el guion para la siguiente",
+"Que puntúe al cliente del 1 al 10",
+"Que resuma la oferta del proyecto"
+],
+"e": "En 3 o 4 iteraciones notas un salto en claridad, ritmo y autoridad."
+}
+]
+}
+]

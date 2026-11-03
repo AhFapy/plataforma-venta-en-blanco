@@ -25,6 +25,8 @@ export const POINT_KINDS: Record<string, string> = {
   asistencia: "Asistencia a directos",
   leccion: "Clases completadas",
   mision: "Misiones",
+  quiz: "Quizzes aprobados",
+  insignia: "Insignias",
   avance: "Avances diarios en tus objetivos",
   post: "Publicaciones",
   comentario: "Comentarios",

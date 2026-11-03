@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid, NotebookPen, Send, Quote, ClipboardList } from "lucide-react";
+import { Home, PlayCircle, MessagesSquare, CalendarDays, Trophy, Users, Shield, LayoutGrid, NotebookPen, Send, Quote, ClipboardList, Target } from "lucide-react";
 
 const items: { href: string; label: string; short?: string; icon: typeof Home }[] = [
   { href: "/", label: "Inicio", icon: Home },
@@ -21,10 +21,13 @@ function active(path: string, href: string) {
   return href === "/" ? path === "/" : path.startsWith(href);
 }
 
-export function SideNav({ staff, csm = false, unread = 0, community = 0 }: { staff: boolean; csm?: boolean; unread?: number; community?: number }) {
+const ENTRENA: (typeof items)[number] = { href: "/entrena", label: "Entrena", icon: Target };
+
+export function SideNav({ staff, csm = false, unread = 0, community = 0, entrena = false }: { staff: boolean; csm?: boolean; unread?: number; community?: number; entrena?: boolean }) {
   const path = usePathname();
+  const base = entrena ? items.flatMap((i) => (i.href === "/ranking" ? [ENTRENA, i] : [i])) : items;
   const all = [
-    ...items,
+    ...base,
     ...(csm ? [{ href: "/seguimiento", label: "Seguimiento", icon: ClipboardList }] : []),
     ...(staff ? [{ href: "/admin", label: "Admin", icon: Shield }] : []),
   ];
@@ -47,9 +50,12 @@ export function SideNav({ staff, csm = false, unread = 0, community = 0 }: { sta
   );
 }
 
-export function BottomNav({ community = 0 }: { community?: number }) {
+export function BottomNav({ community = 0, entrena = false }: { community?: number; entrena?: boolean }) {
   const path = usePathname();
-  const mobile = items.filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones" && i.href !== "/mensajes" && i.href !== "/testimonios");
+  // En móvil no caben 7: Entrena ocupa el sitio de Ranking y lo lleva dentro como pestaña
+  const mobile = items
+    .filter((i) => i.href !== "/miembros" && i.href !== "/aplicaciones" && i.href !== "/mensajes" && i.href !== "/testimonios")
+    .map((i) => (entrena && i.href === "/ranking" ? ENTRENA : i));
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-line bg-bg/95 backdrop-blur pb-[max(env(safe-area-inset-bottom),6px)]">
       <div className="grid grid-cols-6">
