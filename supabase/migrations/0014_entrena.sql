@@ -25,8 +25,7 @@ language sql stable set search_path = public as $$ select to_char(now() at time 
 -- ───────────── Quizzes: preguntas en borrador hasta abrir ─────────────
 alter table public.quiz_questions add column if not exists published boolean not null default true;
 
-drop policy if exists "quiz: miembros leen" on public.quiz_questions;
-create policy "quiz: miembros leen" on public.quiz_questions for select to authenticated
+alter policy "quiz: miembros leen" on public.quiz_questions
   using (is_member() and (published or is_staff()));
 
 -- ───────────── Contenido de los juegos ─────────────
@@ -664,7 +663,7 @@ language plpgsql security definer set search_path = public as $$
 begin
   if not exists (select 1 from profiles where id = auth.uid() and role = 'admin' and active) then raise exception 'solo admin'; end if;
   update app_settings set value = case when p_open then '1' else '0' end where key = 'entrena_abierto';
-  update quiz_questions set published = p_open;
+  update quiz_questions set published = p_open where published is distinct from p_open;
 end $$;
 
 -- Lo que sí se puede llamar desde la app
