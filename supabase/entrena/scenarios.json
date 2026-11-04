@@ -1,186 +1,1248 @@
 [
-{"slug":"laura-insegura","title":"Laura quiere y le da miedo","persona":"Laura, 34 años · administrativa · perfil inseguro","role":"Closer","difficulty":1,"position":1,
- "context":"Laura ha visto el vídeo de ventas y ha agendado. Hizo un curso online hace un año y lo dejó a la mitad.",
- "offer":"Academia de copywriting (marca ficticia): 4 meses, clases semanales y mentor. 3.000 €.",
- "start":"n1","nodes":{
- "n1":{"stage":"Conexión","lead":"Hola… ¿se me oye? Perdona, estoy un poco nerviosa, nunca he hecho una llamada de estas.","options":[
-  {"t":"Se te oye perfecto. Tranquila, esto es una conversación. ¿Desde dónde me hablas?","d":12,"next":"n2","fb":"Humano y sin prisa. Tu calma le baja la suya."},
-  {"t":"Sí. Para no perder tiempo, te cuento nuestro programa y luego me dices.","d":-15,"next":"n2","fb":"Le hablas del producto antes de conocerla. Nadie se abre ante un desconocido."},
-  {"t":"No te preocupes, somos la academia número uno, con cientos de casos de éxito.","d":-8,"next":"n2","fb":"Falsa autoridad. La autoridad que se fuerza genera rechazo."}]},
- "n2":{"stage":"Marco","lead":"Desde Valencia, en el sofá con el perro, jaja. Bueno, tú dirás.","options":[
-  {"t":"Genial. La idea es entender tu situación y ver si encajamos. Si tiene sentido, te cuento cómo trabajamos. Si no, te lo digo. ¿Te parece?","d":12,"next":"n3","fb":"Marco claro: tomas el control y evitas objeciones más tarde."},
-  {"t":"Pues lo primero: son 4 meses y cuesta 3.000 €, para que lo tengas en cuenta.","d":-15,"next":"n3","fb":"Sin contexto, cualquier precio es caro. Primero valor, después inversión."},
-  {"t":"Cuéntame lo que quieras y vamos viendo sobre la marcha.","d":-6,"next":"n3","fb":"Sin marco, la llamada se alarga y no la lideras tú."}]},
- "n3":{"stage":"Información","lead":"Sí, claro. Trabajo de administrativa. Me gustaría dedicarme a escribir, pero no sé…","options":[
-  {"t":"Así por curiosidad, ¿qué te hizo agendar justo ahora? ¿Qué has probado ya?","d":12,"next":"n4","fb":"«Así por curiosidad» quita fricción. Buscas el porqué, no un dato."},
-  {"t":"Es una salida genial. Con nosotros, en 3 meses estarás viviendo de ello.","d":-12,"next":"n4","fb":"Vendes antes de entender y prometes lo que no controlas."},
-  {"t":"¿Cuántas horas trabajas? ¿Cuánto ganas? ¿Tienes ahorros?","d":-6,"next":"n4","fb":"Es un diagnóstico, no un interrogatorio. Suena a formulario."}]},
- "n4":{"stage":"Montaña rusa","lead":"Hice un curso hace un año y lo dejé a la mitad. Me da miedo que vuelva a pasarme. Querría ganar unos 2.000 € al mes escribiendo y salir de la oficina.","options":[
-  {"t":"Te da miedo que vuelva a pasarte… (silencio). ¿Qué pasa si dentro de 6 meses sigues igual en la oficina?","d":15,"next":"n5","fb":"Espejo, silencio y coste de no actuar. Se da cuenta porque lo dice ella."},
-  {"t":"Eso no te va a pasar, este curso es muy distinto. Confía.","d":-8,"next":"n5","fb":"Le quitas importancia a su miedo. No te cree y deja de abrirse."},
-  {"t":"El que no arriesga no gana. Hay que echarle valor.","d":-10,"next":"n5","fb":"Frase de vendedor. Su miedo sigue ahí y ahora se siente juzgada."}]},
- "n5":{"stage":"Solución","lead":"Pues… me veo igual, quejándome, y con menos ganas. La verdad es que me pesa.","options":[
-  {"t":"Tiene sentido. Y estar aquí ya es un paso grande. Por lo que cuentas, no necesitas otro curso suelto: necesitas acompañamiento para no dejarlo a la mitad. Se hace así…","d":12,"next":"n6","fb":"Estabilizas y conectas la oferta con lo que ha dicho. Es un diagnóstico, no un pitch."},
-  {"t":"Exacto, por eso tienes que entrar hoy. No te puedes permitir seguir así.","d":-14,"next":"n6","fb":"Usas su dolor para empujar. Es presión, y un inseguro se frena más."},
-  {"t":"Te cuento: son 24 módulos, 48 lecciones, plantillas, un grupo y varios bonus…","d":-8,"next":"n6","fb":"Vendes características, no resultado. Ella te ha hablado de otra cosa."}]},
- "n6":{"stage":"Precio","lead":"Vale, eso es justo lo que me faltó. ¿Y cuánto es?","options":[
-  {"t":"La inversión es de 3.000 €. ¿Cómo te suena? (y te callas)","d":12,"next":"n7","fb":"Limpio y sin cambiar el tono. El silencio es parte de la frase."},
-  {"t":"Bueno, hay que tener en cuenta todo lo que incluye, por eso son 3.000 €, pero se amortiza…","d":-15,"next":"n7","fb":"Cuando justificas, pierdes poder. Ha notado tu cambio de chip."},
-  {"t":"Normalmente son 3.000 €, pero si entras hoy te lo dejo en 2.200 €.","d":-15,"next":"n7","fb":"Nadie te lo ha pedido. Bajas el valor y siembras desconfianza."}]},
- "n7":{"stage":"Objeción","lead":"(silencio) …Me lo tengo que pensar. No sé si voy a ser capaz.","options":[
-  {"t":"(Pausa) Te entiendo. Cuando dices que te lo tienes que pensar, ¿qué parte te preocupa realmente?","d":15,"next":"n8","fb":"Escucha, pausa, validación y pregunta de profundidad, en ese orden."},
-  {"t":"¿Qué hay que pensar? Si ya me has dicho que lo quieres.","d":-15,"next":"n8","fb":"Confrontación sin permiso. Con un perfil inseguro, se cierra."},
-  {"t":"Sin problema, piénsatelo y te llamo la semana que viene.","d":-6,"next":"n8","fb":"Te rindes sin saber qué le pasa. La objeción sigue sin resolver."}]},
- "n8":{"stage":"Cierre","lead":"Que lo deje a la mitad otra vez y haber tirado el dinero.","options":[
-  {"t":"Si no estuvieras preparada, no estarías aquí. No te pido que confíes en el resultado final, sino en el primer paso: tendrás a tu mentor cada semana. ¿Tendría sentido avanzar?","d":15,"next":"gate","fb":"Reencuadras con lo que te ha dado y mides la temperatura sin presión."},
-  {"t":"Tranquila, eso no va a pasar, te lo garantizo.","d":-10,"next":"gate","fb":"Una garantía sobre lo que depende de ella no le da seguridad."},
-  {"t":"Pues si te da miedo, quizá no estés lista para esto.","d":-15,"next":"gate","fb":"Esto no es antiventa, es un portazo a alguien que se estaba abriendo."}]},
- "gate":{"gate":80,"hi":"end_cierre","lo":"end_seguimiento"},
- "end_cierre":{"end":true,"result":"cierre","title":"Laura entra","body":"«Sí. Me da miedo, pero más miedo me da seguir igual.» Cuando le preguntas cómo le viene mejor hacer el pago, ya está decidida.","lesson":"Con un perfil inseguro no se cierra convenciendo: se cierra dando seguridad y pasos claros."},
- "end_seguimiento":{"end":true,"result":"seguimiento","title":"Laura te pide unos días","body":"«Gracias, de verdad. Déjame unos días.» No está enfadada, pero no la has acompañado hasta la decisión.","lesson":"Revisa dónde perdiste confianza: las rectificaciones al final no compensan los errores del principio."},
- "end_colgado":{"end":true,"result":"perdida","title":"Laura se va","body":"«Oye, me tengo que ir, luego te escribo.» No te escribe.","lesson":"Con un inseguro, la presión es lo único que no se perdona. Vuelve a intentarlo desde la calma."}
- }},
-{"slug":"marcos-dominante","title":"Marcos no tiene tiempo","persona":"Marcos, 45 años · dueño de una clínica · perfil dominante","role":"Closer","difficulty":2,"position":2,
- "context":"Marcos factura bien, pero su equipo comercial no convierte. Llega tarde y conduciendo el coche hacia otra reunión.",
- "offer":"Mentoría comercial para empresas (marca ficticia): 6 meses, formación al equipo y seguimiento. 6.000 €.",
- "start":"n1","nodes":{
- "n1":{"stage":"Conexión","lead":"Dime, que tengo diez minutos. ¿Qué me vas a contar?","options":[
-  {"t":"Marcos, te agradezco el rato. Si en diez minutos vemos que no encaja, te lo digo y ya está. ¿Cómo te va con el equipo comercial?","d":12,"next":"n2","fb":"Firme, breve y sin perseguir. Subes a su nivel sin perder el tuyo."},
-  {"t":"Claro, disculpa, si quieres lo movemos a otro día que estés mejor.","d":-14,"next":"n2","fb":"Suenas necesitado: él manda. Un dominante lo huele y te pierde el respeto."},
-  {"t":"Mira, para hacerlo bien necesito al menos 45 minutos de tu tiempo.","d":-8,"next":"n2","fb":"Te enfrentas a su marco antes de haberle dado un motivo para escucharte."}]},
- "n2":{"stage":"Marco","lead":"Mal. Tengo tres comerciales y cierran lo que quieren. Pero he probado consultores y son todos iguales, mucho PowerPoint.","options":[
-  {"t":"Entendido. Te hago unas preguntas para ver dónde está el fallo. Si no puedo ayudarte, te lo digo. ¿Vale?","d":12,"next":"n3","fb":"Marco sin fuerza y con cero necesidad. Eso es lo que respeta."},
-  {"t":"Nosotros no somos así, tenemos un método único que ya han usado cien empresas.","d":-10,"next":"n3","fb":"Te defiendes y justificas. Acabas de sonar exactamente igual a los anteriores."},
-  {"t":"¿Puedo saber qué consultores, por curiosidad? Es un sector pequeño.","d":-5,"next":"n3","fb":"Te sales del foco: él quiere resultados, no cotilleo del sector."}]},
- "n3":{"stage":"Información","lead":"Pregunta.","options":[
-  {"t":"¿Qué quieres que pase con ese equipo? ¿Y qué no quieres bajo ningún concepto?","d":14,"next":"n4","fb":"El truco de «¿Qué quieres?». Pocos se lo han planteado, y te dirá cómo venderle."},
-  {"t":"¿Qué CRM usáis, cuántos leads entran al mes y de qué fuentes vienen?","d":-4,"next":"n4","fb":"Datos que necesitarás luego. Ahora no llegas al motivo real."},
-  {"t":"¿Y tú cómo te sientes con esta situación, emocionalmente?","d":-8,"next":"n4","fb":"Canal equivocado: con este perfil suena a terapia. Habla de resultados."}]},
- "n4":{"stage":"Se dispersa","lead":"Quiero que cierren un 30 %. Y no quiero estar yo encima. Por cierto, ¿has visto lo que hace la competencia con la IA? Yo tengo una teoría… (sigue tres minutos)","options":[
-  {"t":"Marcos, podríamos estar hablando todo el día, pero si te parece volvemos a lo del 30 %, para no liarnos. ¿Vale?","d":12,"next":"n5","fb":"Recuperas el rumbo sin dureza. Si no lo haces tú, la llamada se pierde."},
-  {"t":"Claro, la IA es importantísima. De hecho, nosotros también la usamos en…","d":-10,"next":"n5","fb":"Has entrado en su juego. Ahora lidera él y faltan cinco minutos."},
-  {"t":"Te paro: me has dicho que tienes diez minutos y estás hablando tú todo el rato.","d":-12,"next":"n5","fb":"Tenías razón, pero así rompes la conexión. Autoridad no es dureza."}]},
- "n5":{"stage":"Montaña rusa","lead":"Vale. Sí. Ahora cierran un 12 %.","options":[
-  {"t":"(Tono firme) ¿Qué ocurre realmente si sigues así 3 meses más? (silencio)","d":15,"next":"n6","fb":"Estrategia rusa: tono, pausa, pregunta directa y silencio. Rompe su rigidez."},
-  {"t":"Un 12 % está muy por debajo de lo normal, estás perdiendo muchísimo dinero.","d":-6,"next":"n6","fb":"Se lo dices tú, así que lo discute. Debe llegar él a esa cuenta."},
-  {"t":"Tranquilo, con nosotros lo subimos seguro. Es muy habitual.","d":-10,"next":"n6","fb":"Prometes sin haber diagnosticado. Otro PowerPoint."}]},
- "n6":{"stage":"Solución","lead":"Pierdo unos 20.000 € al trimestre, y sigo yo apagando fuegos. Ya. ¿Qué propones?","options":[
-  {"t":"Tu problema no es de leads, es que nadie los dirige. Formamos a los tres y les hacemos seguimiento para que dejes de estar encima. Dos pasos.","d":14,"next":"n7","fb":"Es un diagnóstico, con sus palabras y corto. Hablas de resultados."},
-  {"t":"Te mando un dossier con todos los detalles y lo miras tranquilamente.","d":-12,"next":"n7","fb":"Le das la excusa para salir. Y le mandas otro PowerPoint."},
-  {"t":"Nuestro programa tiene seis pilares. El primero es la mentalidad comercial…","d":-8,"next":"n7","fb":"Se le acaba la paciencia. Con este perfil, resultado y nada más."}]},
- "n7":{"stage":"Precio","lead":"¿Cuánto?","options":[
-  {"t":"La inversión es de 6.000 €. (silencio)","d":12,"next":"n8","fb":"Una frase y a callar. Sin mover un milímetro el tono."},
-  {"t":"6.000 €, pero ojo, si lo piensas solo es un 30 % de lo que pierdes cada trimestre…","d":-10,"next":"n8","fb":"Después del precio habla el silencio, no tú. Justificar destruye tu autoridad."},
-  {"t":"Depende de lo que necesites, podemos adaptarlo. ¿Qué presupuesto tienes?","d":-14,"next":"n8","fb":"Se nota que no tienes certeza en tu precio. Te va a regatear."}]},
- "n8":{"stage":"Objeción","lead":"Es caro. Te doy 3.000 y vemos cómo va.","options":[
-  {"t":"No. El precio es el que es. Pero dime: ¿qué necesitas ver para tener claro que merece la pena?","d":14,"next":"gate","fb":"Autoridad sin agresividad, y vuelves al motivo real. No le has discutido nada."},
-  {"t":"Déjame hablarlo con mi jefe a ver qué puede hacer por ti.","d":-14,"next":"gate","fb":"Pierdes tu estatus y confirmas que el precio era aire."},
-  {"t":"3.000 € es poquísimo, con eso no se puede hacer nada serio.","d":-8,"next":"gate","fb":"Le has discutido en su terreno. Ahora quiere ganarte, no comprar."}]},
- "gate":{"gate":75,"hi":"end_cierre","lo":"end_seguimiento"},
- "end_cierre":{"end":true,"result":"cierre","title":"Marcos dice que sí","body":"«Vale. Mándame el contrato, y me llamas tú el lunes con el equipo.» Son 12 minutos de llamada.","lesson":"A un dominante se le gana con firmeza, brevedad y sin necesidad. Le dejas claro que decide él, sin perder tú el mando."},
- "end_seguimiento":{"end":true,"result":"seguimiento","title":"Marcos te dice «mándame algo»","body":"«Mándame algo por email y ya te digo.» Los dos sabéis lo que significa.","lesson":"Has tenido momentos buenos, pero un dominante no perdona dudas. Mira dónde cediste el control."},
- "end_colgado":{"end":true,"result":"perdida","title":"Marcos cuelga","body":"«Mira, tengo otra llamada. Hablamos.» Y corta.","lesson":"Si suenas necesitado, manda él. Y si te pones duro, te pierde. Busca el punto medio: calma y firmeza."}
- }},
-{"slug":"pedro-racional","title":"Pedro lo quiere todo en un Excel","persona":"Pedro, 38 años · ingeniero · perfil racional","role":"Closer","difficulty":2,"position":3,
- "context":"Pedro quiere dejar de ser asalariado y vender como closer. Ha comparado tres academias y tiene una tabla hecha.",
- "offer":"Programa de ventas (marca ficticia): 3 meses de formación y 3 de seguimiento, con bolsa de proyectos. 2.500 €.",
- "start":"n1","nodes":{
- "n1":{"stage":"Conexión","lead":"Buenas. Tengo aquí una tabla con otras dos formaciones. Antes de nada: ¿cuánto cuesta?","options":[
-  {"t":"Te lo digo sin problema, pero sin saber qué buscas, un precio no te dice nada. ¿Me cuentas qué estás comparando y por qué?","d":12,"next":"n2","fb":"Sin contexto cualquier precio es caro. Y le das una razón lógica, que es su idioma."},
-  {"t":"Son 2.500 €. ¿Cómo te queda eso frente a los otros?","d":-12,"next":"n2","fb":"Acabas de entrar en la columna de un Excel. A partir de aquí solo comparará precio."},
-  {"t":"Tranquilo, el dinero es lo de menos. Primero vamos a conocernos un rato.","d":-8,"next":"n2","fb":"Esquivar suena a truco. El racional se incomoda si nota que lo manejas."}]},
- "n2":{"stage":"Marco","lead":"Vale. Me lo he mirado bien. Soy ingeniero, trabajo en una consultora, llevo 11 años y estoy cansado. Quiero saber si esto es serio.","options":[
-  {"t":"Tiene sentido. Te propongo esto: te hago unas preguntas, luego te explico el proceso paso a paso, y al final vemos los números. Si no encaja, te lo digo. ¿Bien?","d":12,"next":"n3","fb":"Estructura clara antes de empezar. El racional se relaja cuando sabe cómo va a ir."},
-  {"t":"Muy serio, te lo aseguro. Mira, llevamos años y hay gente muy contenta.","d":-8,"next":"n3","fb":"Afirmaciones sin datos. A él no le dicen nada."},
-  {"t":"Ser serio también depende de ti, Pedro. Aquí no regalamos nada.","d":-10,"next":"n3","fb":"Le pones a prueba sin motivo y activas sus defensas."}]},
- "n3":{"stage":"Información","lead":"Pregunta lo que quieras.","options":[
-  {"t":"¿Qué objetivo concreto tienes, en cifra y en plazo? ¿Y por qué ese número?","d":14,"next":"n4","fb":"Un objetivo no es ganar dinero: es ganar 5.000 € al mes. Y saber por qué."},
-  {"t":"¿Te gustaría trabajar desde casa y tener más libertad?","d":-6,"next":"n4","fb":"Pregunta con la respuesta dentro. Debe darla él."},
-  {"t":"¿Qué es lo que más te preocupa, Pedro? Siéntete libre de abrirte.","d":-4,"next":"n4","fb":"Buena intención, mal canal. Con él, empieza por lo concreto."}]},
- "n4":{"stage":"Montaña rusa","lead":"Quiero 5.000 € al mes en 12 meses, para poder dejar la consultora. Tengo dos críos y no veo a ninguno.","options":[
-  {"t":"Dos críos y no ves a ninguno… ¿Cuánto tiempo más estás dispuesto a seguir así?","d":15,"next":"n5","fb":"Espejo. Hasta un racional decide con la emoción y luego lo justifica."},
-  {"t":"Con 5.000 € al mes, en 12 meses habrás ganado 60.000 €, fíjate.","d":-6,"next":"n5","fb":"Esa cuenta no le mueve. Te ha dado el motivo real y lo has dejado pasar."},
-  {"t":"Te entiendo, yo también tengo hijos, y mi historia fue parecida…","d":-5,"next":"n5","fb":"Empatizar está bien, pero le quitas el foco cuando estaba a punto de sentirlo."}]},
- "n5":{"stage":"Solución","lead":"(pausa) Ya. Pues no mucho más. Pero explícame cómo funciona, porque el de la tabla me promete lo mismo.","options":[
-  {"t":"Tres fases: formación, práctica con correcciones y entrada en proyectos. Lo que no te prometo es una cifra: depende de lo que apliques. Te enseño qué hacen los que llegan.","d":14,"next":"n6","fb":"Estructura, datos y verdad. Nada le da más seguridad a este perfil."},
-  {"t":"Es que no hay comparación posible, los otros venden humo y nosotros no.","d":-10,"next":"n6","fb":"Atacar a la competencia sin datos suena a exactamente lo contrario de serio."},
-  {"t":"Te garantizo que en 12 meses vas a estar en 5.000 € si lo haces.","d":-14,"next":"n6","fb":"Una promesa que no puedes cumplir. Si encima entra, tendrás un problema."}]},
- "n6":{"stage":"Objeción","lead":"Bien. ¿Y cómo sé que no es otro curso más? Dame un motivo racional.","options":[
-  {"t":"Te digo lo que comprobaría yo: el temario, el contrato y hablar con un alumno de tu perfil. ¿Qué dato te falta para decidir?","d":14,"next":"n7","fb":"Le das pruebas y control. No le pides que confíe en ti, le dejas comprobar."},
-  {"t":"Porque lo digo yo, que llevo cerradas muchas ventas con esto.","d":-12,"next":"n7","fb":"Eso es autoridad forzada, y él no compra autoridad, compra evidencia."},
-  {"t":"No hay motivo racional: las grandes decisiones son emocionales.","d":-6,"next":"n7","fb":"Puede que sea cierto, pero decírselo es perderle. Dale su lógica."}]},
- "n7":{"stage":"Cierre","lead":"Me falta hablar con un alumno. Si es lo que dices, adelante. ¿Precio final?","options":[
-  {"t":"Te paso con uno hoy mismo. La inversión es de 2.500 €. ¿Cómo te suena?","d":12,"next":"gate","fb":"Resuelves lo que pide y das el precio limpio, sin cambiar de chip."},
-  {"t":"Son 2.500 €, pero si decides ahora mismo te hago un precio mejor.","d":-14,"next":"gate","fb":"A un racional, un descuento inesperado le suena a que el precio era inventado."},
-  {"t":"No hace falta hablar con nadie. Decide ya y te lo aclaro todo después.","d":-14,"next":"gate","fb":"Te pide una prueba y le metes presión. Se acabó la confianza."}]},
- "gate":{"gate":75,"hi":"end_cierre","lo":"end_seguimiento"},
- "end_cierre":{"end":true,"result":"cierre","title":"Pedro firma tras hablar con el alumno","body":"Por la tarde, tras hablar con el alumno, te escribe: «Es lo que me dijiste. Mándame el contrato.» Ha tachado las otras dos columnas de su tabla.","lesson":"Un racional no compra el discurso, compra la claridad: estructura, datos y verdad. Pero lo que le mueve sigue siendo lo que siente."},
- "end_seguimiento":{"end":true,"result":"seguimiento","title":"Pedro sigue comparando","body":"«Gracias. Lo meto en la tabla y te digo algo.» Sigues siendo una columna.","lesson":"Le has dado motivos para comparar, no para decidir. Busca el momento en que se perdió la claridad."},
- "end_colgado":{"end":true,"result":"perdida","title":"Pedro lo tiene claro: no","body":"«Creo que no es para mí. Gracias.» Y te borra de la tabla.","lesson":"La presión con un racional es lo peor: decide cuando entiende el cómo y el porqué."}
- }},
-{"slug":"sonia-ley-de-mama","title":"Sonia quiere pedir un préstamo","persona":"Sonia, 29 años · en paro · perfil emocional","role":"Closer","difficulty":3,"position":4,
- "context":"Sonia se ha quedado sin trabajo hace poco y vio un vídeo que la ilusionó. Está muy animada. Quizá demasiado.",
- "offer":"Programa de ventas (marca ficticia): 6 meses con mentor. 2.500 €, con financiación disponible.",
- "start":"n1","nodes":{
- "n1":{"stage":"Conexión","lead":"¡Hola! Me hace muchísima ilusión hablar contigo. ¡He visto todos tus vídeos! Estoy convencidísima de que esto es lo mío.","options":[
-  {"t":"Qué bien, gracias. Me alegra sentirte así. Antes de nada, cuéntame: ¿cómo estás ahora mismo?","d":12,"next":"n2","fb":"Conectas sin dejarte llevar por su subidón. Y te interesas por ella."},
-  {"t":"¡Eso es, Sonia! Con esa actitud lo tienes hecho. Vamos directamente a ver el programa.","d":-12,"next":"n2","fb":"Te subes a su energía y te saltas todo lo que necesitas saber de ella."},
-  {"t":"Bueno, frena un poco. Esto no es tan fácil como parece en los vídeos.","d":-8,"next":"n2","fb":"Le cortas de golpe. Un perfil emocional conecta contigo o no te escucha."}]},
- "n2":{"stage":"Marco","lead":"Pues mira, me despidieron hace dos meses, y con esto voy a empezar de cero. ¡No puedo más con los currículums!","options":[
-  {"t":"Te entiendo. La idea es entender bien dónde estás y ver si esto te conviene. Y si no te conviene, te lo diré claro. ¿Te parece?","d":12,"next":"n3","fb":"Marco honesto. Dejas abierta la posibilidad del no desde el principio."},
-  {"t":"Perfecto, entonces tienes todo el tiempo del mundo para formarte. Es tu momento.","d":-8,"next":"n3","fb":"Conviertes su problema en un argumento de venta. Cuidado."},
-  {"t":"Vaya, lo siento. Bueno, ¿qué es lo que quieres conseguir con el programa?","d":0,"next":"n3","fb":"Aceptable, pero no marcas para qué es la llamada."}]},
- "n3":{"stage":"Información","lead":"Pues quiero tener ingresos ya. Es que necesito el dinero, voy justísima.","options":[
-  {"t":"Tiene sentido. Por curiosidad, ¿cómo estás cubriendo tus gastos ahora? ¿Con qué margen cuentas estos meses?","d":14,"next":"n4","fb":"Aquí está la información clave. Si no la preguntas, no puedes saber si le conviene."},
-  {"t":"Si necesitas ingresos, las ventas son lo más rápido que hay. En un mes estás facturando.","d":-15,"next":"n4","fb":"Una promesa falsa a alguien que va justa. Esto es lo que la Ley de Mamá prohíbe."},
-  {"t":"Tranquila, hay financiación. Eso se soluciona fácil.","d":-14,"next":"n4","fb":"Respondes al problema de cobrar tú, no al de vivir ella."}]},
- "n4":{"stage":"Lo que no te contaba","lead":"(baja la voz) Tengo 300 € en la cuenta y debo dos meses de alquiler. Pero he pensado que le puedo pedir un préstamo a mi madre, que está jubilada. ¿Tú qué harías?","options":[
-  {"t":"(Silencio) Gracias por contármelo. Hablemos de esto antes de nada. ¿Qué pasaría si le pides ese dinero y tardas más de lo que crees en ingresar?","d":15,"next":"n5","fb":"Silencio, respeto y una pregunta que le hace ver la realidad. No has vendido nada."},
-  {"t":"Es una inversión, seguro que tu madre lo entiende. En nada se lo devuelves.","d":-20,"next":"n5","fb":"¿Se lo venderías a tu madre? Estás haciendo lo contrario de lo que enseña esta formación."},
-  {"t":"Eso es decisión tuya. Yo solo te puedo decir que los que entran no se arrepienten.","d":-14,"next":"n5","fb":"Te lavas las manos con una frase de vendedor. Sabes que no le conviene."}]},
- "n5":{"stage":"La decisión","lead":"(voz temblando) Pues… sería un problema, la verdad. Pero es mi única salida. Yo quiero entrar, te lo digo en serio. Dime cómo lo pago.","options":[
-  {"t":"Sonia, ahora no te lo voy a vender. Primero cubre tus gastos con un trabajo, aunque no sea el ideal. Cuando estés estable, hablamos, y mientras te paso contenido gratis para empezar.","d":25,"next":"end_integridad","fb":"La venta más difícil es la que dejas pasar. No le venderías esto a tu madre."},
-  {"t":"Vale, es tu decisión y la respeto. Te mando el enlace con la financiación.","d":-25,"next":"end_venta_mala","fb":"Comisión hoy, reputación mañana. Y alguien que debe dos alquileres con una deuda más."},
-  {"t":"Te hago un descuento por tu situación: te lo dejo en 1.800 € si entras hoy.","d":-25,"next":"end_venta_mala","fb":"Sigues sin escuchar. No le sobra un descuento: le falta poder pagar el alquiler."}]},
- "end_integridad":{"end":true,"result":"integridad","title":"No has vendido, y has ganado","body":"Sonia llora un poco y te da las gracias. Tres meses después, ya con trabajo, te escribe: «Ahora sí. Y le he hablado de ti a dos amigas.»","lesson":"Ley de Mamá: no vendas a nadie lo que no venderías a tu madre. Tu reputación vale más que una comisión."},
- "end_venta_mala":{"end":true,"result":"venta_mala","title":"Has cerrado. Y has perdido","body":"Sonia paga la entrada con el dinero de su madre. Dos meses después sigue sin ingresar, reclama, y cuenta su historia en redes con tu nombre.","lesson":"Hay ventas que no se deben hacer. Vuelve a intentarlo y escucha lo que te ha contado en voz baja."},
- "end_colgado":{"end":true,"result":"perdida","title":"Sonia se apaga","body":"«Bueno… ya te digo algo.» Se ha ido con la misma angustia con la que vino, y encima sin que nadie la haya escuchado.","lesson":"Lo primero es escuchar. Esta llamada no iba de vender."}
- }},
-{"slug":"dani-setting-dm","title":"Dani te escribe por Instagram","persona":"Dani, 23 años · camarero · lead por DM","role":"Setter","difficulty":1,"position":5,
- "context":"Dani ha comentado «INFO» en un reel. Eres setter y hablas con él por mensajes. Tu objetivo no es vender: es agendar una llamada de calidad.",
- "offer":"Llamada con un closer de un programa de ventas (marca ficticia). El precio no se habla por chat.",
- "start":"n1","nodes":{
- "n1":{"stage":"Conexión","lead":"Buenas! He comentado info en el reel","options":[
-  {"t":"Ey Dani! Gracias por escribir. Por curiosidad, ¿de dónde te viene el interés por las ventas?","d":12,"next":"n2","fb":"Enlazas con un tema común y le das el balón. Es una conversación."},
-  {"t":"Hola! Te paso aquí la info del programa: dura 6 meses, cuesta 2.500 € y aquí está el enlace.","d":-16,"next":"n2","fb":"Vendes por chat antes de saber nada. Esto no es setting."},
-  {"t":"Hola Dani. ¿Cuánto dinero tienes disponible para invertir en tu formación?","d":-14,"next":"n2","fb":"Cualificar es necesario, pero aquí suena a tasador. Antes, conexión."}]},
- "n2":{"stage":"Situación","lead":"Pues llevo tiempo viendo vídeos. Estoy de camarero y no me veo así toda la vida jaja","options":[
-  {"t":"Jajaja te entiendo, yo también he currado de eso. ¿Cuánto llevas? ¿Compaginas con algo más?","d":12,"next":"n3","fb":"Empatía real y sigues tirando del hilo. Si no has pasado por eso, no lo digas."},
-  {"t":"Las ventas te cambian la vida, tío. Es el mejor sector que existe.","d":-6,"next":"n3","fb":"Hablas de ti y del sector. Él aún no te ha dicho nada que puedas usar."},
-  {"t":"Perfecto. Te dejo el enlace para que agendes con mi compañero.","d":-10,"next":"n3","fb":"Lanzas agenda sin objetivo ni dolor. No se presentará a la llamada."}]},
- "n3":{"stage":"Objetivo","lead":"3 años ya. Solo hostelería. Quiero ganar más, tener libertad, ya sabes","options":[
-  {"t":"Ganar más, ¿cuánto sería para ti? Dime una cifra con la que digas: esto ya me cambia la vida.","d":14,"next":"n4","fb":"Un objetivo no es ganar dinero. Sin una cifra, no hay nada con lo que dar valor."},
-  {"t":"Claro, todos queremos libertad. Pues mira, nosotros te ayudamos con eso.","d":-8,"next":"n4","fb":"Te conformas con lo genérico. Sin objetivo real, nunca comprarán."},
-  {"t":"Qué bien! Es muy buena mentalidad para empezar.","d":-4,"next":"n4","fb":"Simpático, pero no avanza nada. Y por DM el ritmo importa."}]},
- "n4":{"stage":"Visión y problema","lead":"Con 2.500 al mes ya estaría bien. Poder irme de casa de mis padres","options":[
-  {"t":"Te entiendo. ¿Y por qué crees que no lo has conseguido aún, qué te ha faltado? ¿Cómo te ves si dentro de 3 meses sigues igual?","d":14,"next":"n5","fb":"El problema sale del porqué. Y el dolor mueve más que el placer."},
-  {"t":"Eso con una buena formación es fácil, hay chavales ganando mucho más.","d":-8,"next":"n5","fb":"Le quitas valor a su objetivo y le das la solución sin que vea el problema."},
-  {"t":"Qué guay! ¿Y a dónde te irías a vivir?","d":-2,"next":"n5","fb":"Buen rollo, pero te vas del tema. Conecta con el porqué, no con el piso."}]},
- "n5":{"stage":"Solución","lead":"Pues no sé por dónde empezar la verdad. Y así seguiré, currando los findes hasta tarde","options":[
-  {"t":"Es normal, yo también estuve así. Mira, no sé si encajas, pero podemos hacer una llamada, nos cuentas y vemos si te podemos ayudar. ¿Cómo lo ves?","d":14,"next":"n6","fb":"Eres de igual a igual y la llamada es una oportunidad, no un favor."},
-  {"t":"Pues tienes que apuntarte sí o sí. Es la mejor decisión que vas a tomar.","d":-12,"next":"n6","fb":"Vendes tú en vez de dejar que la llamada lo haga. Presión por DM."},
-  {"t":"Te mando un PDF con nuestro temario y me dices qué te parece.","d":-8,"next":"n6","fb":"Le pones tarea y se enfría. Lo más probable es que no conteste."}]},
- "n6":{"stage":"Cualificación","lead":"Vale me interesa. Pero cuanto cuesta esto? Porque no tengo mucho dinero","options":[
-  {"t":"Te entiendo. Eso lo veréis en la llamada, depende de lo que necesites. Solo para orientarme: si te ayudara a llegar a esos 2.500 al mes, ¿cuánto estarías dispuesto a invertir?","d":14,"next":"n7","fb":"Le das el balón. No hace falta dar el precio por chat, y cualificas sin fricción."},
-  {"t":"2.500 € pero se puede pagar en cuotas, no te preocupes.","d":-12,"next":"n7","fb":"Precio por chat sin contexto: objeción segura y sin nadie para resolverla."},
-  {"t":"Si no tienes dinero, esto no es para ti. Mejor te escribo en unos meses.","d":-10,"next":"n7","fb":"Lo descartas sin indagar. Puede tratarse de prioridad o de miedo."}]},
- "n7":{"stage":"Agenda","lead":"Pues algo podría ahorrar si merece la pena. Vale!","options":[
-  {"t":"Genial. ¿Tienes un minuto para agendar ahora? La llamada es para ver tu caso. No lo hacemos con todo el mundo, pero veo que vas en serio. Confírmame cuando lo hagas.","d":14,"next":"gate","fb":"La vendes como oportunidad y te quedas con él hasta que lanza la agenda."},
-  {"t":"Perfecto, aquí tienes el enlace, cuando puedas lo miras.","d":-10,"next":"gate","fb":"Sin estar con él mientras agenda, se pierden muchísimos leads."},
-  {"t":"Te llamo yo cuando tenga hueco esta semana y lo vemos.","d":-6,"next":"gate","fb":"Queda en el aire. Se enfría y baja el show-up."}]},
- "gate":{"gate":70,"hi":"end_agenda","lo":"end_frio"},
- "end_agenda":{"end":true,"result":"agenda","title":"Dani agenda para mañana","body":"«Listo, ya está! Tengo ganas.» Llega a la llamada con un objetivo, un dolor y sabiendo a qué va.","lesson":"Agendar llamadas es fácil. Agendar llamadas de calidad es tu trabajo."},
- "end_frio":{"end":true,"result":"seguimiento","title":"Dani se enfría","body":"Visto a las 23:40. No contesta. Dos días después te responde «perdona, ahora ando liado».","lesson":"Si no percibe un problema o un cambio en su vida, no agendará o no se presentará. Saca más objetivo y dolor."},
- "end_colgado":{"end":true,"result":"perdida","title":"Te deja en visto","body":"Te deja en visto y deja de seguir la cuenta.","lesson":"Por chat, vender antes de conectar es la forma más rápida de perder un lead."}
- }}
+ {
+  "slug": "laura-insegura",
+  "title": "Laura quiere y le da miedo",
+  "persona": "Laura, 34 años · administrativa · perfil inseguro",
+  "role": "Closer",
+  "difficulty": 1,
+  "position": 1,
+  "context": "Laura ha visto el vídeo de ventas y ha agendado. Hizo un curso online hace un año y lo dejó a la mitad.",
+  "offer": "Academia de copywriting (marca ficticia): 4 meses, clases semanales y mentor. 3.000 €.",
+  "start": "n1",
+  "nodes": {
+   "n1": {
+    "stage": "Conexión",
+    "lead": "Hola… ¿se me oye? Perdona, estoy un poco nerviosa, nunca he hecho una llamada de estas.",
+    "options": [
+     {
+      "t": "Se te oye perfecto. Tranquila, esto es solo una conversación. ¿Desde dónde me hablas?",
+      "d": 8,
+      "next": "n2",
+      "fb": "Humano y sin prisa. Tu calma le baja la suya."
+     },
+     {
+      "t": "Se te oye bien. Gracias por sacar este rato. Cuéntame, ¿qué fue lo que viste de la academia?",
+      "d": 2,
+      "next": "n2",
+      "fb": "Correcto, pero vas al tema sin atender a que te ha dicho que está nerviosa."
+     },
+     {
+      "t": "Tranquila, es normal. Hablamos con muchísima gente cada semana y todas empiezan igual.",
+      "d": -5,
+      "next": "n2",
+      "fb": "Quieres calmarla y la conviertes en una más. Nadie se abre ante eso."
+     }
+    ]
+   },
+   "n2": {
+    "stage": "Marco",
+    "lead": "Desde Valencia, en el sofá con el perro, jaja. Bueno, tú dirás.",
+    "options": [
+     {
+      "t": "La idea es entender tu situación y ver si encajamos. Si tiene sentido, te cuento cómo trabajamos. Si no, te lo digo. ¿Te parece?",
+      "d": 8,
+      "next": "n3",
+      "fb": "Marco claro: lideras sin forzar y dejas abierta la posibilidad del no."
+     },
+     {
+      "t": "Pues te cuento primero cómo trabajamos, para que tengas el contexto, y si te encaja vemos los siguientes pasos. ¿Te parece?",
+      "d": -6,
+      "next": "n3",
+      "fb": "Parece un marco, pero te pone a hablar a ti antes de saber nada de ella."
+     },
+     {
+      "t": "Cuéntame un poco tu situación y vamos viendo sobre la marcha.",
+      "d": -2,
+      "next": "n3",
+      "fb": "Buena intención, pero sin marco la llamada no la lideras tú."
+     }
+    ]
+   },
+   "n3": {
+    "stage": "Información",
+    "lead": "Sí, claro. Trabajo de administrativa. Me gustaría dedicarme a escribir, pero no sé…",
+    "options": [
+     {
+      "t": "Así por curiosidad, ¿qué te hizo agendar justo ahora?",
+      "d": 8,
+      "next": "n4",
+      "fb": "«Así por curiosidad» quita fricción. Buscas el porqué de ahora, no un dato."
+     },
+     {
+      "t": "¿Y cuánto tiempo llevas de administrativa? ¿Lo compaginarías con esto?",
+      "d": 1,
+      "next": "n4",
+      "fb": "Datos que te hacen falta, pero acabas de pasar por encima de ese «pero no sé»."
+     },
+     {
+      "t": "Escribir es de lo que más demanda tiene ahora mismo. Vas muy bien encaminada.",
+      "d": -6,
+      "next": "n4",
+      "fb": "Le das la razón sin saber nada. Vendes antes de entender."
+     }
+    ]
+   },
+   "n4": {
+    "stage": "Información",
+    "lead": "Hice un curso hace un año y lo dejé a la mitad. Me da miedo que vuelva a pasarme.",
+    "options": [
+     {
+      "t": "¿Qué pasó para que lo dejaras a la mitad?",
+      "d": 10,
+      "next": "n5",
+      "fb": "Ahí está la información clave. Sin saber por qué lo dejó, cualquier oferta es a ciegas."
+     },
+     {
+      "t": "Te entiendo. Aquí tendrías un mentor cada semana, así que eso no te volvería a pasar.",
+      "d": -8,
+      "next": "n5",
+      "fb": "Respondes a un miedo que aún no entiendes, y además prometes."
+     },
+     {
+      "t": "¿Y qué te gustaría conseguir ahora, en concreto?",
+      "d": -1,
+      "next": "n5",
+      "fb": "Buena pregunta, mal momento: te acaba de dar la pista más importante de la llamada y la dejas pasar."
+     }
+    ]
+   },
+   "n5": {
+    "stage": "Dolor",
+    "lead": "Al principio iba bien. Luego tuve un mes malo en el trabajo, me retrasé, nadie me dijo nada… y me daba vergüenza volver.",
+    "options": [
+     {
+      "t": "Nadie te dijo nada… (silencio)",
+      "d": 10,
+      "next": "n6",
+      "fb": "Ley del espejo y silencio. Que se escuche y siga hablando ella."
+     },
+     {
+      "t": "Claro, ese es el problema de los cursos grabados. Nosotros te hacemos seguimiento.",
+      "d": -8,
+      "next": "n6",
+      "fb": "Ya estás vendiendo. Tenías delante el motivo real y lo has usado de argumento."
+     },
+     {
+      "t": "Le pasa a mucha gente. ¿Y crees que ahora sería diferente?",
+      "d": 1,
+      "next": "n6",
+      "fb": "Le quitas importancia con el «le pasa a mucha gente», aunque la pregunta no es mala."
+     }
+    ]
+   },
+   "n6": {
+    "stage": "Objetivo",
+    "lead": "Ya… es que soy de las que, si nadie me empuja, se lo deja. Mi madre siempre me lo dice.",
+    "options": [
+     {
+      "t": "Y si esta vez sale bien, ¿qué quieres tener dentro de un año, en concreto?",
+      "d": 8,
+      "next": "n7",
+      "fb": "Pasas del miedo al objetivo. Sin objetivo claro, luego todo parece caro."
+     },
+     {
+      "t": "Eso se trabaja, no te preocupes. Con disciplina todo el mundo puede.",
+      "d": -5,
+      "next": "n7",
+      "fb": "La tranquilizas sin base. No te ha pedido consuelo: te está contando quién cree que es."
+     },
+     {
+      "t": "Tu madre no tiene por qué tener razón, ¿eh? Tú puedes con esto.",
+      "d": -4,
+      "next": "n7",
+      "fb": "Suena bonito, pero no sabes si puede. Es animarla, no acompañarla."
+     }
+    ]
+   },
+   "n7": {
+    "stage": "Objetivo real",
+    "lead": "Pues ganar unos 2.000 € al mes escribiendo y salir de la oficina.",
+    "options": [
+     {
+      "t": "¿Por qué 2.000? ¿Qué cambiaría en tu vida con eso?",
+      "d": 9,
+      "next": "n8",
+      "fb": "Un objetivo es una cifra y un porqué. Sin el porqué, no hay nada por lo que invertir."
+     },
+     {
+      "t": "2.000 € es muy realista. Hay gente que llega en pocos meses.",
+      "d": -8,
+      "next": "n8",
+      "fb": "Prometes un resultado que depende de ella. Si entra por esto, lo reclamará."
+     },
+     {
+      "t": "¿Y cuántas horas a la semana podrías dedicarle?",
+      "d": 1,
+      "next": "n8",
+      "fb": "Lo necesitarás saber, pero antes tienes que saber qué hay detrás de esos 2.000 €."
+     }
+    ]
+   },
+   "n8": {
+    "stage": "Montaña rusa",
+    "lead": "Podría dejar de contar los días para el viernes. Llevo seis años ahí. Y podría mudarme con mi pareja.",
+    "options": [
+     {
+      "t": "Seis años contando los días… ¿Qué pasa si dentro de 6 meses sigues ahí?",
+      "d": 10,
+      "next": "n9",
+      "fb": "Espejo y coste de no actuar. Que la bajada la diga ella."
+     },
+     {
+      "t": "Imagínate mudándote con tu pareja, con otro trabajo. Eso es lo que te llevas de aquí.",
+      "d": -3,
+      "next": "n9",
+      "fb": "Has subido tú, no ella, y te has colado con la promesa de lo que se lleva."
+     },
+     {
+      "t": "Por eso hay que decidir ya: cada mes que pasa es otro mes perdido.",
+      "d": -10,
+      "next": "n9",
+      "fb": "Usas su dolor para empujar. Presión, y un inseguro se frena."
+     }
+    ]
+   },
+   "n9": {
+    "stage": "Estabilizar",
+    "lead": "Pues… me veo igual, quejándome, y con menos ganas. La verdad es que me pesa.",
+    "options": [
+     {
+      "t": "Tiene sentido. Me has dicho que sin nadie detrás lo dejas. ¿Qué necesitarías esta vez para no dejarlo?",
+      "d": 10,
+      "next": "n10",
+      "fb": "Estabilizas y haces que la solución la diga ella. La que se dice sola no hay que venderla."
+     },
+     {
+      "t": "Tiene sentido. Mira, te explico cómo funciona: son cuatro meses, con clases y un mentor.",
+      "d": -3,
+      "next": "n10",
+      "fb": "Saltas a la oferta justo cuando estaba a punto de decirte lo que necesita."
+     },
+     {
+      "t": "Y estar aquí ya es un paso grande. Lo que necesitas es acompañamiento, y se hace así…",
+      "d": 2,
+      "next": "n10",
+      "fb": "Mejor que un pitch, pero el diagnóstico se lo das tú en vez de dejar que lo diga."
+     }
+    ]
+   },
+   "n10": {
+    "stage": "Solución",
+    "lead": "Alguien que me siga de verdad. Que si me retraso, me escriba. Yo sola ya he visto que no.",
+    "options": [
+     {
+      "t": "Eso es justo lo que hacemos: tu mentor revisa tu avance cada semana y, si te retrasas, te escribe. ¿Te encaja?",
+      "d": 8,
+      "next": "n11",
+      "fb": "La oferta es sus palabras de vuelta. Es un diagnóstico, no un pitch."
+     },
+     {
+      "t": "Perfecto. Tenemos 24 módulos, plantillas, comunidad, sesiones en directo y un mentor.",
+      "d": -7,
+      "next": "n11",
+      "fb": "Ha pedido una cosa y le das un catálogo. Características, no resultado."
+     },
+     {
+      "t": "Pues aquí te vas a sentir como en casa. Nuestra comunidad es increíble.",
+      "d": -4,
+      "next": "n11",
+      "fb": "Bonito, pero no responde a lo que acaba de pedirte."
+     }
+    ]
+   },
+   "n11": {
+    "stage": "Precio",
+    "lead": "Vale, eso es justo lo que me faltó. ¿Y cuánto es?",
+    "options": [
+     {
+      "t": "La inversión es de 3.000 €. ¿Cómo te suena? (y te callas)",
+      "d": 8,
+      "next": "n12",
+      "fb": "Limpio y sin cambiar el tono. El silencio es parte de la frase."
+     },
+     {
+      "t": "Son 3.000 €, que con todo lo que incluye está muy por debajo de otras academias.",
+      "d": -8,
+      "next": "n12",
+      "fb": "Cuando justificas, pierdes poder. Ha notado tu cambio de chip."
+     },
+     {
+      "t": "Son 3.000 €, pero tranquila, que se puede fraccionar y casi no se nota.",
+      "d": -6,
+      "next": "n12",
+      "fb": "Respondes a una objeción que no ha hecho y le dices que el precio es un problema."
+     }
+    ]
+   },
+   "n12": {
+    "stage": "Objeción",
+    "lead": "(silencio) …Me lo tengo que pensar. No sé si voy a ser capaz.",
+    "options": [
+     {
+      "t": "(Pausa) Te entiendo. Cuando dices que no sabes si serás capaz, ¿qué es lo que te preocupa?",
+      "d": 10,
+      "next": "n13",
+      "fb": "Escucha, pausa, validación y pregunta de profundidad, en ese orden."
+     },
+     {
+      "t": "Es normal dudar. Pero me has dicho que no quieres seguir igual otros seis meses, ¿no?",
+      "d": -3,
+      "next": "n13",
+      "fb": "Reencuadras antes de saber qué le pasa. Le suena a que la estás cerrando."
+     },
+     {
+      "t": "Claro, piénsatelo con calma. ¿Hablamos el jueves y me dices?",
+      "d": -5,
+      "next": "n13",
+      "fb": "Sin presión, sí, pero te vas sin saber qué la frena."
+     }
+    ]
+   },
+   "n13": {
+    "stage": "Cierre",
+    "lead": "Que lo deje a la mitad otra vez y haber tirado el dinero.",
+    "options": [
+     {
+      "t": "La otra vez nadie te escribió al retrasarte. Esta sí. No te pido confiar en el resultado, solo en el primer paso. ¿Avanzamos?",
+      "d": 10,
+      "next": "gate",
+      "fb": "Reencuadras con lo que ella te dio y mides la temperatura sin presión."
+     },
+     {
+      "t": "Eso no te va a pasar. Te lo garantizo: aquí nadie se queda atrás.",
+      "d": -8,
+      "next": "gate",
+      "fb": "Una garantía sobre lo que depende de ella no le da seguridad: suena a vendedor."
+     },
+     {
+      "t": "Mira, si lo dejas será decisión tuya, pero aquí tienes el mentor, las clases y todo lo necesario para no hacerlo. Depende de ti.",
+      "d": -5,
+      "next": "gate",
+      "fb": "Es verdad, pero justo ahora suena a lavarte las manos."
+     }
+    ]
+   },
+   "gate": {
+    "gate": 80,
+    "hi": "end_cierre",
+    "lo": "end_seguimiento"
+   },
+   "end_cierre": {
+    "end": true,
+    "result": "cierre",
+    "title": "Laura entra",
+    "body": "«Sí. Me da miedo, pero más miedo me da seguir igual.» Cuando le preguntas cómo le viene mejor hacer el pago, ya está decidida.",
+    "lesson": "Con un perfil inseguro no se cierra convenciendo: se cierra entendiendo qué pasó la otra vez y dándole seguridad en el primer paso."
+   },
+   "end_seguimiento": {
+    "end": true,
+    "result": "seguimiento",
+    "title": "Laura te pide unos días",
+    "body": "«Gracias, de verdad. Déjame unos días.» No está enfadada, pero no la has acompañado hasta la decisión.",
+    "lesson": "Mira dónde respondiste en vez de preguntar. Cada vez que le das la solución, se la quitas."
+   },
+   "end_colgado": {
+    "end": true,
+    "result": "perdida",
+    "title": "Laura se va",
+    "body": "«Oye, me tengo que ir, luego te escribo.» No te escribe.",
+    "lesson": "Con un inseguro, la presión es lo único que no se perdona. Vuelve a intentarlo desde la calma."
+   }
+  }
+ },
+ {
+  "slug": "marcos-dominante",
+  "title": "Marcos no tiene tiempo",
+  "persona": "Marcos, 45 años · dueño de una clínica · perfil dominante",
+  "role": "Closer",
+  "difficulty": 2,
+  "position": 2,
+  "context": "Marcos factura bien, pero su equipo comercial no convierte. Llega tarde y conduciendo el coche hacia otra reunión.",
+  "offer": "Mentoría comercial para empresas (marca ficticia): 6 meses, formación al equipo y seguimiento. 6.000 €.",
+  "start": "n1",
+  "nodes": {
+   "n1": {
+    "stage": "Conexión",
+    "lead": "Dime, que tengo diez minutos. ¿Qué me vas a contar?",
+    "options": [
+     {
+      "t": "Nada todavía. Te hago un par de preguntas y en diez minutos sabemos si tiene sentido seguir. ¿Cómo va el equipo comercial?",
+      "d": 9,
+      "next": "n2",
+      "fb": "Firme, breve y sin perseguir. Subes a su nivel sin perder el tuyo."
+     },
+     {
+      "t": "Perfecto, voy al grano: ayudamos a clínicas como la tuya a duplicar la conversión de su equipo comercial en pocos meses.",
+      "d": -6,
+      "next": "n2",
+      "fb": "Te pide que le cuentes y se lo cuentas: acaba de ponerte en modo vendedor."
+     },
+     {
+      "t": "Sin problema, Marcos. Si te viene mejor, lo movemos a otro día con más calma.",
+      "d": -9,
+      "next": "n2",
+      "fb": "Educado, pero suenas necesitado. Un dominante lo huele."
+     }
+    ]
+   },
+   "n2": {
+    "stage": "Información",
+    "lead": "Mal. Tengo tres comerciales y cierran lo que quieren. He probado consultores y son todos iguales, mucho PowerPoint.",
+    "options": [
+     {
+      "t": "¿Qué hicieron esos consultores, y en qué momento viste que no servía?",
+      "d": 10,
+      "next": "n3",
+      "fb": "Te acaba de decir lo que no quiere comprar. Sácalo antes de abrir la boca."
+     },
+     {
+      "t": "Te entiendo. Por eso nosotros no damos teoría, trabajamos en llamadas reales con el equipo.",
+      "d": -6,
+      "next": "n3",
+      "fb": "Te defiendes de una acusación que no era para ti. Sonaste igual que los anteriores."
+     },
+     {
+      "t": "¿Cuánto cierran ahora mismo? ¿Tienes los datos por comercial?",
+      "d": 2,
+      "next": "n3",
+      "fb": "Pregunta útil y a su estilo, pero te saltas lo que acaba de darte."
+     }
+    ]
+   },
+   "n3": {
+    "stage": "Qué quiere",
+    "lead": "Vinieron dos días, dieron una charla y el lunes todos igual. Y yo pagué 4.000.",
+    "options": [
+     {
+      "t": "Todos igual el lunes… ¿Qué quieres que pase con ese equipo? ¿Y qué no quieres bajo ningún concepto?",
+      "d": 10,
+      "next": "n4",
+      "fb": "Espejo y «¿Qué quieres?». Pocos se lo han planteado, y te dirá cómo venderle."
+     },
+     {
+      "t": "Normal, una charla no cambia hábitos. Hace falta seguimiento, y eso es justo lo que hacemos.",
+      "d": -5,
+      "next": "n4",
+      "fb": "Tienes razón, pero estás presentando antes de tiempo."
+     },
+     {
+      "t": "¿Y por qué crees que siguieron igual?",
+      "d": 4,
+      "next": "n4",
+      "fb": "Buena pregunta, aunque le sacas la opinión y no lo que quiere."
+     }
+    ]
+   },
+   "n4": {
+    "stage": "Se dispersa",
+    "lead": "Quiero que cierren un 30 %. Y no quiero estar yo encima. Por cierto, ¿has visto lo que hace la competencia con la IA? Yo tengo una teoría… (sigue tres minutos)",
+    "options": [
+     {
+      "t": "Marcos, podríamos estar todo el día con esto, pero si te parece volvemos a lo del 30 %, para no liarnos. ¿Vale?",
+      "d": 9,
+      "next": "n5",
+      "fb": "Recuperas el rumbo sin dureza. Si no lo haces tú, la llamada se pierde."
+     },
+     {
+      "t": "Interesante. Nosotros también usamos IA con los equipos comerciales, y da muy buenos resultados. Luego te lo cuento con calma.",
+      "d": -6,
+      "next": "n5",
+      "fb": "Has entrado en su juego. Ahora lidera él y faltan cinco minutos."
+     },
+     {
+      "t": "Te corto, que vamos justos de tiempo. ¿Cuánto cierran hoy?",
+      "d": -3,
+      "next": "n5",
+      "fb": "Vuelves al tema, pero en seco. Autoridad no es dureza."
+     }
+    ]
+   },
+   "n5": {
+    "stage": "Coste",
+    "lead": "Vale. Sí. Ahora cierran un 12 %.",
+    "options": [
+     {
+      "t": "¿Y qué te está costando ese 12 % cada trimestre?",
+      "d": 9,
+      "next": "n6",
+      "fb": "Que haga él la cuenta. Lo que calcula él no lo discute."
+     },
+     {
+      "t": "Un 12 % es bajo para tu sector. Estás perdiendo bastante dinero.",
+      "d": -6,
+      "next": "n6",
+      "fb": "Se lo dices tú, así que lo discute. Debe llegar él."
+     },
+     {
+      "t": "Con un buen proceso, pasar a un 20 % en dos meses es bastante habitual.",
+      "d": -8,
+      "next": "n6",
+      "fb": "Prometes sin haber diagnosticado. Otro PowerPoint."
+     }
+    ]
+   },
+   "n6": {
+    "stage": "Montaña rusa",
+    "lead": "Unos 20.000 € al trimestre, a ojo. Y sigo yo apagando fuegos.",
+    "options": [
+     {
+      "t": "(Tono firme) ¿Qué ocurre realmente si sigues así 3 meses más? (silencio)",
+      "d": 10,
+      "next": "n7",
+      "fb": "Estrategia rusa: tono, pausa, pregunta directa y silencio. Rompe su rigidez."
+     },
+     {
+      "t": "Por eso te conviene empezar ya: cada trimestre son otros 20.000 € perdidos.",
+      "d": -6,
+      "next": "n7",
+      "fb": "Usas su número para empujar. Con él, eso activa el modo regateo."
+     },
+     {
+      "t": "20.000 €… ¿y a ti personalmente cómo te afecta?",
+      "d": 2,
+      "next": "n7",
+      "fb": "Buena idea, pero con este perfil suena blando. Mantén el foco en el resultado."
+     }
+    ]
+   },
+   "n7": {
+    "stage": "Solución",
+    "lead": "Pues otros 20.000, y yo sin poder abrir la segunda clínica. ¿Qué propones?",
+    "options": [
+     {
+      "t": "Tu problema no es de leads: nadie dirige a esos tres. Los formamos en llamadas reales y seguimos hasta que no tengas que estar encima.",
+      "d": 9,
+      "next": "n8",
+      "fb": "Diagnóstico con sus palabras, y corto. Le has quitado la charla y el PowerPoint."
+     },
+     {
+      "t": "Te preparo una propuesta detallada por email y la revisas con calma.",
+      "d": -9,
+      "next": "n8",
+      "fb": "Le das la excusa para salir, y encima otro PowerPoint."
+     },
+     {
+      "t": "Tenemos un programa de seis meses con seis pilares, de la mentalidad comercial al cierre. ¿Te cuento cómo funciona cada uno?",
+      "d": -6,
+      "next": "n8",
+      "fb": "Le pides permiso para hablar de características. Quiere resultados."
+     }
+    ]
+   },
+   "n8": {
+    "stage": "Precio",
+    "lead": "¿Cuánto?",
+    "options": [
+     {
+      "t": "La inversión es de 6.000 €. (silencio)",
+      "d": 9,
+      "next": "n9",
+      "fb": "Una frase y a callar, sin mover un milímetro el tono."
+     },
+     {
+      "t": "6.000 €, que es menos de lo que pierdes en un trimestre.",
+      "d": -6,
+      "next": "n9",
+      "fb": "Suena listo, pero es justificar. Después del precio habla el silencio, no tú."
+     },
+     {
+      "t": "Depende del alcance. ¿Con qué presupuesto te mueves?",
+      "d": -10,
+      "next": "n9",
+      "fb": "Se nota que no tienes certeza en tu precio. Te va a regatear."
+     }
+    ]
+   },
+   "n9": {
+    "stage": "Objeción",
+    "lead": "Es caro. Te doy 3.000 y vemos cómo va.",
+    "options": [
+     {
+      "t": "A mitad no trabajamos. ¿Qué tendrías que ver para tener claro que merece la pena?",
+      "d": 11,
+      "next": "gate",
+      "fb": "Autoridad sin agresividad, y vuelves al motivo real. No le has discutido nada."
+     },
+     {
+      "t": "Puedo hablarlo con mi responsable, a ver qué podemos hacer por ti.",
+      "d": -12,
+      "next": "gate",
+      "fb": "Pierdes tu estatus y confirmas que el precio era aire."
+     },
+     {
+      "t": "Te lo puedo dividir en dos pagos de 3.000 €, si te ayuda.",
+      "d": -3,
+      "next": "gate",
+      "fb": "Mejor que bajar el precio, pero aún no sabes si es por dinero o porque le quemaron los anteriores."
+     }
+    ]
+   },
+   "gate": {
+    "gate": 78,
+    "hi": "end_cierre",
+    "lo": "end_seguimiento"
+   },
+   "end_cierre": {
+    "end": true,
+    "result": "cierre",
+    "title": "Marcos dice que sí",
+    "body": "«Vale. Mándame el contrato, y me llamas tú el lunes con el equipo.» Son 12 minutos de llamada.",
+    "lesson": "A un dominante se le gana con firmeza, brevedad y sin necesidad. Decide él, sin que pierdas tú el mando."
+   },
+   "end_seguimiento": {
+    "end": true,
+    "result": "seguimiento",
+    "title": "Marcos te dice «mándame algo»",
+    "body": "«Mándame algo por email y ya te digo.» Los dos sabéis lo que significa.",
+    "lesson": "Has tenido momentos buenos, pero un dominante no perdona dudas. Mira dónde cediste el control."
+   },
+   "end_colgado": {
+    "end": true,
+    "result": "perdida",
+    "title": "Marcos cuelga",
+    "body": "«Mira, tengo otra llamada. Hablamos.» Y corta.",
+    "lesson": "Si suenas necesitado, manda él. Y si te pones duro, te pierde. Busca el punto medio: calma y firmeza."
+   }
+  }
+ },
+ {
+  "slug": "pedro-racional",
+  "title": "Pedro lo quiere todo en un Excel",
+  "persona": "Pedro, 38 años · ingeniero · perfil racional",
+  "role": "Closer",
+  "difficulty": 2,
+  "position": 3,
+  "context": "Pedro quiere dejar de ser asalariado y vender como closer. Ha comparado tres academias y tiene una tabla hecha.",
+  "offer": "Programa de ventas (marca ficticia): 3 meses de formación y 3 de seguimiento, con bolsa de proyectos. 2.500 €.",
+  "start": "n1",
+  "nodes": {
+   "n1": {
+    "stage": "Conexión",
+    "lead": "Buenas. Tengo aquí una tabla con otras dos formaciones. Antes de nada: ¿cuánto cuesta?",
+    "options": [
+     {
+      "t": "Te lo digo sin problema, pero sin saber qué buscas, un precio no te dice nada. ¿Qué estás comparando y por qué?",
+      "d": 9,
+      "next": "n2",
+      "fb": "Sin contexto cualquier precio es caro. Y le das una razón lógica, que es su idioma."
+     },
+     {
+      "t": "Son 2.500 €. ¿Cómo te queda frente a los otros dos?",
+      "d": -9,
+      "next": "n2",
+      "fb": "Acabas de entrar en la columna de un Excel. A partir de aquí solo comparará precio."
+     },
+     {
+      "t": "El precio lo vemos luego, tranquilo, que no es lo importante. Primero me gustaría conocerte un poco y saber qué buscas.",
+      "d": -6,
+      "next": "n2",
+      "fb": "Esquivar suena a truco. El racional se incomoda si nota que lo manejas."
+     }
+    ]
+   },
+   "n2": {
+    "stage": "Marco",
+    "lead": "Vale. Soy ingeniero, trabajo en una consultora, llevo 11 años y estoy cansado. Quiero saber si esto es serio.",
+    "options": [
+     {
+      "t": "Tiene sentido. Te pregunto, te explico el proceso paso a paso y al final vemos números. Si no encaja, te lo digo. ¿Bien?",
+      "d": 9,
+      "next": "n3",
+      "fb": "Estructura antes de empezar. El racional se relaja cuando sabe cómo va a ir."
+     },
+     {
+      "t": "Muy serio, te lo aseguro. Llevamos años en esto, trabajamos con contrato y tenemos a mucha gente contenta con el resultado.",
+      "d": -6,
+      "next": "n3",
+      "fb": "Afirmaciones sin datos. A él no le dicen nada."
+     },
+     {
+      "t": "¿Qué es para ti que sea serio? ¿Qué tendrías que ver?",
+      "d": 3,
+      "next": "n3",
+      "fb": "Buena pregunta, pero aún no has marcado cómo va la llamada."
+     }
+    ]
+   },
+   "n3": {
+    "stage": "Información",
+    "lead": "Pregunta lo que quieras.",
+    "options": [
+     {
+      "t": "¿Por qué cansado? ¿Qué ha pasado para mirar esto ahora?",
+      "d": 10,
+      "next": "n4",
+      "fb": "Te ha dejado caer el motivo y vas a por él. Con un racional, esto no suele salir solo."
+     },
+     {
+      "t": "¿Cuánto ganas ahora mismo en la consultora y cuánto te gustaría ganar?",
+      "d": 1,
+      "next": "n4",
+      "fb": "Dato útil y en su idioma, pero te quedas en la superficie."
+     },
+     {
+      "t": "¿Te gustaría trabajar desde casa y tener más libertad?",
+      "d": -5,
+      "next": "n4",
+      "fb": "Pregunta con la respuesta dentro. Debe darla él."
+     }
+    ]
+   },
+   "n4": {
+    "stage": "Dolor",
+    "lead": "Tengo dos críos y no veo a ninguno. Llego a las nueve. Mi mujer ya ni pregunta.",
+    "options": [
+     {
+      "t": "Mi mujer ya ni pregunta… (silencio)",
+      "d": 11,
+      "next": "n5",
+      "fb": "Espejo y silencio. Hasta un racional decide con la emoción y luego lo justifica."
+     },
+     {
+      "t": "Te entiendo, yo también tengo hijos, y mi historia fue parecida…",
+      "d": -4,
+      "next": "n5",
+      "fb": "Empatizar está bien, pero le quitas el foco cuando estaba a punto de sentirlo."
+     },
+     {
+      "t": "Claro. Con esto puedes organizarte tú las horas y estar con ellos.",
+      "d": -6,
+      "next": "n5",
+      "fb": "Le das la solución sin que haya terminado de ver el problema."
+     }
+    ]
+   },
+   "n5": {
+    "stage": "Objetivo",
+    "lead": "(pausa) Ya. Quiero 5.000 € al mes en 12 meses, para poder dejar la consultora.",
+    "options": [
+     {
+      "t": "¿Por qué no lo has hecho ya? ¿Qué te ha faltado en estos años?",
+      "d": 10,
+      "next": "n6",
+      "fb": "El problema sale del porqué. Y le obliga a responderse lo que aún no se ha dicho."
+     },
+     {
+      "t": "Con 5.000 al mes, en 12 meses habrás ganado 60.000 €. Fíjate.",
+      "d": -6,
+      "next": "n6",
+      "fb": "Esa cuenta no le mueve. Te ha dado el motivo real y lo has dejado pasar."
+     },
+     {
+      "t": "5.000 € es alcanzable, pero depende mucho de lo que apliques. ¿Cuántas horas tienes?",
+      "d": 2,
+      "next": "n6",
+      "fb": "Honesto, y necesitas el dato. Pero te adelantas al porqué."
+     }
+    ]
+   },
+   "n6": {
+    "stage": "Solución",
+    "lead": "No sabía por dónde empezar, y me da vértigo soltar un sueldo fijo sin datos. Explícame cómo funciona, porque el de la tabla me promete lo mismo.",
+    "options": [
+     {
+      "t": "Tres fases: formación, práctica corregida y proyectos, compaginando al principio. No te prometo una cifra: depende de lo que apliques.",
+      "d": 10,
+      "next": "n7",
+      "fb": "Estructura y verdad, y contestas al vértigo con un paso a paso. Nada le da más seguridad."
+     },
+     {
+      "t": "No hay comparación posible: los otros venden humo con vídeos grabados y nosotros tenemos resultados reales que te puedo enseñar.",
+      "d": -8,
+      "next": "n7",
+      "fb": "Atacar a la competencia sin datos suena a lo contrario de serio."
+     },
+     {
+      "t": "Si lo aplicas, en 12 meses estás en 5.000 € sin problema. Lo hemos visto muchas veces con perfiles técnicos como el tuyo.",
+      "d": -11,
+      "next": "n7",
+      "fb": "Una promesa que no puedes cumplir. Si encima entra, tendrás un problema."
+     }
+    ]
+   },
+   "n7": {
+    "stage": "Objeción",
+    "lead": "Bien. ¿Y cómo sé que no es otro curso más? Dame un motivo racional.",
+    "options": [
+     {
+      "t": "Comprueba tú: temario, contrato y hablar con un alumno de tu perfil. ¿Qué dato te falta para decidir?",
+      "d": 10,
+      "next": "n8",
+      "fb": "Le das pruebas y control. No le pides que confíe, le dejas comprobar."
+     },
+     {
+      "t": "Porque llevo muchas ventas cerradas con esto, y sé lo que funciona.",
+      "d": -9,
+      "next": "n8",
+      "fb": "Autoridad forzada. Él no compra autoridad, compra evidencia."
+     },
+     {
+      "t": "Te enseño ahora mismo varios casos de éxito de gente como tú, con sus números, y así lo ves con tus propios ojos.",
+      "d": 3,
+      "next": "n8",
+      "fb": "Útil, pero eliges tú la prueba. Él confía más en lo que comprueba por su cuenta."
+     }
+    ]
+   },
+   "n8": {
+    "stage": "Cierre",
+    "lead": "Me falta hablar con un alumno. Si es lo que dices, adelante. ¿Precio final?",
+    "options": [
+     {
+      "t": "Te paso con uno hoy mismo. La inversión es de 2.500 €. ¿Cómo te suena?",
+      "d": 9,
+      "next": "gate",
+      "fb": "Resuelves lo que pide y das el precio limpio, sin cambiar de chip."
+     },
+     {
+      "t": "Son 2.500 €, pero si decides ahora mismo te puedo hacer un precio mejor.",
+      "d": -11,
+      "next": "gate",
+      "fb": "A un racional, un descuento inesperado le suena a que el precio era inventado."
+     },
+     {
+      "t": "No hace falta hablar con nadie. Decide y te lo aclaro todo después.",
+      "d": -11,
+      "next": "gate",
+      "fb": "Te pide una prueba y le metes presión. Se acabó la confianza."
+     }
+    ]
+   },
+   "gate": {
+    "gate": 78,
+    "hi": "end_cierre",
+    "lo": "end_seguimiento"
+   },
+   "end_cierre": {
+    "end": true,
+    "result": "cierre",
+    "title": "Pedro firma tras hablar con el alumno",
+    "body": "Por la tarde te escribe: «Es lo que me dijiste. Mándame el contrato.» Ha tachado las otras dos columnas de su tabla.",
+    "lesson": "Un racional no compra el discurso, compra la claridad. Pero lo que le mueve sigue siendo lo que siente: ese «mi mujer ya ni pregunta»."
+   },
+   "end_seguimiento": {
+    "end": true,
+    "result": "seguimiento",
+    "title": "Pedro sigue comparando",
+    "body": "«Gracias. Lo meto en la tabla y te digo algo.» Sigues siendo una columna.",
+    "lesson": "Le has dado motivos para comparar, no para decidir. Busca dónde se te escapó el motivo real."
+   },
+   "end_colgado": {
+    "end": true,
+    "result": "perdida",
+    "title": "Pedro lo tiene claro: no",
+    "body": "«Creo que no es para mí. Gracias.» Y te borra de la tabla.",
+    "lesson": "La presión con un racional es lo peor: decide cuando entiende el cómo y el porqué."
+   }
+  }
+ },
+ {
+  "slug": "sonia-ley-de-mama",
+  "title": "Sonia quiere pedir un préstamo",
+  "persona": "Sonia, 29 años · en paro · perfil emocional",
+  "role": "Closer",
+  "difficulty": 3,
+  "position": 4,
+  "context": "Sonia se ha quedado sin trabajo hace poco y vio un vídeo que la ilusionó. Está muy animada. Quizá demasiado.",
+  "offer": "Programa de ventas (marca ficticia): 6 meses con mentor. 2.500 €, con financiación disponible.",
+  "start": "n1",
+  "nodes": {
+   "n1": {
+    "stage": "Conexión",
+    "lead": "¡Hola! Me hace muchísima ilusión hablar contigo. ¡He visto todos tus vídeos! Estoy convencidísima de que esto es lo mío.",
+    "options": [
+     {
+      "t": "Qué bien, gracias. Me alegra sentirte así. Antes de nada, cuéntame: ¿cómo estás ahora mismo?",
+      "d": 9,
+      "next": "n2",
+      "fb": "Conectas sin dejarte llevar por su subidón, y te interesas por ella."
+     },
+     {
+      "t": "¡Genial, Sonia! Esa energía es justo lo que hace falta. ¿Qué es lo que más te ha gustado?",
+      "d": -3,
+      "next": "n2",
+      "fb": "Es simpático, pero te subes a su energía y alimentas el subidón."
+     },
+     {
+      "t": "Me alegro, pero ojo, que esto no es tan fácil como parece en los vídeos.",
+      "d": -6,
+      "next": "n2",
+      "fb": "Le cortas de golpe. Un perfil emocional conecta contigo o no te escucha."
+     }
+    ]
+   },
+   "n2": {
+    "stage": "Marco",
+    "lead": "Pues mira, me despidieron hace dos meses, y con esto voy a empezar de cero. ¡No puedo más con los currículums!",
+    "options": [
+     {
+      "t": "Te entiendo. La idea es ver dónde estás y si esto te conviene. Y si no, te lo diré claro. ¿Te parece?",
+      "d": 9,
+      "next": "n3",
+      "fb": "Marco honesto. Dejas abierta la posibilidad del no desde el principio."
+     },
+     {
+      "t": "Entonces tienes todo el tiempo del mundo para formarte. Puede ser tu momento.",
+      "d": -8,
+      "next": "n3",
+      "fb": "Conviertes su problema en un argumento de venta. Cuidado."
+     },
+     {
+      "t": "Vaya, lo siento mucho, tiene que estar siendo duro. Cuéntame, ¿qué es lo que quieres conseguir con el programa?",
+      "d": 1,
+      "next": "n3",
+      "fb": "Aceptable, pero das por hecho el programa, y no marcas para qué es la llamada."
+     }
+    ]
+   },
+   "n3": {
+    "stage": "Información",
+    "lead": "Pues quiero tener ingresos ya. Es que necesito el dinero, voy justísima.",
+    "options": [
+     {
+      "t": "Tiene sentido. Por curiosidad, ¿cómo estás cubriendo tus gastos ahora? ¿Con qué margen cuentas estos meses?",
+      "d": 10,
+      "next": "n4",
+      "fb": "Es la información clave. Si no la preguntas, no puedes saber si le conviene."
+     },
+     {
+      "t": "Si necesitas ingresos, las ventas son lo más rápido que hay para generarlos. Con constancia, se puede empezar a cobrar pronto.",
+      "d": -10,
+      "next": "n4",
+      "fb": "Una promesa peligrosa a alguien que va justa. Esto es lo que la Ley de Mamá prohíbe."
+     },
+     {
+      "t": "Entiendo. ¿Y cuánto te gustaría ganar al mes para estar tranquila?",
+      "d": 0,
+      "next": "n4",
+      "fb": "Pregunta del manual, pero no es la que toca: te acaba de decir que va justísima."
+     }
+    ]
+   },
+   "n4": {
+    "stage": "Lo que no te contaba",
+    "lead": "(baja la voz) Tengo 300 € en la cuenta y debo dos meses de alquiler. Pero he pensado que le puedo pedir un préstamo a mi madre, que está jubilada. ¿Tú qué harías?",
+    "options": [
+     {
+      "t": "(Silencio) Gracias por contármelo. ¿Qué pasaría si le pides ese dinero y tardas más de lo que crees en ingresar?",
+      "d": 12,
+      "next": "n5",
+      "fb": "Silencio, respeto y una pregunta que le hace ver la realidad. No has vendido nada."
+     },
+     {
+      "t": "Es una inversión, y seguro que tu madre lo entiende. En nada se lo devuelves.",
+      "d": -20,
+      "next": "n5",
+      "fb": "¿Se lo venderías a tu madre? Estás haciendo lo contrario de lo que enseña esta formación."
+     },
+     {
+      "t": "Eso es decisión tuya. Yo solo puedo decirte que los que entran no se arrepienten.",
+      "d": -12,
+      "next": "n5",
+      "fb": "Te lavas las manos con una frase de vendedor, sabiendo que no le conviene."
+     }
+    ]
+   },
+   "n5": {
+    "stage": "La decisión",
+    "lead": "(voz temblando) Pues… sería un problema, la verdad. Pero es mi única salida. Yo quiero entrar, te lo digo en serio. Dime cómo lo pago.",
+    "options": [
+     {
+      "t": "Sonia, ahora no te lo voy a vender. Primero cubre tus gastos con un trabajo, aunque no sea el ideal. Cuando estés estable, hablamos.",
+      "d": 25,
+      "next": "end_integridad",
+      "fb": "La venta más difícil es la que dejas pasar. No le venderías esto a tu madre."
+     },
+     {
+      "t": "Si es lo que quieres, lo respeto: es tu vida y tu decisión. Hay financiación a 12 meses, así la cuota se queda baja y lo vas pagando.",
+      "d": -25,
+      "next": "end_venta_mala",
+      "fb": "Suena a respetar su decisión, pero sabes que no puede pagarlo: comisión hoy, problema mañana."
+     },
+     {
+      "t": "Por tu situación te hago un precio especial: 1.800 € si entras hoy, y así no tienes que pedirle tanto a tu madre.",
+      "d": -25,
+      "next": "end_venta_mala",
+      "fb": "Parece un detalle, pero no le sobra un descuento: le falta para el alquiler."
+     }
+    ]
+   },
+   "end_integridad": {
+    "end": true,
+    "result": "integridad",
+    "title": "No has vendido, y has ganado",
+    "body": "Sonia llora un poco y te da las gracias. Tres meses después, ya con trabajo, te escribe: «Ahora sí. Y le he hablado de ti a dos amigas.»",
+    "lesson": "Ley de Mamá: no vendas a nadie lo que no venderías a tu madre. Tu reputación vale más que una comisión."
+   },
+   "end_venta_mala": {
+    "end": true,
+    "result": "venta_mala",
+    "title": "Has cerrado. Y has perdido",
+    "body": "Sonia paga la entrada con el dinero de su madre. Dos meses después sigue sin ingresar, reclama, y cuenta su historia en redes con tu nombre.",
+    "lesson": "Hay ventas que no se deben hacer. Vuelve a intentarlo y escucha lo que te ha contado en voz baja."
+   },
+   "end_colgado": {
+    "end": true,
+    "result": "perdida",
+    "title": "Sonia se apaga",
+    "body": "«Bueno… ya te digo algo.» Se ha ido con la misma angustia con la que vino, y sin que nadie la haya escuchado.",
+    "lesson": "Lo primero es escuchar. Esta llamada no iba de vender."
+   }
+  }
+ },
+ {
+  "slug": "dani-setting-dm",
+  "title": "Dani te escribe por Instagram",
+  "persona": "Dani, 23 años · camarero · lead por DM",
+  "role": "Setter",
+  "difficulty": 1,
+  "position": 5,
+  "context": "Dani ha comentado «INFO» en un reel. Eres setter y hablas con él por mensajes. Tu objetivo no es vender: es agendar una llamada de calidad.",
+  "offer": "Llamada con un closer de un programa de ventas (marca ficticia). El precio no se habla por chat.",
+  "start": "n1",
+  "nodes": {
+   "n1": {
+    "stage": "Conexión",
+    "lead": "Buenas! He comentado info en el reel",
+    "options": [
+     {
+      "t": "Ey Dani! Gracias por escribir. Por curiosidad, ¿de dónde te viene el interés por las ventas?",
+      "d": 9,
+      "next": "n2",
+      "fb": "Enlazas con un tema común y le das el balón. Es una conversación."
+     },
+     {
+      "t": "Hola! Te paso la info: es un programa de 6 meses para aprender a vender. Aquí tienes el vídeo.",
+      "d": -8,
+      "next": "n2",
+      "fb": "Te pide info y se la das. Lógico, pero pierdes la conversación antes de empezarla."
+     },
+     {
+      "t": "Hola Dani! ¿Estás buscando formarte en ventas o ya estás trabajando en esto?",
+      "d": 4,
+      "next": "n2",
+      "fb": "Correcta y filtra, pero suena a formulario. Primero persona."
+     }
+    ]
+   },
+   "n2": {
+    "stage": "Situación",
+    "lead": "Pues llevo tiempo viendo vídeos. Estoy de camarero y no me veo así toda la vida jaja",
+    "options": [
+     {
+      "t": "Jajaja te entiendo. ¿Cuánto llevas? ¿Qué es lo que ya no aguantas?",
+      "d": 9,
+      "next": "n3",
+      "fb": "Sigues tirando del hilo. Ese «no me veo» es la puerta del problema."
+     },
+     {
+      "t": "Las ventas te cambian la vida, tío. Es el mejor sector que hay ahora.",
+      "d": -6,
+      "next": "n3",
+      "fb": "Hablas de ti y del sector. Él aún no te ha dicho nada que puedas usar."
+     },
+     {
+      "t": "Top. Si quieres te paso el enlace y lo ves con mi compañero en una llamada.",
+      "d": -9,
+      "next": "n3",
+      "fb": "Lanzas agenda sin objetivo ni dolor. No se presentará."
+     }
+    ]
+   },
+   "n3": {
+    "stage": "Objetivo",
+    "lead": "3 años ya. Solo hostelería. Quiero ganar más, tener libertad, ya sabes",
+    "options": [
+     {
+      "t": "Ganar más, ¿cuánto sería para ti? Dime una cifra con la que digas: esto ya me cambia la vida.",
+      "d": 10,
+      "next": "n4",
+      "fb": "Un objetivo no es ganar dinero. Sin cifra, no hay nada con lo que dar valor."
+     },
+     {
+      "t": "Claro, todos queremos libertad y ganar más. Pues mira, justo en eso ayudamos a mucha gente que empezó como tú.",
+      "d": -7,
+      "next": "n4",
+      "fb": "Te conformas con lo genérico. Sin objetivo real, nunca comprarán."
+     },
+     {
+      "t": "Te entiendo. ¿Y has probado algo ya, algún curso o algo?",
+      "d": 2,
+      "next": "n4",
+      "fb": "Pregunta útil, pero aún no tienes su objetivo."
+     }
+    ]
+   },
+   "n4": {
+    "stage": "Visión",
+    "lead": "Con 2.500 al mes ya estaría bien. Poder irme de casa de mis padres",
+    "options": [
+     {
+      "t": "¿Y qué te haría sentir irte de casa? ¿Cuánto llevas queriendo hacerlo?",
+      "d": 9,
+      "next": "n5",
+      "fb": "Relacionas el dinero con lo personal. Hay que indagar: el objetivo no sale con una pregunta."
+     },
+     {
+      "t": "Eso con buena formación es fácil, hay chavales ganando mucho más.",
+      "d": -8,
+      "next": "n5",
+      "fb": "Le quitas valor a su objetivo y le das la solución sin que vea el problema."
+     },
+     {
+      "t": "Qué guay! ¿Y a dónde te irías a vivir?",
+      "d": -1,
+      "next": "n5",
+      "fb": "Buen rollo, pero te vas del tema. Conecta con el porqué, no con el piso."
+     }
+    ]
+   },
+   "n5": {
+    "stage": "Problema",
+    "lead": "Pff desde los 20. Y tengo 23. Me sentiría por fin adulto jaja, aunque ya me da hasta vergüenza",
+    "options": [
+     {
+      "t": "Te entiendo. ¿Y por qué crees que no lo has conseguido aún? ¿Qué te ha faltado?",
+      "d": 10,
+      "next": "n6",
+      "fb": "El problema sale del porqué. Y el dolor mueve más que el placer."
+     },
+     {
+      "t": "Vergüenza ninguna, tío, que tienes 23 años. Tienes toda la vida por delante.",
+      "d": -3,
+      "next": "n6",
+      "fb": "Lo animas, pero le quitas el dolor que le iba a mover."
+     },
+     {
+      "t": "Pues mira, con una llamada lo vemos y te ayudamos a salir de ahí.",
+      "d": -6,
+      "next": "n6",
+      "fb": "Propones antes de que vea su problema. Pensará que te hace un favor a ti."
+     }
+    ]
+   },
+   "n6": {
+    "stage": "Coste",
+    "lead": "Pues no sé por dónde empezar la verdad. Y así seguiré, currando los findes hasta tarde",
+    "options": [
+     {
+      "t": "¿Y te ves igual dentro de 3 meses, currando los findes? ¿Estarías contento contigo?",
+      "d": 9,
+      "next": "n7",
+      "fb": "Posibilidad negativa con sus palabras. Sin esto no percibe que tenga que cambiar."
+     },
+     {
+      "t": "Normal, nadie te ha enseñado cómo hacerlo. Para eso estamos nosotros, para que no tengas que hacerlo solo.",
+      "d": -3,
+      "next": "n7",
+      "fb": "Empatizas, pero cierras el dolor antes de hora y sales tú de salvador."
+     },
+     {
+      "t": "Te mando un PDF con el temario y me dices qué te parece.",
+      "d": -7,
+      "next": "n7",
+      "fb": "Le pones tarea y se enfría. Lo más probable es que no conteste."
+     }
+    ]
+   },
+   "n7": {
+    "stage": "Solución",
+    "lead": "Nah. Ya sería el colmo. Pero no sé si esto es para mí",
+    "options": [
+     {
+      "t": "Yo tampoco lo sé aún, tío. Yo también estuve así. Podemos hacer una llamada, nos cuentas y vemos si podemos ayudarte. ¿Cómo lo ves?",
+      "d": 10,
+      "next": "n8",
+      "fb": "De igual a igual, y la llamada es una oportunidad, no un favor."
+     },
+     {
+      "t": "Claro que es para ti, se te ve con ganas. Es la mejor decisión que vas a tomar.",
+      "d": -9,
+      "next": "n8",
+      "fb": "Vendes tú en vez de dejar que la llamada lo haga. Presión por DM."
+     },
+     {
+      "t": "¿Por qué piensas que no sería para ti? Cuéntame, que me interesa saber qué te frena de verdad.",
+      "d": 3,
+      "next": "n8",
+      "fb": "Buena pregunta, pero por chat alarga la conversación justo cuando toca proponer."
+     }
+    ]
+   },
+   "n8": {
+    "stage": "Cualificación",
+    "lead": "Vale me interesa. Pero cuanto cuesta esto? Porque no tengo mucho dinero",
+    "options": [
+     {
+      "t": "Eso lo veis en la llamada. Para orientarme: si te ayudara a llegar a esos 2.500 al mes, ¿cuánto invertirías?",
+      "d": 10,
+      "next": "n9",
+      "fb": "Le das el balón. No hace falta el precio por chat, y cualificas sin fricción."
+     },
+     {
+      "t": "Son 2.500 €, pero se puede pagar en cuotas, no te preocupes, que casi todo el mundo lo hace así y apenas se nota.",
+      "d": -9,
+      "next": "n9",
+      "fb": "Precio por chat sin contexto: objeción segura y sin nadie para resolverla."
+     },
+     {
+      "t": "Si no tienes dinero igual no es el momento. Te escribo en unos meses.",
+      "d": -7,
+      "next": "n9",
+      "fb": "Lo descartas sin indagar. Puede ser prioridad o miedo."
+     }
+    ]
+   },
+   "n9": {
+    "stage": "Agenda",
+    "lead": "Pues algo podría ahorrar si merece la pena. Vale!",
+    "options": [
+     {
+      "t": "Genial. ¿Tienes un minuto para agendar ahora? Veo que vas en serio. Confírmame cuando lo hagas.",
+      "d": 10,
+      "next": "gate",
+      "fb": "La vendes como oportunidad y te quedas con él hasta que lanza la agenda."
+     },
+     {
+      "t": "Perfecto, aquí tienes el enlace del calendario. Cuando puedas lo miras con calma y eliges el hueco que mejor te venga.",
+      "d": -8,
+      "next": "gate",
+      "fb": "Sin estar con él mientras agenda, se pierden muchísimos leads."
+     },
+     {
+      "t": "Te llamo yo cuando tenga hueco esta semana y lo vemos.",
+      "d": -5,
+      "next": "gate",
+      "fb": "Queda en el aire. Se enfría y baja el show-up."
+     }
+    ]
+   },
+   "gate": {
+    "gate": 78,
+    "hi": "end_agenda",
+    "lo": "end_frio"
+   },
+   "end_agenda": {
+    "end": true,
+    "result": "agenda",
+    "title": "Dani agenda para mañana",
+    "body": "«Listo, ya está! Tengo ganas.» Llega a la llamada con un objetivo, un dolor y sabiendo a qué va.",
+    "lesson": "Agendar llamadas es fácil. Agendar llamadas de calidad es tu trabajo."
+   },
+   "end_frio": {
+    "end": true,
+    "result": "seguimiento",
+    "title": "Dani se enfría",
+    "body": "Visto a las 23:40. Dos días después te responde «perdona, ahora ando liado».",
+    "lesson": "Si no percibe un problema o un cambio en su vida, no agendará o no se presentará. Saca más objetivo y dolor."
+   },
+   "end_colgado": {
+    "end": true,
+    "result": "perdida",
+    "title": "Te deja en visto",
+    "body": "Te deja en visto y deja de seguir la cuenta.",
+    "lesson": "Por chat, vender antes de conectar es la forma más rápida de perder un lead."
+   }
+  }
+ }
 ]
