@@ -37,9 +37,9 @@
 "q": "¿Qué marca la diferencia respecto al miedo?",
 "o": [
 "Actuar igual, aunque estés temblando",
-"Esperar a sentirte preparado",
-"Eliminarlo antes de la primera llamada",
-"Evitar las llamadas difíciles al principio"
+"Esperar a sentirte preparado para actuar",
+"Prepararte tanto que deje de aparecer",
+"Empezar por las llamadas más fáciles"
 ],
 "e": "Todos tenemos miedo. La diferencia está en quién actúa igual a pesar de él."
 },
@@ -47,9 +47,9 @@
 "q": "¿Qué se espera de ti como alumno?",
 "o": [
 "Ser coherente con tu palabra y aplicar cada ejercicio",
-"Ver todos los vídeos antes de hacer ningún ejercicio",
-"Tener experiencia previa en ventas",
-"Conseguir un cliente durante la primera semana"
+"Ver todos los vídeos antes de hacer los ejercicios",
+"Avanzar en orden, sin saltarte ningún módulo",
+"Asistir a todas las clases en directo"
 ],
 "e": "Consciencia de tu punto de partida, coherencia, ejercicios y participación, no quedarte mirando."
 },
@@ -73,9 +73,9 @@
 "q": "¿De dónde viene el miedo a vender, según el módulo?",
 "o": [
 "De pensar que vendes por ti y no para ayudar",
-"De no conocer bien el producto",
-"De no tener suficiente experiencia",
-"De que los clientes no tienen dinero"
+"De no conocer bien el producto que vendes",
+"De haber recibido muchos noes al empezar",
+"De no tener aún suficiente experiencia"
 ],
 "e": "Cuando entiendes que vendes para ayudar, el miedo desaparece."
 },
@@ -83,9 +83,9 @@
 "q": "¿Cómo se rompen las creencias limitantes?",
 "o": [
 "Con acción repetida",
-"Con pensamiento positivo",
-"Con más formación antes de empezar",
-"Con motivación diaria"
+"Con pensamiento positivo diario",
+"Entendiendo de dónde vienen",
+"Con más formación antes de empezar"
 ],
 "e": "Las creencias no se rompen pensando. Se reemplazan con acción repetida."
 },
@@ -150,9 +150,9 @@
 "q": "¿Desde dónde trabaja el vendedor tradicional?",
 "o": [
 "Desde el miedo",
-"Desde el propósito",
-"Desde la escucha",
-"Desde el desapego"
+"Desde el ego",
+"Desde la técnica",
+"Desde el producto"
 ],
 "e": "Miedo a no cerrar, a no llegar a fin de mes y a no ser suficiente. Y el cliente lo nota."
 },
@@ -170,9 +170,9 @@
 "q": "¿Qué vende en realidad un setter?",
 "o": [
 "Atención",
-"Productos",
-"Precio",
-"Formación"
+"Llamadas",
+"Confianza",
+"Oportunidades"
 ],
 "e": "El setter no vende productos, vende atención: crea interés y filtra."
 },
@@ -227,7 +227,7 @@
 "o": [
 "Expansiva: palabras, energía, pausas y emociones",
 "Enfocada: atención total a sus palabras",
-"Interna: pensar bien lo que vas a decir"
+"Activa: repetir y tomar notas de todo"
 ],
 "e": "En la escucha expansiva no necesitas convencer, entiendes lo que necesita."
 },
@@ -265,8 +265,8 @@
 "q": "¿Qué enseña el ejemplo del cuchillo?",
 "o": [
 "No vendes el producto, vendes el resultado",
-"Hay que cortar las llamadas largas",
-"Un buen vendedor no necesita herramientas",
+"Una buena herramienta hay que saber usarla",
+"El cliente paga por la calidad del producto",
 "El precio se defiende con firmeza"
 ],
 "e": "Nadie compra el cuchillo, compra lo que le permite hacer."
@@ -292,9 +292,9 @@
 "q": "¿Qué provoca hablar rápido?",
 "o": [
 "Activa las defensas del cliente",
-"Transmite más autoridad",
-"Mantiene su atención por más tiempo",
-"Da sensación de profesionalidad"
+"Transmite energía y seguridad al cliente",
+"Mantiene su atención durante más tiempo",
+"Da sensación de que dominas el tema"
 ],
 "e": "Las pausas relajan su sistema nervioso. Habla como quien ya tiene la venta cerrada."
 },
@@ -302,9 +302,9 @@
 "q": "¿Qué haces antes de cuestionar a un cliente?",
 "o": [
 "Validar lo que ha dicho",
-"Corregir lo que ha entendido mal",
-"Recordarle tu experiencia",
-"Hacer un resumen de la oferta"
+"Aclarar lo que ha entendido mal",
+"Hacer un resumen de lo que ha dicho",
+"Dejar un silencio de un par de segundos"
 ],
 "e": "Primero validas, luego profundizas: «Tiene sentido lo que dices. Déjame preguntarte algo…»"
 },
@@ -359,8 +359,8 @@
 "q": "¿Qué rompe un buen silencio?",
 "o": [
 "El patrón del vendedor pesado",
-"La autoridad que traías al empezar",
-"El marco de la llamada",
+"La presión que siente el cliente",
+"El marco que habías marcado",
 "El interés que tenía el lead en ti"
 ],
 "e": "El cliente espera que intentes convencerlo. El silencio le demuestra que no persigues."
@@ -389,9 +389,9 @@
 "q": "Tu identidad atrae a un tipo de cliente y repele a otro. ¿Eso es…?",
 "o": [
 "Bueno: deja que tus valores elijan tu nicho",
-"Un problema que hay que corregir",
-"Algo a evitar para vender a todo el mundo",
-"Solo importante si haces contenido"
+"Un riesgo que hay que controlar al empezar",
+"Algo que debes neutralizar para vender más",
+"Solo relevante si haces contenido en redes"
 ],
 "e": "Cuanto más auténtico seas, más fuerte es la conexión."
 },
@@ -417,8 +417,8 @@
 "o": [
 "El cliente manda",
 "El cliente empatiza contigo",
-"Consigues un mejor precio",
-"Generas más urgencia"
+"Generas más urgencia",
+"Pierdes la venta seguro"
 ],
 "e": "Si suenas seguro, marcas tú el ritmo."
 },
@@ -467,7 +467,7 @@
 "Pierdes poder",
 "Generas confianza",
 "Aumentas el valor percibido",
-"Evitas objeciones"
+"Te adelantas a las objeciones"
 ],
 "e": "Tu autoridad: no justificas, no explicas de más, no pides permiso, no persigues."
 }
@@ -541,9 +541,9 @@
 "q": "¿Qué es el cierre?",
 "o": [
 "Guiar la decisión que él ya quiere tomar",
-"El momento de presionar con la urgencia",
-"Rebatir hasta conseguir el sí",
-"La técnica más importante de la llamada"
+"El momento de crear urgencia real",
+"El bloque donde se resuelven las objeciones",
+"La técnica que más hay que dominar"
 ],
 "e": "Es una consecuencia natural de todo lo anterior."
 },
@@ -551,9 +551,9 @@
 "q": "¿Qué define a la antiventa?",
 "o": [
 "No empujar, ni forzar, ni perseguir",
-"Decirle al lead que no compre nunca",
-"Vender sin hablar del precio",
-"Evitar los leads complicados"
+"Hablar lo mínimo durante toda la llamada",
+"Decirle al lead que quizá no es para él",
+"Filtrar a los leads antes de la llamada"
 ],
 "e": "El cliente se siente dueño de su decisión, y una decisión propia se paga con gusto."
 }
@@ -683,7 +683,7 @@
 "q": "¿Qué dos preguntas hace el truco de «¿Qué quieres?»",
 "o": [
 "¿Qué quieres? ¿Y qué NO quieres?",
-"¿Qué quieres? ¿Y cuánto puedes pagar?",
+"¿Qué quieres? ¿Y qué has probado ya?",
 "¿Qué quieres? ¿Y para cuándo lo necesitas?"
 ],
 "e": "La mayoría nunca se lo ha planteado, y al decirlo tú ya sabes cómo venderles."
@@ -702,9 +702,9 @@
 "q": "¿Con qué perfiles sirve especialmente la estrategia rusa?",
 "o": [
 "Con dominantes o fríos",
+"Con racionales",
 "Con inseguros",
-"Con emocionales",
-"Con recién llegados al sector"
+"Con emocionales"
 ],
 "e": "Control emocional, cambios de tono, pausas y confrontación suave para romper su rigidez."
 }
@@ -739,8 +739,8 @@
 "q": "El cliente no encaja y sabes que no le va a funcionar. ¿Qué haces?",
 "o": [
 "No lo cierras",
-"Lo cierras con un pago reducido",
-"Lo cierras y avisas al equipo de soporte",
+"Lo cierras con un pago más reducido",
+"Lo cierras y avisas a soporte para que lo cuide",
 "Se lo pasas a un compañero"
 ],
 "e": "«Te digo la verdad aunque pierda dinero hoy.»"
@@ -778,7 +778,7 @@
 "No, el problema es cuando se repiten en momentos importantes",
 "Sí, hay que eliminarlas todas para sonar profesional",
 "Solo si la llamada es de un ticket muy alto",
-"No, nunca restan autoridad"
+"No, nunca restan autoridad si suenas natural"
 ],
 "e": "Muchas veces muestran naturalidad. Pero repetitivas en lo importante te restan certeza."
 },
@@ -833,9 +833,9 @@
 "q": "¿Cuántas interacciones nuevas al día como mínimo?",
 "o": [
 "10-15",
-"2-3",
-"50-100",
-"Una, pero muy buena"
+"5-8",
+"20-30",
+"50"
 ],
 "e": "Responder historias, comentar, mandar audios y abrir conversaciones."
 },
@@ -873,9 +873,9 @@
 "q": "¿Qué debe hacer el mensaje que acompaña al vídeo?",
 "o": [
 "Abrir conversación, no cerrarla",
-"Cerrar la colaboración con un precio",
-"Contar toda tu trayectoria",
-"Enviar el contrato"
+"Dejar claro tu precio desde el principio",
+"Contar tu trayectoria y tus resultados",
+"Pedir directamente una llamada"
 ],
 "e": "Quién eres, por qué le escribes a él y qué has visto en su proyecto."
 },
@@ -883,9 +883,9 @@
 "q": "Te contestan pero no cierras. ¿Qué revisas?",
 "o": [
 "Tu llamada y tu seguimiento",
-"A quién escribes",
+"A quién le estás escribiendo",
 "El copy de tu primer mensaje",
-"El diseño de tu perfil"
+"Cómo tienes montado el perfil"
 ],
 "e": "Si no contestan, revisa a quién escribes y el copy. Cada silencio es un dato."
 }
@@ -920,9 +920,9 @@
 "q": "¿Qué debería darte más miedo, según el módulo?",
 "o": [
 "Convertirte en uno más",
-"Polarizar",
+"Polarizar demasiado",
 "Perder seguidores",
-"Que alguien no te entienda"
+"Que no te entiendan"
 ],
 "e": "No tengas miedo de polarizar. La gente conecta con lo que eres."
 },
@@ -940,9 +940,9 @@
 "q": "¿Qué preguntas al final al entrar en un proyecto?",
 "o": [
 "La comisión",
-"Cómo trabajaron comerciales anteriores",
-"Cómo es el producto",
-"Cómo es el volumen"
+"Cómo trabajaron los comerciales anteriores",
+"Cómo es el producto y a quién va dirigido",
+"Qué volumen de llamadas hay"
 ],
 "e": "Cuando alguien habla de comisiones en el primer mensaje, mala señal. Y firma siempre contrato."
 },
@@ -997,8 +997,8 @@
 "o": [
 "Uno solo",
 "Dos o tres",
-"Todos los que tengas",
-"Ninguno, mandan las sensaciones"
+"Los tres principales",
+"Todos los que tengas"
 ],
 "e": "Nada de intentar mejorar todo a la vez."
 }
@@ -1013,8 +1013,8 @@
 "q": "¿Qué pregunta te cambia la carrera?",
 "o": [
 "¿Qué dato me dice qué tengo que mejorar mañana?",
-"¿Cuánto he vendido este mes?",
-"¿Cómo me he sentido en la llamada?",
+"¿Qué ratio tengo este mes frente al anterior?",
+"¿Dónde estoy perdiendo más leads ahora mismo?",
 "¿Quién de mi equipo está vendiendo más que yo este mes?"
 ],
 "e": "Quien mejora con datos va mucho más rápido que quien vende a sensaciones."
@@ -1043,9 +1043,9 @@
 "q": "¿Cuánto tiempo al día lleva rellenar tu Excel de métricas?",
 "o": [
 "5 minutos",
+"15 minutos",
 "Media hora",
-"Una hora",
-"Se hace solo una vez por semana"
+"Se rellena una vez por semana"
 ],
 "e": "Te da una claridad brutal a cambio de muy poco tiempo."
 }
@@ -1060,9 +1060,9 @@
 "q": "¿Grabar tus llamadas es opcional?",
 "o": [
 "No, es obligatorio",
-"Sí, solo en las importantes",
-"Sí, solo si lo pide el proyecto",
-"Solo durante el primer mes"
+"Sí, se recomienda solo en las importantes",
+"Sí, depende de lo que pida cada proyecto",
+"Solo durante los primeros meses"
 ],
 "e": "Un cierre de 5 cifras puede depender de revisar 30 segundos de tu propia llamada."
 },
@@ -1079,9 +1079,9 @@
 "q": "¿Cuánto dura la revisión rápida antes de la llamada?",
 "o": [
 "20-30 segundos",
+"2-3 minutos",
 "10 minutos",
-"1 hora",
-"No hace falta"
+"Media hora"
 ],
 "e": "Formulario, notas e información del setter."
 },

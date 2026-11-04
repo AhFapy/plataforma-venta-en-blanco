@@ -10,7 +10,7 @@ export default async function Page() {
     <RapidGame best={data?.score ?? null} cfg={{
       game: "ping_pong", title: "Ping Pong de", emphasis: "Objeciones.", quote: true,
       intro: "Lo que te va a salvar en llamadas reales es la velocidad mental. Aquí la entrenas sin dinero en juego.",
-      rules: ["12 objeciones, 12 segundos cada una, 3 vidas.", "Elige la respuesta que validaría y preguntaría de verdad.", "Cuanto antes aciertes, más puntos. Encadena aciertos y multiplicas."],
+      rules: ["12 objeciones, 15 segundos cada una, 3 vidas.", "Elige la respuesta que validaría y preguntaría de verdad.", "Cuanto antes aciertes, más puntos. Encadena aciertos y multiplicas."],
     }} />
   );
 }

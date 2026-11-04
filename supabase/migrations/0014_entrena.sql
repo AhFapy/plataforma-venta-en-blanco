@@ -380,7 +380,7 @@ revoke all on function public.game_item_public(uuid, int) from public, anon, aut
 
 create or replace function public.game_start(p_game text) returns jsonb
 language plpgsql security definer set search_path = public as $$
-declare s game_sessions; picked uuid[]; lim int := case p_game when 'ping_pong' then 12 else 9 end;
+declare s game_sessions; picked uuid[]; lim int := case p_game when 'ping_pong' then 15 else 9 end;
 begin
   if not entrena_open() then raise exception 'sin acceso'; end if;
   if p_game not in ('ping_pong', 'lee') then raise exception 'juego no válido'; end if;
@@ -399,7 +399,7 @@ begin
   if not entrena_open() then raise exception 'sin acceso'; end if;
   select * into s from game_sessions where id = p_session and user_id = auth.uid() and finished_at is null for update;
   if not found then raise exception 'partida no disponible'; end if;
-  lim := case s.game when 'ping_pong' then 12 else 9 end;
+  lim := case s.game when 'ping_pong' then 15 else 9 end;
   total := array_length(s.items, 1);
   select * into it from game_items where id = s.items[s.idx + 1];
   elapsed := extract(epoch from now() - s.last_at);

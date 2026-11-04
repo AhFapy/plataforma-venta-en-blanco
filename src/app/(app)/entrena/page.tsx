@@ -55,7 +55,7 @@ export default async function EntrenaHub() {
       </section>
 
       <div className="grid sm:grid-cols-2 gap-3">
-        <GameCard href="/entrena/ping-pong" icon={<MessageCircleQuestion size={22} strokeWidth={1.8} />} title="Ping Pong de Objeciones" desc="Te sueltan una objeción y tienes 12 segundos. Sin frases de memoria." meta={best("ping_pong") !== null ? `Tu récord: ${best("ping_pong")}` : "3 vidas · 12 objeciones"} />
+        <GameCard href="/entrena/ping-pong" icon={<MessageCircleQuestion size={22} strokeWidth={1.8} />} title="Ping Pong de Objeciones" desc="Te sueltan una objeción y tienes 15 segundos. Sin frases de memoria." meta={best("ping_pong") !== null ? `Tu récord: ${best("ping_pong")}` : "3 vidas · 12 objeciones"} />
         <GameCard href="/entrena/simulador" icon={<PhoneCall size={22} strokeWidth={1.8} />} title="Simulador de llamada" desc="Cinco leads, cinco llamadas. Cada decisión cambia cómo acaba." meta={`${simWins} de ${simTotal ?? 0} superadas`} />
         <GameCard href="/entrena/lee" icon={<Eye size={22} strokeWidth={1.8} />} title="Lee al lead" desc="Perfil, canal, cerebro y objeción real. Detecta lo que no te dicen." meta={best("lee") !== null ? `Tu récord: ${best("lee")}` : "3 vidas · 9 segundos"} />
         <GameCard href="/entrena/ordena" icon={<ListOrdered size={22} strokeWidth={1.8} />} title="Ordena la llamada" desc="Cada fase en su sitio, de la conexión al cierre." meta={`${orderDone?.length ?? 0} de ${orderTotal ?? 0} niveles`} />

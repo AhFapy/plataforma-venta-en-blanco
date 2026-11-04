@@ -1,82 +1,758 @@
-{"ping_pong":[
-{"p":"«Es caro.»","o":["¿Qué te hace sentir eso?","En realidad es muy barato para lo que incluye.","Te puedo hacer un descuento si entras hoy."],"e":"Y silencio. El cliente se escucha y profundiza."},
-{"p":"«No tengo tiempo.»","o":["¿Qué te hace pensar que no vas a tener tiempo?","Solo son unas pocas horas a la semana, de verdad.","Todo el mundo saca tiempo si quiere."],"e":"El tiempo casi nunca es el problema. Se quita indagando."},
-{"p":"«Me lo tengo que pensar.»","o":["Tiene sentido. ¿Qué parte te preocupa realmente?","Claro, te llamo el lunes y lo vemos.","¿Qué hay que pensar? Ya me has dicho que lo quieres."],"e":"Valida y busca el motivo real. Detrás suele haber falta de confianza."},
-{"p":"«Lo tengo que hablar con mi pareja.»","o":["Entiendo. Si dependiera solo de ti, ¿qué harías?","Pásale el enlace y que lo vea tu pareja.","Es tu dinero, no necesitas su permiso."],"e":"La pareja suele esconder la objeción de confianza. Primero entiende dónde estás."},
-{"p":"«No sé si funcionará para mí.»","o":["¿Qué te hace dudar de que funcione para ti?","Funciona para todo el mundo, te lo aseguro.","Mira estos casos de éxito que te voy a enseñar."],"e":"La duda más profunda es en sí mismo. Primero que hable él."},
-{"p":"«Ahora no es buen momento.»","o":["¿Qué tendría que pasar para que sí lo fuera?","Nunca hay un buen momento, hay que tirarse.","Vale, ¿te escribo en unos meses?"],"e":"El momento ideal nunca llega, pero que lo vea él con una pregunta."},
-{"p":"«Se me va de presupuesto.»","o":["¿Te refieres a que no puedes o a que no sabes si vale la pena?","Tenemos pago en cuotas, ¿te mando el enlace?","Si lo quisieras de verdad, lo encontrarías."],"e":"Distingue emocional de económico antes de hablar de fórmulas de pago."},
-{"p":"«He probado muchas cosas y siempre acabo igual.»","o":["Siempre acabas igual… ¿qué crees que ha pasado esas veces?","Esas cosas eran malas, esto es muy diferente.","Lo que te faltaba es justo nuestro método."],"e":"Ley del espejo: que se escuche a sí mismo y encuentre el patrón."},
-{"p":"«Tengo miedo de volver a fallar.»","o":["Te entiendo. ¿Qué es lo que más miedo te da de fallar?","Tranquilo, aquí no vas a fallar.","Quien no arriesga no gana."],"e":"Valida la emoción y profundiza. No le prometas lo que no controlas."},
-{"p":"«¿Y por qué tan caro?»","o":["Caro respecto a qué, cuéntame.","Porque incluye muchísimas cosas, te las explico.","Porque somos los mejores del mercado."],"e":"En ventas, cuando justificas, pierdes poder. Pregunta."},
-{"p":"«Déjame mirar otras opciones.»","o":["Claro. ¿Qué es lo que necesitas ver en esas opciones?","Ninguna te va a dar lo que nosotros.","Si esperas, perderás la oferta de hoy."],"e":"Te dice qué le falta para decidir. Información pura."},
-{"p":"«Mándamelo por email y lo miro.»","o":["Sin problema. ¿Qué es lo que quieres mirar con calma?","Vale, te lo envío ahora mismo.","Por email no se entiende, mejor decidimos ahora."],"e":"Suele esconder una duda no resuelta. Búscala antes de enviar nada."},
-{"p":"«Estoy haciendo ya otro curso parecido.»","o":["¿Qué te está dando y qué sientes que te falta?","Ese curso no es comparable con esto.","Puedes compaginar los dos sin problema."],"e":"Sin atacar a la competencia: indaga dónde está su necesidad real."},
-{"p":"«No confío en estas cosas de internet.»","o":["Tiene sentido. ¿Has tenido alguna mala experiencia?","Somos una empresa totalmente seria.","Mira nuestras reseñas de Trustpilot."],"e":"La confianza en el proceso se recupera entendiendo qué pasó y explicando simple."},
-{"p":"«Tú lo que quieres es venderme.»","o":["Entiendo que lo veas así. ¿Qué te ha hecho sentirlo?","Para nada, yo solo quiero ayudarte.","Si no te interesa, lo dejamos aquí."],"e":"Falta confianza en ti: baja ritmo, valida y escucha de verdad."},
-{"p":"«Tengo que pedir un préstamo.»","o":["Antes de seguir, cuéntame cómo está tu situación ahora mismo.","Es una inversión, en 2 meses lo recuperas.","Muchos alumnos lo hacen, no pasa nada."],"e":"Ley de Mamá: comprueba si de verdad le conviene antes de nada."},
-{"p":"«Ya sé cómo vender, no necesito esto.»","o":["Genial. ¿Y por qué agendaste esta llamada?","Siempre se puede aprender algo más.","Seguro que hay cosas que no sabes."],"e":"Con perfiles dominantes, directo y breve. Te da la verdad con la pregunta."},
-{"p":"«No soy bueno hablando.»","o":["¿Qué te hace pensar eso? ¿Qué has visto en ti?","No hace falta, con un guion basta.","Eso se arregla con una clase."],"e":"Es una creencia limitante. Que la mire de frente."},
-{"p":"«Mi familia cree que esto es una estafa.»","o":["Es normal que se preocupen. ¿Y tú qué crees?","Dales nuestra web para que lo comprueben.","Tu familia no sabe de ventas."],"e":"Reencuadre sin atacar a los suyos: la decisión es suya y hay que saber qué piensa."},
-{"p":"«¿Me garantizas que voy a ganar dinero?»","o":["Te cuento cómo funciona. ¿Qué necesitarías ver para estar tranquilo?","Sí, si lo haces, ganarás seguro.","Nadie puede garantizar nada en esta vida."],"e":"Autoridad sin promesas falsas: seguridad y pasos claros."},
-{"p":"«Dime el precio y ya.»","o":["Te lo digo sin problema. Para que tenga sentido, ¿me cuentas qué buscas?","Son 3.000 €.","El precio es lo de menos, no te preocupes."],"e":"Sin contexto, cualquier precio es caro. Directo, pero mantén el marco."},
-{"p":"«Soy muy mayor para empezar con esto.»","o":["¿Mayor respecto a qué? ¿Qué te hace pensarlo?","Qué va, si eres muy joven.","Tenemos alumnos de todas las edades."],"e":"Pregunta primero. Muchas creencias ni siquiera son nuestras."},
-{"p":"«Estoy en paro, no es buen momento para gastar.»","o":["Te entiendo. ¿Cómo estás cubriendo tus gastos ahora mismo?","Justo por eso necesitas invertir ahora.","Con cuotas casi ni lo notas."],"e":"Puede ser objeción económica real. Entiéndelo antes de seguir: Ley de Mamá."},
-{"p":"«No quiero parecer un pesado vendiendo.»","o":["¿Qué significa para ti ser pesado?","Tranquilo, se aprende a no serlo.","Hay que insistir para vender, es normal."],"e":"No eres un pesado: guías hacia una buena decisión. Esa creencia se trabaja."},
-{"p":"«Tengo que consultar con mi socio.»","o":["Perfecto. ¿Qué crees que te va a preguntar tu socio?","Vale, ¿lo llamamos ahora los tres?","¿Pero quién decide en tu empresa?"],"e":"Así descubres las dudas que él mismo tiene."},
-{"p":"«Me lo dices porque te llevas comisión.»","o":["Sí, cobro comisión. Por eso solo me interesa si te encaja.","No, yo no gano nada con esto.","Eso es irrelevante para la oferta."],"e":"Verdad y antiventa. La confianza se gana sin esconder nada."},
-{"p":"«Vuelve a llamarme la semana que viene.»","o":["Claro. ¿Qué va a cambiar de aquí a la semana que viene?","Muy bien, te pongo una cita el martes.","La oferta solo vale para hoy."],"e":"Si no cambia nada, no es una cuestión de calendario."},
-{"p":"«No tengo experiencia en ventas.»","o":["¿Qué te preocupa exactamente de no tenerla?","Mucho mejor, así no traes vicios.","No pasa nada, todo se aprende."],"e":"Antes de tranquilizar, indaga. Muchas veces el miedo no es ese."},
-{"p":"«Estoy bien como estoy.»","o":["Me alegro. ¿Qué te hizo agendar la llamada, entonces?","Seguro que puedes estar mejor.","Pues no te quito más tiempo."],"e":"Si no le incomodara su situación, no estaría aquí. Que lo diga él."},
-{"p":"«Ya me han estafado antes.»","o":["Vaya. ¿Qué pasó? Cuéntame.","Nosotros jamás haríamos algo así.","Tranquilo, aquí tienes contrato firmado."],"e":"Confianza en el proceso: escucha primero, luego explica simple y sin hype."},
-{"p":"«Es que tengo dos hijos y no me da la vida.»","o":["Te entiendo. ¿Cómo es tu día a día ahora mismo?","Mucha gente con hijos lo consigue.","Se puede hacer de noche, cuando duerman."],"e":"Valida y profundiza. Si es de verdad, habrá que ver si encaja."},
-{"p":"«Yo eso lo puedo aprender gratis en YouTube.»","o":["Es verdad, hay mucho. ¿Y por qué aún no lo has conseguido?","En YouTube no está nada de esto.","Ya, pero aquí tienes acompañamiento."],"e":"Coherencia entre lo que quiere y lo que hace, sin discutir."},
-{"p":"«Déjame consultarlo con la almohada.»","o":["Claro. ¿Qué es lo que te gustaría tener más claro?","Mañana lo verás igual, decide ya.","Te llamo mañana a primera hora."],"e":"Encuentra la duda concreta. Sin tensión ni agresividad."},
-{"p":"«¿Por qué debería creerte a ti?»","o":["No me creas todavía. ¿Qué necesitas ver para tenerlo claro?","Porque llevo muchos años haciéndolo.","Mira, te enseño mis resultados."],"e":"Cero necesidad de validación. Eso es autoridad."},
-{"p":"«No estoy al 100 % seguro.»","o":["¿Qué te falta para llegar al 100 %?","Nadie lo está nunca, tírate.","¿Y del 1 al 10 cuánto quieres cambiar?"],"e":"Pregunta directa a la duda. Te dice lo que queda por resolver."},
-{"p":"«Yo no me fío de pagar por adelantado.»","o":["Tiene sentido. ¿Qué te daría tranquilidad para hacerlo?","Todos los programas se pagan por adelantado.","Te lo dejo en dos pagos, si quieres."],"e":"Entiende la emoción antes de negociar condiciones."}
+{
+"ping_pong": [
+{
+"p": "«Es caro.»",
+"o": [
+"¿Caro respecto a qué?",
+"¿Qué precio tenías en la cabeza antes de la llamada?",
+"¿Y si lo dividimos en cuotas, te encajaría mejor?"
 ],
-"lee":[
-{"t":"Perfil","p":"«Antes de nada, mándame los datos, el temario, qué garantías hay y cómo lo comparáis con otros.»","o":["Racional","Emocional","Dominante","Inseguro"],"e":"Compara todo y decide cuando entiende el cómo y el porqué."},
-{"t":"Perfil","p":"«Tengo cinco minutos. ¿Qué resultados dais y cuánto cuesta? Al grano.»","o":["Dominante","Racional","Emocional","Inseguro"],"e":"Directo, quiere control. Sé firme y breve, y déjale claro que él decide."},
-{"t":"Perfil","p":"«Es que me ha encantado cómo hablabas en el vídeo, siento que me entiendes.»","o":["Emocional","Racional","Dominante","Inseguro"],"e":"Si conecta contigo, compra. Conecta antes de explicar."},
-{"t":"Perfil","p":"«Parece que todo encaja, pero… no sé, ¿y si luego no soy capaz? ¿Tú qué harías?»","o":["Inseguro","Emocional","Dominante","Racional"],"e":"Parece que decide, pero se frena al final. Seguridad y pasos claros."},
-{"t":"Perfil","p":"«¿Cuál es exactamente el proceso, paso a paso? ¿Qué porcentaje de alumnos llega al resultado?»","o":["Racional","Inseguro","Emocional","Dominante"],"e":"Usa datos, procesos y garantías. No presiones."},
-{"t":"Perfil","p":"«Mira, yo tomo las decisiones rápido. Convénceme ahora o paso.»","o":["Dominante","Inseguro","Racional","Emocional"],"e":"Respeta la competencia y la claridad. No entres en su juego."},
-{"t":"Perfil","p":"«Mi madre siempre me decía que yo valía, y hablar contigo me la ha recordado.»","o":["Emocional","Inseguro","Racional","Dominante"],"e":"Decide por sensaciones. Historias, tono cálido y validación emocional."},
-{"t":"Perfil","p":"«Lo he estado mirando varias veces, y me da cosa equivocarme otra vez…»","o":["Inseguro","Racional","Emocional","Dominante"],"e":"Miedo a equivocarse. Autoridad suave y acompañamiento."},
-{"t":"Canal","p":"«No me lo imagino todavía. ¿Puedes mostrarme cómo se ve por dentro?»","o":["Visual","Auditivo","Kinestésico"],"e":"Ver, imaginar, mostrar: piensa en imágenes."},
-{"t":"Canal","p":"«Eso que me dices me suena bien. Cuéntame cómo sonaría una llamada.»","o":["Auditivo","Visual","Kinestésico"],"e":"Escuchar, sonar: piensa en sonidos y palabras."},
-{"t":"Canal","p":"«No sé, necesito sentirlo. Me da buena sensación, pero quiero notarlo claro.»","o":["Kinestésico","Visual","Auditivo"],"e":"Sentir, transmitir: piensa en sensaciones y emociones."},
-{"t":"Canal","p":"«Ya veo por dónde vas, se ve clarísimo cómo lo planteas.»","o":["Visual","Kinestésico","Auditivo"],"e":"Háblale en imágenes: «imagínate», «te voy a enseñar»."},
-{"t":"Canal","p":"«Me ha dicho un amigo que lo escuchó y le sonó muy convincente.»","o":["Auditivo","Kinestésico","Visual"],"e":"Usa su idioma: «te cuento», «¿cómo te suena?»."},
-{"t":"Canal","p":"«Es que me pesa mucho esta situación, la llevo encima todo el día.»","o":["Kinestésico","Auditivo","Visual"],"e":"Le pesa, la lleva encima: sensaciones físicas."},
-{"t":"Cerebro","p":"El lead está tenso, habla poco y desconfía de ti en el minuto 1. ¿Qué cerebro está pidiendo algo?","o":["Reptiliano","Límbico","Neocórtex"],"e":"Si aquí no hay seguridad, no hay venta. Tono calmado y presencia estable."},
-{"t":"Cerebro","p":"«Ya, pero ¿cómo justifico este gasto? Explícame los números.»","o":["Neocórtex","Reptiliano","Límbico"],"e":"Justifica la compra: estructura, precio, garantías y pasos."},
-{"t":"Cerebro","p":"El lead se abre y te cuenta algo personal porque siente que lo entiendes. ¿Dónde estás?","o":["Límbico","Neocórtex","Reptiliano"],"e":"Decide por sensaciones. Empatía, historias y escucha real."},
-{"t":"Cerebro","p":"«¿Y si me lo quito todo y luego no funciona? Me da miedo arriesgarme.»","o":["Reptiliano","Neocórtex","Límbico"],"e":"Miedo y seguridad: instinto primario, evitar el peligro."},
-{"t":"Cerebro","p":"«¿Cuántas sesiones son, cuánto dura y qué pasa si no llego?»","o":["Neocórtex","Límbico","Reptiliano"],"e":"Le estás dando claridad: datos, proceso y estructura."},
-{"t":"Objeción real","p":"«Es caro.»","o":["Falta de claridad o miedo a fallar","Falta real de dinero","Falta de tiempo"],"e":"Rara vez es económico. Casi siempre es prioridad y decisión."},
-{"t":"Objeción real","p":"«No tengo tiempo.»","o":["Prioridades","Falta de confianza en ti","Falta de dinero"],"e":"Prioridades mal colocadas y no haber profundizado al principio."},
-{"t":"Objeción real","p":"«Me lo pienso.»","o":["Falta de confianza","Falta de tiempo","Falta de información técnica"],"e":"Nunca aparece como «no confío en ti»."},
-{"t":"Objeción real","p":"«No es el momento.»","o":["Falta de confianza","Falta de dinero","Falta de interés total"],"e":"Se esconde detrás del calendario. Hay que ir a buscarla."},
-{"t":"Objeción real","p":"«Me gustaría, pero se me va de presupuesto.»","o":["No ve suficiente valor o tiene miedo","Seguro que no tiene un euro","No le interesa el programa"],"e":"En el 90 % de los casos no es un tema de dinero."},
-{"t":"Confianza","p":"«Has sonado muy comercial todo el rato, la verdad.»","o":["En ti","En el proceso","En sí mismo"],"e":"No conectaste o sonaste vendedor. Baja ritmo, valida y escucha."},
-{"t":"Confianza","p":"«No termino de entender cómo funciona, y ya me pasó con otra academia.»","o":["En el proceso","En ti","En sí mismo"],"e":"Malas experiencias o no lo ha entendido. Explícalo simple, sin hype."},
-{"t":"Confianza","p":"«Es que otros pueden, pero yo no sé si valgo para esto.»","o":["En sí mismo","En el proceso","En ti"],"e":"La más profunda. Refléjale que ya está dando un paso grande."},
-{"t":"Escucha","p":"Mientras te habla, piensas: «¿qué digo ahora? ¿lo estaré haciendo bien?»","o":["Interna","Enfocada","Expansiva"],"e":"Estás más pendiente de ti que del cliente, y lo nota."},
-{"t":"Escucha","p":"Oyes exactamente lo que dice, pero no notas el tono con el que lo dice.","o":["Enfocada","Interna","Expansiva"],"e":"Entiendes el mensaje lógico, se te escapa el emocional."},
-{"t":"Escucha","p":"Notas su pausa, su energía baja y que evita hablar de su pareja.","o":["Expansiva","Enfocada","Interna"],"e":"Aquí no necesitas convencer: entiendes lo que necesita."},
-{"t":"Señal","p":"Baja el tono, asiente sin pensar y copia tu postura.","o":["Está en confianza","Está nervioso","Quiere colgar"],"e":"Su cuerpo no miente nunca."},
-{"t":"Señal","p":"Se queda en silencio tras escuchar tu resumen, procesando.","o":["Buena señal: lo está validando","Se ha perdido: repítelo todo","Quiere irse: cierra ya"],"e":"Déjale el espacio. También es señal: te da información que no había dicho."},
-{"t":"Rol","p":"Filtra, conecta y clasifica leads por DM. Convierte desconocidos en interesados.","o":["Setter","Triager","Closer"],"e":"La primera línea: genera movimiento."},
-{"t":"Rol","p":"Llama antes de la cita para confirmar asistencia y comprobar que está cualificado.","o":["Triager","Setter","Closer"],"e":"Protege el tiempo del closer y sube el show-up."},
-{"t":"Rol","p":"Tiene la llamada con el interesado. Profundiza en dolor, deseo y contexto.","o":["Closer","Setter","Triager"],"e":"Domina la psicología, los silencios y el control emocional."},
-{"t":"Métrica","p":"Tienes pocas oportunidades cada semana.","o":["Prospección floja","Mal pitch","Mala cualificación"],"e":"Los ratios te dicen dónde poner el foco mañana."},
-{"t":"Métrica","p":"Presentas mucho, pero apenas cierras.","o":["Mala transición o pitch","Prospección floja","Ticket medio bajo"],"e":"La fuga está entre presentación y cierre."},
-{"t":"Métrica","p":"Se apuntan a la cita, pero muchos no se presentan.","o":["Show-up rate","Close rate","Ticket medio"],"e":"El KPI que el 90 % subestima."},
-{"t":"Metáfora","p":"«Si le falta una pata, se cae. Mi proceso soluciona esa inestabilidad.»","o":["Mesa de 4 patas","Los ladrillos y la casa","La plastilina"],"e":"Le ayuda a ver qué le falta de forma visual."},
-{"t":"Metáfora","p":"«La oportunidad está pasando ahora. Mirarla o subirte: ambas son decisiones.»","o":["El tren que pasa una vez","El barco y el mar","Creer para ver"],"e":"Influye sin presionar."},
-{"t":"Metáfora","p":"«Yo te doy las herramientas; el ritmo lo decides tú.»","o":["Los ladrillos y la casa","El cuchillo","Mesa de 4 patas"],"e":"Responsabilidad compartida, sin promesas falsas."},
-{"t":"Metáfora","p":"«Lo inteligente es actuar antes de que el problema explote.»","o":["Preventivo vs. reactivo","El barco y el mar","Inversión 100 € vs. 10.000 €"],"e":"Le hace ver el coste de no actuar."}
-]}
+"e": "Caro siempre es respecto a algo. Primero entiende con qué lo compara. Preguntar por su precio te lleva a negociar."
+},
+{
+"p": "«No tengo tiempo.»",
+"o": [
+"¿Qué te hace pensar que no vas a tener tiempo?",
+"¿Cuántas horas libres tienes a la semana, más o menos?",
+"¿Y una hora al día, de verdad no la sacarías?"
+],
+"e": "Indaga el origen. Contar horas o discutírselas se queda en la excusa, no en la prioridad."
+},
+{
+"p": "«Me lo tengo que pensar.»",
+"o": [
+"Tiene sentido. ¿Qué parte te preocupa realmente?",
+"Claro. ¿Qué día te viene bien que te llame?",
+"¿Qué es lo que necesitas pensar, si ya me has dicho que lo quieres?"
+],
+"e": "Valida y busca el motivo real. Agendar sin saberlo es rendirse; lo otro es presionar."
+},
+{
+"p": "«Lo tengo que hablar con mi pareja.»",
+"o": [
+"Entiendo. Si dependiera solo de ti, ¿qué harías?",
+"Perfecto. ¿Podemos hablar los tres mañana?",
+"¿Tu pareja suele decidir este tipo de cosas por ti?"
+],
+"e": "Saber dónde está él es lo primero. La llamada a tres puede venir luego; atacar la relación, nunca."
+},
+{
+"p": "«No sé si funcionará para mí.»",
+"o": [
+"¿Qué te hace dudar de que funcione para ti?",
+"¿Quieres que te enseñe casos de gente como tú?",
+"Si lo aplicas funciona. ¿Vas a aplicarlo?"
+],
+"e": "La duda es en sí mismo. Los casos de éxito ayudan, pero después de saber qué le frena."
+},
+{
+"p": "«Ahora no es buen momento.»",
+"o": [
+"¿Qué tendría que pasar para que sí lo fuera?",
+"¿Cuándo crees que será buen momento?",
+"¿Crees que alguna vez hay un momento perfecto?"
+],
+"e": "Sacas la condición real. Preguntar «cuándo» te da una fecha, no el motivo."
+},
+{
+"p": "«Se me va de presupuesto.»",
+"o": [
+"¿Te refieres a que no puedes o a que no sabes si vale la pena?",
+"¿Cuánto podrías invertir ahora mismo?",
+"¿Te ayudaría pagarlo en varias cuotas?"
+],
+"e": "Primero distingue si es emocional o económico. Si no, negocias contra una objeción que no es."
+},
+{
+"p": "«He probado muchas cosas y siempre acabo igual.»",
+"o": [
+"Siempre acabas igual… ¿qué crees que ha pasado esas veces?",
+"¿Qué has probado exactamente, y con quién?",
+"¿Y qué crees que tiene esto de diferente?"
+],
+"e": "Ley del espejo: que se escuche y encuentre el patrón. La lista de cursos no te dice por qué."
+},
+{
+"p": "«Tengo miedo de volver a fallar.»",
+"o": [
+"¿Qué significó para ti fallar la otra vez?",
+"¿Qué es lo peor que podría pasar si fallas?",
+"El miedo es normal. ¿Lo harías aunque te dé miedo?"
+],
+"e": "Te lleva a la experiencia real. «Lo peor que puede pasar» aviva el miedo, y lo último es prematuro."
+},
+{
+"p": "«¿Y por qué tan caro?»",
+"o": [
+"¿Qué te esperabas encontrar por ese precio?",
+"¿Te cuento todo lo que incluye y lo vemos?",
+"¿Has mirado cuánto cuestan otras formaciones?"
+],
+"e": "En ventas, cuando justificas, pierdes poder. Devuélvele la pregunta para ver qué falta."
+},
+{
+"p": "«Déjame mirar otras opciones.»",
+"o": [
+"Claro. ¿Qué es lo que necesitas ver en esas opciones?",
+"¿Qué otras opciones estás mirando?",
+"¿Quieres que te ayude a compararlas?"
+],
+"e": "Lo importante es qué le falta para decidir. Los nombres de la competencia no te lo dicen."
+},
+{
+"p": "«Mándamelo por email y lo miro.»",
+"o": [
+"Sin problema. ¿Qué es lo que quieres mirar con calma?",
+"Vale. ¿Qué email es el mejor para enviártelo?",
+"¿Lo miras esta semana y lo hablamos el viernes?"
+],
+"e": "Suele esconder una duda sin resolver. Búscala antes de enviar nada."
+},
+{
+"p": "«Estoy haciendo ya otro curso parecido.»",
+"o": [
+"¿Qué te está dando y qué sientes que te falta?",
+"¿Con quién lo estás haciendo, por curiosidad?",
+"¿Y por qué agendaste si ya tienes ese curso?"
+],
+"e": "Sin atacar a la competencia: busca dónde está la necesidad real."
+},
+{
+"p": "«No confío en estas cosas de internet.»",
+"o": [
+"Tiene sentido. ¿Has tenido alguna mala experiencia?",
+"¿Qué necesitarías ver para fiarte de nosotros?",
+"¿Has visto nuestras reseñas en Trustpilot?"
+],
+"e": "Antes de dar pruebas, entiende qué pasó. Esa desconfianza suele venir de algo concreto."
+},
+{
+"p": "«Tú lo que quieres es venderme.»",
+"o": [
+"Sí, si te encaja. Si no, te lo digo. ¿Qué te ha hecho sentir eso?",
+"No, de verdad, solo intento ayudarte. ¿Seguimos?",
+"¿Te he presionado en algún momento de la llamada?"
+],
+"e": "Verdad, antiventa y escucha. Negarlo suena a vendedor; defenderte, también."
+},
+{
+"p": "«Tengo que pedir un préstamo.»",
+"o": [
+"Antes de seguir, ¿cómo está tu situación ahora mismo?",
+"¿Con qué banco lo pedirías, y a qué plazo?",
+"¿Sabes que lo puedes recuperar con tu primer proyecto?"
+],
+"e": "Ley de Mamá: comprueba si de verdad le conviene antes de nada."
+},
+{
+"p": "«Ya sé cómo vender, no necesito esto.»",
+"o": [
+"Genial. ¿Y por qué agendaste esta llamada?",
+"¿Cuánto estás facturando ahora mismo?",
+"¿Qué es lo que crees que ya sabes?"
+],
+"e": "Directo y breve, a su estilo. La pregunta le hace decir qué le trajo aquí, sin competir con él."
+},
+{
+"p": "«No soy bueno hablando.»",
+"o": [
+"¿Qué te hace pensar eso? ¿Qué has visto en ti?",
+"¿Y te has grabado alguna vez para comprobarlo?",
+"¿Sabías que vender es más escuchar que hablar?"
+],
+"e": "Es una creencia limitante. Que la mire de frente, y que venga de él."
+},
+{
+"p": "«Mi familia cree que esto es una estafa.»",
+"o": [
+"Es normal que se preocupen. ¿Y tú qué crees?",
+"¿Qué les ha hecho pensar eso, han visto algo?",
+"¿Les enseñamos juntos la web y los testimonios?"
+],
+"e": "Sin atacar a los suyos, pero lo que importa es lo que piensa él."
+},
+{
+"p": "«¿Me garantizas que voy a ganar dinero?»",
+"o": [
+"No, depende de lo que apliques. ¿Qué necesitas ver para estar tranquilo?",
+"Si haces lo que te digamos, sí. ¿Vas a hacerlo?",
+"¿Cuánto tendrías que ganar para que te mereciera la pena?"
+],
+"e": "Verdad y autoridad. Una garantía sobre lo que depende de él es una promesa falsa."
+},
+{
+"p": "«Dime el precio y ya.»",
+"o": [
+"Te lo digo. Para que tenga sentido, ¿qué es lo que buscas?",
+"Son 3.000 €. ¿Cómo te suena?",
+"¿Qué presupuesto tienes en mente?"
+],
+"e": "Sin contexto, cualquier precio es caro. Directo, pero mantienes tu marco."
+},
+{
+"p": "«Soy muy mayor para empezar con esto.»",
+"o": [
+"¿Mayor respecto a qué? ¿Qué te hace pensarlo?",
+"¿Cuántos años tienes, si no es indiscreción?",
+"¿Sabes que tenemos alumnos de todas las edades?"
+],
+"e": "Pregunta primero. Muchas creencias ni siquiera son nuestras."
+},
+{
+"p": "«Estoy en paro, no es buen momento para gastar.»",
+"o": [
+"Te entiendo. ¿Cómo estás cubriendo tus gastos ahora?",
+"¿Y no es justo ahora cuando más lo necesitas?",
+"¿Podrías pedir ayuda a alguien de confianza?"
+],
+"e": "Puede ser una objeción económica real. Entiéndela antes de seguir: Ley de Mamá."
+},
+{
+"p": "«No quiero parecer un pesado vendiendo.»",
+"o": [
+"¿Qué significa para ti ser pesado?",
+"¿Alguien te ha dicho alguna vez que lo eres?",
+"¿Y si en vez de insistir aprendes a ayudar?"
+],
+"e": "No eres un pesado: guías hacia una buena decisión. Primero que defina esa creencia."
+},
+{
+"p": "«Tengo que consultar con mi socio.»",
+"o": [
+"Perfecto. ¿Qué crees que te va a preguntar tu socio?",
+"¿Lo llamamos ahora y lo vemos los tres?",
+"¿Quién decide normalmente en la empresa?"
+],
+"e": "Así descubres las dudas que tiene él mismo."
+},
+{
+"p": "«Me lo dices porque te llevas comisión.»",
+"o": [
+"Sí, cobro comisión. Por eso solo me interesa si te encaja.",
+"No, yo aquí estoy para ayudarte, de verdad.",
+"¿Y eso qué cambia en lo que hemos hablado?"
+],
+"e": "Verdad y antiventa. La confianza no se gana escondiendo nada."
+},
+{
+"p": "«Vuelve a llamarme la semana que viene.»",
+"o": [
+"Claro. ¿Qué va a cambiar de aquí a la semana que viene?",
+"Muy bien. ¿Te viene mejor el martes o el jueves?",
+"¿Es por algo que hemos hablado hoy?"
+],
+"e": "Si no cambia nada, no es cuestión de calendario."
+},
+{
+"p": "«No tengo experiencia en ventas.»",
+"o": [
+"¿Qué te preocupa exactamente de no tenerla?",
+"¿Y en atención al cliente, has trabajado alguna vez?",
+"¿Sabes que muchos alumnos empezaron desde cero?"
+],
+"e": "Antes de tranquilizar, indaga. Muchas veces el miedo no es ese."
+},
+{
+"p": "«Estoy bien como estoy.»",
+"o": [
+"Me alegro. ¿Qué te hizo agendar la llamada, entonces?",
+"¿Seguro? ¿Estarás igual de bien dentro de un año?",
+"Perfecto. ¿Y hay algo que te gustaría mejorar?"
+],
+"e": "Si no le incomodara su situación, no estaría aquí. Que lo diga él."
+},
+{
+"p": "«Ya me han estafado antes.»",
+"o": [
+"Vaya. ¿Qué pasó? Cuéntame.",
+"¿Te devolvieron el dinero, al menos?",
+"¿Quieres que te pase el contrato para que lo mires?"
+],
+"e": "Confianza en el proceso: escucha primero, luego explica simple y sin hype."
+},
+{
+"p": "«Es que tengo dos hijos y no me da la vida.»",
+"o": [
+"Te entiendo. ¿Cómo es tu día a día ahora mismo?",
+"¿Y tu pareja te podría ayudar con ellos?",
+"¿Podrías dedicarle una hora cuando se acuesten?"
+],
+"e": "Valida y profundiza. Si es verdad, habrá que ver si encaja."
+},
+{
+"p": "«Yo eso lo puedo aprender gratis en YouTube.»",
+"o": [
+"Es verdad, hay mucho. ¿Y por qué aún no lo has conseguido?",
+"¿Qué canales has estado viendo últimamente?",
+"¿Y quién te corrige las llamadas en YouTube?"
+],
+"e": "Coherencia entre lo que quiere y lo que hace. La última es buena, pero discute en vez de preguntar."
+},
+{
+"p": "«Déjame consultarlo con la almohada.»",
+"o": [
+"Claro. ¿Qué te gustaría tener más claro?",
+"¿Te llamo mañana por la mañana y me dices?",
+"¿Qué crees que va a cambiar mañana?"
+],
+"e": "Encuentra la duda concreta. Sin tensión ni agresividad."
+},
+{
+"p": "«¿Por qué debería creerte a ti?»",
+"o": [
+"No me creas todavía. ¿Qué necesitas ver para tenerlo claro?",
+"¿Quieres que te cuente mi historia y mis resultados?",
+"¿Por qué crees que no deberías?"
+],
+"e": "Cero necesidad de validación. Eso es autoridad."
+},
+{
+"p": "«No estoy al 100 % seguro.»",
+"o": [
+"¿Qué te falta para llegar al 100 %?",
+"¿Y del 1 al 10, cuánto estás comprometido?",
+"¿Alguien está alguna vez seguro al 100 %?"
+],
+"e": "Pregunta directa a la duda. Te dice lo que queda por resolver."
+},
+{
+"p": "«Yo no me fío de pagar por adelantado.»",
+"o": [
+"Tiene sentido. ¿Qué te daría tranquilidad para hacerlo?",
+"¿Te encajaría más pagarlo en dos veces?",
+"¿Has tenido algún problema con eso antes?"
+],
+"e": "Entiende la emoción antes de negociar condiciones."
+}
+],
+"lee": [
+{
+"t": "Perfil",
+"p": "«Antes de nada, mándame los datos, el temario, qué garantías hay y cómo lo comparáis con otros.»",
+"o": [
+"Racional",
+"Emocional",
+"Dominante",
+"Inseguro"
+],
+"e": "Compara todo y decide cuando entiende el cómo y el porqué."
+},
+{
+"t": "Perfil",
+"p": "«Tengo cinco minutos. ¿Qué resultados dais y cuánto cuesta? Al grano.»",
+"o": [
+"Dominante",
+"Racional",
+"Emocional",
+"Inseguro"
+],
+"e": "Directo, quiere control. Sé firme y breve, y déjale claro que él decide."
+},
+{
+"t": "Perfil",
+"p": "«Es que me ha encantado cómo hablabas en el vídeo, siento que me entiendes.»",
+"o": [
+"Emocional",
+"Racional",
+"Dominante",
+"Inseguro"
+],
+"e": "Si conecta contigo, compra. Conecta antes de explicar."
+},
+{
+"t": "Perfil",
+"p": "«Parece que todo encaja, pero… no sé, ¿y si luego no soy capaz? ¿Tú qué harías?»",
+"o": [
+"Inseguro",
+"Emocional",
+"Dominante",
+"Racional"
+],
+"e": "Parece que decide, pero se frena al final. Seguridad y pasos claros."
+},
+{
+"t": "Perfil",
+"p": "«¿Cuál es exactamente el proceso, paso a paso? ¿Qué porcentaje de alumnos llega al resultado?»",
+"o": [
+"Racional",
+"Inseguro",
+"Emocional",
+"Dominante"
+],
+"e": "Usa datos, procesos y garantías. No presiones."
+},
+{
+"t": "Perfil",
+"p": "«Mira, yo tomo las decisiones rápido. Convénceme ahora o paso.»",
+"o": [
+"Dominante",
+"Inseguro",
+"Racional",
+"Emocional"
+],
+"e": "Respeta la competencia y la claridad. No entres en su juego."
+},
+{
+"t": "Perfil",
+"p": "«Mi madre siempre me decía que yo valía, y hablar contigo me la ha recordado.»",
+"o": [
+"Emocional",
+"Inseguro",
+"Racional",
+"Dominante"
+],
+"e": "Decide por sensaciones. Historias, tono cálido y validación emocional."
+},
+{
+"t": "Perfil",
+"p": "«Lo he estado mirando varias veces, y me da cosa equivocarme otra vez…»",
+"o": [
+"Inseguro",
+"Racional",
+"Emocional",
+"Dominante"
+],
+"e": "Miedo a equivocarse. Autoridad suave y acompañamiento."
+},
+{
+"t": "Canal",
+"p": "«No me lo imagino todavía. ¿Puedes mostrarme cómo se ve por dentro?»",
+"o": [
+"Visual",
+"Auditivo",
+"Kinestésico"
+],
+"e": "Ver, imaginar, mostrar: piensa en imágenes."
+},
+{
+"t": "Canal",
+"p": "«Eso que me dices me suena bien. Cuéntame cómo sonaría una llamada.»",
+"o": [
+"Auditivo",
+"Visual",
+"Kinestésico"
+],
+"e": "Escuchar, sonar: piensa en sonidos y palabras."
+},
+{
+"t": "Canal",
+"p": "«No sé, necesito sentirlo. Me da buena sensación, pero quiero notarlo claro.»",
+"o": [
+"Kinestésico",
+"Visual",
+"Auditivo"
+],
+"e": "Sentir, transmitir: piensa en sensaciones y emociones."
+},
+{
+"t": "Canal",
+"p": "«Ya veo por dónde vas, se ve clarísimo cómo lo planteas.»",
+"o": [
+"Visual",
+"Kinestésico",
+"Auditivo"
+],
+"e": "Háblale en imágenes: «imagínate», «te voy a enseñar»."
+},
+{
+"t": "Canal",
+"p": "«Me ha dicho un amigo que lo escuchó y le sonó muy convincente.»",
+"o": [
+"Auditivo",
+"Kinestésico",
+"Visual"
+],
+"e": "Usa su idioma: «te cuento», «¿cómo te suena?»."
+},
+{
+"t": "Canal",
+"p": "«Es que me pesa mucho esta situación, la llevo encima todo el día.»",
+"o": [
+"Kinestésico",
+"Auditivo",
+"Visual"
+],
+"e": "Le pesa, la lleva encima: sensaciones físicas."
+},
+{
+"t": "Cerebro",
+"p": "El lead está tenso, habla poco y desconfía de ti en el minuto 1. ¿Qué cerebro está pidiendo algo?",
+"o": [
+"Reptiliano",
+"Límbico",
+"Neocórtex"
+],
+"e": "Si aquí no hay seguridad, no hay venta. Tono calmado y presencia estable."
+},
+{
+"t": "Cerebro",
+"p": "«Ya, pero ¿cómo justifico este gasto? Explícame los números.»",
+"o": [
+"Neocórtex",
+"Reptiliano",
+"Límbico"
+],
+"e": "Justifica la compra: estructura, precio, garantías y pasos."
+},
+{
+"t": "Cerebro",
+"p": "El lead se abre y te cuenta algo personal porque siente que lo entiendes. ¿Dónde estás?",
+"o": [
+"Límbico",
+"Neocórtex",
+"Reptiliano"
+],
+"e": "Decide por sensaciones. Empatía, historias y escucha real."
+},
+{
+"t": "Cerebro",
+"p": "«¿Y si me lo quito todo y luego no funciona? Me da miedo arriesgarme.»",
+"o": [
+"Reptiliano",
+"Neocórtex",
+"Límbico"
+],
+"e": "Miedo y seguridad: instinto primario, evitar el peligro."
+},
+{
+"t": "Cerebro",
+"p": "«¿Cuántas sesiones son, cuánto dura y qué pasa si no llego?»",
+"o": [
+"Neocórtex",
+"Límbico",
+"Reptiliano"
+],
+"e": "Le estás dando claridad: datos, proceso y estructura."
+},
+{
+"t": "Objeción real",
+"p": "«Es caro.»",
+"o": [
+"Falta de claridad o miedo a fallar",
+"Falta real de dinero",
+"Falta de tiempo"
+],
+"e": "Rara vez es económico. Casi siempre es prioridad y decisión."
+},
+{
+"t": "Objeción real",
+"p": "«No tengo tiempo.»",
+"o": [
+"Prioridades",
+"Falta de confianza en ti",
+"Falta de dinero"
+],
+"e": "Prioridades mal colocadas y no haber profundizado al principio."
+},
+{
+"t": "Objeción real",
+"p": "«Me lo pienso.»",
+"o": [
+"Falta de confianza",
+"Falta de tiempo",
+"Falta de información técnica"
+],
+"e": "Nunca aparece como «no confío en ti»."
+},
+{
+"t": "Objeción real",
+"p": "«No es el momento.»",
+"o": [
+"Falta de confianza",
+"Falta de dinero",
+"Falta de tiempo"
+],
+"e": "Se esconde detrás del calendario. Hay que ir a buscarla."
+},
+{
+"t": "Objeción real",
+"p": "«Me gustaría, pero se me va de presupuesto.»",
+"o": [
+"No ve suficiente valor o tiene miedo",
+"No tiene dinero, sin más",
+"Le falta tiempo para pensarlo"
+],
+"e": "En el 90 % de los casos no es un tema de dinero."
+},
+{
+"t": "Confianza",
+"p": "«Has sonado muy comercial todo el rato, la verdad.»",
+"o": [
+"En ti",
+"En el proceso",
+"En sí mismo"
+],
+"e": "No conectaste o sonaste vendedor. Baja ritmo, valida y escucha."
+},
+{
+"t": "Confianza",
+"p": "«No termino de entender cómo funciona, y ya me pasó con otra academia.»",
+"o": [
+"En el proceso",
+"En ti",
+"En sí mismo"
+],
+"e": "Malas experiencias o no lo ha entendido. Explícalo simple, sin hype."
+},
+{
+"t": "Confianza",
+"p": "«Es que otros pueden, pero yo no sé si valgo para esto.»",
+"o": [
+"En sí mismo",
+"En el proceso",
+"En ti"
+],
+"e": "La más profunda. Refléjale que ya está dando un paso grande."
+},
+{
+"t": "Escucha",
+"p": "Mientras te habla, piensas: «¿qué digo ahora? ¿lo estaré haciendo bien?»",
+"o": [
+"Interna",
+"Enfocada",
+"Expansiva"
+],
+"e": "Estás más pendiente de ti que del cliente, y lo nota."
+},
+{
+"t": "Escucha",
+"p": "Oyes exactamente lo que dice, pero no notas el tono con el que lo dice.",
+"o": [
+"Enfocada",
+"Interna",
+"Expansiva"
+],
+"e": "Entiendes el mensaje lógico, se te escapa el emocional."
+},
+{
+"t": "Escucha",
+"p": "Notas su pausa, su energía baja y que evita hablar de su pareja.",
+"o": [
+"Expansiva",
+"Enfocada",
+"Interna"
+],
+"e": "Aquí no necesitas convencer: entiendes lo que necesita."
+},
+{
+"t": "Señal",
+"p": "Baja el tono, asiente sin pensar y copia tu postura.",
+"o": [
+"Está en confianza",
+"Está nervioso",
+"Quiere colgar"
+],
+"e": "Su cuerpo no miente nunca."
+},
+{
+"t": "Señal",
+"p": "Se queda en silencio tras escuchar tu resumen, procesando.",
+"o": [
+"Buena señal: lo está procesando",
+"Se ha perdido: repítelo todo",
+"Se ha enfriado: pasa a la oferta"
+],
+"e": "Déjale el espacio. También es señal: te da información que no había dicho."
+},
+{
+"t": "Rol",
+"p": "Filtra, conecta y clasifica leads por DM. Convierte desconocidos en interesados.",
+"o": [
+"Setter",
+"Triager",
+"Closer"
+],
+"e": "La primera línea: genera movimiento."
+},
+{
+"t": "Rol",
+"p": "Llama antes de la cita para confirmar asistencia y comprobar que está cualificado.",
+"o": [
+"Triager",
+"Setter",
+"Closer"
+],
+"e": "Protege el tiempo del closer y sube el show-up."
+},
+{
+"t": "Rol",
+"p": "Tiene la llamada con el interesado. Profundiza en dolor, deseo y contexto.",
+"o": [
+"Closer",
+"Setter",
+"Triager"
+],
+"e": "Domina la psicología, los silencios y el control emocional."
+},
+{
+"t": "Métrica",
+"p": "Tienes pocas oportunidades cada semana.",
+"o": [
+"Prospección floja",
+"Mal pitch",
+"Mala cualificación"
+],
+"e": "Los ratios te dicen dónde poner el foco mañana."
+},
+{
+"t": "Métrica",
+"p": "Presentas mucho, pero apenas cierras.",
+"o": [
+"Mala transición o pitch",
+"Prospección floja",
+"Ticket medio bajo"
+],
+"e": "La fuga está entre presentación y cierre."
+},
+{
+"t": "Métrica",
+"p": "Se apuntan a la cita, pero muchos no se presentan.",
+"o": [
+"Show-up rate",
+"Close rate",
+"Ticket medio"
+],
+"e": "El KPI que el 90 % subestima."
+},
+{
+"t": "Metáfora",
+"p": "«Si le falta una pata, se cae. Mi proceso soluciona esa inestabilidad.»",
+"o": [
+"Mesa de 4 patas",
+"Los ladrillos y la casa",
+"La plastilina"
+],
+"e": "Le ayuda a ver qué le falta de forma visual."
+},
+{
+"t": "Metáfora",
+"p": "«La oportunidad está pasando ahora. Mirarla o subirte: ambas son decisiones.»",
+"o": [
+"El tren que pasa una vez",
+"El barco y el mar",
+"Creer para ver"
+],
+"e": "Influye sin presionar."
+},
+{
+"t": "Metáfora",
+"p": "«Yo te doy las herramientas; el ritmo lo decides tú.»",
+"o": [
+"Los ladrillos y la casa",
+"El cuchillo",
+"Mesa de 4 patas"
+],
+"e": "Responsabilidad compartida, sin promesas falsas."
+},
+{
+"t": "Metáfora",
+"p": "«Lo inteligente es actuar antes de que el problema explote.»",
+"o": [
+"Preventivo vs. reactivo",
+"El barco y el mar",
+"Inversión 100 € vs. 10.000 €"
+],
+"e": "Le hace ver el coste de no actuar."
+}
+]
+}
