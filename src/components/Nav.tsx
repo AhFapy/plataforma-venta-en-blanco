@@ -23,13 +23,13 @@ function active(path: string, href: string) {
 
 const ENTRENA: (typeof items)[number] = { href: "/entrena", label: "Entrena", icon: Target };
 
-export function SideNav({ staff, csm = false, unread = 0, community = 0, entrena = false }: { staff: boolean; csm?: boolean; unread?: number; community?: number; entrena?: boolean }) {
+export function SideNav({ csm = false, adminHref = null, unread = 0, community = 0, entrena = false }: { csm?: boolean; adminHref?: string | null; unread?: number; community?: number; entrena?: boolean }) {
   const path = usePathname();
   const base = entrena ? items.flatMap((i) => (i.href === "/ranking" ? [ENTRENA, i] : [i])) : items;
   const all = [
     ...base,
     ...(csm ? [{ href: "/seguimiento", label: "Seguimiento", icon: ClipboardList }] : []),
-    ...(staff ? [{ href: "/admin", label: "Admin", icon: Shield }] : []),
+    ...(adminHref ? [{ href: adminHref, label: "Admin", icon: Shield }] : []),
   ];
   return (
     <nav className="space-y-1">

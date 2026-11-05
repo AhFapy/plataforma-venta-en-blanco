@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MessageCircle, Send } from "lucide-react";
-import { requireStaff } from "@/lib/auth";
+import { requireStudentsViewer } from "@/lib/auth";
 import { Avatar } from "@/components/Avatar";
 import { getMyPoints, level } from "@/lib/data";
 import { fmtDate, timeAgo } from "@/lib/utils";
@@ -11,7 +11,7 @@ export const metadata = { title: "Ficha de alumno" };
 
 export default async function StudentDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { supabase, profile: me } = await requireStaff();
+  const { supabase, profile: me } = await requireStudentsViewer();
   const [{ data: p }, { data: priv }] = await Promise.all([
     supabase.from("profiles").select("id,full_name,avatar_url,role,active,cohort,bio,enrolled_at,last_seen_at,onboarded_at").eq("id", id).maybeSingle(),
     supabase.from("profile_private").select("email,phone,situation,goal,weekly_hours,objectives,improvements").eq("id", id).maybeSingle(),
@@ -99,7 +99,7 @@ export default async function StudentDetail({ params }: { params: Promise<{ id: 
             {s.file_name && <p className="text-xs text-ink-faint">📎 {s.file_name}</p>}
           </div>
         ))}
-        {(subs ?? []).length > 0 && <Link href="/admin/deberes" className="text-sm text-brand">Corregir en Deberes →</Link>}
+        {(subs ?? []).length > 0 && me.role !== "csm" && <Link href="/admin/deberes" className="text-sm text-brand">Corregir en Deberes →</Link>}
       </section>
 
       {(quizzes ?? []).length > 0 && (

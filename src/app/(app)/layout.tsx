@@ -23,6 +23,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   const staff = isStaffRole(profile.role);
   const csm = isCsmRole(profile.role);
+  // El CSM solo ve Alumnos dentro de admin
+  const adminHref = staff ? "/admin" : profile.role === "csm" ? "/admin/alumnos" : null;
   const [notes, settings, popup, { data: unreadDm }, { data: entrena }] = await Promise.all([getNotifications(supabase, 12, profile.id), getSettings(supabase), getActivePopup(supabase, profile.id), supabase.rpc("unread_dm_count"), supabase.rpc("entrena_open")]);
   const { data: unreadPosts } = await supabase.rpc("unread_posts_by_channel");
   const community = ((unreadPosts ?? []) as { n: number }[]).reduce((a, r) => a + Number(r.n || 0), 0);
@@ -37,7 +39,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/"><Logo size={18} /></Link>
             <NotificationBell items={notes} seenAt={seenAt} align="left" rosa={{ name: settings.rosa_name, avatar: settings.rosa_avatar_url }} />
           </div>
-          <SideNav staff={staff} csm={csm} unread={unread} community={community} entrena={!!entrena} />
+          <SideNav csm={csm} adminHref={adminHref} unread={unread} community={community} entrena={!!entrena} />
         </div>
         <div className="space-y-3">
           <Link href="/perfil" className="flex items-center gap-3 rounded-[14px] p-2 hover:bg-surface">
@@ -58,7 +60,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <Link href="/"><Logo size={16} /></Link>
         <div className="flex items-center gap-1.5">
           {csm && <Link href="/seguimiento" className="badge">Seguimiento</Link>}
-          {staff && <Link href="/admin" className="badge">Admin</Link>}
+          {adminHref && <Link href={adminHref} className="badge">Admin</Link>}
           <Link href="/mensajes" aria-label={`Mensajes${unread ? `, ${unread} sin leer` : ""}`} className="relative grid place-items-center w-10 h-10 rounded-full hover:bg-bg-badge">
             <Send size={20} strokeWidth={1.8} />
             {unread > 0 && <span className="absolute top-1 right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[11px] font-semibold grid place-items-center leading-none">{unread}</span>}

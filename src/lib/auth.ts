@@ -27,6 +27,13 @@ export async function requireStaff() {
   return ctx;
 }
 
+/** Equipo o CSM: el CSM solo entra a la parte de Alumnos de admin, en modo lectura. */
+export async function requireStudentsViewer() {
+  const ctx = await requireMember();
+  if (!isStaffRole(ctx.profile.role) && ctx.profile.role !== "csm") redirect("/");
+  return ctx;
+}
+
 export async function requireCsm() {
   const ctx = await requireMember();
   if (!isCsmRole(ctx.profile.role)) redirect("/");

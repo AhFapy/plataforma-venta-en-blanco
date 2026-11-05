@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireStaff } from "@/lib/auth";
+import { requireStudentsViewer } from "@/lib/auth";
 import { fmtDate, timeAgo } from "@/lib/utils";
 import { getStudents } from "../students";
 import { inviteStudents } from "../actions";
@@ -10,8 +10,9 @@ export const metadata = { title: "Alumnos" };
 
 export default async function AdminStudents({ searchParams }: { searchParams: Promise<{ q?: string; c?: string }> }) {
   const { q, c } = await searchParams;
-  const { supabase, profile } = await requireStaff();
+  const { supabase, profile } = await requireStudentsViewer();
   const isAdmin = profile.role === "admin";
+  const readOnly = profile.role === "csm";
   const all = await getStudents(supabase);
   let rows = all;
   if (q) { const t = q.toLowerCase(); rows = rows.filter((r) => (r.full_name ?? "").toLowerCase().includes(t) || r.email.includes(t)); }
@@ -66,7 +67,7 @@ export default async function AdminStudents({ searchParams }: { searchParams: Pr
                 <td className="px-4 py-3 whitespace-nowrap">{r.last_seen_at ? timeAgo(r.last_seen_at) : "Nunca"}</td>
                 <td className="px-4 py-3 tabular-nums">{r.done}/{r.total}</td>
                 <td className="px-4 py-3 tabular-nums">{r.points}</td>
-                <td className="px-4 py-3"><MemberControls id={r.id} active={r.active} role={r.role} cohort={r.cohort} isAdmin={isAdmin} /></td>
+                <td className="px-4 py-3">{!readOnly && <MemberControls id={r.id} active={r.active} role={r.role} cohort={r.cohort} isAdmin={isAdmin} />}</td>
               </tr>
             ))}
           </tbody>
