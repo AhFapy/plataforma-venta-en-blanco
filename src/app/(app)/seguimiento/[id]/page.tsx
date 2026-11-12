@@ -8,6 +8,7 @@ import { dueCheckins, eur, fmtDay, STAGE_LABEL, STAGES, type Overview } from "@/
 import { FollowupForm } from "./FollowupForm";
 import { CheckinForm } from "./CheckinForm";
 import { InPersonEvents } from "./InPersonEvents";
+import { Linkify } from "@/components/Linkify";
 
 export const metadata = { title: "Ficha de seguimiento" };
 
@@ -106,7 +107,7 @@ export default async function FollowupDetail({ params }: { params: Promise<{ id:
                 <span className="text-ink-muted">{fmtDay(c.checkin_date)}</span>
                 <span className="text-xs text-ink-faint">· {c.author?.full_name ?? "—"} · guardado {fmtDateTime(c.created_at)}</span>
               </div>
-              <p className="text-[15px] whitespace-pre-line break-words">{c.notes}</p>
+              <p className="text-[15px] whitespace-pre-line break-words"><Linkify text={c.notes} /></p>
             </li>
           ))}
           {!checkins?.length && <li className="py-3 text-sm text-ink-faint">Aún no hay check-ins.</li>}

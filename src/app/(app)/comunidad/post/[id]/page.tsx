@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { timeAgo } from "@/lib/utils";
 import { MediaGrid, PostCard, POST_SELECT, shownAuthor, type LegacyAuthor, type Media, type PostRow } from "../../posts";
 import { CommentForm, DeleteComment } from "../../components";
+import { Linkify } from "@/components/Linkify";
 
 type CommentRow = { id: string; body: string; created_at: string; author_id: string; author: { id: string; full_name: string | null; avatar_url: string | null } | null; legacy_author: LegacyAuthor | null; media: Media[] | null };
 
@@ -33,7 +34,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
                 <p className="text-sm font-medium">{au.name} <span className="text-ink-faint font-normal">· {timeAgo(c.created_at)}</span></p>
                 {(staff || c.author_id === profile.id) && <DeleteComment id={c.id} postId={p.id} />}
               </div>
-              <p className="text-[15px] whitespace-pre-line break-words mt-1">{c.body}</p>
+              <p className="text-[15px] whitespace-pre-line break-words mt-1"><Linkify text={c.body} /></p>
               {c.media && c.media.length > 0 && <div className="mt-2"><MediaGrid media={c.media} /></div>}
             </div>
           </div>

@@ -7,6 +7,7 @@ import { videoEmbed } from "@/lib/utils";
 import type { LessonMedia } from "@/lib/types";
 import { CompleteButton } from "./CompleteButton";
 import { HomeworkBox, type MySubmission } from "@/components/HomeworkBox";
+import { Linkify } from "@/components/Linkify";
 
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -78,7 +79,7 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
           <CompleteButton lessonId={lesson.id} done={done} nextHref={nextOpen ? `/formacion/leccion/${next.id}` : null} />
         </div>
 
-        {lesson.description && <div className="text-[16px] leading-relaxed text-ink/85 whitespace-pre-line max-w-3xl">{lesson.description}</div>}
+        {lesson.description && <div className="text-[16px] leading-relaxed text-ink/85 whitespace-pre-line max-w-3xl"><Linkify text={lesson.description} /></div>}
 
         {resources.length > 0 && (
           <section className="card p-6">

@@ -5,6 +5,7 @@ import { Avatar } from "@/components/Avatar";
 import { timeAgo } from "@/lib/utils";
 import { ActionForm } from "../ActionForm";
 import { saveFeedback } from "../extra-actions";
+import { Linkify } from "@/components/Linkify";
 
 export const metadata = { title: "Deberes" };
 
@@ -60,7 +61,7 @@ export default async function AdminHomework({ searchParams }: { searchParams: Pr
                 </div>
                 {r.feedback && <span className="ml-auto badge !bg-accent-soft !text-brand-deep">Corregido</span>}
               </header>
-              {r.body && <p className="text-[15px] leading-relaxed whitespace-pre-line break-words">{r.body}</p>}
+              {r.body && <p className="text-[15px] leading-relaxed whitespace-pre-line break-words"><Linkify text={r.body} /></p>}
               {url && <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-bg-badge px-3 py-1.5 text-sm hover:text-brand"><Paperclip size={14} /> {r.file_name}</a>}
               <ActionForm action={saveFeedback} submit={r.feedback ? "Actualizar corrección" : "Enviar corrección"}>
                 <input type="hidden" name="id" value={r.id} />

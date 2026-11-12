@@ -3,6 +3,7 @@ import { Avatar } from "@/components/Avatar";
 import { PageHeader } from "@/components/PageHeader";
 import { fmtDate } from "@/lib/utils";
 import { MyTestimonial } from "./MyTestimonial";
+import { Linkify } from "@/components/Linkify";
 
 export const metadata = { title: "Testimonios" };
 
@@ -38,7 +39,7 @@ export default async function Testimonials() {
                 <p className="text-xs text-ink-faint">{t.kind === "tangible" ? "Resultado tangible" : "Resultado no tangible"} · {fmtDate(t.published_at)}</p>
               </div>
             </div>
-            <p className="text-[15px] leading-relaxed whitespace-pre-line break-words">{t.body}</p>
+            <p className="text-[15px] leading-relaxed whitespace-pre-line break-words"><Linkify text={t.body} /></p>
           </article>
         ))}
       </section>

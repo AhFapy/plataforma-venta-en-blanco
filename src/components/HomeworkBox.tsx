@@ -7,6 +7,7 @@ import { CheckCircle2, Paperclip, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { saveSubmission } from "@/app/(app)/hoja-en-blanco/actions";
 import { timeAgo } from "@/lib/utils";
+import { Linkify } from "@/components/Linkify";
 
 const MAX = 25 * 1024 * 1024;
 
@@ -59,7 +60,7 @@ export function HomeworkBox({ lessonId, userId, sub }: { lessonId: string; userI
 
       {!editing && sub ? (
         <div className="space-y-4">
-          {sub.body && <p className="whitespace-pre-line text-[15px] leading-relaxed break-words">{sub.body}</p>}
+          {sub.body && <p className="whitespace-pre-line text-[15px] leading-relaxed break-words"><Linkify text={sub.body} /></p>}
           {sub.file_url && (
             <a href={sub.file_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-bg-badge px-3 py-1.5 text-sm hover:text-brand">
               <Paperclip size={14} /> {sub.file_name}
@@ -68,7 +69,7 @@ export function HomeworkBox({ lessonId, userId, sub }: { lessonId: string; userI
           {sub.feedback && (
             <div className="rounded-[16px] bg-accent-soft p-4 space-y-1">
               <p className="text-sm font-semibold text-brand-deep">Corrección del equipo</p>
-              <p className="whitespace-pre-line text-[15px] leading-relaxed">{sub.feedback}</p>
+              <p className="whitespace-pre-line text-[15px] leading-relaxed"><Linkify text={sub.feedback} /></p>
             </div>
           )}
           <div className="flex flex-wrap gap-3">

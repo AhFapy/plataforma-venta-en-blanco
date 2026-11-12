@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { markPopupSeen } from "@/app/popup-actions";
+import { Linkify } from "@/components/Linkify";
 
 type Popup = { id: string; title: string; body: string | null; image_url: string | null; cta_label: string | null; link: string | null };
 
@@ -35,7 +36,7 @@ export function PopupGate({ popup }: { popup: Popup }) {
         {popup.image_url && <img src={popup.image_url} alt="" className="w-full aspect-[16/10] object-cover" />}
         <div className="p-6 space-y-3">
           <h2 className="text-2xl font-semibold tracking-[-0.03em] leading-tight">{popup.title}</h2>
-          {popup.body && <p className="text-ink-muted whitespace-pre-line">{popup.body}</p>}
+          {popup.body && <p className="text-ink-muted whitespace-pre-line"><Linkify text={popup.body} /></p>}
           <div className="flex gap-2 pt-2">
             {popup.link && (
               <button onClick={() => close(true)} className="btn btn-brand flex-1 justify-center">

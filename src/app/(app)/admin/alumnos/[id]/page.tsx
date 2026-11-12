@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { getMyPoints, level } from "@/lib/data";
 import { fmtDate, timeAgo } from "@/lib/utils";
 import { PasswordForm } from "./PasswordForm";
+import { Linkify } from "@/components/Linkify";
 
 export const metadata = { title: "Ficha de alumno" };
 
@@ -33,7 +34,7 @@ export default async function StudentDetail({ params }: { params: Promise<{ id: 
   const Q = ({ q, children }: { q: string; children: React.ReactNode }) => (
     <div className="space-y-1">
       <p className="text-sm text-ink-muted">{q}</p>
-      <div className="text-[15px] whitespace-pre-line break-words">{children || <span className="text-ink-faint">Sin responder</span>}</div>
+      <div className="text-[15px] whitespace-pre-line break-words">{(typeof children === "string" ? <Linkify text={children} /> : children) || <span className="text-ink-faint">Sin responder</span>}</div>
     </div>
   );
 
@@ -95,7 +96,7 @@ export default async function StudentDetail({ params }: { params: Promise<{ id: 
         {((subs ?? []) as unknown as { id: string; body: string | null; file_name: string | null; feedback: string | null; updated_at: string; lesson: { id: string; title: string } | null }[]).map((s) => (
           <div key={s.id} className="border-t border-line pt-3 first:border-0 first:pt-0">
             <p className="text-sm font-medium">{s.lesson?.title} <span className="text-ink-faint font-normal">· {timeAgo(s.updated_at)}</span> {s.feedback ? <span className="badge !py-0 !text-[10px] !bg-accent-soft !text-brand-deep ml-1">Corregido</span> : <span className="badge !py-0 !text-[10px] ml-1">Pendiente</span>}</p>
-            {s.body && <p className="text-sm text-ink-muted line-clamp-3 whitespace-pre-line">{s.body}</p>}
+            {s.body && <p className="text-sm text-ink-muted line-clamp-3 whitespace-pre-line"><Linkify text={s.body} /></p>}
             {s.file_name && <p className="text-xs text-ink-faint">📎 {s.file_name}</p>}
           </div>
         ))}

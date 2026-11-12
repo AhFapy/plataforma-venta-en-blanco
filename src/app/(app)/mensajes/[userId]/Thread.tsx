@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Send } from "lucide-react";
 import { markConversationRead, sendDm } from "@/app/social-actions";
 import { timeAgo } from "@/lib/utils";
+import { Linkify } from "@/components/Linkify";
 
 export type ThreadMsg = { id: string; sender_id: string; body: string; created_at: string; read_at: string | null; story_media_url: string | null; story_media_type: string | null };
 
@@ -61,7 +62,7 @@ export function Thread({ me, to, conversationId, messages, canSend, onSend, onRe
                     : <img src={m.story_media_url} alt="" className="w-24 h-40 rounded-[12px] object-cover bg-bg-badge" />}
                 </div>
               )}
-              <p className={`max-w-[80%] whitespace-pre-line break-words rounded-[18px] px-4 py-2.5 text-[15px] ${mine ? "bg-ink text-bg rounded-br-[6px]" : "bg-bg-badge text-ink rounded-bl-[6px]"} ${m.id.startsWith("tmp-") ? "opacity-60" : ""}`}>{m.body}</p>
+              <p className={`max-w-[80%] whitespace-pre-line break-words rounded-[18px] px-4 py-2.5 text-[15px] ${mine ? "bg-ink text-bg rounded-br-[6px]" : "bg-bg-badge text-ink rounded-bl-[6px]"} ${m.id.startsWith("tmp-") ? "opacity-60" : ""}`}><Linkify text={m.body} /></p>
               {showTime && <span className="text-[11px] text-ink-faint mt-1">{timeAgo(m.created_at)}{mine && i === all.length - 1 && m.read_at ? " · Visto" : ""}</span>}
             </div>
           );

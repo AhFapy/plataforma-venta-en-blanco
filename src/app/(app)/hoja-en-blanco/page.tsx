@@ -4,6 +4,7 @@ import { requireMember } from "@/lib/auth";
 import { getCurriculum } from "@/lib/data";
 import { timeAgo } from "@/lib/utils";
 import { NotesBoard, type Folder, type Note } from "./NotesBoard";
+import { Linkify } from "@/components/Linkify";
 
 export const metadata = { title: "Hoja en Blanco" };
 
@@ -92,7 +93,7 @@ export default async function HojaEnBlanco({ searchParams }: { searchParams: Pro
                       ? <span className="badge !bg-accent-soft !text-brand-deep">Corregido</span>
                       : <span className="badge">Pendiente de revisión</span>}
                   </header>
-                  {s.body && <p className="text-[15px] leading-relaxed whitespace-pre-line line-clamp-6 break-words">{s.body}</p>}
+                  {s.body && <p className="text-[15px] leading-relaxed whitespace-pre-line line-clamp-6 break-words"><Linkify text={s.body} /></p>}
                   {url && (
                     <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-bg-badge px-3 py-1.5 text-sm hover:text-brand max-w-full">
                       <Paperclip size={14} className="shrink-0" /><span className="truncate">{s.file_name}</span>
@@ -101,7 +102,7 @@ export default async function HojaEnBlanco({ searchParams }: { searchParams: Pro
                   {s.feedback && (
                     <div className="rounded-[16px] bg-accent-soft p-4">
                       <p className="text-sm font-semibold text-brand-deep mb-1">Corrección del equipo</p>
-                      <p className="text-[15px] leading-relaxed whitespace-pre-line">{s.feedback}</p>
+                      <p className="text-[15px] leading-relaxed whitespace-pre-line"><Linkify text={s.feedback} /></p>
                     </div>
                   )}
                 </article>

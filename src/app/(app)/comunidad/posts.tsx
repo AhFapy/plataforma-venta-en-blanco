@@ -3,6 +3,7 @@ import { MessageCircle, Paperclip, Pin } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { timeAgo } from "@/lib/utils";
 import { LikeButton, PostAdmin, PostEngagement, Reactions } from "./components";
+import { Linkify } from "@/components/Linkify";
 
 export type PostRow = {
   id: string; body: string; pinned: boolean; created_at: string; author_id: string;
@@ -76,12 +77,14 @@ export function PostCard({ p, me, staff, full = false }: { p: PostRow; me: strin
         </div>
       </header>
       {full ? (
-        <p className="whitespace-pre-line text-[15px] leading-relaxed break-words">{p.body}</p>
+        <p className="whitespace-pre-line text-[15px] leading-relaxed break-words"><Linkify text={p.body} /></p>
       ) : (
-        <Link href={`/comunidad/post/${p.id}`} className="block group" aria-label="Abrir publicación">
-          <p className="whitespace-pre-line text-[15px] leading-relaxed break-words line-clamp-[12]">{p.body}</p>
+        <div className="relative group">
+          {/* El enlace a la publicación cubre el bloque; los enlaces del texto quedan por encima (z-10) y se pueden clicar. */}
+          <Link href={`/comunidad/post/${p.id}`} className="absolute inset-0" aria-label="Abrir publicación" />
+          <p className="whitespace-pre-line text-[15px] leading-relaxed break-words line-clamp-[12]"><Linkify text={p.body} /></p>
           {(p.body.length > 600 || p.body.split("\n").length > 12) && <span className="mt-1 inline-block text-sm font-medium text-brand group-hover:underline">Ver más</span>}
-        </Link>
+        </div>
       )}
       <MediaGrid media={p.media} />
       <footer className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
