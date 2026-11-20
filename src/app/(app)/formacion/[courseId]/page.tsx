@@ -6,6 +6,7 @@ import { getCurriculum } from "@/lib/data";
 import { ProgressBar } from "@/components/Progress";
 import { isNew } from "@/lib/utils";
 import { SearchFilter } from "@/components/SearchFilter";
+import { CourseCard, courseTree } from "@/components/CourseCard";
 
 export default async function CoursePage({ params }: { params: Promise<{ courseId: string }> }) {
   const { courseId } = await params;
@@ -14,6 +15,8 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
   const course = cur.courses.find((c) => c.id === courseId);
   if (!course) notFound();
   const mods = cur.modules.filter((m) => m.course_id === course.id);
+  const children = cur.courses.filter((c) => c.parent_id === course.id);
+  const parent = course.parent_id ? cur.courses.find((c) => c.id === course.parent_id) : undefined;
   const modIds = mods.map((m) => m.id);
   const [{ data: qrows }, { data: arows }] = modIds.length ? await Promise.all([
     supabase.from("quiz_questions").select("module_id").in("module_id", modIds),
@@ -25,13 +28,22 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
 
   return (
     <div className="fade-in space-y-8">
-      <Link href="/formacion" className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"><ArrowLeft size={14} /> Formación</Link>
+      <Link href={parent ? `/formacion/${parent.id}` : "/formacion"} className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink"><ArrowLeft size={14} /> {parent ? parent.title : "Formación"}</Link>
       <div>
         <h1 className="text-[34px] sm:text-[46px] leading-[1.05] font-semibold tracking-[-0.035em]">{course.title}</h1>
         {course.description && <p className="mt-3 text-ink-muted text-lg max-w-2xl">{course.description}</p>}
       </div>
 
-      <SearchFilter placeholder="Buscar una clase…">
+      {children.length > 0 && (
+        <div className="grid sm:grid-cols-2 gap-4">
+          {children.map((c) => {
+            const ids = courseTree(cur.courses, c.id);
+            return <CourseCard key={c.id} c={c} lessons={cur.ordered.filter((l) => ids.has(l.course.id))} completed={cur.completed} />;
+          })}
+        </div>
+      )}
+
+      {mods.length > 0 && <SearchFilter placeholder="Buscar una clase…">
         {mods.map((m, mi) => {
           const st = cur.states.get(m.id)!;
           const ls = cur.lessons.filter((l) => l.module_id === m.id);
@@ -92,7 +104,7 @@ export default async function CoursePage({ params }: { params: Promise<{ courseI
             </section>
           );
         })}
-      </SearchFilter>
+      </SearchFilter>}
     </div>
   );
 }

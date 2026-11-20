@@ -29,7 +29,7 @@ export type Profile = {
   created_at: string;
 };
 
-export type Course = { id: string; title: string; description: string | null; cover_url: string | null; position: number; published: boolean };
+export type Course = { id: string; title: string; description: string | null; cover_url: string | null; position: number; published: boolean; parent_id?: string | null };
 export type Module = { id: string; course_id: string; title: string; description: string | null; position: number; unlock_mode: "libre" | "progreso" | "fecha"; unlock_after_days: number };
 export type Lesson = { id: string; module_id: string; title: string; description: string | null; duration_min: number | null; position: number; published: boolean; updated_at: string };
 export type LessonMedia = { lesson_id: string; video_url: string | null; resources: { label: string; url: string }[] };
