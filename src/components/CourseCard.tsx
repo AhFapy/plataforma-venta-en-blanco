@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { ProgressBar } from "@/components/Progress";
 import { isNew } from "@/lib/utils";
 import type { Course, Lesson } from "@/lib/types";
@@ -34,6 +34,31 @@ export function CourseCard({ c, lessons, completed }: { c: Course; lessons: Less
         </div>
       </div>
     </Link>
+  );
+}
+
+/** Tarjeta bloqueada, sin enlace: se ve pero no se puede abrir. */
+export function LockedCard({ title, description }: { title: string; description?: string }) {
+  return (
+    <div aria-disabled="true" className="card overflow-hidden select-none cursor-not-allowed opacity-80">
+      <div className="on-dark aspect-[16/8] bg-bg-dark grid place-items-center p-6">
+        <div className="flex flex-col items-center gap-3">
+          <Lock size={28} className="text-[#f5f4ef]" />
+          <p className="text-[#f5f4ef] text-2xl font-semibold tracking-[-0.03em] text-center">{title}</p>
+        </div>
+      </div>
+      <div className="p-6 space-y-4">
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">{title}</h2>
+          <span className="badge shrink-0">Próximamente</span>
+        </div>
+        {description && <p className="text-sm text-ink-muted line-clamp-2">{description}</p>}
+        <div className="flex items-center justify-between text-sm text-ink-muted">
+          <span>Cerrado</span>
+          <span className="flex items-center gap-1"><Lock size={14} /> Próximamente</span>
+        </div>
+      </div>
+    </div>
   );
 }
 
