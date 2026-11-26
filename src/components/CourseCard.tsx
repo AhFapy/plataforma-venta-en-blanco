@@ -52,7 +52,7 @@ export function CirculoCard() {
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Círculo privado</h2>
           <span className="badge shrink-0 !bg-accent-soft !text-brand-deep">Nuevo</span>
         </div>
-        <p className="text-sm text-ink-muted line-clamp-2">Tu siguiente paso después de Venta en Blanco: llegar a 10.000 € al mes.</p>
+        <p className="text-sm text-ink-muted line-clamp-2">Tu siguiente paso después de Venta en Blanco: llegar a 10.000–20.000 € al mes.</p>
         <div className="flex items-center justify-end text-sm">
           <span className="flex items-center gap-1 font-medium group-hover:text-brand">Ver vídeo <ArrowRight size={14} /></span>
         </div>

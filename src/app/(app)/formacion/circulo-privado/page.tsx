@@ -23,7 +23,7 @@ export default async function CirculoPrivado() {
 
       <div className="space-y-3">
         <h1 className="text-[28px] sm:text-[36px] leading-[1.1] font-semibold tracking-[-0.03em]">
-          Círculo privado: <span className="em">llega a 10.000 € al mes.</span>
+          Círculo privado: <span className="em">llega a 10.000–20.000 € al mes.</span>
         </h1>
         <p className="text-[16px] leading-relaxed text-ink/85 max-w-2xl">
           Mira el vídeo entero. Si quieres tu Plan 10K, escríbeme por WhatsApp y vemos juntos si encajas.
