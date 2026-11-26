@@ -1,7 +1,7 @@
 import { requireMember } from "@/lib/auth";
 import { getCurriculum } from "@/lib/data";
 import { PageHeader } from "@/components/PageHeader";
-import { CourseCard, LockedCard, courseTree } from "@/components/CourseCard";
+import { CourseCard, CirculoCard, courseTree } from "@/components/CourseCard";
 
 export const metadata = { title: "Formación" };
 
@@ -21,8 +21,8 @@ export default async function Formacion() {
           const ids = courseTree(cur.courses, c.id);
           return <CourseCard key={c.id} c={c} lessons={cur.ordered.filter((l) => ids.has(l.course.id))} completed={cur.completed} />;
         })}
-        {/* Cerrado para todos: sin enlace ni ruta, solo se ve */}
-        <LockedCard title="Círculo privado" />
+        {/* Upsell: vídeo de Javi + WhatsApp */}
+        <CirculoCard />
       </div>
     </div>
   );

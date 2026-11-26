@@ -37,6 +37,30 @@ export function CourseCard({ c, lessons, completed }: { c: Course; lessons: Less
   );
 }
 
+/** Tarjeta del Círculo privado (upsell): abre la página con el vídeo y el WhatsApp de Javi. */
+export function CirculoCard() {
+  return (
+    <Link href="/formacion/circulo-privado" className="card overflow-hidden group hover:border-brand transition-colors">
+      <div className="on-dark aspect-[16/8] bg-bg-dark grid place-items-center p-6">
+        <div className="flex flex-col items-center gap-3">
+          <Lock size={28} className="text-[#f5f4ef]" />
+          <p className="text-[#f5f4ef] text-2xl font-semibold tracking-[-0.03em] text-center">Círculo privado</p>
+        </div>
+      </div>
+      <div className="p-6 space-y-4">
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Círculo privado</h2>
+          <span className="badge shrink-0 !bg-accent-soft !text-brand-deep">Nuevo</span>
+        </div>
+        <p className="text-sm text-ink-muted line-clamp-2">Tu siguiente paso después de Venta en Blanco: llegar a 10.000 € al mes.</p>
+        <div className="flex items-center justify-end text-sm">
+          <span className="flex items-center gap-1 font-medium group-hover:text-brand">Ver vídeo <ArrowRight size={14} /></span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 /** Tarjeta bloqueada, sin enlace: se ve pero no se puede abrir. */
 export function LockedCard({ title, description }: { title: string; description?: string }) {
   return (
